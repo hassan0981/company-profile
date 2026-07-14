@@ -3,18 +3,17 @@
 import { useRef } from "react";
 import gsap from "gsap";
 
-interface MagneticButtonProps {
+interface MagneticButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  className?: string;
   magneticStrength?: number; // default 0.3
-  onClick?: () => void;
 }
 
 export default function MagneticButton({
   children,
   className = "",
   magneticStrength = 0.3,
-  onClick
+  type = "button",
+  ...props
 }: MagneticButtonProps) {
   const btnRef = useRef<HTMLButtonElement>(null);
   const bgRef = useRef<HTMLDivElement>(null);
@@ -82,8 +81,9 @@ export default function MagneticButton({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onMouseMove={handleMouseMove}
-      onClick={onClick}
+      type={type}
       className={`group relative rounded-full border flex items-center justify-center overflow-hidden transition-all duration-300 text-black font-semibold tracking-wide z-10 cursor-pointer select-none bg-white ${className}`}
+      {...props}
     >
       {/* Scale Background Fill Layer */}
       <div
