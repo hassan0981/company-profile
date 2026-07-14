@@ -1,65 +1,1608 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import MagneticButton from "@/components/MagneticButton";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+const servicesData = [
+  {
+    title: "Web Development",
+    image: "/service_webdev.png",
+    description: "We develop fast, responsive, and visually appealing websites providing smooth user experience and helping your business become visible and profitable.",
+    bullets: ["API Development", "WordPress", "Custom App Development", "Front End Development", "Back End Systems", "Next.js & React"]
+  },
+  {
+    title: "SEO",
+    image: "/service_seo.png",
+    description: "With our SEO services, your business will have an opportunity to become more visible online through keyword research, technical SEO, on-page & off-page SEO.",
+    bullets: ["Keyword Research", "Technical Audit", "On-Page SEO", "Off-Page SEO", "Local SEO Optimization", "Performance Tracking"]
+  },
+  {
+    title: "Social Media Management",
+    image: "/service_smm.png",
+    description: "We manage and scale your digital presence via calculated content calendars, graphic production, community relations, and strategic engagement plans.",
+    bullets: ["Content Strategy", "Graphic Design", "Community Moderation", "Competitor Research", "Audience Analytics", "Brand Guidelines"]
+  },
+  {
+    title: "Meta Ads",
+    image: "/service_metaads.png",
+    description: "We create strategic Facebook and Instagram ad campaigns targeted at high-intent customer segments, managing spend to deliver maximum ROI.",
+    bullets: ["Campaign Setup", "Pixel Integration", "A/B Creative Testing", "Audience Retargeting", "Conversion Tracking", "Weekly ROI Reports"]
+  }
+];
+
+const testimonials = [
+  {
+    quote: "Bouncy really surprised us from the beginning. Their team completely changed our presence by making a website that works well. They improved our position on Google search results with their quality services and they helped us get good quality leads. Highly Recommended.",
+    author: "CLIENT 01",
+    designation: "Founder"
+  },
+  {
+    quote: "We worked with Bouncy for our social media marketing and Google Ads. The results were amazing. The advertising campaigns they made were very creative. The way they worked with us was very professional. They kept us informed about every step, which made the whole process very easy.",
+    author: "CLIENT 02",
+    designation: "Marketing Manager"
+  },
+  {
+    quote: "Great experience working with Bouncy. They are very professional and cooperative. They designed a beautiful, modern, and fast website for our company. Our organic visibility and local search traffic has grown significantly since we started working with them.",
+    author: "CLIENT 03",
+    designation: "Marketing Coordinator"
+  },
+  {
+    quote: "Highly recommended digital agency in Lahore! Bouncy's team helped us run meta ads campaigns that generated a massive number of sales and high return on ad spend. They are very active in communication and always ready to help.",
+    author: "CLIENT 04",
+    designation: "E-commerce Director"
+  },
+  {
+    quote: "We were searching for a dependable Digital Marketing Agency in Lahore and got outstanding results from Bouncy. Their SEO, website optimization, and Google Ads efforts have really boosted our visibility, traffic, and lead generation.",
+    author: "CLIENT 05",
+    designation: "Business Owner"
+  },
+  {
+    quote: "Bouncy has totally revamped our social media performance. They have increased our brand awareness through their creativity, content creation, and regular posting.",
+    author: "CLIENT 06",
+    designation: "Managing Director"
+  }
+];
 
 export default function Home() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const [activeService, setActiveService] = useState(0);
+  const lastActiveIndex = useRef<number>(0);
+
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+
+  // Testimonial transitions
+  const handleNextTestimonial = () => {
+    gsap.to(".testimonial-quote-wrapper", {
+      opacity: 0,
+      x: -30,
+      duration: 0.35,
+      ease: "power2.in",
+      onComplete: () => {
+        setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+        gsap.fromTo(".testimonial-quote-wrapper",
+          { opacity: 0, x: 30 },
+          { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }
+        );
+      }
+    });
+  };
+
+  const handlePrevTestimonial = () => {
+    gsap.to(".testimonial-quote-wrapper", {
+      opacity: 0,
+      x: 30,
+      duration: 0.35,
+      ease: "power2.in",
+      onComplete: () => {
+        setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+        gsap.fromTo(".testimonial-quote-wrapper",
+          { opacity: 0, x: -30 },
+          { opacity: 1, x: 0, duration: 0.5, ease: "power2.out" }
+        );
+      }
+    });
+  };
+
+  const handleNavClick = (index: number) => {
+    const trigger = ScrollTrigger.getById("servicesPin");
+    if (trigger) {
+      const start = trigger.start;
+      const end = trigger.end;
+      // Scroll to a scroll position corresponding to the start of each of the 4 steps
+      const targetScroll = start + (index / 3) * (end - start) + 1;
+      window.scrollTo({
+        top: targetScroll,
+        behavior: "smooth"
+      });
+    }
+  };
+
+  useEffect(() => {
+    // 1. Master Animation Timeline (Preloader -> Reveal)
+    const masterTimeline = gsap.timeline();
+
+    // A. Animate Preloader Progress Circle (0% to 100%)
+    masterTimeline.to(".preloader-progress-circle", {
+      strokeDashoffset: 0,
+      duration: 1.5,
+      ease: "power2.inOut",
+    });
+
+    // B. Fade out Preloader Progress Circle SVG
+    masterTimeline.to(
+      ".preloader-svg",
+      {
+        scale: 0.8,
+        opacity: 0,
+        duration: 0.3,
+        ease: "power2.in",
+      },
+      "-=0.1"
+    );
+
+    // C. Slide out preloader black screen layer via circular clip-path wipe
+    masterTimeline.to(".preloader-layer", {
+      clipPath: "circle(0% at 50% 50%)",
+      duration: 1.2,
+      ease: "power4.inOut",
+    });
+
+    // D. Entrance: Concentric Background Circles (Fade & Expand)
+    masterTimeline.fromTo(
+      ".bg-circle-line",
+      {
+        scale: 0.7,
+        opacity: 0,
+      },
+      {
+        scale: 1,
+        opacity: 0.08,
+        duration: 1.8,
+        stagger: 0.12,
+        ease: "power3.out",
+      },
+      "-=1.0" // Starts revealing as the clip-path wipe is halfway done
+    );
+
+    // E. Entrance: Typography Mask-Reveal (Lift Vertically & Scale Up)
+    // "Bounce" line
+    masterTimeline.fromTo(
+      ".char-line1",
+      {
+        y: "120%",
+        scale: 0.6,
+        opacity: 0,
+      },
+      {
+        y: "0%",
+        scale: 1,
+        opacity: 1,
+        duration: 1.2,
+        stagger: 0.03,
+        ease: "power4.out", // Buttery, high-end cubic-bezier equivalent
+      },
+      "-=1.2" // Overlaps with circles entrance
+    );
+
+    // "Beyond" line
+    masterTimeline.fromTo(
+      ".char-line2",
+      {
+        y: "120%",
+        scale: 0.6,
+        opacity: 0,
+      },
+      {
+        y: "0%",
+        scale: 1,
+        opacity: 1,
+        duration: 1.2,
+        stagger: 0.03,
+        ease: "power4.out",
+      },
+      "-=1.0"
+    );
+
+    // "Ordinary" line
+    masterTimeline.fromTo(
+      ".char-line3",
+      {
+        y: "120%",
+        scale: 0.6,
+        opacity: 0,
+      },
+      {
+        y: "0%",
+        scale: 1,
+        opacity: 1,
+        duration: 1.2,
+        stagger: 0.03,
+        ease: "power4.out",
+      },
+      "-=0.9"
+    );
+
+    // F. Entrance: Staggered Collage Images (Top to Bottom: 1 -> 2 -> 3 -> 4)
+    const collageImages = [
+      ".portrait-img-1",
+      ".portrait-img-2",
+      ".portrait-img-3",
+      ".portrait-img-4",
+    ];
+
+    masterTimeline.fromTo(
+      collageImages,
+      {
+        opacity: 0,
+        y: 80,
+        scale: 0.88,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 1.4,
+        stagger: 0.15,
+        ease: "power3.out",
+      },
+      "-=1.1"
+    );
+
+    // G. Entrance: Description Words Stagger
+    masterTimeline.fromTo(
+      ".desc-word",
+      {
+        y: 15,
+        opacity: 0,
+      },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.015,
+        ease: "power2.out",
+      },
+      "-=0.9"
+    );
+
+    // H. Entrance: Decorative Squares
+    masterTimeline.fromTo(
+      [".peach-box", ".dark-box"],
+      {
+        opacity: 0,
+        scale: 0.5,
+        x: 30,
+      },
+      {
+        opacity: 1,
+        scale: 1,
+        x: 0,
+        duration: 1.0,
+        stagger: 0.1,
+        ease: "power3.out",
+      },
+      "-=1.1"
+    );
+
+    // 2. Continuous Floating Effect for Hero Images (Gently bobbing/swaying)
+    gsap.to(".portrait-img-1-inner", {
+      y: "-=15",
+      x: "+=5",
+      rotation: 1.5,
+      duration: 3.5,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+    });
+
+    gsap.to(".portrait-img-2-inner", {
+      y: "+=12",
+      x: "-=6",
+      rotation: -1.2,
+      duration: 4.2,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+      delay: 0.2,
+    });
+
+    gsap.to(".portrait-img-3-inner", {
+      y: "-=12",
+      x: "+=4",
+      rotation: 1.0,
+      duration: 4.0,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+      delay: 0.4,
+    });
+
+    gsap.to(".portrait-img-4-inner", {
+      y: "+=15",
+      x: "-=5",
+      rotation: -1.5,
+      duration: 3.8,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+      delay: 0.6,
+    });
+
+    // 3. Continuous Floating Effect for Unlock Section Images
+    gsap.to(".unlock-left-inner", {
+      y: "-=15",
+      x: "+=5",
+      rotation: 1.2,
+      duration: 4.2,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+    });
+
+    gsap.to(".unlock-right-inner", {
+      y: "+=12",
+      x: "-=6",
+      rotation: -1.0,
+      duration: 3.8,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+      delay: 0.3,
+    });
+
+    // 4. Scroll Trigger Parallax Animations (Drifting Depth)
+    const ctx = gsap.context(() => {
+      // Image 1: Slow Parallax
+      gsap.to(".portrait-img-1", {
+        y: -30,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".hero-section",
+          start: "top top",
+          end: "bottom top",
+          scrub: 1.0,
+        },
+      });
+
+      // Image 2: Medium Parallax
+      gsap.to(".portrait-img-2", {
+        y: -80,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".hero-section",
+          start: "top top",
+          end: "bottom top",
+          scrub: 1.2,
+        },
+      });
+
+      // Image 3: Slow-Medium Parallax
+      gsap.to(".portrait-img-3", {
+        y: -60,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".hero-section",
+          start: "top top",
+          end: "bottom top",
+          scrub: 0.9,
+        },
+      });
+
+      // Image 4: Fast Parallax
+      gsap.to(".portrait-img-4", {
+        y: -100,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".hero-section",
+          start: "top top",
+          end: "bottom top",
+          scrub: 1.4,
+        },
+      });
+
+      // Faint background circles parallax (creates a subtle layout shift)
+      gsap.to(".bg-circles-container", {
+        y: 35,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".hero-section",
+          start: "top top",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+
+      // Peach Box Parallax
+      gsap.fromTo(
+        ".peach-box",
+        { y: 30 },
+        {
+          y: -30,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".hero-section",
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        }
+      );
+
+      // Dark Box Parallax (drifts slightly differently from Peach Box)
+      gsap.fromTo(
+        ".dark-box",
+        { y: 15 },
+        {
+          y: -15,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".hero-section",
+            start: "top top",
+            end: "bottom top",
+            scrub: true,
+          },
+        }
+      );
+
+      // 5. Coordinated ScrollTrigger timeline for the entire Unlock Section
+      const unlockTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".unlock-section",
+          start: "top 80%", // Fires as soon as the section is visible
+          toggleActions: "play none none none",
+        },
+      });
+
+      // Title fade in and slide up reveal
+      unlockTimeline.fromTo(
+        ".unlock-title-container h2",
+        {
+          y: 40,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.2,
+          ease: "power3.out",
+        }
+      );
+
+      // Left & Right flanking images reveal as a PURE FADE
+      unlockTimeline.fromTo(
+        [".unlock-left-wrapper", ".unlock-right-wrapper"],
+        { opacity: 0 },
+        {
+          opacity: 1,
+          duration: 1.5,
+          stagger: 0.25,
+          ease: "power2.out",
+        },
+        "-=0.9" // Overlaps with title animation
+      );
+
+      // Paragraph & Button fade in & slide up
+      unlockTimeline.fromTo(
+        [".unlock-desc", ".explore-btn-container"],
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: "power2.out",
+        },
+        "-=0.6" // Overlaps with image animation
+      );
+
+      // 6. Parallax scroll-drift (floating) for Heading and Description
+      // Heading drifts slightly faster
+      gsap.to(".unlock-title-container", {
+        y: -45,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".unlock-section",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1.0,
+        },
+      });
+
+      // Description wrapper drifts slightly slower
+      gsap.to(".unlock-desc-wrapper", {
+        y: -25,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".unlock-section",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1.2,
+        },
+      });
+
+      // 7. Pinned Services Showcase Section Timeline
+      gsap.timeline({
+        scrollTrigger: {
+          trigger: ".services-showcase-section",
+          start: "top top",
+          end: "+=300%",
+          pin: true,
+          scrub: 0.5,
+          id: "servicesPin",
+          onUpdate: (self) => {
+            const progress = self.progress;
+            let activeIndex = 0;
+            if (progress < 0.25) activeIndex = 0;
+            else if (progress < 0.5) activeIndex = 1;
+            else if (progress < 0.75) activeIndex = 2;
+            else activeIndex = 3;
+
+            if (activeIndex !== lastActiveIndex.current) {
+              lastActiveIndex.current = activeIndex;
+              setActiveService(activeIndex);
+            }
+          }
+        }
+      });
+
+      // 8. Workflow Section Entrance Animations
+      const workflowTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".workflow-section",
+          start: "top 80%",
+          toggleActions: "play none none none",
+        },
+      });
+
+      workflowTimeline.fromTo(
+        ".workflow-section-title",
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power2.out",
+        }
+      );
+
+      workflowTimeline.fromTo(
+        ".workflow-line-divider",
+        { scaleX: 0, transformOrigin: "center" },
+        {
+          scaleX: 1,
+          duration: 1.0,
+          ease: "power3.inOut",
+        },
+        "-=0.6"
+      );
+
+      workflowTimeline.fromTo(
+        ".workflow-step",
+        { opacity: 0, y: 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1.0,
+          stagger: 0.18,
+          ease: "power3.out",
+        },
+        "-=0.7"
+      );
+
+      // 9. Pinned Horizontal Page Slider (Why Choose Us)
+      const sliderTl = gsap.to(".why-choose-us-slider", {
+        xPercent: -75,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".why-choose-us-wrapper",
+          start: "top top",
+          end: "+=300%",
+          pin: true,
+          scrub: 0.5,
+          id: "horizontalSlider"
+        }
+      });
+
+      // 10. Slide 3 Metrics Count-up animation triggered when Slide 3 enters center screen
+      ScrollTrigger.create({
+        trigger: ".slide-metrics-trigger",
+        containerAnimation: sliderTl,
+        start: "left 65%",
+        onEnter: () => {
+          const counters = document.querySelectorAll(".counter-val");
+          counters.forEach(counter => {
+            // Guard to prevent re-running if already counting/completed
+            if (counter.classList.contains("counted")) return;
+            counter.classList.add("counted");
+
+            const targetVal = parseInt(counter.getAttribute("data-target") || "0", 10);
+            const suffix = counter.getAttribute("data-suffix") || "";
+            const obj = { val: 0 };
+            gsap.to(obj, {
+              val: targetVal,
+              duration: 2.2,
+              ease: "power2.out",
+              onUpdate: () => {
+                counter.textContent = Math.floor(obj.val) + suffix;
+              }
+            });
+          });
+        }
+      });
+
+    }, containerRef);
+
+    // 11. Testimonial Parallax Grid Shift (surrounding scattered images float relative to cursor)
+    const testimonialSect = document.querySelector(".testimonial-section");
+    const handleMouseMoveTestimonial = (e: Event) => {
+      const mouseEvent = e as MouseEvent;
+      if (!testimonialSect) return;
+      const rect = testimonialSect.getBoundingClientRect();
+      const x = mouseEvent.clientX - rect.left - rect.width / 2;
+      const y = mouseEvent.clientY - rect.top - rect.height / 2;
+
+      const floatingImgs = testimonialSect.querySelectorAll(".floating-img");
+      floatingImgs.forEach((img, idx) => {
+        // Vary multipliers so images drift at different visual layers
+        const speedX = (idx + 1) * -0.035;
+        const speedY = (idx + 1) * -0.035;
+        gsap.to(img, {
+          x: x * speedX,
+          y: y * speedY,
+          duration: 0.8,
+          ease: "power2.out"
+        });
+      });
+    };
+
+    const handleMouseLeaveTestimonial = () => {
+      if (!testimonialSect) return;
+      const floatingImgs = testimonialSect.querySelectorAll(".floating-img");
+      floatingImgs.forEach((img) => {
+        gsap.to(img, {
+          x: 0,
+          y: 0,
+          duration: 1.2,
+          ease: "power3.out"
+        });
+      });
+    };
+
+    if (testimonialSect) {
+      testimonialSect.addEventListener("mousemove", handleMouseMoveTestimonial);
+      testimonialSect.addEventListener("mouseleave", handleMouseLeaveTestimonial);
+    }
+
+    // Dynamic height refresh for ScrollTrigger (fixes dynamic image loading height issues)
+    const refreshTimeout = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 1000);
+
+    return () => {
+      ctx.revert();
+      clearTimeout(refreshTimeout);
+      if (testimonialSect) {
+        testimonialSect.removeEventListener("mousemove", handleMouseMoveTestimonial);
+        testimonialSect.removeEventListener("mouseleave", handleMouseLeaveTestimonial);
+      }
+    };
+  }, []);
+
+  const line1Words = "Bounce".split("");
+  const line2Words = "Beyond".split("");
+  const line3Words = "Ordinary".split("");
+  const descParagraph = "We offer creative minds and intelligent digital marketing solutions ranging from web design/development and SEO to social media management and winning ad campaigns.We help your business attract attention, build trust, and grow with confidence.".split(" ");
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <main
+      ref={containerRef}
+      className="relative flex-grow bg-white text-black overflow-hidden font-kanit"
+    >
+      {/* 1. Circular Preloader Layer */}
+      <div
+        className="preloader-layer fixed inset-0 z-[9999] bg-[#0b0b0b] flex items-center justify-center pointer-events-none"
+        style={{ clipPath: "circle(100% at 50% 50%)" }}
+      >
+        <svg className="preloader-svg w-20 h-20 sm:w-24 sm:h-24" viewBox="0 0 100 100">
+          <circle
+            cx="50"
+            cy="50"
+            r="40"
+            stroke="#1a1a1a"
+            strokeWidth="4"
+            fill="transparent"
+          />
+          <circle
+            className="preloader-progress-circle"
+            cx="50"
+            cy="50"
+            r="40"
+            stroke="#ffffff"
+            strokeWidth="4"
+            fill="transparent"
+            strokeDasharray="251.2"
+            strokeDashoffset="251.2"
+            strokeLinecap="round"
+          />
+        </svg>
+      </div>
+
+      {/* Main Hero Section */}
+      <section className="hero-section relative min-h-screen flex items-center justify-center pt-16 pb-12 sm:pt-24 sm:pb-20 lg:pt-28 lg:pb-24 px-4 sm:px-8 lg:px-12 xl:px-16">
+        {/* Background Grid Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-top bg-no-repeat pointer-events-none opacity-85 z-0"
+          style={{ backgroundImage: `url('/sh-bg.webp')` }}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+
+        {/* Background Concentric Circles Geometry */}
+        <div className="bg-circles-container absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden">
+          <div className="relative w-full h-full flex items-center justify-center">
+            <div className="bg-circle-line absolute w-[18vw] h-[18vw] min-w-[180px] min-h-[180px] border border-neutral-100 rounded-full opacity-0" />
+            <div className="bg-circle-line absolute w-[40vw] h-[40vw] min-w-[400px] min-h-[400px] border border-neutral-100 rounded-full opacity-0" />
+            <div className="bg-circle-line absolute w-[65vw] h-[65vw] min-w-[650px] min-h-[650px] border border-neutral-100 rounded-full opacity-0" />
+            <div className="bg-circle-line absolute w-[90vw] h-[90vw] min-w-[900px] min-h-[900px] border border-neutral-100 rounded-full opacity-0" />
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className="relative mx-auto max-w-[1510px] w-full flex flex-col lg:flex-row items-center lg:items-stretch gap-10 lg:gap-0 z-10">
+
+          {/* Left Column: 3-Image Collage (Stacked Vertically on Desktop) */}
+          <div className="w-full lg:w-[26.7%] flex flex-row flex-nowrap lg:flex-col gap-[15px] items-center lg:items-start overflow-x-auto lg:overflow-x-visible pb-4 lg:pb-0 scrollbar-none">
+            {/* Image 1 */}
+            <div className="portrait-img-1 shrink-0 relative w-[180px] h-[180px] sm:w-[220px] sm:h-[220px] lg:w-[240px] lg:h-[240px] border border-neutral-200/50 bg-neutral-50 shadow-md">
+              <div className="portrait-img-1-inner relative w-full h-full">
+                <Image
+                  src="/portrait_1.png"
+                  alt="Digital design collage 1"
+                  fill
+                  sizes="(max-width: 768px) 180px, 240px"
+                  className="object-cover"
+                  priority
+                />
+              </div>
+            </div>
+
+            {/* Image 2 - Shifted right (self-end) on both mobile and desktop for zig-zag */}
+            <div className="portrait-img-2 shrink-0 relative w-[180px] h-[180px] sm:w-[220px] sm:h-[220px] lg:w-[240px] lg:h-[240px] border border-neutral-200/50 bg-neutral-50 shadow-md self-end lg:self-end">
+              <div className="portrait-img-2-inner relative w-full h-full">
+                <Image
+                  src="/portrait_2.png"
+                  alt="Digital design collage 2"
+                  fill
+                  sizes="(max-width: 768px) 180px, 240px"
+                  className="object-cover"
+                  priority
+                />
+              </div>
+            </div>
+
+            {/* Image 3 */}
+            <div className="portrait-img-3 shrink-0 relative w-[180px] h-[180px] sm:w-[220px] sm:h-[220px] lg:w-[240px] lg:h-[240px] border border-neutral-200/50 bg-neutral-50 shadow-md">
+              <div className="portrait-img-3-inner relative w-full h-full">
+                <Image
+                  src="/portrait_3.png"
+                  alt="Digital design collage 3"
+                  fill
+                  sizes="(max-width: 768px) 180px, 240px"
+                  className="object-cover"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Title, Decorative Boxes, Bottom Image, and Description */}
+          <div className="w-full lg:w-[73.3%] flex flex-col lg:pl-4 justify-start gap-4 lg:gap-6">
+
+            {/* Top Row: Headings & Colored Bars */}
+            <div className="flex flex-col lg:flex-row items-stretch lg:items-end justify-between w-full">
+
+              {/* Massive Agency Heading Column */}
+              <div className="w-full lg:w-[65%] flex flex-col text-left">
+                <h1 className="select-none leading-none flex flex-col font-medium tracking-tight">
+                  {/* Line 1: Bounce */}
+                  <span className="block text-[40px] sm:text-[60px] md:text-[76px] lg:text-[90px] xl:text-[108px] font-semibold tracking-tight leading-[0.95] pl-0 lg:pl-[30px]">
+                    {line1Words.map((char, index) => (
+                      <span
+                        key={index}
+                        className="inline-block overflow-hidden py-2 -my-2"
+                      >
+                        <span className="char-line1 inline-block opacity-0 bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent">
+                          {char}
+                        </span>
+                      </span>
+                    ))}
+                  </span>
+
+                  {/* Line 2: Beyond */}
+                  <span className="block text-[40px] sm:text-[60px] md:text-[76px] lg:text-[90px] xl:text-[108px] font-semibold tracking-tight leading-[0.95] text-center w-full mt-1 lg:mt-2">
+                    {line2Words.map((char, index) => (
+                      <span
+                        key={index}
+                        className="inline-block overflow-hidden py-2 -my-2"
+                      >
+                        <span className="char-line2 inline-block opacity-0 bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent">
+                          {char}
+                        </span>
+                      </span>
+                    ))}
+                  </span>
+
+                  {/* Line 3: Ordinary */}
+                  <span className="block text-[40px] sm:text-[60px] md:text-[76px] lg:text-[90px] xl:text-[108px] font-semibold tracking-tight leading-[0.95] text-right w-full mt-1 lg:mt-2">
+                    {line3Words.map((char, index) => (
+                      <span
+                        key={index}
+                        className="inline-block overflow-hidden py-2 -my-2"
+                      >
+                        <span className="char-line3 inline-block opacity-0 bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent">
+                          {char}
+                        </span>
+                      </span>
+                    ))}
+                  </span>
+                </h1>
+              </div>
+
+              {/* Decorative Blocks - Nesting overlapping squares */}
+              <div className="w-full lg:w-[35%] flex items-end justify-start lg:justify-end pt-6 lg:pt-0 lg:pb-[15px]">
+                <div className="relative w-[100px] h-[100px] lg:w-[120px] lg:h-[120px] lg:mr-[40px] shrink-0">
+                  {/* Green Square */}
+                  <div className="peach-box opacity-0 absolute top-0 right-0 w-[50px] h-[50px] lg:w-[75px] lg:h-[75px] bg-[#3c9e90] shadow-sm" />
+                  {/* Blue Square (Overlaps bottom-left of Green Square) */}
+                  <div className="dark-box opacity-0 absolute bottom-0 left-0 w-[40px] h-[40px] lg:w-[57px] lg:h-[57px] bg-[#206cbb] shadow-sm z-10" />
+                </div>
+              </div>
+
+            </div>
+
+            {/* Bottom Row: 4th Portrait & Indented Copywriting */}
+            <div className="flex flex-col-reverse lg:flex-row items-stretch lg:items-end justify-between w-full pt-4 lg:pt-6 gap-8 lg:gap-0">
+
+              {/* 4th Image (Portrait 4) - Loaded when scrolling slightly down */}
+              <div className="w-full lg:w-[33%] pt-0 flex justify-center lg:justify-start">
+                <div className="portrait-img-4 relative w-full h-[150px] sm:h-[200px] lg:h-[240px] aspect-[240/150] lg:aspect-square border border-neutral-200/50 bg-neutral-50 shadow-md">
+                  <div className="portrait-img-4-inner relative w-full h-full">
+                    <Image
+                      src="/portrait_4.png"
+                      alt="Digital design collage 4"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 240px"
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Copywriting Paragraph & Scroll Indicator */}
+              <div className="w-full lg:w-[67%] flex flex-col items-start justify-between min-h-[150px] sm:min-h-[180px] lg:min-h-[240px] pl-0 lg:pl-[15px]">
+
+                {/* Indented Text Paragraph */}
+                <p className="desc-text text-sm sm:text-base lg:text-[18px] text-[#555555] font-normal leading-[1.42] max-w-full lg:max-w-[460px] pl-0 lg:pl-[80px] text-left">
+                  {descParagraph.map((word, index) => (
+                    <span
+                      key={index}
+                      className="inline-block overflow-hidden py-1 -my-1"
+                    >
+                      <span className="desc-word inline-block opacity-0 mr-1.5">
+                        {word}
+                      </span>
+                    </span>
+                  ))}
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* 2. Unlock Potential Section */}
+      <section className="unlock-section relative bg-white py-20 lg:py-28 px-4 sm:px-8 lg:px-12 xl:px-16 overflow-hidden z-20 border-t border-neutral-100">
+        <div className="relative mx-auto max-w-[1510px] w-full flex flex-col lg:flex-row items-start justify-between gap-12 lg:gap-0">
+
+          {/* Left Flanking Image (Collaborating designers in yellow jacket & beanie) */}
+          <div className="unlock-left-wrapper w-full lg:w-[42%] flex justify-start pt-6 lg:pt-16">
+            <div className="unlock-left-inner relative w-full max-w-[480px] aspect-[4/3] lg:aspect-[420/460] overflow-hidden border border-neutral-200/50 shadow-md">
+              <Image
+                src="/unlock_potential_left.png"
+                alt="Collaborating creative designers in yellow jacket"
+                fill
+                sizes="(max-width: 1024px) 100vw, 480px"
+                className="object-cover"
+              />
+            </div>
+          </div>
+
+          {/* Right Side Content Container */}
+          <div className="w-full lg:w-[58%] lg:pl-8 flex flex-col items-start">
+
+            {/* Outer Headline Parallax Wrapper */}
+            <div className="unlock-title-container w-full">
+              {/* Headline with 3D Flip perspective wrapper */}
+              <h2 className="bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent font-bold text-[22px] sm:text-[28px] md:text-[32px] lg:text-[36px] xl:text-[40px] leading-[1.2] tracking-tight text-left select-none mb-8 lg:mb-12">
+                We help unlock your business&apos;s potential through creativity, innovation, and online marketing that delivers measurable growth.
+              </h2>
+            </div>
+
+            {/* Bottom Row containing Paragraph Block + Explore Us Button AND Right Image */}
+            <div className="w-full flex flex-col lg:flex-row items-stretch lg:items-start justify-between gap-8 lg:gap-6">
+
+              {/* Column A: Paragraph & Button */}
+              <div className="w-full lg:w-[55%] flex flex-col items-start justify-start">
+
+                {/* Outer Description Parallax Wrapper */}
+                <div className="unlock-desc-wrapper w-full">
+                  <p className="unlock-desc text-[#555555] text-sm sm:text-base leading-relaxed text-left max-w-full lg:max-w-[360px]">
+                    Every brand has a story that needs to be told. This is where Bouncy comes in handy since our team helps your brand to tell its story through the implementation of various innovative and effective tactics that ensure sustainability.
+                  </p>
+                </div>
+
+                {/* Interactive Explore Us Button */}
+                <div className="mt-10 lg:mt-14">
+                  <MagneticButton 
+                    className="w-32 h-32 lg:w-36 lg:h-36 border-neutral-300 text-sm bg-white"
+                  >
+                    Explore Us
+                  </MagneticButton>
+                </div>
+              </div>
+
+              {/* Column B: Right Elongated Image */}
+              <div className="unlock-right-wrapper w-full lg:w-[45%] flex justify-center lg:justify-end lg:pl-6">
+                <div className="unlock-right-inner relative w-full max-w-[280px] h-[340px] overflow-hidden border border-neutral-200/50 shadow-md">
+                  <Image
+                    src="/unlock_potential_right.png"
+                    alt="Discussing work in modern office space"
+                    fill
+                    sizes="(max-width: 1024px) 280px, 280px"
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* 3. Services Showcase Pinned Section */}
+      <section className="services-showcase-section relative bg-white text-black w-full min-h-screen overflow-hidden z-20 border-t border-neutral-200">
+        <div className="services-container relative w-full h-screen flex flex-col lg:flex-row items-stretch select-none">
+
+          {/* Column 1: Left Stationary Nav Menu */}
+          <div className="w-full lg:w-[25%] flex flex-col justify-center items-start border-b lg:border-b-0 lg:border-r border-neutral-200 pl-4 sm:pl-8 lg:pl-12 xl:pl-16 pr-6 pt-28 lg:pt-36 pb-12 lg:pb-16">
+            <div className="flex flex-row lg:flex-col gap-6 lg:gap-10 overflow-x-auto lg:overflow-x-visible w-full scrollbar-none pr-4">
+              {servicesData.map((service, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => handleNavClick(idx)}
+                  className={`service-nav-btn text-left text-lg sm:text-xl lg:text-2xl font-bold tracking-tight transition-all duration-500 whitespace-nowrap cursor-pointer hover:text-black ${activeService === idx
+                    ? "bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent opacity-100 scale-105 origin-left w-fit"
+                    : "text-neutral-400 opacity-50 hover:opacity-80"
+                    }`}
+                >
+                  {service.title}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Column 2: Dynamic Media Center (Middle - covers vertically completely from top to bottom) */}
+          <div className="w-full lg:w-[35%] h-full relative overflow-hidden border-b lg:border-b-0 lg:border-r border-neutral-200 shrink-0">
+            <div className="absolute inset-0 w-full h-full">
+              {servicesData.map((service, idx) => (
+                <div
+                  key={idx}
+                  className={`service-img-wrapper absolute inset-0 w-full h-full transition-all duration-700 ease-in-out ${activeService === idx ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-95 pointer-events-none"
+                    }`}
+                >
+                  <Image
+                    src={service.image}
+                    alt={service.title}
+                    fill
+                    sizes="(max-width: 1024px) 50vw, 35vw"
+                    className="object-cover brightness-[0.95] contrast-[1.02]"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Column 3: Service Details (Right) */}
+          <div className="w-full lg:w-[40%] flex flex-col justify-between pl-6 lg:pl-12 pr-4 sm:pr-8 lg:pr-12 xl:pr-16 pt-28 lg:pt-36 pb-12 lg:pb-16">
+
+            {/* Top Row: Static branding message */}
+            <div className="text-left mb-6 lg:mb-0">
+              <span className="text-xs uppercase tracking-widest text-[#206cbb] font-semibold">Our Digital Expertise</span>
+              <p className="text-neutral-500 text-xs sm:text-sm mt-2 leading-relaxed max-w-[380px]">
+                Everything that we do is intended to help your business become smarter, faster, and stronger in the world of the internet.
+              </p>
+            </div>
+
+            {/* Middle Row: Dynamic Details Container */}
+            <div className="relative flex-grow flex flex-col justify-center items-start py-6 lg:py-0 min-h-[220px]">
+              {servicesData.map((service, idx) => (
+                <div
+                  key={idx}
+                  className={`service-details-wrapper absolute inset-x-0 transition-all duration-700 ease-in-out ${activeService === idx ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-6 pointer-events-none"
+                    }`}
+                >
+                  <h3 className="bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight mb-4 w-fit">
+                    {service.title}
+                  </h3>
+                  <p className="text-neutral-600 text-sm sm:text-base leading-relaxed mb-6 max-w-[420px]">
+                    {service.description}
+                  </p>
+
+                  {/* Dynamic bullet items */}
+                  <div className="grid grid-cols-2 gap-y-3 gap-x-4 w-full max-w-[440px]">
+                    {service.bullets.map((bullet, bIdx) => (
+                      <div key={bIdx} className="flex items-center text-xs sm:text-sm text-neutral-500 font-medium">
+                        <span className="text-[#206cbb] mr-2 font-bold">+</span>
+                        {bullet}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Bottom Row: Pinned interactive "Get Free Quotes" badge */}
+              <MagneticButton 
+                className="w-28 h-28 sm:w-32 sm:h-32 border-neutral-300 text-xs sm:text-sm bg-transparent"
+              >
+                Get Free Quotes <span className="text-xs sm:text-sm">↗</span>
+              </MagneticButton>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* 4. Workflow / How we work Section */}
+      <section className="workflow-section relative bg-[#f9f9f9] text-black py-20 lg:py-28 px-4 sm:px-8 lg:px-12 xl:px-16 border-t border-neutral-200">
+        <div className="mx-auto max-w-[1510px] w-full">
+
+          {/* Header Typography */}
+          <div className="text-center mb-16 lg:mb-24 flex flex-col items-center">
+            <h2 className="workflow-section-title bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight select-none w-fit pb-1">
+              Our Workflow
+            </h2>
+          </div>
+
+          {/* Workflow Steps Grid Column Container */}
+          <div className="relative w-full">
+
+            {/* Horizontal Divider Line cutting through the grid */}
+            <div className="workflow-line-divider absolute left-0 right-0 top-[28px] h-[1px] bg-neutral-200 z-0" />
+
+            {/* 4-Column Step Row Layout */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-12 lg:gap-y-0 gap-x-8 relative z-10">
+
+              {/* Step 1 */}
+              <div className="workflow-step flex flex-col items-center text-center px-4">
+                <span className="step-tag text-xs font-bold text-[#121212] tracking-wider bg-[#f9f9f9] px-4 pb-2 z-10 select-none">
+                  Step 01
+                </span>
+
+                <div className="relative w-full mt-10 flex flex-col items-center">
+                  {/* Faint Background Watermark Number */}
+                  <span className="watermark-number absolute -top-12 text-[110px] sm:text-[130px] font-black text-neutral-200/40 select-none pointer-events-none z-0">
+                    01
+                  </span>
+
+                  {/* Step content */}
+                  <div className="relative z-10 pt-4 flex flex-col items-center">
+                    <h3 className="step-title bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-lg sm:text-xl font-bold mb-3 select-none w-fit mx-auto text-center">
+                      Free Discovery Consultation
+                    </h3>
+                    <p className="step-desc text-neutral-500 text-sm leading-relaxed max-w-[280px]">
+                      Before any project can succeed, there needs to be an understanding of your business. This consultation helps us know more about your business, your aims and target audience so that we can find ways of sustainable development.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Step 2 */}
+              <div className="workflow-step flex flex-col items-center text-center px-4">
+                <span className="step-tag text-xs font-bold text-[#121212] tracking-wider bg-[#f9f9f9] px-4 pb-2 z-10 select-none">
+                  Step 02
+                </span>
+
+                <div className="relative w-full mt-10 flex flex-col items-center">
+                  {/* Faint Background Watermark Number */}
+                  <span className="watermark-number absolute -top-12 text-[110px] sm:text-[130px] font-black text-neutral-200/40 select-none pointer-events-none z-0">
+                    02
+                  </span>
+
+                  {/* Step content */}
+                  <div className="relative z-10 pt-4 flex flex-col items-center">
+                    <h3 className="step-title bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-lg sm:text-xl font-bold mb-3 select-none w-fit mx-auto text-center">
+                      Personalized Growth Strategy
+                    </h3>
+                    <p className="step-desc text-neutral-500 text-sm leading-relaxed max-w-[280px]">
+                      We conduct thorough research and use all the data to create a personalized strategy for your online growth.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Step 3 */}
+              <div className="workflow-step flex flex-col items-center text-center px-4">
+                <span className="step-tag text-xs font-bold text-[#121212] tracking-wider bg-[#f9f9f9] px-4 pb-2 z-10 select-none">
+                  Step 03
+                </span>
+
+                <div className="relative w-full mt-10 flex flex-col items-center">
+                  {/* Faint Background Watermark Number */}
+                  <span className="watermark-number absolute -top-12 text-[110px] sm:text-[130px] font-black text-neutral-200/40 select-none pointer-events-none z-0">
+                    03
+                  </span>
+
+                  {/* Step content */}
+                  <div className="relative z-10 pt-4 flex flex-col items-center">
+                    <h3 className="step-title bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-lg sm:text-xl font-bold mb-3 select-none w-fit mx-auto text-center">
+                      Effective Implementation
+                    </h3>
+                    <p className="step-desc text-neutral-500 text-sm leading-relaxed max-w-[280px]">
+                      From developing websites and implementing SEO tactics to managing social media and advertising campaigns - our team implements your strategy in a most creative way.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Step 4 */}
+              <div className="workflow-step flex flex-col items-center text-center px-4">
+                <span className="step-tag text-xs font-bold text-[#121212] tracking-wider bg-[#f9f9f9] px-4 pb-2 z-10 select-none">
+                  Step 04
+                </span>
+
+                <div className="relative w-full mt-10 flex flex-col items-center">
+                  {/* Faint Background Watermark Number */}
+                  <span className="watermark-number absolute -top-12 text-[110px] sm:text-[130px] font-black text-neutral-200/40 select-none pointer-events-none z-0">
+                    04
+                  </span>
+
+                  {/* Step content */}
+                  <div className="relative z-10 pt-4 flex flex-col items-center">
+                    <h3 className="step-title bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-lg sm:text-xl font-bold mb-3 select-none w-fit mx-auto text-center">
+                      Optimization & Scaling
+                    </h3>
+                    <p className="step-desc text-neutral-500 text-sm leading-relaxed max-w-[280px]">
+                      Online growth never ends after the implementation phase. It continues through constant optimization and scaling of your efforts.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      {/* 5. Horizontal Slider Section (Why Choose Us) */}
+      <div className="why-choose-us-wrapper relative w-full overflow-hidden bg-white border-t border-neutral-100">
+        <div className="why-choose-us-slider flex flex-row flex-nowrap w-[400vw] h-screen">
+
+          {/* Slide 1: Welcome Intro */}
+          <div className="w-screen h-screen shrink-0 bg-[#faf8f5] flex items-center justify-center relative select-none">
+            {/* Decorative Overlapping Boxes (Top-Left) */}
+            <div className="absolute top-28 left-6 sm:top-36 sm:left-16 md:left-24 w-[110px] h-[110px] sm:w-[150px] sm:h-[150px] pointer-events-none">
+              {/* Green Box (Behind) */}
+              <div 
+                className="absolute top-0 right-0 w-[70px] h-[70px] sm:w-[100px] sm:h-[100px] rounded-sm shadow-sm" 
+                style={{ backgroundColor: "#3c9e90" }}
+              />
+              {/* Blue Box (In Front, Overlapping) */}
+              <div 
+                className="absolute bottom-0 left-0 w-[55px] h-[55px] sm:w-[80px] sm:h-[80px] rounded-sm shadow-md z-10" 
+                style={{ backgroundColor: "#206cbb" }}
+              />
+            </div>
+
+            <h2 className="bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent font-black text-6xl sm:text-8xl lg:text-[110px] tracking-tight leading-none text-center py-2">
+              WHY<br />CHOOSE US ?
+            </h2>
+          </div>
+
+          {/* Slide 2: Core Philosophy & Competencies */}
+          <div className="w-screen h-screen shrink-0 bg-[#faf8f5] flex items-center justify-center relative px-6 sm:px-12 lg:px-24">
+            <div className="mx-auto max-w-[1510px] w-full flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-6">
+              {/* Left Column (40%) */}
+              <div className="w-full lg:w-[40%] text-left flex flex-col items-start pr-0 lg:pr-8">
+                <span className="text-xs uppercase tracking-widest text-neutral-500 font-semibold mb-3 select-none">
+                  WHY CHOOSE US ?
+                </span>
+                <h2 className="bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-4xl sm:text-5xl font-extrabold tracking-tight mb-6 py-1">
+                  Bouncy Strategic Core
+                </h2>
+                <p className="text-neutral-600 text-sm sm:text-base leading-relaxed">
+                  At Bouncy, we provide not only digital services but also strategies for businesses to grow. Our creativity, analytical approach, and focus on delivering results will become your ally on your way to success online.
+                </p>
+              </div>
+
+              {/* Right Column (60%): 2x2 grid of circular progress rings */}
+              <div className="w-full lg:w-[60%] grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-8 lg:gap-y-10 pl-0 lg:pl-8">
+                {/* Value 1: Research */}
+                <div className="flex items-start gap-4">
+                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 shrink-0 flex items-center justify-center select-none">
+                    <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                      <defs>
+                        <linearGradient id="grad-research" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#206cbb" />
+                          <stop offset="100%" stopColor="#3c9e90" />
+                        </linearGradient>
+                      </defs>
+                      <circle cx="50" cy="50" r="40" stroke="#e5e7eb" strokeWidth="6" fill="transparent" />
+                      <circle cx="50" cy="50" r="40" stroke="url(#grad-research)" strokeWidth="6" fill="transparent" strokeDasharray="251.2" strokeDashoffset={251.2 - (251.2 * 85) / 100} strokeLinecap="round" />
+                    </svg>
+                    <span className="absolute text-sm sm:text-base font-extrabold text-black">85%</span>
+                  </div>
+                  <div className="text-left">
+                    <h3 className="text-black text-base sm:text-lg font-bold mb-1 flex items-center gap-1 select-none">
+                      <span>🔍</span> Research
+                    </h3>
+                    <p className="text-neutral-500 text-sm sm:text-base leading-relaxed">
+                      Discovering important insights about your market, audience, and competitors is an essential step.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Value 2: Strategy */}
+                <div className="flex items-start gap-4">
+                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 shrink-0 flex items-center justify-center select-none">
+                    <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                      <defs>
+                        <linearGradient id="grad-strategy" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#206cbb" />
+                          <stop offset="100%" stopColor="#3c9e90" />
+                        </linearGradient>
+                      </defs>
+                      <circle cx="50" cy="50" r="40" stroke="#e5e7eb" strokeWidth="6" fill="transparent" />
+                      <circle cx="50" cy="50" r="40" stroke="url(#grad-strategy)" strokeWidth="6" fill="transparent" strokeDasharray="251.2" strokeDashoffset={251.2 - (251.2 * 90) / 100} strokeLinecap="round" />
+                    </svg>
+                    <span className="absolute text-sm sm:text-base font-extrabold text-black">90%</span>
+                  </div>
+                  <div className="text-left">
+                    <h3 className="text-black text-base sm:text-lg font-bold mb-1 flex items-center gap-1 select-none">
+                      <span>🎯</span> Strategy
+                    </h3>
+                    <p className="text-neutral-500 text-sm sm:text-base leading-relaxed">
+                      Each of our strategies is carefully developed based on your needs to ensure your business grows successfully.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Value 3: Analytics */}
+                <div className="flex items-start gap-4">
+                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 shrink-0 flex items-center justify-center select-none">
+                    <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                      <defs>
+                        <linearGradient id="grad-analytics" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#206cbb" />
+                          <stop offset="100%" stopColor="#3c9e90" />
+                        </linearGradient>
+                      </defs>
+                      <circle cx="50" cy="50" r="40" stroke="#e5e7eb" strokeWidth="6" fill="transparent" />
+                      <circle cx="50" cy="50" r="40" stroke="url(#grad-analytics)" strokeWidth="6" fill="transparent" strokeDasharray="251.2" strokeDashoffset={251.2 - (251.2 * 75) / 100} strokeLinecap="round" />
+                    </svg>
+                    <span className="absolute text-sm sm:text-base font-extrabold text-black">75%</span>
+                  </div>
+                  <div className="text-left">
+                    <h3 className="text-black text-base sm:text-lg font-bold mb-1 flex items-center gap-1 select-none">
+                      <span>📈</span> Analytics
+                    </h3>
+                    <p className="text-neutral-500 text-sm sm:text-base leading-relaxed">
+                      We analyze and optimize each of our campaigns to deliver meaningful results.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Value 4: Growth */}
+                <div className="flex items-start gap-4">
+                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 shrink-0 flex items-center justify-center select-none">
+                    <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+                      <defs>
+                        <linearGradient id="grad-growth" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#206cbb" />
+                          <stop offset="100%" stopColor="#3c9e90" />
+                        </linearGradient>
+                      </defs>
+                      <circle cx="50" cy="50" r="40" stroke="#e5e7eb" strokeWidth="6" fill="transparent" />
+                      <circle cx="50" cy="50" r="40" stroke="url(#grad-growth)" strokeWidth="6" fill="transparent" strokeDasharray="251.2" strokeDashoffset={251.2 - (251.2 * 95) / 100} strokeLinecap="round" />
+                    </svg>
+                    <span className="absolute text-sm sm:text-base font-extrabold text-black">95%</span>
+                  </div>
+                  <div className="text-left">
+                    <h3 className="text-black text-base sm:text-lg font-bold mb-1 flex items-center gap-1 select-none">
+                      <span>🚀</span> Growth
+                    </h3>
+                    <p className="text-neutral-500 text-sm sm:text-base leading-relaxed">
+                      With constant improvement, we will take your brand to new heights.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Slide 3: Growth Metrics Counter */}
+          <div className="slide-metrics-trigger w-screen h-screen shrink-0 bg-[#faf8f5] flex items-center justify-center relative px-6 sm:px-12 lg:px-24">
+            <div className="mx-auto max-w-[1150px] w-full flex flex-col lg:flex-row items-center justify-between gap-12">
+
+              {/* Left Side: 3 statistical counters */}
+              <div className="w-full lg:w-[40%] flex flex-col justify-center items-start gap-10 lg:gap-14">
+                {/* Metric 1 */}
+                <div className="text-left">
+                  <span
+                    className="counter-val bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight select-none leading-none inline-block py-1"
+                    data-target="5"
+                    data-suffix=" yrs+"
+                  >
+                    0
+                  </span>
+                  <p className="text-neutral-500 text-sm uppercase tracking-widest font-semibold mt-2 select-none">
+                    Experience
+                  </p>
+                </div>
+
+                {/* Metric 2 */}
+                <div className="text-left">
+                  <span
+                    className="counter-val bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight select-none leading-none inline-block py-1"
+                    data-target="200"
+                    data-suffix="+"
+                  >
+                    0
+                  </span>
+                  <p className="text-neutral-500 text-sm uppercase tracking-widest font-semibold mt-2 select-none">
+                    Project Completed
+                  </p>
+                </div>
+
+                {/* Metric 3 */}
+                <div className="text-left">
+                  <span
+                    className="counter-val bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight select-none leading-none inline-block py-1"
+                    data-target="150"
+                    data-suffix="+"
+                  >
+                    0
+                  </span>
+                  <p className="text-neutral-500 text-sm uppercase tracking-widest font-semibold mt-2 select-none">
+                    Happy Customers
+                  </p>
+                </div>
+              </div>
+
+              {/* Right Side: Dot Pattern Grid and Triangular Masked Image Collage */}
+              <div className="w-full lg:w-[50%] flex items-center justify-center relative py-12 lg:py-0">
+
+                {/* Grid Overlay with Repeating Dot Pattern */}
+                <div
+                  className="relative w-[340px] h-[340px] sm:w-[460px] sm:h-[460px] flex items-center justify-center"
+                  style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 60 0 L 0 0 0 60' stroke='%23e6e6e6' stroke-width='1'/%3E%3Ccircle cx='0' cy='0' r='3.5' fill='%23121212'/%3E%3C/svg%3E")`,
+                    backgroundSize: "60px 60px"
+                  }}
+                >
+
+                  {/* Triangle Image 1 (Left / Lower) */}
+                  <div
+                    className="absolute bottom-6 left-6 w-[110px] h-[150px] sm:w-[150px] sm:h-[200px] overflow-hidden border border-neutral-300 shadow-md"
+                    style={{ clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)" }}
+                  >
+                    <Image
+                      src="/portrait_1.png"
+                      alt="Team portrait triangle 1"
+                      fill
+                      sizes="(max-width: 768px) 110px, 150px"
+                      className="object-cover"
+                    />
+                  </div>
+
+                  {/* Triangle Image 2 (Middle / High) */}
+                  <div
+                    className="absolute top-6 left-[110px] sm:left-[150px] w-[140px] h-[210px] sm:w-[190px] sm:h-[280px] overflow-hidden border border-neutral-300 shadow-lg z-10"
+                    style={{ clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)" }}
+                  >
+                    <Image
+                      src="/portrait_2.png"
+                      alt="Team portrait triangle 2"
+                      fill
+                      sizes="(max-width: 768px) 140px, 190px"
+                      className="object-cover"
+                    />
+                  </div>
+
+                  {/* Triangle Image 3 (Right / Lower) */}
+                  <div
+                    className="absolute bottom-12 right-6 w-[100px] h-[130px] sm:w-[130px] sm:h-[180px] overflow-hidden border border-neutral-300 shadow-md"
+                    style={{ clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)" }}
+                  >
+                    <Image
+                      src="/portrait_3.png"
+                      alt="Team portrait triangle 3"
+                      fill
+                      sizes="(max-width: 768px) 100px, 130px"
+                      className="object-cover"
+                    />
+                  </div>
+
+                  {/* Faint floating text label badges (stamped on pattern intersections) */}
+                  <span className="absolute top-16 left-6 text-[9px] font-bold tracking-widest text-neutral-400 select-none uppercase">
+                    Team work
+                  </span>
+                  <span className="absolute top-24 right-12 text-[9px] font-bold tracking-widest text-neutral-400 select-none uppercase">
+                    Skill & Exp
+                  </span>
+                  <span className="absolute bottom-36 left-36 text-[9px] font-bold tracking-widest text-neutral-400 select-none uppercase z-20 bg-[#faf8f5]/80 px-1 py-0.5 rounded-sm">
+                    Happiness
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+          {/* Slide 4: Final Call To Action (CTA) */}
+          <div className="w-screen h-screen shrink-0 bg-[#dbe1d4] flex flex-col items-center justify-center relative px-6 select-none">
+
+            {/* Center Content Text Stack */}
+            <span className="text-xs uppercase tracking-widest text-neutral-600 font-semibold mb-4">
+              Have you project in mind?
+            </span>
+            <h2 className="bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent font-extrabold text-4xl sm:text-6xl lg:text-[76px] tracking-tight leading-none text-center max-w-[900px] mb-12 py-2">
+              Let’s make something great together!
+            </h2>
+
+            {/* Interactive Magnetic Outline Circle Button */}
+            <MagneticButton 
+              className="w-36 h-36 sm:w-44 sm:h-44 border-neutral-800 font-bold text-xs sm:text-sm bg-transparent hover:border-transparent"
+              magneticStrength={0.25}
+            >
+              Contact With Us <span>→</span>
+            </MagneticButton>
+
+          </div>
+
+        </div>
+      </div>
+
+      {/* 6. Testimonials Section */}
+      <section className="testimonial-section relative w-full h-screen bg-white overflow-hidden flex items-center justify-center border-t border-neutral-100 select-none">
+
+        {/* Background Diagonal Diamond Lines matching user screenshot */}
+        <div className="absolute inset-0 pointer-events-none z-0">
+          <svg className="w-full h-full stroke-neutral-100" fill="none" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path d="M 50 0 L 0 50 L 50 100 L 100 50 Z" strokeWidth="0.15" />
+          </svg>
+        </div>
+
+        {/* Scattered Floating Media Grid (Asymmetric Periphery) */}
+        <div className="absolute inset-0 w-full h-full z-10 pointer-events-none">
+
+          {/* Image 1: left edge, middle. Square */}
+          <div className="floating-img absolute left-6 sm:left-12 top-[42%] w-16 h-16 sm:w-20 sm:h-20 border border-neutral-200 bg-neutral-50 shadow-sm overflow-hidden">
+            <Image src="/portrait_1.png" alt="Testimonial background portrait 1" fill className="object-cover" />
+          </div>
+
+          {/* Image 2: top left. Vertical square */}
+          <div className="floating-img absolute left-[22%] top-[8%] sm:top-[12%] w-24 h-24 sm:w-32 sm:h-32 border border-neutral-200 bg-neutral-50 shadow-sm overflow-hidden">
+            <Image src="/portrait_2.png" alt="Testimonial background portrait 2" fill className="object-cover" />
+          </div>
+
+          {/* Image 3: bottom left. Vertical rect */}
+          <div className="floating-img absolute left-[8%] sm:left-[12%] bottom-[6%] w-28 h-36 sm:w-40 sm:h-52 border border-neutral-200 bg-neutral-50 shadow-sm overflow-hidden">
+            <Image src="/portrait_3.png" alt="Testimonial background portrait 3" fill className="object-cover" />
+          </div>
+
+          {/* Image 4: top right. Small square */}
+          <div className="floating-img absolute right-[22%] top-[12%] w-16 h-16 sm:w-20 sm:h-20 border border-neutral-200 bg-neutral-50 shadow-sm overflow-hidden">
+            <Image src="/portrait_4.png" alt="Testimonial background portrait 4" fill className="object-cover" />
+          </div>
+
+          {/* Image 5: right edge, middle. Square */}
+          <div className="floating-img absolute right-6 sm:right-12 top-[45%] w-24 h-24 sm:w-32 sm:h-32 border border-neutral-200 bg-neutral-50 shadow-sm overflow-hidden">
+            <Image src="/unlock_potential_left.png" alt="Testimonial background portrait 5" fill className="object-cover" />
+          </div>
+
+          {/* Image 6: bottom right. Vertical square */}
+          <div className="floating-img absolute right-[15%] bottom-[12%] w-20 h-24 sm:w-24 sm:h-28 border border-neutral-200 bg-neutral-50 shadow-sm overflow-hidden">
+            <Image src="/unlock_potential_right.png" alt="Testimonial background portrait 6" fill className="object-cover" />
+          </div>
+
+        </div>
+
+        {/* Central Content Slider Container */}
+        <div className="relative z-20 mx-auto max-w-[800px] w-full px-6 flex flex-col items-center text-center">
+
+          {/* Top Quote Icon */}
+          <span className="bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-7xl sm:text-[90px] font-serif leading-none mb-4 select-none inline-block">
+            “
+          </span>
+
+          {/* Testimonial Quote Wrapper */}
+          <div className="testimonial-quote-wrapper w-full flex flex-col items-center">
+
+            <p className="text-black italic text-base sm:text-lg md:text-xl lg:text-2xl font-light leading-relaxed mb-8 max-w-[680px]">
+              {testimonials[currentTestimonial].quote}
+            </p>
+
+            <span className="bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent font-extrabold text-sm sm:text-base tracking-widest uppercase mb-1 inline-block">
+              {testimonials[currentTestimonial].author}
+            </span>
+
+            <span className="text-neutral-500 text-xs sm:text-sm tracking-wider">
+              {testimonials[currentTestimonial].designation}
+            </span>
+
+          </div>
+
+          {/* Navigation Controls */}
+          <div className="flex items-center gap-4 mt-10">
+            {/* Left Button */}
+            <button
+              onClick={handlePrevTestimonial}
+              className="w-10 h-10 rounded-full border border-neutral-300 flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-all duration-300 text-black text-sm cursor-pointer"
+              aria-label="Previous Testimonial"
+            >
+              &lt;
+            </button>
+
+            {/* Right Button */}
+            <button
+              onClick={handleNextTestimonial}
+              className="w-10 h-10 rounded-full border border-neutral-300 flex items-center justify-center hover:bg-black hover:text-white hover:border-black transition-all duration-300 text-black text-sm cursor-pointer"
+              aria-label="Next Testimonial"
+            >
+              &gt;
+            </button>
+          </div>
+
+        </div>
+
+      </section>
+
+      {/* Floating Scroll to Top Button (Bottom-Right) */}
+      <button
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-12 h-12 rounded-full bg-[#121212] text-white hover:bg-black transition-colors shadow-lg cursor-pointer"
+        aria-label="Scroll to top"
+      >
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <line x1="12" y1="19" x2="12" y2="5" />
+          <polyline points="5 12 12 5 19 12" />
+        </svg>
+      </button>
+
+    </main>
   );
 }
