@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import MagneticButton from "@/components/MagneticButton";
@@ -9,6 +10,13 @@ import MagneticButton from "@/components/MagneticButton";
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
+
+const serviceUrls = [
+  "/services/web-development",
+  "/services/seo",
+  "/services/social-media",
+  "/services/meta-ads"
+];
 
 const servicesData = [
   {
@@ -126,6 +134,8 @@ export default function Home() {
   };
 
   useEffect(() => {
+    const cardListeners: { card: HTMLElement; move: (e: MouseEvent) => void; leave: () => void }[] = [];
+
     // 1. Master Animation Timeline (Preloader -> Reveal)
     const masterTimeline = gsap.timeline();
 
@@ -553,49 +563,133 @@ export default function Home() {
         }
       });
 
-      // 8. Workflow Section Entrance Animations
-      const workflowTimeline = gsap.timeline({
+      // 8. Workflow Section Entrance: Drop-Bounce Concrete Effect & Connecting Arrows
+      const workflowTl = gsap.timeline({
         scrollTrigger: {
           trigger: ".workflow-section",
-          start: "top 80%",
+          start: "top 75%",
           toggleActions: "play none none none",
-        },
+        }
       });
 
-      workflowTimeline.fromTo(
-        ".workflow-section-title",
-        { opacity: 0, y: 20 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power2.out",
-        }
-      );
+      // Initial setup: hide all cards (above viewport ready to drop) and arrows
+      gsap.set(".workflow-card", { opacity: 0, y: -250, scale: 0.9, rotationX: 10 });
+      gsap.set(".workflow-arrow-path-1, .workflow-arrow-path-2, .workflow-arrow-path-3", { strokeDashoffset: 350 });
+      gsap.set(".gyro-ring, .bottom-glow", { opacity: 0 });
 
-      workflowTimeline.fromTo(
-        ".workflow-line-divider",
-        { scaleX: 0, transformOrigin: "center" },
-        {
-          scaleX: 1,
-          duration: 1.0,
-          ease: "power3.inOut",
-        },
-        "-=0.6"
-      );
+      // Step 1 drops
+      workflowTl.to(".workflow-card:nth-child(1)", {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        rotationX: 0,
+        duration: 0.8,
+        ease: "bounce.out"
+      });
+      // Card 1 impact: show glow & rings and start drawing Arrow 1
+      workflowTl.to(".workflow-card:nth-child(1) .gyro-ring, .workflow-card:nth-child(1) .bottom-glow", {
+        opacity: 1,
+        duration: 0.3
+      }, "-=0.25");
+      workflowTl.to(".workflow-arrow-path-1", {
+        strokeDashoffset: 0,
+        duration: 0.7,
+        ease: "power2.inOut"
+      }, "-=0.1");
 
-      workflowTimeline.fromTo(
-        ".workflow-step",
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1.0,
-          stagger: 0.18,
-          ease: "power3.out",
-        },
-        "-=0.7"
-      );
+      // Step 2 drops
+      workflowTl.to(".workflow-card:nth-child(2)", {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        rotationX: 0,
+        duration: 0.8,
+        ease: "bounce.out"
+      }, "-=0.2");
+      // Card 2 impact
+      workflowTl.to(".workflow-card:nth-child(2) .gyro-ring, .workflow-card:nth-child(2) .bottom-glow", {
+        opacity: 1,
+        duration: 0.3
+      }, "-=0.25");
+      workflowTl.to(".workflow-arrow-path-2", {
+        strokeDashoffset: 0,
+        duration: 0.7,
+        ease: "power2.inOut"
+      }, "-=0.1");
+
+      // Step 3 drops
+      workflowTl.to(".workflow-card:nth-child(3)", {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        rotationX: 0,
+        duration: 0.8,
+        ease: "bounce.out"
+      }, "-=0.2");
+      // Card 3 impact
+      workflowTl.to(".workflow-card:nth-child(3) .gyro-ring, .workflow-card:nth-child(3) .bottom-glow", {
+        opacity: 1,
+        duration: 0.3
+      }, "-=0.25");
+      workflowTl.to(".workflow-arrow-path-3", {
+        strokeDashoffset: 0,
+        duration: 0.7,
+        ease: "power2.inOut"
+      }, "-=0.1");
+
+      // Step 4 drops
+      workflowTl.to(".workflow-card:nth-child(4)", {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        rotationX: 0,
+        duration: 0.8,
+        ease: "bounce.out"
+      }, "-=0.2");
+      // Card 4 impact
+      workflowTl.to(".workflow-card:nth-child(4) .gyro-ring, .workflow-card:nth-child(4) .bottom-glow", {
+        opacity: 1,
+        duration: 0.3
+      }, "-=0.25");
+
+      // Interactive 3D mouse parallax tilt effect
+      const workflowCards = gsap.utils.toArray(".workflow-card") as HTMLElement[];
+      workflowCards.forEach((card) => {
+        const handleMouseMove = (e: MouseEvent) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const xc = rect.width / 2;
+          const yc = rect.height / 2;
+          const angleX = (yc - y) / 12;
+          const angleY = (x - xc) / 12;
+          
+          gsap.to(card, {
+            rotationX: angleX,
+            rotationY: angleY,
+            scale: card.classList.contains("active-step") ? 1.07 : 1.02,
+            duration: 0.3,
+            ease: "power2.out",
+            overwrite: "auto",
+          });
+        };
+
+        const handleMouseLeave = () => {
+          gsap.to(card, {
+            rotationX: 0,
+            rotationY: 0,
+            scale: card.classList.contains("active-step") ? 1.05 : 0.95,
+            duration: 0.5,
+            ease: "power2.out",
+            overwrite: "auto",
+          });
+        };
+
+        card.addEventListener("mousemove", handleMouseMove);
+        card.addEventListener("mouseleave", handleMouseLeave);
+
+        cardListeners.push({ card, move: handleMouseMove, leave: handleMouseLeave });
+      });
 
       // 9. Pinned Horizontal Page Slider (Why Choose Us)
       const sliderTl = gsap.to(".why-choose-us-slider", {
@@ -693,6 +787,10 @@ export default function Home() {
         testimonialSect.removeEventListener("mousemove", handleMouseMoveTestimonial);
         testimonialSect.removeEventListener("mouseleave", handleMouseLeaveTestimonial);
       }
+      cardListeners.forEach(({ card, move, leave }) => {
+        card.removeEventListener("mousemove", move);
+        card.removeEventListener("mouseleave", leave);
+      });
     };
   }, []);
 
@@ -736,7 +834,7 @@ export default function Home() {
       </div>
 
       {/* Main Hero Section */}
-      <section className="hero-section relative min-h-screen flex items-center justify-center pt-16 pb-12 sm:pt-24 sm:pb-20 lg:pt-28 lg:pb-24 px-4 sm:px-8 lg:px-12 xl:px-16">
+      <section className="hero-section relative min-h-[calc(100vh-7rem)] flex items-center justify-center pt-6 pb-12 sm:pt-10 sm:pb-20 lg:pt-12 lg:pb-24 px-4 sm:px-8 lg:px-12 xl:px-16">
         {/* Background Grid Image */}
         <div
           className="absolute inset-0 bg-cover bg-top bg-no-repeat pointer-events-none opacity-85 z-0"
@@ -886,7 +984,7 @@ export default function Home() {
               <div className="w-full lg:w-[67%] flex flex-col items-start justify-between min-h-[150px] sm:min-h-[180px] lg:min-h-[240px] pl-0 lg:pl-[15px]">
 
                 {/* Indented Text Paragraph */}
-                <p className="desc-text text-sm sm:text-base lg:text-[18px] text-[#555555] font-normal leading-[1.42] max-w-full lg:max-w-[460px] pl-0 lg:pl-[80px] text-left">
+                <p className="desc-text text-sm sm:text-base lg:text-[18px] text-[#555555] font-normal leading-[1.42] max-w-full lg:max-w-[460px] pl-0 lg:pl-[80px] text-justify">
                   {descParagraph.map((word, index) => (
                     <span
                       key={index}
@@ -944,7 +1042,7 @@ export default function Home() {
 
                 {/* Outer Description Parallax Wrapper */}
                 <div className="unlock-desc-wrapper w-full">
-                  <p className="unlock-desc text-[#555555] text-sm sm:text-base leading-relaxed text-left max-w-full lg:max-w-[360px]">
+                  <p className="unlock-desc text-[#555555] text-sm sm:text-base leading-relaxed text-justify max-w-full lg:max-w-[360px]">
                     Every brand has a story that needs to be told. This is where Bouncy comes in handy since our team helps your brand to tell its story through the implementation of various innovative and effective tactics that ensure sustainability.
                   </p>
                 </div>
@@ -1044,7 +1142,7 @@ export default function Home() {
                   <h3 className="bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight mb-4 w-fit">
                     {service.title}
                   </h3>
-                  <p className="text-neutral-600 text-sm sm:text-base leading-relaxed mb-6 max-w-[420px]">
+                  <p className="text-neutral-600 text-sm sm:text-base leading-relaxed mb-6 max-w-[420px] text-justify">
                     {service.description}
                   </p>
 
@@ -1061,12 +1159,14 @@ export default function Home() {
               ))}
             </div>
 
-            {/* Bottom Row: Pinned interactive "Get Free Quotes" badge */}
+            {/* Bottom Row: Pinned interactive "Explore More" badge */}
+            <Link href={serviceUrls[activeService]} className="block w-fit">
               <MagneticButton 
                 className="w-28 h-28 sm:w-32 sm:h-32 border-neutral-300 text-xs sm:text-sm bg-transparent"
               >
-                Get Free Quotes <span className="text-xs sm:text-sm">↗</span>
+                Explore More <span className="text-xs sm:text-sm">↗</span>
               </MagneticButton>
+            </Link>
 
           </div>
 
@@ -1074,119 +1174,429 @@ export default function Home() {
       </section>
 
       {/* 4. Workflow / How we work Section */}
-      <section className="workflow-section relative bg-[#f9f9f9] text-black py-20 lg:py-28 px-4 sm:px-8 lg:px-12 xl:px-16 border-t border-neutral-200">
-        <div className="mx-auto max-w-[1510px] w-full">
+      <section className="workflow-section relative bg-gradient-to-b from-[#fbfbfb] to-[#f5f5f5] text-black py-24 lg:py-32 px-4 sm:px-8 lg:px-12 xl:px-16 border-t border-neutral-200/60 overflow-hidden">
+        {/* Soft Background Glowing Blobs */}
+        <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] rounded-full bg-[#206cbb]/5 blur-[100px] pointer-events-none z-0" />
+        <div className="absolute bottom-1/4 right-1/4 translate-x-1/2 translate-y-1/2 w-[350px] h-[350px] rounded-full bg-[#3c9e90]/5 blur-[100px] pointer-events-none z-0" />
+
+        <div className="mx-auto max-w-[1510px] w-full relative z-10">
 
           {/* Header Typography */}
-          <div className="text-center mb-16 lg:mb-24 flex flex-col items-center">
-            <h2 className="workflow-section-title bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent font-extrabold text-4xl sm:text-5xl lg:text-6xl tracking-tight select-none w-fit pb-1">
+          <div className="text-center mb-20 lg:mb-28 flex flex-col items-center">
+            <span className="text-xs uppercase tracking-widest text-[#206cbb] font-bold mb-3 bg-[#206cbb]/10 px-3 py-1 rounded-full select-none">
+              How We Create Success
+            </span>
+            <h2 className="workflow-section-title bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent font-black text-4xl sm:text-5xl lg:text-6xl tracking-tight select-none w-fit pb-1">
               Our Workflow
             </h2>
+            <p className="text-neutral-500 text-sm sm:text-base max-w-[500px] mt-4 leading-relaxed">
+              We follow a streamlined, data-driven approach to transform your digital presence and ensure sustainable long-term growth.
+            </p>
           </div>
 
           {/* Workflow Steps Grid Column Container */}
           <div className="relative w-full">
 
-            {/* Horizontal Divider Line cutting through the grid */}
-            <div className="workflow-line-divider absolute left-0 right-0 top-[28px] h-[1px] bg-neutral-200 z-0" />
+            {/* Glowing Funky 3D Connecting Arrows (Horizontal on desktop) */}
+            <div className="hidden lg:block absolute inset-x-0 top-[75px] h-[120px] pointer-events-none z-0">
+              <svg className="w-0 h-0 absolute">
+                <defs>
+                  <linearGradient id="arrow-grad-1" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#206cbb" />
+                    <stop offset="100%" stopColor="#3c9e90" />
+                  </linearGradient>
+                  <linearGradient id="arrow-grad-2" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#3c9e90" />
+                    <stop offset="100%" stopColor="#206cbb" />
+                  </linearGradient>
+                  <filter id="glow-arrow" x="-30%" y="-30%" width="160%" height="160%">
+                    <feGaussianBlur stdDeviation="4" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                  </filter>
+                  {/* Solid highly-visible arrowheads */}
+                  <marker
+                    id="arrowhead-1"
+                    markerWidth="8"
+                    markerHeight="8"
+                    refX="7"
+                    refY="4"
+                    orient="auto"
+                  >
+                    <path d="M 1,1 L 7,4 L 1,7 Z" fill="#3c9e90" />
+                  </marker>
+                  <marker
+                    id="arrowhead-2"
+                    markerWidth="8"
+                    markerHeight="8"
+                    refX="7"
+                    refY="4"
+                    orient="auto"
+                  >
+                    <path d="M 1,1 L 7,4 L 1,7 Z" fill="#206cbb" />
+                  </marker>
+                  <marker
+                    id="arrowhead-3"
+                    markerWidth="8"
+                    markerHeight="8"
+                    refX="7"
+                    refY="4"
+                    orient="auto"
+                  >
+                    <path d="M 1,1 L 7,4 L 1,7 Z" fill="#3c9e90" />
+                  </marker>
+                  {/* Semi-transparent background arrowheads */}
+                  <marker
+                    id="arrowhead-bg-1"
+                    markerWidth="8"
+                    markerHeight="8"
+                    refX="7"
+                    refY="4"
+                    orient="auto"
+                  >
+                    <path d="M 1,1 L 7,4 L 1,7 Z" fill="rgba(60, 158, 144, 0.25)" />
+                  </marker>
+                  <marker
+                    id="arrowhead-bg-2"
+                    markerWidth="8"
+                    markerHeight="8"
+                    refX="7"
+                    refY="4"
+                    orient="auto"
+                  >
+                    <path d="M 1,1 L 7,4 L 1,7 Z" fill="rgba(32, 108, 187, 0.25)" />
+                  </marker>
+                  <marker
+                    id="arrowhead-bg-3"
+                    markerWidth="8"
+                    markerHeight="8"
+                    refX="7"
+                    refY="4"
+                    orient="auto"
+                  >
+                    <path d="M 1,1 L 7,4 L 1,7 Z" fill="rgba(60, 158, 144, 0.25)" />
+                  </marker>
+                </defs>
+              </svg>
+
+              {/* Arrow 1: Col 1 -> Col 2 (Arches up) */}
+              <svg className="absolute left-[13.5%] w-[23%] top-0 h-[100px] overflow-visible animate-float-arrow-1" viewBox="0 0 300 100">
+                {/* Background dotted line */}
+                <path
+                  d="M 30,50 Q 150,-10 270,42"
+                  fill="none"
+                  stroke="rgba(32, 108, 187, 0.15)"
+                  strokeWidth="3.5"
+                  strokeLinecap="round"
+                  strokeDasharray="6 8"
+                  markerEnd="url(#arrowhead-bg-1)"
+                />
+                {/* Animated solid path */}
+                <path
+                  d="M 30,50 Q 150,-10 270,42"
+                  fill="none"
+                  stroke="url(#arrow-grad-1)"
+                  strokeWidth="4.5"
+                  strokeLinecap="round"
+                  strokeDasharray="350"
+                  strokeDashoffset="350"
+                  markerEnd="url(#arrowhead-1)"
+                  className="workflow-arrow-path-1"
+                  style={{ filter: "url(#glow-arrow)" }}
+                />
+              </svg>
+
+              {/* Arrow 2: Col 2 -> Col 3 (Dips down) */}
+              <svg className="absolute left-[38.5%] w-[23%] top-0 h-[100px] overflow-visible animate-float-arrow-2" viewBox="0 0 300 100">
+                {/* Background dotted line */}
+                <path
+                  d="M 30,42 Q 150,110 270,42"
+                  fill="none"
+                  stroke="rgba(60, 158, 144, 0.15)"
+                  strokeWidth="3.5"
+                  strokeLinecap="round"
+                  strokeDasharray="6 8"
+                  markerEnd="url(#arrowhead-bg-2)"
+                />
+                {/* Animated solid path */}
+                <path
+                  d="M 30,42 Q 150,110 270,42"
+                  fill="none"
+                  stroke="url(#arrow-grad-2)"
+                  strokeWidth="4.5"
+                  strokeLinecap="round"
+                  strokeDasharray="350"
+                  strokeDashoffset="350"
+                  markerEnd="url(#arrowhead-2)"
+                  className="workflow-arrow-path-2"
+                  style={{ filter: "url(#glow-arrow)" }}
+                />
+              </svg>
+
+              {/* Arrow 3: Col 3 -> Col 4 (Arches up) */}
+              <svg className="absolute left-[63.5%] w-[23%] top-0 h-[100px] overflow-visible animate-float-arrow-1" viewBox="0 0 300 100">
+                {/* Background dotted line */}
+                <path
+                  d="M 30,48 Q 150,-12 270,44"
+                  fill="none"
+                  stroke="rgba(32, 108, 187, 0.15)"
+                  strokeWidth="3.5"
+                  strokeLinecap="round"
+                  strokeDasharray="6 8"
+                  markerEnd="url(#arrowhead-bg-3)"
+                />
+                {/* Animated solid path */}
+                <path
+                  d="M 30,48 Q 150,-12 270,44"
+                  fill="none"
+                  stroke="url(#arrow-grad-1)"
+                  strokeWidth="4.5"
+                  strokeLinecap="round"
+                  strokeDasharray="350"
+                  strokeDashoffset="350"
+                  markerEnd="url(#arrowhead-3)"
+                  className="workflow-arrow-path-3"
+                  style={{ filter: "url(#glow-arrow)" }}
+                />
+              </svg>
+            </div>
 
             {/* 4-Column Step Row Layout */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-12 lg:gap-y-0 gap-x-8 relative z-10">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-10 lg:gap-y-0 gap-x-8 relative z-10">
 
               {/* Step 1 */}
-              <div className="workflow-step flex flex-col items-center text-center px-4">
-                <span className="step-tag text-xs font-bold text-[#121212] tracking-wider bg-[#f9f9f9] px-4 pb-2 z-10 select-none">
+              <div className="workflow-card group flex flex-col items-center p-8 bg-white border border-neutral-200/50 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(32,108,187,0.12)] hover:border-neutral-300 transition-all duration-500 relative overflow-hidden select-none">
+                {/* Subtle gradient glow line at the bottom of the card */}
+                <div className="bottom-glow absolute bottom-0 inset-x-0 h-[4px] bg-gradient-to-r from-[#206cbb] to-[#3c9e90] transition-opacity duration-500" />
+                
+                {/* Step badge */}
+                <span className="text-xs font-bold px-3 py-1 rounded-full bg-gradient-to-r from-[#206cbb] to-[#3c9e90] text-white transition-all duration-300 z-10 shadow-sm">
                   Step 01
                 </span>
 
-                <div className="relative w-full mt-10 flex flex-col items-center">
-                  {/* Faint Background Watermark Number */}
-                  <span className="watermark-number absolute -top-12 text-[110px] sm:text-[130px] font-black text-neutral-200/40 select-none pointer-events-none z-0">
-                    01
-                  </span>
+                {/* 3D Icon Container with 3D Gyroscope Rings */}
+                <div className="relative w-28 h-28 flex items-center justify-center mt-6 mb-4">
+                  {/* Gyro Ring 1 */}
+                  <div className="gyro-ring absolute inset-0 rounded-full border border-dashed border-[#206cbb]/30 scale-95 transition-opacity duration-500 pointer-events-none animate-gyro-1" />
+                  {/* Gyro Ring 2 */}
+                  <div className="gyro-ring absolute inset-0 rounded-full border border-dashed border-[#3c9e90]/30 scale-105 transition-opacity duration-500 pointer-events-none animate-gyro-2" />
+                  
+                  {/* Inner 3D Icon */}
+                  <img
+                    src="/workflow_icon_1.png"
+                    alt="Free Discovery Consultation"
+                    className="w-20 h-20 object-contain z-10 drop-shadow-[0_10px_20px_rgba(32,108,187,0.25)] group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500"
+                  />
+                </div>
 
-                  {/* Step content */}
-                  <div className="relative z-10 pt-4 flex flex-col items-center">
-                    <h3 className="step-title bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-lg sm:text-xl font-bold mb-3 select-none w-fit mx-auto text-center">
-                      Free Discovery Consultation
-                    </h3>
-                    <p className="step-desc text-neutral-500 text-sm leading-relaxed max-w-[280px]">
-                      Before any project can succeed, there needs to be an understanding of your business. This consultation helps us know more about your business, your aims and target audience so that we can find ways of sustainable development.
-                    </p>
-                  </div>
+                {/* Step content */}
+                <div className="relative z-10 flex flex-col items-center">
+                  <h3 className="text-lg font-bold bg-gradient-to-r from-neutral-800 to-neutral-900 bg-clip-text text-transparent group-hover:from-[#206cbb] group-hover:to-[#3c9e90] transition-colors duration-500 mt-2 text-center select-none w-fit mx-auto">
+                    Free Discovery Consultation
+                  </h3>
+                  <p className="text-neutral-500 transition-colors duration-500 text-xs sm:text-sm leading-relaxed text-center mt-3 max-w-[280px]">
+                    This consultation helps us know more about your business, your aims and target audience so that we can find ways of sustainable development.
+                  </p>
+                </div>
+
+                {/* Faint Background Watermark Number */}
+                <span className="watermark-number absolute -bottom-6 -right-6 text-[100px] font-black text-neutral-100/60 select-none pointer-events-none group-hover:text-[#3c9e90]/10 group-hover:-translate-y-2 group-hover:scale-105 transition-all duration-500 z-0 font-kanit">
+                  01
+                </span>
+
+                {/* Mobile connecting arrow pointing down to next step */}
+                <div className="lg:hidden absolute left-1/2 -translate-x-1/2 top-[100%] h-[40px] w-12 flex justify-center items-center z-20 pointer-events-none">
+                  <svg className="w-6 h-10 overflow-visible" viewBox="0 0 30 50">
+                    <path
+                      d="M 15,2 Q 28,25 15,48"
+                      fill="none"
+                      stroke="rgba(32, 108, 187, 0.15)"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeDasharray="3 4"
+                      markerEnd="url(#arrowhead-bg-1)"
+                    />
+                    <path
+                      d="M 15,2 Q 28,25 15,48"
+                      fill="none"
+                      stroke="url(#arrow-grad-1)"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      markerEnd="url(#arrowhead-1)"
+                      className="animate-pulse"
+                    />
+                  </svg>
                 </div>
               </div>
 
               {/* Step 2 */}
-              <div className="workflow-step flex flex-col items-center text-center px-4">
-                <span className="step-tag text-xs font-bold text-[#121212] tracking-wider bg-[#f9f9f9] px-4 pb-2 z-10 select-none">
+              <div className="workflow-card group flex flex-col items-center p-8 bg-white border border-neutral-200/50 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(32,108,187,0.12)] hover:border-neutral-300 transition-all duration-500 relative overflow-hidden select-none">
+                {/* Subtle gradient glow line at the bottom of the card */}
+                <div className="bottom-glow absolute bottom-0 inset-x-0 h-[4px] bg-gradient-to-r from-[#206cbb] to-[#3c9e90] transition-opacity duration-500" />
+                
+                {/* Step badge */}
+                <span className="text-xs font-bold px-3 py-1 rounded-full bg-gradient-to-r from-[#206cbb] to-[#3c9e90] text-white transition-all duration-300 z-10 shadow-sm">
                   Step 02
                 </span>
 
-                <div className="relative w-full mt-10 flex flex-col items-center">
-                  {/* Faint Background Watermark Number */}
-                  <span className="watermark-number absolute -top-12 text-[110px] sm:text-[130px] font-black text-neutral-200/40 select-none pointer-events-none z-0">
-                    02
-                  </span>
+                {/* 3D Icon Container with 3D Gyroscope Rings */}
+                <div className="relative w-28 h-28 flex items-center justify-center mt-6 mb-4">
+                  {/* Gyro Ring 1 */}
+                  <div className="gyro-ring absolute inset-0 rounded-full border border-dashed border-[#206cbb]/30 scale-95 transition-opacity duration-500 pointer-events-none animate-gyro-1" />
+                  {/* Gyro Ring 2 */}
+                  <div className="gyro-ring absolute inset-0 rounded-full border border-dashed border-[#3c9e90]/30 scale-105 transition-opacity duration-500 pointer-events-none animate-gyro-2" />
+                  
+                  {/* Inner 3D Icon */}
+                  <img
+                    src="/workflow_icon_2.png"
+                    alt="Personalized Growth Strategy"
+                    className="w-20 h-20 object-contain z-10 drop-shadow-[0_10px_20px_rgba(32,108,187,0.25)] group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500"
+                  />
+                </div>
 
-                  {/* Step content */}
-                  <div className="relative z-10 pt-4 flex flex-col items-center">
-                    <h3 className="step-title bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-lg sm:text-xl font-bold mb-3 select-none w-fit mx-auto text-center">
-                      Personalized Growth Strategy
-                    </h3>
-                    <p className="step-desc text-neutral-500 text-sm leading-relaxed max-w-[280px]">
-                      We conduct thorough research and use all the data to create a personalized strategy for your online growth.
-                    </p>
-                  </div>
+                {/* Step content */}
+                <div className="relative z-10 flex flex-col items-center">
+                  <h3 className="text-lg font-bold bg-gradient-to-r from-neutral-800 to-neutral-900 bg-clip-text text-transparent group-hover:from-[#206cbb] group-hover:to-[#3c9e90] transition-colors duration-500 mt-2 text-center select-none w-fit mx-auto">
+                    Personalized Growth Strategy
+                  </h3>
+                  <p className="text-neutral-500 transition-colors duration-500 text-xs sm:text-sm leading-relaxed text-center mt-3 max-w-[280px]">
+                    We conduct thorough research and use all the data to create a personalized strategy for your online growth.
+                  </p>
+                </div>
+
+                {/* Faint Background Watermark Number */}
+                <span className="watermark-number absolute -bottom-6 -right-6 text-[100px] font-black text-neutral-100/60 select-none pointer-events-none group-hover:text-[#3c9e90]/10 group-hover:-translate-y-2 group-hover:scale-105 transition-all duration-500 z-0 font-kanit">
+                  02
+                </span>
+
+                {/* Mobile connecting arrow pointing down to next step */}
+                <div className="lg:hidden absolute left-1/2 -translate-x-1/2 top-[100%] h-[40px] w-12 flex justify-center items-center z-20 pointer-events-none">
+                  <svg className="w-6 h-10 overflow-visible" viewBox="0 0 30 50">
+                    <path
+                      d="M 15,2 Q 2,25 15,48"
+                      fill="none"
+                      stroke="rgba(32, 108, 187, 0.15)"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeDasharray="3 4"
+                      markerEnd="url(#arrowhead-bg-2)"
+                    />
+                    <path
+                      d="M 15,2 Q 2,25 15,48"
+                      fill="none"
+                      stroke="url(#arrow-grad-2)"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      markerEnd="url(#arrowhead-2)"
+                      className="animate-pulse"
+                    />
+                  </svg>
                 </div>
               </div>
 
               {/* Step 3 */}
-              <div className="workflow-step flex flex-col items-center text-center px-4">
-                <span className="step-tag text-xs font-bold text-[#121212] tracking-wider bg-[#f9f9f9] px-4 pb-2 z-10 select-none">
+              <div className="workflow-card group flex flex-col items-center p-8 bg-white border border-neutral-200/50 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(32,108,187,0.12)] hover:border-neutral-300 transition-all duration-500 relative overflow-hidden select-none">
+                {/* Subtle gradient glow line at the bottom of the card */}
+                <div className="bottom-glow absolute bottom-0 inset-x-0 h-[4px] bg-gradient-to-r from-[#206cbb] to-[#3c9e90] transition-opacity duration-500" />
+                
+                {/* Step badge */}
+                <span className="text-xs font-bold px-3 py-1 rounded-full bg-gradient-to-r from-[#206cbb] to-[#3c9e90] text-white transition-all duration-300 z-10 shadow-sm">
                   Step 03
                 </span>
 
-                <div className="relative w-full mt-10 flex flex-col items-center">
-                  {/* Faint Background Watermark Number */}
-                  <span className="watermark-number absolute -top-12 text-[110px] sm:text-[130px] font-black text-neutral-200/40 select-none pointer-events-none z-0">
-                    03
-                  </span>
+                {/* 3D Icon Container with 3D Gyroscope Rings */}
+                <div className="relative w-28 h-28 flex items-center justify-center mt-6 mb-4">
+                  {/* Gyro Ring 1 */}
+                  <div className="gyro-ring absolute inset-0 rounded-full border border-dashed border-[#206cbb]/30 scale-95 transition-opacity duration-500 pointer-events-none animate-gyro-1" />
+                  {/* Gyro Ring 2 */}
+                  <div className="gyro-ring absolute inset-0 rounded-full border border-dashed border-[#3c9e90]/30 scale-105 transition-opacity duration-500 pointer-events-none animate-gyro-2" />
+                  
+                  {/* Inner 3D Icon */}
+                  <img
+                    src="/workflow_icon_3.png"
+                    alt="Effective Implementation"
+                    className="w-20 h-20 object-contain z-10 drop-shadow-[0_10px_20px_rgba(32,108,187,0.25)] group-hover:scale-110 group-hover:rotate-12 transition-transform duration-500"
+                  />
+                </div>
 
-                  {/* Step content */}
-                  <div className="relative z-10 pt-4 flex flex-col items-center">
-                    <h3 className="step-title bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-lg sm:text-xl font-bold mb-3 select-none w-fit mx-auto text-center">
-                      Effective Implementation
-                    </h3>
-                    <p className="step-desc text-neutral-500 text-sm leading-relaxed max-w-[280px]">
-                      From developing websites and implementing SEO tactics to managing social media and advertising campaigns - our team implements your strategy in a most creative way.
-                    </p>
-                  </div>
+                {/* Step content */}
+                <div className="relative z-10 flex flex-col items-center">
+                  <h3 className="text-lg font-bold bg-gradient-to-r from-neutral-800 to-neutral-900 bg-clip-text text-transparent group-hover:from-[#206cbb] group-hover:to-[#3c9e90] transition-colors duration-500 mt-2 text-center select-none w-fit mx-auto">
+                    Effective Implementation
+                  </h3>
+                  <p className="text-neutral-500 transition-colors duration-500 text-xs sm:text-sm leading-relaxed text-center mt-3 max-w-[280px]">
+                    From developing websites and implementing SEO tactics to managing social media and advertising campaigns - our team implements your strategy in a most creative way.
+                  </p>
+                </div>
+
+                {/* Faint Background Watermark Number */}
+                <span className="watermark-number absolute -bottom-6 -right-6 text-[100px] font-black text-neutral-100/60 select-none pointer-events-none group-hover:text-[#3c9e90]/10 group-hover:-translate-y-2 group-hover:scale-105 transition-all duration-500 z-0 font-kanit">
+                  03
+                </span>
+
+                {/* Mobile connecting arrow pointing down to next step */}
+                <div className="lg:hidden absolute left-1/2 -translate-x-1/2 top-[100%] h-[40px] w-12 flex justify-center items-center z-20 pointer-events-none">
+                  <svg className="w-6 h-10 overflow-visible" viewBox="0 0 30 50">
+                    <path
+                      d="M 15,2 Q 28,25 15,48"
+                      fill="none"
+                      stroke="rgba(32, 108, 187, 0.15)"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      strokeDasharray="3 4"
+                      markerEnd="url(#arrowhead-bg-3)"
+                    />
+                    <path
+                      d="M 15,2 Q 28,25 15,48"
+                      fill="none"
+                      stroke="url(#arrow-grad-1)"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      markerEnd="url(#arrowhead-3)"
+                      className="animate-pulse"
+                    />
+                  </svg>
                 </div>
               </div>
 
               {/* Step 4 */}
-              <div className="workflow-step flex flex-col items-center text-center px-4">
-                <span className="step-tag text-xs font-bold text-[#121212] tracking-wider bg-[#f9f9f9] px-4 pb-2 z-10 select-none">
+              <div className="workflow-card group flex flex-col items-center p-8 bg-white border border-neutral-200/50 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(32,108,187,0.12)] hover:border-neutral-300 transition-all duration-500 relative overflow-hidden select-none">
+                {/* Subtle gradient glow line at the bottom of the card */}
+                <div className="bottom-glow absolute bottom-0 inset-x-0 h-[4px] bg-gradient-to-r from-[#206cbb] to-[#3c9e90] transition-opacity duration-500" />
+                
+                {/* Step badge */}
+                <span className="text-xs font-bold px-3 py-1 rounded-full bg-gradient-to-r from-[#206cbb] to-[#3c9e90] text-white transition-all duration-300 z-10 shadow-sm">
                   Step 04
                 </span>
 
-                <div className="relative w-full mt-10 flex flex-col items-center">
-                  {/* Faint Background Watermark Number */}
-                  <span className="watermark-number absolute -top-12 text-[110px] sm:text-[130px] font-black text-neutral-200/40 select-none pointer-events-none z-0">
-                    04
-                  </span>
-
-                  {/* Step content */}
-                  <div className="relative z-10 pt-4 flex flex-col items-center">
-                    <h3 className="step-title bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-lg sm:text-xl font-bold mb-3 select-none w-fit mx-auto text-center">
-                      Optimization & Scaling
-                    </h3>
-                    <p className="step-desc text-neutral-500 text-sm leading-relaxed max-w-[280px]">
-                      Online growth never ends after the implementation phase. It continues through constant optimization and scaling of your efforts.
-                    </p>
-                  </div>
+                {/* 3D Icon Container with 3D Gyroscope Rings */}
+                <div className="relative w-28 h-28 flex items-center justify-center mt-6 mb-4">
+                  {/* Gyro Ring 1 */}
+                  <div className="gyro-ring absolute inset-0 rounded-full border border-dashed border-[#206cbb]/30 scale-95 transition-opacity duration-500 pointer-events-none animate-gyro-1" />
+                  {/* Gyro Ring 2 */}
+                  <div className="gyro-ring absolute inset-0 rounded-full border border-dashed border-[#3c9e90]/30 scale-105 transition-opacity duration-500 pointer-events-none animate-gyro-2" />
+                  
+                  {/* Inner 3D Icon */}
+                  <img
+                    src="/workflow_icon_4.png"
+                    alt="Optimization & Scaling"
+                    className="w-20 h-20 object-contain z-10 drop-shadow-[0_10px_20px_rgba(32,108,187,0.25)] group-hover:scale-110 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform duration-500"
+                  />
                 </div>
+
+                {/* Step content */}
+                <div className="relative z-10 flex flex-col items-center">
+                  <h3 className="text-lg font-bold bg-gradient-to-r from-neutral-800 to-neutral-900 bg-clip-text text-transparent group-hover:from-[#206cbb] group-hover:to-[#3c9e90] transition-colors duration-500 mt-2 text-center select-none w-fit mx-auto">
+                    Optimization & Scaling
+                  </h3>
+                  <p className="text-neutral-500 transition-colors duration-500 text-xs sm:text-sm leading-relaxed text-center mt-3 max-w-[280px]">
+                    Online growth never ends after the implementation phase. It continues through constant optimization and scaling of your efforts.
+                  </p>
+                </div>
+
+                {/* Faint Background Watermark Number */}
+                <span className="watermark-number absolute -bottom-6 -right-6 text-[100px] font-black text-neutral-100/60 select-none pointer-events-none group-hover:text-[#3c9e90]/10 group-hover:-translate-y-2 group-hover:scale-105 transition-all duration-500 z-0 font-kanit">
+                  04
+                </span>
               </div>
 
             </div>

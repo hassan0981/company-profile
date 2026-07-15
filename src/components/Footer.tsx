@@ -84,10 +84,10 @@ export default function Footer() {
   };
 
   const socials = [
-    { name: "FACEBOOK", href: "#" },
-    { name: "TWITTER", href: "#" },
+    { name: "FACEBOOK", href: "https://www.facebook.com/share/1bP3YwPJq8/" },
+    { name: "THREAD", href: "https://www.threads.com/@bouncy_digital" },
     { name: "LINKEDIN", href: "#" },
-    { name: "INSTAGRAM", href: "#" },
+    { name: "INSTAGRAM", href: "https://www.instagram.com/bouncy_digital?igsh=MXc3OTd0bnlrajM3cg==" },
   ];
 
   const currentYear = new Date().getFullYear();
@@ -99,29 +99,28 @@ export default function Footer() {
     >
       <div className="mx-auto max-w-7xl px-6 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
-          
+
           {/* Left Column (approx. 25%) */}
-          <div className="lg:col-span-3 flex flex-col justify-between gap-8">
-            <div>
+          <div className="lg:col-span-3 flex flex-col justify-between gap-8 items-center text-center">
+            <div className="flex flex-col items-center w-full">
               {/* Logo */}
-              <Link href="/" className="flex flex-col focus:outline-none w-fit">
-                <span className="text-3xl font-extrabold tracking-tighter text-white uppercase">
-                  Axtra
-                </span>
-                <span className="text-[10px] font-bold tracking-widest text-white/70 uppercase -mt-1.5">
-                  Digital Agency Studio
-                </span>
+              <Link href="/" className="flex items-center justify-center focus:outline-none w-fit">
+                <img
+                  src="/white_outline.png"
+                  alt="BouncyDigital Logo"
+                  className="h-40 w-auto object-contain -mt-15"
+                />
               </Link>
               {/* High contrast paragraph */}
-              <p className="mt-6 text-sm leading-relaxed text-white/90">
-                We are a digital agency that builds beautiful, high-performing websites and web applications tailored to your business needs.
+              <p className="-mt-4 text-sm leading-relaxed text-white/90 text-center">
+                We offer creative minds and intelligent digital marketing solutions ranging from web design/development and SEO to social media management and winning ad campaigns.
               </p>
             </div>
             {/* Copyright */}
-            <div className="text-xs text-white/70 mt-6 lg:mt-0">
+            <div className="text-xs text-white/70 mt-6 lg:mt-0 text-center">
               &copy; 2022 - {currentYear} | All rights reserved by{" "}
               <span className="text-white hover:underline transition-colors cursor-pointer font-semibold">
-                CrowdyFlow
+                BouncyDigital
               </span>
             </div>
           </div>
@@ -132,6 +131,8 @@ export default function Footer() {
               <a
                 key={social.name}
                 href={social.href}
+                target={social.href !== "#" ? "_blank" : undefined}
+                rel={social.href !== "#" ? "noopener noreferrer" : undefined}
                 className="social-box relative flex items-center justify-center py-5 border-b border-white/20 overflow-hidden group cursor-pointer"
                 onMouseEnter={handleSocialMouseEnter}
                 onMouseLeave={handleSocialMouseLeave}
@@ -166,14 +167,14 @@ export default function Footer() {
                   </h2>
                 </div>
               </Link>
-              
+
               {/* Elegant contact details under LET'S TALK */}
               <div className="flex flex-col items-start lg:items-end text-sm text-white/80 font-semibold tracking-wide">
-                <a href="mailto:hello@axtra.com" className="hover:text-white transition-colors">
-                  hello@axtra.com
+                <a href="mailto:info@bouncydigital.com" className="hover:text-white transition-colors">
+                  info@bouncydigital.com
                 </a>
-                <a href="tel:+09888777666" className="hover:text-white transition-colors mt-1">
-                  +(09) 888 777 666
+                <a href="tel:+923290968819" className="hover:text-white transition-colors mt-1">
+                  +92 329 0968819
                 </a>
               </div>
             </div>
@@ -188,12 +189,9 @@ export default function Footer() {
                 <Link href="/contact-us" className="hover:text-white transition-colors">
                   CONTACT
                 </Link>
-                <a href="#" className="hover:text-white transition-colors">
-                  CAREERS
-                </a>
-                <a href="#" className="hover:text-white transition-colors">
-                  FAQS
-                </a>
+                <Link href="/blog" className="hover:text-white transition-colors">
+                  BLOGS
+                </Link>
               </nav>
             </div>
 

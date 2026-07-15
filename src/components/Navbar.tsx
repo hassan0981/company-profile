@@ -40,21 +40,21 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-neutral-100 bg-white">
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 sm:px-8">
+      <div className="mx-auto flex h-28 max-w-7xl items-center justify-between px-6 sm:px-8">
         {/* Logo Section */}
-        <Link href="/" onClick={handleLinkClick} className="flex items-center focus:outline-none">
+        <Link href="/" onClick={handleLinkClick} className="flex items-center focus:outline-none -ml-16 sm:-ml-24">
           <Image
-            src="/1783962937797.jpg"
+            src="/BOUNCY.png"
             alt="Bouncy Logo"
-            width={120}
-            height={67}
-            className="object-contain h-12 w-[120px]"
+            width={400}
+            height={220}
+            className="object-contain h-35 w-[400px] -my-6"
             priority
           />
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-12">
           <Link
             href="/"
             onClick={handleLinkClick}

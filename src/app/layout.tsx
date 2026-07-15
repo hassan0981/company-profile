@@ -21,7 +21,7 @@ const kanit = Kanit({
 });
 
 export const metadata: Metadata = {
-  title: "Axtra - Digital Agency Studio",
+  title: "BouncyDigital - Creative Digital Marketing Agency",
   description: "Professional company profile website",
 };
 

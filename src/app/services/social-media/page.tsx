@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import MagneticButton from "@/components/MagneticButton";
@@ -308,7 +309,7 @@ export default function SocialMediaPage() {
               <div className="w-16 h-[2.5px] bg-neutral-800 my-4" />
 
               {/* Description Paragraph in Solid Black */}
-              <p className="text-black text-sm sm:text-base md:text-lg leading-relaxed max-w-[420px] font-normal">
+              <p className="text-black text-sm sm:text-base md:text-lg leading-relaxed max-w-[420px] font-normal text-justify">
                 Social media is not just about sharing content; it is about building connections and earning trust and having productive conversations with your audiences. At Bouncy, we offer Social Media Management services designed for professionals who want to build up their brands and expand their businesses through social networks.
               </p>
             </div>
@@ -411,7 +412,7 @@ export default function SocialMediaPage() {
                     <h3 className="bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-2xl sm:text-3xl font-extrabold tracking-tight mb-4 w-fit">
                       {service.title}
                     </h3>
-                    <p className="text-neutral-600 text-sm sm:text-base leading-relaxed mb-6 max-w-[400px]">
+                    <p className="text-neutral-600 text-sm sm:text-base leading-relaxed mb-6 max-w-[400px] text-justify">
                       {service.description}
                     </p>
 
@@ -429,13 +430,15 @@ export default function SocialMediaPage() {
               })}
             </div>
 
-            {/* Bottom Row: Pinned interactive "Get Free Quotes" badge */}
+            {/* Bottom Row: Pinned interactive "Explore More" badge */}
             <div className="mt-8 flex justify-start">
-              <MagneticButton 
-                className="w-28 h-28 sm:w-32 sm:h-32 border-neutral-300 text-xs sm:text-sm bg-transparent"
-              >
-                Get Free Quotes <span className="text-xs sm:text-sm">↗</span>
-              </MagneticButton>
+              <Link href="/contact-us">
+                <MagneticButton 
+                  className="w-28 h-28 sm:w-32 sm:h-32 border-neutral-300 text-xs sm:text-sm bg-transparent"
+                >
+                  Explore More <span className="text-xs sm:text-sm">↗</span>
+                </MagneticButton>
+              </Link>
             </div>
 
           </div>
