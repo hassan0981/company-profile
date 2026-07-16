@@ -158,23 +158,22 @@ export default function ContactUsPage() {
               <div className="flex flex-col gap-4 text-[15px] sm:text-[17px] font-medium text-black">
                 <div>
                   <a
-                    href="tel:+2578365379"
+                    href="tel:+923290968819"
                     className="underline underline-offset-[6px] decoration-[1.5px] decoration-black hover:text-[#206cbb] transition-colors"
                   >
-                    +(2) 578 – 365 – 379
+                    +92 329 0968819
                   </a>
                 </div>
                 <div>
                   <a
-                    href="mailto:hello@example.com"
+                    href="mailto:info@bouncydigital.com"
                     className="underline underline-offset-[8px] decoration-[1.5px] decoration-black hover:text-[#206cbb] transition-colors"
                   >
-                    hello@example.com
+                    info@bouncydigital.com
                   </a>
                 </div>
                 <div className="text-[#555555] leading-relaxed font-medium mt-2">
-                  230 Norman Street New York,<br />
-                  QC (USA) H8R 1A1
+                  Lahore, Pakistan
                 </div>
               </div>
             </div>

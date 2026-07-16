@@ -6,6 +6,7 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import MagneticButton from "@/components/MagneticButton";
+import { blogPosts } from "@/data/blogs";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -663,7 +664,7 @@ export default function Home() {
           const yc = rect.height / 2;
           const angleX = (yc - y) / 12;
           const angleY = (x - xc) / 12;
-          
+
           gsap.to(card, {
             rotationX: angleX,
             rotationY: angleY,
@@ -1049,7 +1050,7 @@ export default function Home() {
 
                 {/* Interactive Explore Us Button */}
                 <div className="mt-10 lg:mt-14">
-                  <MagneticButton 
+                  <MagneticButton
                     className="w-32 h-32 lg:w-36 lg:h-36 border-neutral-300 text-sm bg-white"
                   >
                     Explore Us
@@ -1161,7 +1162,7 @@ export default function Home() {
 
             {/* Bottom Row: Pinned interactive "Explore More" badge */}
             <Link href={serviceUrls[activeService]} className="block w-fit">
-              <MagneticButton 
+              <MagneticButton
                 className="w-28 h-28 sm:w-32 sm:h-32 border-neutral-300 text-xs sm:text-sm bg-transparent"
               >
                 Explore More <span className="text-xs sm:text-sm">↗</span>
@@ -1367,7 +1368,7 @@ export default function Home() {
               <div className="workflow-card group flex flex-col items-center p-8 bg-white border border-neutral-200/50 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(32,108,187,0.12)] hover:border-neutral-300 transition-all duration-500 relative overflow-hidden select-none">
                 {/* Subtle gradient glow line at the bottom of the card */}
                 <div className="bottom-glow absolute bottom-0 inset-x-0 h-[4px] bg-gradient-to-r from-[#206cbb] to-[#3c9e90] transition-opacity duration-500" />
-                
+
                 {/* Step badge */}
                 <span className="text-xs font-bold px-3 py-1 rounded-full bg-gradient-to-r from-[#206cbb] to-[#3c9e90] text-white transition-all duration-300 z-10 shadow-sm">
                   Step 01
@@ -1379,7 +1380,7 @@ export default function Home() {
                   <div className="gyro-ring absolute inset-0 rounded-full border border-dashed border-[#206cbb]/30 scale-95 transition-opacity duration-500 pointer-events-none animate-gyro-1" />
                   {/* Gyro Ring 2 */}
                   <div className="gyro-ring absolute inset-0 rounded-full border border-dashed border-[#3c9e90]/30 scale-105 transition-opacity duration-500 pointer-events-none animate-gyro-2" />
-                  
+
                   {/* Inner 3D Icon */}
                   <img
                     src="/workflow_icon_1.png"
@@ -1432,7 +1433,7 @@ export default function Home() {
               <div className="workflow-card group flex flex-col items-center p-8 bg-white border border-neutral-200/50 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(32,108,187,0.12)] hover:border-neutral-300 transition-all duration-500 relative overflow-hidden select-none">
                 {/* Subtle gradient glow line at the bottom of the card */}
                 <div className="bottom-glow absolute bottom-0 inset-x-0 h-[4px] bg-gradient-to-r from-[#206cbb] to-[#3c9e90] transition-opacity duration-500" />
-                
+
                 {/* Step badge */}
                 <span className="text-xs font-bold px-3 py-1 rounded-full bg-gradient-to-r from-[#206cbb] to-[#3c9e90] text-white transition-all duration-300 z-10 shadow-sm">
                   Step 02
@@ -1444,7 +1445,7 @@ export default function Home() {
                   <div className="gyro-ring absolute inset-0 rounded-full border border-dashed border-[#206cbb]/30 scale-95 transition-opacity duration-500 pointer-events-none animate-gyro-1" />
                   {/* Gyro Ring 2 */}
                   <div className="gyro-ring absolute inset-0 rounded-full border border-dashed border-[#3c9e90]/30 scale-105 transition-opacity duration-500 pointer-events-none animate-gyro-2" />
-                  
+
                   {/* Inner 3D Icon */}
                   <img
                     src="/workflow_icon_2.png"
@@ -1497,7 +1498,7 @@ export default function Home() {
               <div className="workflow-card group flex flex-col items-center p-8 bg-white border border-neutral-200/50 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(32,108,187,0.12)] hover:border-neutral-300 transition-all duration-500 relative overflow-hidden select-none">
                 {/* Subtle gradient glow line at the bottom of the card */}
                 <div className="bottom-glow absolute bottom-0 inset-x-0 h-[4px] bg-gradient-to-r from-[#206cbb] to-[#3c9e90] transition-opacity duration-500" />
-                
+
                 {/* Step badge */}
                 <span className="text-xs font-bold px-3 py-1 rounded-full bg-gradient-to-r from-[#206cbb] to-[#3c9e90] text-white transition-all duration-300 z-10 shadow-sm">
                   Step 03
@@ -1509,7 +1510,7 @@ export default function Home() {
                   <div className="gyro-ring absolute inset-0 rounded-full border border-dashed border-[#206cbb]/30 scale-95 transition-opacity duration-500 pointer-events-none animate-gyro-1" />
                   {/* Gyro Ring 2 */}
                   <div className="gyro-ring absolute inset-0 rounded-full border border-dashed border-[#3c9e90]/30 scale-105 transition-opacity duration-500 pointer-events-none animate-gyro-2" />
-                  
+
                   {/* Inner 3D Icon */}
                   <img
                     src="/workflow_icon_3.png"
@@ -1562,7 +1563,7 @@ export default function Home() {
               <div className="workflow-card group flex flex-col items-center p-8 bg-white border border-neutral-200/50 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(32,108,187,0.12)] hover:border-neutral-300 transition-all duration-500 relative overflow-hidden select-none">
                 {/* Subtle gradient glow line at the bottom of the card */}
                 <div className="bottom-glow absolute bottom-0 inset-x-0 h-[4px] bg-gradient-to-r from-[#206cbb] to-[#3c9e90] transition-opacity duration-500" />
-                
+
                 {/* Step badge */}
                 <span className="text-xs font-bold px-3 py-1 rounded-full bg-gradient-to-r from-[#206cbb] to-[#3c9e90] text-white transition-all duration-300 z-10 shadow-sm">
                   Step 04
@@ -1574,7 +1575,7 @@ export default function Home() {
                   <div className="gyro-ring absolute inset-0 rounded-full border border-dashed border-[#206cbb]/30 scale-95 transition-opacity duration-500 pointer-events-none animate-gyro-1" />
                   {/* Gyro Ring 2 */}
                   <div className="gyro-ring absolute inset-0 rounded-full border border-dashed border-[#3c9e90]/30 scale-105 transition-opacity duration-500 pointer-events-none animate-gyro-2" />
-                  
+
                   {/* Inner 3D Icon */}
                   <img
                     src="/workflow_icon_4.png"
@@ -1615,13 +1616,13 @@ export default function Home() {
             {/* Decorative Overlapping Boxes (Top-Left) */}
             <div className="absolute top-28 left-6 sm:top-36 sm:left-16 md:left-24 w-[110px] h-[110px] sm:w-[150px] sm:h-[150px] pointer-events-none">
               {/* Green Box (Behind) */}
-              <div 
-                className="absolute top-0 right-0 w-[70px] h-[70px] sm:w-[100px] sm:h-[100px] rounded-sm shadow-sm" 
+              <div
+                className="absolute top-0 right-0 w-[70px] h-[70px] sm:w-[100px] sm:h-[100px] rounded-sm shadow-sm"
                 style={{ backgroundColor: "#3c9e90" }}
               />
               {/* Blue Box (In Front, Overlapping) */}
-              <div 
-                className="absolute bottom-0 left-0 w-[55px] h-[55px] sm:w-[80px] sm:h-[80px] rounded-sm shadow-md z-10" 
+              <div
+                className="absolute bottom-0 left-0 w-[55px] h-[55px] sm:w-[80px] sm:h-[80px] rounded-sm shadow-md z-10"
                 style={{ backgroundColor: "#206cbb" }}
               />
             </div>
@@ -1885,7 +1886,7 @@ export default function Home() {
             </h2>
 
             {/* Interactive Magnetic Outline Circle Button */}
-            <MagneticButton 
+            <MagneticButton
               className="w-36 h-36 sm:w-44 sm:h-44 border-neutral-800 font-bold text-xs sm:text-sm bg-transparent hover:border-transparent"
               magneticStrength={0.25}
             >
@@ -1990,6 +1991,142 @@ export default function Home() {
 
         </div>
 
+      </section>
+
+      {/* 7. Blog Section */}
+      <section className="blog-section relative w-full py-24 bg-white border-t border-neutral-100 overflow-hidden">
+        {/* Background Decorative Grid lines matching Bouncy theme */}
+        <div className="absolute inset-0 pointer-events-none opacity-[0.03] text-black">
+          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="blogGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="1" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#blogGrid)" />
+          </svg>
+        </div>
+
+        <div className="max-w-[1200px] mx-auto px-6 relative z-10">
+
+          {/* Header */}
+          <div className="text-center mb-16 max-w-[600px] mx-auto">
+            <span className="bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent font-extrabold text-xs sm:text-sm tracking-widest uppercase mb-3 inline-block">
+              OUR STORIES
+            </span>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-black tracking-tight leading-tight">
+              Latest news & articles
+            </h2>
+            <div className="w-12 h-1 bg-[#206cbb] mx-auto mt-4 rounded-full" />
+          </div>
+
+          {/* Cards Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+            {blogPosts.map((post) => (
+              <div
+                key={post.id}
+                className="blog-card-container group relative w-full h-[380px] sm:h-[400px] lg:h-[420px] [perspective:2000px] select-none"
+              >
+                {/* Book Wrapper */}
+                <div className="book-wrapper relative w-full h-full [transform-style:preserve-3d] transition-transform duration-700 ease-out group-hover:[transform:rotateY(-10deg)_rotateX(5deg)] shadow-xl rounded-lg">
+
+                  {/* Inside Page (Revealed on hover) */}
+                  <div className="book-inside absolute inset-0 bg-[#fafafa] border border-neutral-100 rounded-lg p-6 sm:p-8 flex flex-col justify-between shadow-inner select-none pointer-events-none z-10">
+                    <div>
+                      <div className="flex items-center justify-between mb-4 border-b border-neutral-100 pb-3">
+                        <span className="text-xs text-[#206cbb] font-extrabold tracking-widest uppercase">INSIDE LOOK</span>
+                        <span className="text-xs text-neutral-400 font-medium">{post.readTime}</span>
+                      </div>
+                      <p className="text-neutral-600 text-sm sm:text-base leading-relaxed mb-4 line-clamp-5">
+                        {post.excerpt}
+                      </p>
+                    </div>
+
+                    <div className="flex items-center justify-between border-t border-neutral-200/60 pt-4">
+                      <div className="flex items-center gap-3">
+                        <div className="relative w-8 h-8 rounded-full overflow-hidden border border-neutral-200 bg-neutral-50">
+                          <Image src={post.author.avatar} alt={post.author.name} fill className="object-cover" />
+                        </div>
+                        <div>
+                          <span className="text-xs font-bold text-neutral-700 block">{post.author.name}</span>
+                          <span className="text-[10px] text-neutral-400 block uppercase tracking-wider">{post.author.role}</span>
+                        </div>
+                      </div>
+                      <Link
+                        href={`/blog/${post.slug}`}
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-[#3c9e90] hover:text-[#206cbb] transition-colors pointer-events-auto cursor-pointer"
+                      >
+                        Go to Article &rarr;
+                      </Link>
+                    </div>
+                  </div>
+
+                  {/* Book Cover Page (Flips Open Y-axis hinged Left) */}
+                  <div className="book-cover absolute inset-0 origin-left [transform-style:preserve-3d] transition-transform duration-700 ease-out group-hover:[transform:rotateY(-140deg)] z-20 shadow-2xl rounded-lg overflow-hidden bg-white">
+
+                    {/* Front Side of the Cover */}
+                    <div className="absolute inset-0 [backface-visibility:hidden] flex flex-col sm:flex-row h-full">
+
+                      {/* Image container */}
+                      <div className="relative w-full sm:w-[55%] h-[48%] sm:h-full overflow-hidden bg-neutral-100">
+                        <Image
+                          src={post.image}
+                          alt={post.title}
+                          fill
+                          className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        />
+                        {/* Book Spine Shadow Overlay */}
+                        <div className="absolute left-0 top-0 bottom-0 w-3 bg-gradient-to-r from-black/25 to-transparent z-30 pointer-events-none" />
+                      </div>
+
+                      {/* Notched Content Box */}
+                      <div className="w-full sm:w-[45%] h-[52%] sm:h-full p-6 sm:p-8 flex flex-col justify-between bg-white relative">
+                        {/* Cutout Corner Effect Overlay */}
+                        <div className="hidden sm:block absolute left-[-16px] top-1/2 -translate-y-1/2 w-4 h-8 bg-white rotate-45 z-10" />
+
+                        <div>
+                          <div className="flex items-center gap-2 text-xs text-neutral-400 font-medium mb-3">
+                            <span className="text-[#206cbb] font-extrabold uppercase tracking-wider">{post.category}</span>
+                            <span>•</span>
+                            <span>{post.date}</span>
+                          </div>
+                          <h3 className="text-base sm:text-lg md:text-xl font-extrabold text-black leading-snug tracking-tight group-hover:text-[#206cbb] transition-colors line-clamp-5">
+                            {post.title}
+                          </h3>
+                        </div>
+
+                        <div className="pt-4 border-t border-neutral-100 flex items-center justify-between">
+                          <Link
+                            href={`/blog/${post.slug}`}
+                            className="inline-flex items-center gap-2 text-xs sm:text-sm font-extrabold text-black group-hover:text-[#206cbb] transition-colors cursor-pointer"
+                          >
+                            Read More
+                            <svg className="w-3.5 h-3.5 transform transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                            </svg>
+                          </Link>
+                        </div>
+                      </div>
+
+                    </div>
+
+                    {/* Back Side of the Cover (revealed during mid-flip) */}
+                    <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] bg-[#121212] flex items-center justify-center p-6 border-l-4 border-neutral-800 shadow-inner z-10">
+                      <div className="text-center text-neutral-400 text-xs">
+                        <div className="w-16 h-1 bg-[#206cbb] mx-auto mb-4 rounded-full" />
+                        <p className="font-bold text-white mb-2 max-w-[200px] mx-auto leading-relaxed">{post.title}</p>
+                        <p className="italic text-neutral-500">Opening inside page...</p>
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
       </section>
 
       {/* Floating Scroll to Top Button (Bottom-Right) */}

@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+import { supabaseAdmin } from "@/lib/supabase";
 
 export async function POST(request: Request) {
   try {
@@ -10,6 +11,36 @@ export async function POST(request: Request) {
       return NextResponse.json(
         { error: "Name, email, subject, and message are required." },
         { status: 400 }
+      );
+    }
+
+    // Save to Supabase first
+    try {
+      const { error: dbError } = await supabaseAdmin
+        .from("contact_enquiries")
+        .insert([
+          {
+            name,
+            email,
+            phone: phone || null,
+            subject,
+            message,
+          },
+        ]);
+
+      if (dbError) {
+        console.error("Supabase Save Error:", dbError);
+        return NextResponse.json(
+          { error: `Database error: ${dbError.message}. Please verify that the 'contact_enquiries' table is created in Supabase.` },
+          { status: 500 }
+        );
+      }
+    } catch (dbEx: unknown) {
+      console.error("Supabase Exception:", dbEx);
+      const errorMessage = dbEx instanceof Error ? dbEx.message : "Unknown error";
+      return NextResponse.json(
+        { error: `Database connection failed: ${errorMessage}. Check Supabase env configurations.` },
+        { status: 500 }
       );
     }
 
@@ -135,7 +166,7 @@ export async function POST(request: Request) {
                   <td class="value" style="font-weight: 700;">${subject}</td>
                 </tr>
               </table>
-
+ 
               <div class="label" style="margin-bottom: 10px;">Message Details</div>
               <div class="message-box">
                 <p>${message}</p>
@@ -162,10 +193,11 @@ export async function POST(request: Request) {
     await transporter.sendMail(mailOptions);
 
     return NextResponse.json({ success: true, message: "Enquiry sent successfully!" });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Nodemailer Send Error:", error);
+    const errorMessage = error instanceof Error ? error.message : "Failed to deliver contact email.";
     return NextResponse.json(
-      { error: error?.message || "Failed to deliver contact email." },
+      { error: errorMessage },
       { status: 500 }
     );
   }
