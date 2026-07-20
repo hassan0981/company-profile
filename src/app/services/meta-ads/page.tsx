@@ -6,6 +6,7 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import MagneticButton from "@/components/MagneticButton";
+import FAQ from "@/components/FAQ";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -13,35 +14,40 @@ if (typeof window !== "undefined") {
 
 const servicesData = [
   {
-    title: "Facebook & Instagram Ads That Turn Attention into Action",
-    image: "/portrait_2.png",
-    description: "Our approach to Meta Ads combines audience research, creative storytelling, and data-driven optimization to ensure your advertising budget is invested where it delivers the greatest impact. Whether your goal is generating qualified leads, increasing online sales, promoting a new product, or building brand awareness, we create campaigns that are designed to move people from scrolling to taking action.",
-    bullets: ["Audience Research", "Creative Storytelling", "Qualified Leads", "ROAS Optimization"]
+    title: "Audience Research & Targeting",
+    image: "/meta ad (3).png",
+    description: "The success of every Meta Ads campaign begins with reaching the right audience. We research your ideal customers and build highly targeted audiences based on demographics, interests, behaviors, and location, ensuring your ads are shown to people who are most likely to convert.",
+    bullets: ["Audience Research", "Demographic Targeting", "Location-Based Reach", "Higher Conversions"]
   },
   {
-    title: "More Than Ads—A Growth Strategy",
-    image: "/portrait_1.png",
-    description: "Successful advertising isn&apos;t about reaching the most people; it&apos;s about reaching the right people at the right time with the right message. That&apos;s why we build a complete advertising strategy instead of relying on guesswork. From identifying high-value audiences and creating compelling ad creatives to testing different campaign variations and optimizing performance, every decision is guided by real data.",
-    bullets: ["High-Value Audiences", "Ad Creatives Testing", "Real Data Optimization", "Targeting Refinement"]
+    title: "Creative Ad Design",
+    image: "/meta creative.png",
+    description: "Great advertising starts with great creativity. Our team designs scroll-stopping visuals and compelling ad copy that capture attention on Facebook and Instagram, encourage engagement, and motivate potential customers to take action.",
+    bullets: ["Creative Ad Design", "Compelling Ad Copy", "Scroll-Stopping Visuals", "Higher Customer Engagement"]
   },
   {
-    title: "What We Can Help You Achieve",
-    image: "/portrait_4.png",
-    description: "Whether you&apos;re a startup, local business, eCommerce brand, or established company, our Facebook and Instagram advertising services are designed to support every stage of your growth. We help businesses:",
-    bullets: [
-      "Generate high-quality leads",
-      "Increase online and in-store sales",
-      "Build brand awareness and credibility",
-      "Drive targeted website traffic",
-      "Re-engage previous visitors through remarketing",
-      "Launch new products and promotional campaigns"
-    ]
+    title: "Campaign Strategy & Management",
+    image: "/meta ad 2 (1).png",
+    description: "Running ads without a strategy often leads to wasted budget. We create customized advertising campaigns aligned with your business objectives, manage every aspect of your campaigns, and continuously monitor performance to keep your advertising effective and efficient.",
+    bullets: ["Custom Campaign Strategy", "Campaign Management", "Performance Monitoring", "Budget Optimization"]
   },
   {
-    title: "Why Business Needs SEO",
-    image: "/unlock_potential_right.png",
-    description: "Search Engine Optimization (SEO) is a highly effective long-term digital marketing strategy for growing your business online. When potential customers search for products or services related to your business, appearing on the first page of search results boosts your chances of being found, trusted, and selected over competitors. Unlike paid advertising, SEO continues to provide value over time by attracting qualified organic traffic without making you pay for each click.",
-    bullets: ["Long-Term SEO Strategy", "First Page Search Rankings", "Qualified Organic Traffic", "Enhance User Experience"]
+    title: "Performance Optimization",
+    image: "/meta ad 3.png",
+    description: "Digital advertising requires constant improvement. We regularly test audiences, creatives, placements, and campaign setup to improve results, lower advertising costs, and maximize your return on ad spend (ROAS).",
+    bullets: ["A/B Testing", "Audience Optimization", "Lower Ad Costs", "Higher ROAS"]
+  },
+  {
+    title: "Lead Generation & Business Growth",
+    image: "/meta 4.png",
+    description: "Our goal is more than generating clicks—we focus on generating business. Whether you want more inquiries, website traffic, online sales, or brand awareness, our Facebook and Instagram advertising are designed to attract quality customers and support long-term business growth.",
+    bullets: ["Qualified Lead Generation", "Website Traffic Growth", "Increased Online Sales", "Long-Term Business Growth"]
+  },
+  {
+    title: "Reporting & Insights",
+    image: "/Performance reporting social (1).png",
+    description: "Every successful campaign is backed by data. We provide clear performance reports and actionable insights, allowing you to understand what's working, track your growth, and make informed decisions for future marketing campaigns.",
+    bullets: ["Performance Reporting", "Growth Tracking", "Actionable Insights", "Data-Driven Decisions"]
   }
 ];
 
@@ -69,8 +75,8 @@ export default function MetaAdsPage() {
     if (trigger && window.innerWidth >= 1024) {
       const start = trigger.start;
       const end = trigger.end;
-      // Scroll to a scroll position corresponding to the start of each of the 4 services
-      const targetScroll = start + (index / 3) * (end - start) + 1;
+      // Scroll to a scroll position corresponding to the start of each of the 6 services
+      const targetScroll = start + (index / 5) * (end - start) + 1;
       window.scrollTo({
         top: targetScroll,
         behavior: "smooth"
@@ -139,7 +145,7 @@ export default function MetaAdsPage() {
         delay: 0.8,
       });
 
-      // Pinned Services Showcase Section ScrollTrigger (4 items: divide by 0.25 bounds) - Desktop-only
+      // Pinned Services Showcase Section ScrollTrigger (6 items) - Desktop-only
       const mm = gsap.matchMedia();
       mm.add("(min-width: 1024px)", () => {
         gsap.timeline({
@@ -152,11 +158,7 @@ export default function MetaAdsPage() {
             id: "metaServicesPin",
             onUpdate: (self) => {
               const progress = self.progress;
-              let activeIndex = 0;
-              if (progress < 0.25) activeIndex = 0;
-              else if (progress < 0.5) activeIndex = 1;
-              else if (progress < 0.75) activeIndex = 2;
-              else activeIndex = 3;
+              const activeIndex = Math.min(Math.floor(progress * 6), 5);
 
               if (activeIndex !== lastActiveIndex.current) {
                 lastActiveIndex.current = activeIndex;
@@ -254,8 +256,8 @@ export default function MetaAdsPage() {
                   style={{ borderRadius: "50% 50% 5% 50%" }}
                 >
                   <Image
-                    src="/unlock_potential_left.png"
-                    alt="Creative team workspace discussion"
+                    src="/office_team_discuss.png"
+                    alt="Creative team discussing marketing strategy in a modern office"
                     fill
                     sizes="(max-width: 768px) 230px, 290px"
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -282,8 +284,8 @@ export default function MetaAdsPage() {
                   style={{ borderRadius: "5% 50% 50% 50%" }}
                 >
                   <Image
-                    src="/portrait_2.png"
-                    alt="Developer workstation office desk"
+                    src="/office_workspace_desk.png"
+                    alt="Sleek startup office desk with dashboard analytics on laptop"
                     fill
                     sizes="(max-width: 768px) 190px, 230px"
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -310,7 +312,7 @@ export default function MetaAdsPage() {
 
               {/* Description Paragraph in Solid Black */}
               <p className="text-black text-sm sm:text-base md:text-lg leading-relaxed max-w-[420px] font-normal text-justify">
-                Millions of people scroll through Facebook and Instagram every day—but only a handful of brands capture their attention. At Bouncy Grow Digital, we help your business become one of them. We don&apos;t believe in launching ads and hoping for the best. Every campaign begins with understanding your business, your audience, and the results you want to achieve.
+                Facebook and Instagram advertising is one of the fastest ways to connect with people who are actively interested in your products or services. At Bouncy, we create strategic Meta Ads campaigns that help businesses increase brand awareness, generate qualified leads, drive sales, and achieve measurable growth.
               </p>
             </div>
           </div>
@@ -335,8 +337,8 @@ export default function MetaAdsPage() {
                   style={{ borderRadius: "50% 5% 50% 50%" }}
                 >
                   <Image
-                    src="/unlock_potential_right.png"
-                    alt="Modern client office discussion"
+                    src="/office_meeting_collab.png"
+                    alt="Team meeting in glass conference room of a modern high-rise office"
                     fill
                     sizes="(max-width: 768px) 250px, 330px"
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -352,11 +354,11 @@ export default function MetaAdsPage() {
 
       {/* TAB-SLIDER SECTION (EXACT COPY OF THE SPECIFIC SERVICES SHOWCASE LAYOUT) */}
       <section className="meta-services-showcase-section relative bg-white text-black w-full min-h-screen overflow-hidden z-20 border-t border-neutral-200">
-        <div className="services-container relative w-full h-screen flex flex-col lg:flex-row items-stretch select-none">
+        <div className="services-container relative w-full lg:h-screen flex flex-col lg:flex-row items-stretch select-none">
 
           {/* Column 1: Left Stationary Nav Menu */}
-          <div className="w-full lg:w-[30%] flex flex-col justify-center items-start border-b lg:border-b-0 lg:border-r border-neutral-200 pl-4 sm:pl-8 lg:pl-12 xl:pl-16 pr-6 pt-8 lg:pt-36 pb-6 lg:pb-16 animate-pulse-none">
-            <div className="flex flex-row lg:flex-col gap-6 lg:gap-8 overflow-x-auto lg:overflow-x-visible w-full scrollbar-none pr-4 py-2">
+          <div className="w-full lg:w-[30%] flex flex-col justify-center items-start border-b lg:border-b-0 lg:border-r border-neutral-200 pl-4 sm:pl-8 lg:pl-12 xl:pl-16 pr-6 pt-16 lg:pt-44 pb-6 lg:pb-16 animate-pulse-none">
+            <div className="flex flex-row lg:flex-col gap-6 lg:gap-6 overflow-x-auto lg:overflow-x-visible w-full scrollbar-none pr-4 py-2">
               {servicesData.map((service, idx) => (
                 <button
                   key={idx}
@@ -394,10 +396,10 @@ export default function MetaAdsPage() {
           </div>
 
           {/* Column 3: Service Details (Right) */}
-          <div className="w-full lg:w-[34%] flex flex-col justify-between pl-6 lg:pl-12 pr-4 sm:pr-8 lg:pr-12 xl:pr-16 pt-8 lg:pt-36 pb-6 lg:pb-10">
+          <div className="w-full lg:w-[34%] flex flex-col justify-start pl-6 lg:pl-12 pr-4 sm:pr-8 lg:pr-12 xl:pr-16 pt-16 lg:pt-44 pb-6 lg:pb-10">
 
             {/* Middle Row: Dynamic Details Container */}
-            <div className="relative flex-grow flex flex-col justify-start items-start pt-8 pb-4 lg:py-0">
+            <div className="relative flex-initial flex flex-col justify-start items-start pt-8 pb-4 lg:py-0">
               {servicesData.map((service, idx) => {
                 const isActive = activeService === idx;
                 return (
@@ -419,7 +421,7 @@ export default function MetaAdsPage() {
                     {/* Dynamic bullet items */}
                     <div className="grid grid-cols-2 gap-y-3 gap-x-4 w-full max-w-[440px]">
                       {servicesData[idx].bullets.map((bullet, bIdx) => (
-                        <div key={bIdx} className="flex items-center text-xs sm:text-sm text-neutral-500 font-medium">
+                        <div key={bIdx} className="flex items-center text-xs sm:text-sm text-black font-bold">
                           <span className="text-[#206cbb] mr-2 font-bold">+</span>
                           {bullet}
                         </div>
@@ -431,7 +433,7 @@ export default function MetaAdsPage() {
             </div>
 
             {/* Bottom Row: Pinned interactive "Explore More" badge */}
-            <div className="mt-8 flex justify-start">
+            <div className="mt-14 flex justify-start">
               <Link href="/contact-us">
                 <MagneticButton 
                   className="w-28 h-28 sm:w-32 sm:h-32 border-neutral-300 text-xs sm:text-sm bg-transparent"
@@ -446,8 +448,27 @@ export default function MetaAdsPage() {
         </div>
       </section>
 
+      {/* FAQ Section */}
+      <FAQ
+        title="FAQ'S"
+        items={[
+          {
+            question: "Will you manage my entire advertising campaign?",
+            answer: "Yes. We take care of audience targeting, ad creatives, campaign optimization, and performance reporting from start to finish."
+          },
+          {
+            question: "How do you improve campaign performance?",
+            answer: "We continuously test audiences, creatives, and campaign settings to reduce ad costs and maximize your return on ad spend (ROAS)."
+          },
+          {
+            question: "What results can I expect from Meta Ads?",
+            answer: "Our goal is to help you generate qualified leads, increase website traffic, boost sales, and grow your brand through data-driven Facebook and Instagram advertising."
+          }
+        ]}
+      />
+
       {/* Spacer to give the pinned section distance from the footer */}
-      <div className="h-20 lg:h-32 bg-white relative z-30" />
+      <div className="h-[15vh] lg:h-[20vh] bg-white relative z-30" />
 
     </main>
   );

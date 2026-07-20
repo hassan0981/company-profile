@@ -6,6 +6,7 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import MagneticButton from "@/components/MagneticButton";
+import FAQ from "@/components/FAQ";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -14,39 +15,39 @@ if (typeof window !== "undefined") {
 const servicesData = [
   {
     title: "Business Website Design & Development",
-    image: "/service_webdev.png",
-    description: "The website is the first point of contact for potential customers with a business. That’s why it needs to leave a lasting impression on them. We offer our clients a professional business website design that reflects their brand identity, clearly shows the benefits of using their products or services and guides visitors to take an action step. All of the websites developed by us have a good layout, simple navigation and a well-thought conversion-oriented structure.",
-    bullets: ["Brand Identity Integration", "Conversion Optimized", "Responsive Grid Layout", "Clear Call-to-Actions"]
+    image: "/web 2.png",
+    description: "Your business deserves a website that creates a powerful first impression and inspires confidence from the very first click. We build professional business websites that reflect your brand, clearly communicate your value, and guide visitors toward taking action. Every website is designed with intuitive navigation, mobile responsiveness, and conversion-focused layouts to help turn visitors into loyal customers.",
+    bullets: ["One Page Sites", "Design Focus", "SEO Optimization", "Multi Page Sites"]
   },
   {
     title: "WordPress Website Development",
-    image: "/portrait_2.png",
-    description: "There are many website platforms available nowadays but WordPress is considered to be one of the best ones due to its flexibility and high scalability. We provide our clients with custom WordPress websites that ensure a full control over content, fast performance and good protection from possible cyber threats. Our developers can develop any type of the site including a corporate website, service-based website or a blog.",
-    bullets: ["Custom Theme Design", "Cyber Threat Shield", "Scalable CMS Core", "Corporate & Blog Setup"]
+    image: "/web 3.png",
+    description: "WordPress powers millions of successful websites for a reason—it's flexible, scalable, and easy to manage. We develop custom WordPress websites tailored to your business needs, giving you complete control over your content while ensuring fast performance, strong security, and room to grow. From service-based businesses to corporate websites and blogs, we build solutions that are ready for the future.",
+    bullets: ["Custom Themes", "Easy Management", "High Security", "Fast Loading"]
   },
   {
     title: "Portfolio Website Design",
-    image: "/portrait_1.png",
-    description: "A good portfolio is more than just the presentation of your works; it is an opportunity to make yourself known and gain credibility. Our team design a neat and modern website portfolio that will showcase your works in the most convenient and engaging manner possible. A well-thought UI design will enable users to understand your expertise immediately and confidently select your services.",
-    bullets: ["Creative Work Showcase", "Interactive UI Transitions", "Credibility Framework", "Expertise Highlights"]
+    image: "/web 4.png",
+    description: "Your portfolio should do more than display your work—it should tell your story and showcase your expertise. We create clean, modern portfolio websites that highlight your achievements, strengthen your credibility, and leave a lasting impression on potential clients. Every design is crafted to make your work stand out while encouraging visitors to connect with you.",
+    bullets: ["Work Showcase", "Personal Branding", "Creative Layouts", "Contact Forms"]
   },
   {
     title: "Landing Page Design",
-    image: "/portrait_4.png",
-    description: "Our team designs simple and efficient landing pages that are focused on achieving the desired result without any unnecessary distractions. It is important for the user to get your message and do something after that. If you run a Google Ads campaign, Meta Ads, or launch a new product – we can help you with landing pages.",
-    bullets: ["Ad Campaign Alignment", "Zero Distractions Layout", "Lead Capture Focus", "A/B Testing Ready"]
+    image: "/web 5.png",
+    description: "A successful landing page has one goal: turning visitors into leads or customers. We design high-converting landing pages with clear messaging, persuasive layouts, and calls-to-action that eliminate distractions and drive results. Whether you're running Google Ads, Meta Ads, or launching a new product or service, our landing pages are built to maximize conversions.",
+    bullets: ["Lead Generation", "Ad Campaign", "Clean Layout", "High Conversion"]
   },
   {
     title: "E-Commerce Website Development",
-    image: "/unlock_potential_right.png",
-    description: "Your online store should make shopping simple, secure, and enjoyable. We develop eCommerce websites that not only showcase your products beautifully but also provide a smooth buying experience from browsing to checkout. Whether you're using WordPress with WooCommerce or Shopify, we create online stores that are fast, mobile-friendly, secure, and designed to help you increase sales while making day-to-day store management effortless.",
-    bullets: ["WooCommerce & Shopify", "Secure Checkout Funnel", "Mobile-First UX", "Inventory Sync Systems"]
+    image: "/web6.png",
+    description: "A great online store should make buying effortless and enjoyable. We develop high-performance eCommerce websites that provide a smooth shopping experience from product discovery to secure checkout. Whether you choose WooCommerce or Shopify, we build fast, mobile-friendly, and conversion-focused online stores that help increase sales while making inventory and order management simple.",
+    bullets: ["WooCommerce Shopify", "Secure Checkout", "Product Catalog", "Payment Gateway"]
   },
   {
     title: "Ongoing Website Support & Maintenance",
-    image: "/unlock_potential_left.png",
-    description: "An effective website needs continuous attention to be safe, reliable, and updated. Our collaboration does not end at deployment; we will continue to assist you by updating your website and providing technical services as well as monitoring its security and improving its performance. With the evolution of your business, we will be happy to help you expand and improve your website's functionality.",
-    bullets: ["Security Auditing", "Speed & Core Updates", "Post-Deployment Help", "Feature Scaling"]
+    image: "/web 7.png",
+    description: "Launching your website is only the beginning. To keep it performing at its best, we provide ongoing support, security updates, performance optimization, and technical maintenance. As your business grows, we ensure your website stays secure, up to date, and ready to support your next stage of growth—so you can focus on running your business with confidence.",
+    bullets: ["System Updates", "Security Backups", "Speed Tuning", "Bug Fixing"]
   }
 ];
 
@@ -261,8 +262,8 @@ export default function WebDevelopmentPage() {
                   style={{ borderRadius: "50% 50% 5% 50%" }}
                 >
                   <Image
-                    src="/unlock_potential_left.png"
-                    alt="Creative team workspace discussion"
+                    src="/web_code_monitors.png"
+                    alt="Web development code on modern monitors"
                     fill
                     sizes="(max-width: 768px) 230px, 290px"
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -289,8 +290,8 @@ export default function WebDevelopmentPage() {
                   style={{ borderRadius: "5% 50% 50% 50%" }}
                 >
                   <Image
-                    src="/portrait_2.png"
-                    alt="Developer workstation office desk"
+                    src="/web_wireframe_tablet.png"
+                    alt="Web design and layout wireframing on drawing tablet"
                     fill
                     sizes="(max-width: 768px) 190px, 230px"
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -317,7 +318,7 @@ export default function WebDevelopmentPage() {
 
               {/* Description Paragraph in Solid Black */}
               <p className="text-black text-sm sm:text-base md:text-lg leading-relaxed max-w-[420px] font-normal text-justify">
-                Whether for business or e-commerce sites, we create websites that are fast, functional, and optimized for search engines, offering a unique experience for the visitors and converting them into customers.
+                Your website shouldn't just exist—it should help your business grow. Whether someone discovers you through Google, social media, or an ad, your website should build trust, showcase your value, and turn visitors into paying customers. At Bouncy, we create fast, high-performing websites that are designed to generate leads, increase conversions, and support long-term business growth.
               </p>
             </div>
           </div>
@@ -342,8 +343,8 @@ export default function WebDevelopmentPage() {
                   style={{ borderRadius: "50% 5% 50% 50%" }}
                 >
                   <Image
-                    src="/unlock_potential_right.png"
-                    alt="Modern client office discussion"
+                    src="/web development 1.png"
+                    alt="Creative team workspace discussion"
                     fill
                     sizes="(max-width: 768px) 250px, 330px"
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -359,11 +360,11 @@ export default function WebDevelopmentPage() {
 
       {/* TAB-SLIDER SECTION (EXACT COPY OF HOMEPAGE LAYOUT WITH SPECIFIC SERVICES CONTENT) */}
       <section className="web-services-showcase-section relative bg-white text-black w-full min-h-screen overflow-hidden z-20 border-t border-neutral-200">
-        <div className="services-container relative w-full h-screen flex flex-col lg:flex-row items-stretch select-none">
+        <div className="services-container relative w-full lg:h-screen flex flex-col lg:flex-row items-stretch select-none">
 
           {/* Column 1: Left Stationary Nav Menu */}
-          <div className="w-full lg:w-[30%] flex flex-col justify-center items-start border-b lg:border-b-0 lg:border-r border-neutral-200 pl-4 sm:pl-8 lg:pl-12 xl:pl-16 pr-6 pt-8 lg:pt-36 pb-6 lg:pb-16 animate-pulse-none">
-            <div className="flex flex-row lg:flex-col gap-6 lg:gap-8 overflow-x-auto lg:overflow-x-visible w-full scrollbar-none pr-4 py-2">
+          <div className="w-full lg:w-[30%] flex flex-col justify-center items-start border-b lg:border-b-0 lg:border-r border-neutral-200 pl-4 sm:pl-8 lg:pl-12 xl:pl-16 pr-6 pt-16 lg:pt-44 pb-6 lg:pb-16 animate-pulse-none">
+            <div className="flex flex-row lg:flex-col gap-6 lg:gap-6 overflow-x-auto lg:overflow-x-visible w-full scrollbar-none pr-4 py-2">
               {servicesData.map((service, idx) => (
                 <button
                   key={idx}
@@ -401,10 +402,10 @@ export default function WebDevelopmentPage() {
           </div>
 
           {/* Column 3: Service Details (Right) */}
-          <div className="w-full lg:w-[34%] flex flex-col justify-between pl-6 lg:pl-12 pr-4 sm:pr-8 lg:pr-12 xl:pr-16 pt-8 lg:pt-36 pb-6 lg:pb-10">
+          <div className="w-full lg:w-[34%] flex flex-col justify-start pl-6 lg:pl-12 pr-4 sm:pr-8 lg:pr-12 xl:pr-16 pt-16 lg:pt-44 pb-6 lg:pb-10">
 
             {/* Middle Row: Dynamic Details Container */}
-            <div className="relative flex-grow flex flex-col justify-start items-start pt-8 pb-4 lg:py-0">
+            <div className="relative flex-initial flex flex-col justify-start items-start pt-8 pb-4 lg:py-0">
               {servicesData.map((service, idx) => {
                 const isActive = activeService === idx;
                 return (
@@ -426,7 +427,7 @@ export default function WebDevelopmentPage() {
                     {/* Dynamic bullet items */}
                     <div className="grid grid-cols-2 gap-y-3 gap-x-4 w-full max-w-[440px]">
                       {servicesData[idx].bullets.map((bullet, bIdx) => (
-                        <div key={bIdx} className="flex items-center text-xs sm:text-sm text-neutral-500 font-medium">
+                        <div key={bIdx} className="flex items-center text-xs sm:text-sm text-black font-bold">
                           <span className="text-[#206cbb] mr-2 font-bold">+</span>
                           {bullet}
                         </div>
@@ -438,7 +439,7 @@ export default function WebDevelopmentPage() {
             </div>
 
             {/* Bottom Row: Pinned interactive "Explore More" badge */}
-            <div className="mt-8 flex justify-start">
+            <div className="mt-14 flex justify-start">
               <Link href="/contact-us">
                 <MagneticButton 
                   className="w-28 h-28 sm:w-32 sm:h-32 border-neutral-300 text-xs sm:text-sm bg-transparent"
@@ -453,8 +454,27 @@ export default function WebDevelopmentPage() {
         </div>
       </section>
 
+      {/* FAQ Section */}
+      <FAQ
+        title="FAQ'S"
+        items={[
+          {
+            question: "How long does it take to build a website?",
+            answer: "Most business websites take 2–4 weeks depending on size and features. Larger projects like e-commerce stores may take a bit longer."
+          },
+          {
+            question: "Do I need to provide the content and images?",
+            answer: "Not necessarily—we can help with copywriting and source quality visuals if needed. You're welcome to provide your own branding materials too."
+          },
+          {
+            question: "Will my website work on mobile phones?",
+            answer: "Yes, every website we build is fully responsive and optimized for mobile, tablet, and desktop. This ensures a smooth experience for all your visitors."
+          }
+        ]}
+      />
+
       {/* Spacer to give the pinned section distance from the footer */}
-      <div className="h-20 lg:h-32 bg-white relative z-30" />
+      <div className="h-[15vh] lg:h-[20vh] bg-white relative z-30" />
 
     </main>
   );

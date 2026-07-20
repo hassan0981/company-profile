@@ -23,59 +23,59 @@ const servicesData = [
   {
     title: "Web Development",
     image: "/service_webdev.png",
-    description: "We develop fast, responsive, and visually appealing websites providing smooth user experience and helping your business become visible and profitable.",
-    bullets: ["API Development", "WordPress", "Custom App Development", "Front End Development", "Back End Systems", "Next.js & React"]
+    description: "We build fast, responsive, and user-friendly websites that combine modern design with seamless functionality. Every website is designed to create a strong first impression, enhance user experience, and turn visitors into customers.",
+    bullets: ["WordPress", "Mern Stack", "App Development", "Ecommerce"]
   },
   {
     title: "SEO",
     image: "/service_seo.png",
-    description: "With our SEO services, your business will have an opportunity to become more visible online through keyword research, technical SEO, on-page & off-page SEO.",
-    bullets: ["Keyword Research", "Technical Audit", "On-Page SEO", "Off-Page SEO", "Local SEO Optimization", "Performance Tracking"]
+    description: "Our SEO strategies are built to improve your online visibility and drive sustainable organic growth. Through in-depth keyword research, technical SEO, on-page optimization & off-page SEO, we help your business rank higher and attract qualified traffic.",
+    bullets: ["Search Optimization", "Technical Audit", "Keyword Research", "Keyword Analysis"]
   },
   {
     title: "Social Media Management",
     image: "/service_smm.png",
-    description: "We manage and scale your digital presence via calculated content calendars, graphic production, community relations, and strategic engagement plans.",
-    bullets: ["Content Strategy", "Graphic Design", "Community Moderation", "Competitor Research", "Audience Analytics", "Brand Guidelines"]
+    description: "We help businesses build a strong and consistent presence across social media. Through conversion focused targetting, creative content, and active community management, we increase brand awareness and build lasting customer relationships.",
+    bullets: ["Content Strategy", "Brand Consistency", "Customer Engagement", "Brand Awareness"]
   },
   {
     title: "Meta Ads",
     image: "/service_metaads.png",
-    description: "We create strategic Facebook and Instagram ad campaigns targeted at high-intent customer segments, managing spend to deliver maximum ROI.",
-    bullets: ["Campaign Setup", "Pixel Integration", "A/B Creative Testing", "Audience Retargeting", "Conversion Tracking", "Weekly ROI Reports"]
+    description: "We create Facebook and Instagram advertising campaigns that connect your business with the right audience. Through strategic targeting, compelling creatives, and continuous optimization, we turn clicks into qualified leads, customers, and measurable business growth.",
+    bullets: ["Audience Research", "Campaign Strategy", "Creative Ad Design", "A/B Testing"]
   }
 ];
 
 const testimonials = [
   {
-    quote: "Bouncy really surprised us from the beginning. Their team completely changed our presence by making a website that works well. They improved our position on Google search results with their quality services and they helped us get good quality leads. Highly Recommended.",
-    author: "CLIENT 01",
-    designation: "Founder"
+    quote: "Bouncy transformed our online presence with a professional website and an effective SEO. We've seen better Google rankings, more quality leads, and measurable business growth. Highly recommended!",
+    author: "AGN Tax Consultant",
+    designation: "Business Owner"
   },
   {
-    quote: "We worked with Bouncy for our social media marketing and Google Ads. The results were amazing. The advertising campaigns they made were very creative. The way they worked with us was very professional. They kept us informed about every step, which made the whole process very easy.",
-    author: "CLIENT 02",
-    designation: "Marketing Manager"
+    quote: "Working with Bouncy was a great experience. Their social media marketing and advertising campaigns delivered excellent results, and their team kept us informed throughout the entire process.",
+    author: "My Fragrances",
+    designation: "Business Owner"
   },
   {
-    quote: "Great experience working with Bouncy. They are very professional and cooperative. They designed a beautiful, modern, and fast website for our company. Our organic visibility and local search traffic has grown significantly since we started working with them.",
-    author: "CLIENT 03",
-    designation: "Marketing Coordinator"
+    quote: "Our new website is fast, modern, and works perfectly on every device. Combined with their SEO expertise, we've seen a noticeable increase in website traffic and customer inquiries.",
+    author: "Headrogen",
+    designation: "Business Owner"
   },
   {
-    quote: "Highly recommended digital agency in Lahore! Bouncy's team helped us run meta ads campaigns that generated a massive number of sales and high return on ad spend. They are very active in communication and always ready to help.",
-    author: "CLIENT 04",
-    designation: "E-commerce Director"
+    quote: "Bouncy understood our business and created a growth plan that delivered results. Their content, advertising, and marketing approach helped us reach the right audience and generate more quality leads.",
+    author: "Mux Foods",
+    designation: "Business Owner"
   },
   {
-    quote: "We were searching for a dependable Digital Marketing Agency in Lahore and got outstanding results from Bouncy. Their SEO, website optimization, and Google Ads efforts have really boosted our visibility, traffic, and lead generation.",
-    author: "CLIENT 05",
+    quote: "Bouncy has been a reliable digital marketing partner. Their SEO, website optimization, and advertising significantly improved our online visibility, website traffic, and lead generation.",
+    author: "Physicians Revenue Group",
     designation: "Business Owner"
   },
   {
     quote: "Bouncy has totally revamped our social media performance. They have increased our brand awareness through their creativity, content creation, and regular posting.",
-    author: "CLIENT 06",
-    designation: "Managing Director"
+    author: "The Punjab School",
+    designation: "Business Owner"
   }
 ];
 
@@ -86,6 +86,7 @@ export default function Home() {
   const lastActiveIndex = useRef<number>(0);
 
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [expandedCards, setExpandedCards] = useState<Record<number, boolean>>({});
 
   // Testimonial transitions
   const handleNextTestimonial = () => {
@@ -267,21 +268,21 @@ export default function Home() {
       "-=1.1"
     );
 
-    // G. Entrance: Description Words Stagger
+    // G. Entrance: Description Words Stagger Reveal
     masterTimeline.fromTo(
       ".desc-word",
       {
-        y: 15,
+        y: "100%",
         opacity: 0,
       },
       {
-        y: 0,
+        y: "0%",
         opacity: 1,
+        stagger: 0.012,
         duration: 0.8,
-        stagger: 0.015,
-        ease: "power2.out",
+        ease: "power3.out",
       },
-      "-=0.9"
+      "-=1.1"
     );
 
     // H. Entrance: Decorative Squares
@@ -467,24 +468,40 @@ export default function Home() {
       const unlockTimeline = gsap.timeline({
         scrollTrigger: {
           trigger: ".unlock-section",
-          start: "top 80%", // Fires as soon as the section is visible
+          start: "top 75%", // Fires when 25% of the section is visible
           toggleActions: "play none none none",
         },
       });
+
+      // What we do top heading fade in and slide up
+      unlockTimeline.fromTo(
+        ".what-we-do-heading",
+        {
+          opacity: 0,
+          y: 30,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1.0,
+          ease: "power3.out",
+        }
+      );
 
       // Title fade in and slide up reveal
       unlockTimeline.fromTo(
         ".unlock-title-container h2",
         {
-          y: 40,
           opacity: 0,
+          y: 30,
         },
         {
-          y: 0,
           opacity: 1,
-          duration: 1.2,
+          y: 0,
+          duration: 1.0,
           ease: "power3.out",
-        }
+        },
+        "-=0.7" // Overlaps with heading animation
       );
 
       // Left & Right flanking images reveal as a PURE FADE
@@ -493,51 +510,41 @@ export default function Home() {
         { opacity: 0 },
         {
           opacity: 1,
-          duration: 1.5,
-          stagger: 0.25,
+          duration: 1.2,
+          stagger: 0.2,
           ease: "power2.out",
         },
-        "-=0.9" // Overlaps with title animation
+        "-=0.7"
       );
 
-      // Paragraph & Button fade in & slide up
+      // Description text fade in and slide up
       unlockTimeline.fromTo(
-        [".unlock-desc", ".explore-btn-container"],
-        { opacity: 0, y: 30 },
+        ".unlock-desc",
+        {
+          opacity: 0,
+          y: 20,
+        },
         {
           opacity: 1,
           y: 0,
           duration: 0.8,
-          stagger: 0.1,
           ease: "power2.out",
         },
-        "-=0.6" // Overlaps with image animation
+        "-=0.6"
       );
 
-      // 6. Parallax scroll-drift (floating) for Heading and Description
-      // Heading drifts slightly faster
-      gsap.to(".unlock-title-container", {
-        y: -45,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".unlock-section",
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1.0,
+      // Button fade in & slide up
+      unlockTimeline.fromTo(
+        ".explore-btn-container",
+        { opacity: 0, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power2.out",
         },
-      });
-
-      // Description wrapper drifts slightly slower
-      gsap.to(".unlock-desc-wrapper", {
-        y: -25,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".unlock-section",
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1.2,
-        },
-      });
+        "-=0.6"
+      );
 
       // 7. Pinned Services Showcase Section Timeline
       gsap.timeline({
@@ -795,10 +802,10 @@ export default function Home() {
     };
   }, []);
 
-  const line1Words = "Bounce".split("");
-  const line2Words = "Beyond".split("");
-  const line3Words = "Ordinary".split("");
-  const descParagraph = "We offer creative minds and intelligent digital marketing solutions ranging from web design/development and SEO to social media management and winning ad campaigns.We help your business attract attention, build trust, and grow with confidence.".split(" ");
+  const line1Words = "Creative Digital".split("");
+  const line2Words = "Marketing Agency".split("");
+  const line3Words = "Bouncy Beyond Ordinary".split("");
+  const descParagraph = "We combine creative thinking with data-driven digital marketing strategies. From website development and SEO to social media management and high-performing ad campaigns, we help your business attract the right audience, build trust, and achieve sustainable growth. ".split(" ");
 
   return (
     <main
@@ -860,7 +867,7 @@ export default function Home() {
             <div className="portrait-img-1 shrink-0 relative w-[180px] h-[180px] sm:w-[220px] sm:h-[220px] lg:w-[240px] lg:h-[240px] border border-neutral-200/50 bg-neutral-50 shadow-md">
               <div className="portrait-img-1-inner relative w-full h-full">
                 <Image
-                  src="/portrait_1.png"
+                  src="/meta%20ad%202.png"
                   alt="Digital design collage 1"
                   fill
                   sizes="(max-width: 768px) 180px, 240px"
@@ -874,7 +881,7 @@ export default function Home() {
             <div className="portrait-img-2 shrink-0 relative w-[180px] h-[180px] sm:w-[220px] sm:h-[220px] lg:w-[240px] lg:h-[240px] border border-neutral-200/50 bg-neutral-50 shadow-md self-end lg:self-end">
               <div className="portrait-img-2-inner relative w-full h-full">
                 <Image
-                  src="/portrait_2.png"
+                  src="/service_smm.png"
                   alt="Digital design collage 2"
                   fill
                   sizes="(max-width: 768px) 180px, 240px"
@@ -888,7 +895,7 @@ export default function Home() {
             <div className="portrait-img-3 shrink-0 relative w-[180px] h-[180px] sm:w-[220px] sm:h-[220px] lg:w-[240px] lg:h-[240px] border border-neutral-200/50 bg-neutral-50 shadow-md">
               <div className="portrait-img-3-inner relative w-full h-full">
                 <Image
-                  src="/portrait_3.png"
+                  src="/meta%20ad%20(1).png"
                   alt="Digital design collage 3"
                   fill
                   sizes="(max-width: 768px) 180px, 240px"
@@ -905,54 +912,54 @@ export default function Home() {
             <div className="flex flex-col lg:flex-row items-stretch lg:items-end justify-between w-full">
 
               {/* Massive Agency Heading Column */}
-              <div className="w-full lg:w-[65%] flex flex-col text-left">
+              <div className="w-full lg:w-[75%] flex flex-col text-left">
                 <h1 className="select-none leading-none flex flex-col font-medium tracking-tight">
                   {/* Line 1: Bounce */}
-                  <span className="block text-[40px] sm:text-[60px] md:text-[76px] lg:text-[90px] xl:text-[108px] font-semibold tracking-tight leading-[0.95] pl-0 lg:pl-[30px]">
+                  <span className="block text-[32px] sm:text-[48px] md:text-[64px] lg:text-[76px] xl:text-[90px] font-semibold tracking-tight leading-[0.95] pl-0 lg:pl-[30px] whitespace-nowrap">
                     {line1Words.map((char, index) => (
                       <span
                         key={index}
                         className="inline-block overflow-hidden py-2 -my-2"
                       >
                         <span className="char-line1 inline-block opacity-0 bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent">
-                          {char}
+                          {char === " " ? "\u00A0" : char}
                         </span>
                       </span>
                     ))}
                   </span>
 
                   {/* Line 2: Beyond */}
-                  <span className="block text-[40px] sm:text-[60px] md:text-[76px] lg:text-[90px] xl:text-[108px] font-semibold tracking-tight leading-[0.95] text-center w-full mt-1 lg:mt-2">
+                  <span className="block text-[32px] sm:text-[48px] md:text-[64px] lg:text-[76px] xl:text-[90px] font-semibold tracking-tight leading-[0.95] text-center w-full mt-1 lg:mt-2 whitespace-nowrap">
                     {line2Words.map((char, index) => (
                       <span
                         key={index}
                         className="inline-block overflow-hidden py-2 -my-2"
                       >
                         <span className="char-line2 inline-block opacity-0 bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent">
-                          {char}
-                        </span>
-                      </span>
-                    ))}
-                  </span>
-
-                  {/* Line 3: Ordinary */}
-                  <span className="block text-[40px] sm:text-[60px] md:text-[76px] lg:text-[90px] xl:text-[108px] font-semibold tracking-tight leading-[0.95] text-right w-full mt-1 lg:mt-2">
-                    {line3Words.map((char, index) => (
-                      <span
-                        key={index}
-                        className="inline-block overflow-hidden py-2 -my-2"
-                      >
-                        <span className="char-line3 inline-block opacity-0 bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent">
-                          {char}
+                          {char === " " ? "\u00A0" : char}
                         </span>
                       </span>
                     ))}
                   </span>
                 </h1>
+
+                {/* Line 3: Ordinary */}
+                <h2 className="block select-none leading-none font-medium tracking-tight text-[15px] sm:text-[22px] md:text-[29px] lg:text-[36px] xl:text-[44px] font-semibold tracking-tight leading-[0.95] text-center w-full mt-4 lg:mt-8 whitespace-nowrap">
+                  {line3Words.map((char, index) => (
+                    <span
+                      key={index}
+                      className="inline-block overflow-hidden py-2 -my-2"
+                    >
+                      <span className="char-line3 inline-block opacity-0 text-[#206cbb]">
+                        {char === " " ? "\u00A0" : char}
+                      </span>
+                    </span>
+                  ))}
+                </h2>
               </div>
 
               {/* Decorative Blocks - Nesting overlapping squares */}
-              <div className="w-full lg:w-[35%] flex items-end justify-start lg:justify-end pt-6 lg:pt-0 lg:pb-[15px]">
+              <div className="w-full lg:w-[25%] flex items-end justify-start lg:justify-end pt-6 lg:pt-0 lg:pb-[15px]">
                 <div className="relative w-[100px] h-[100px] lg:w-[120px] lg:h-[120px] lg:mr-[40px] shrink-0">
                   {/* Green Square */}
                   <div className="peach-box opacity-0 absolute top-0 right-0 w-[50px] h-[50px] lg:w-[75px] lg:h-[75px] bg-[#3c9e90] shadow-sm" />
@@ -984,14 +991,13 @@ export default function Home() {
               {/* Copywriting Paragraph & Scroll Indicator */}
               <div className="w-full lg:w-[67%] flex flex-col items-start justify-between min-h-[150px] sm:min-h-[180px] lg:min-h-[240px] pl-0 lg:pl-[15px]">
 
-                {/* Indented Text Paragraph */}
                 <p className="desc-text text-sm sm:text-base lg:text-[18px] text-[#555555] font-normal leading-[1.42] max-w-full lg:max-w-[460px] pl-0 lg:pl-[80px] text-justify">
                   {descParagraph.map((word, index) => (
                     <span
                       key={index}
-                      className="inline-block overflow-hidden py-1 -my-1"
+                      className="inline-block overflow-hidden py-1 -my-1 mr-[0.25em]"
                     >
-                      <span className="desc-word inline-block opacity-0 mr-1.5">
+                      <span className="desc-word inline-block opacity-0">
                         {word}
                       </span>
                     </span>
@@ -1008,73 +1014,83 @@ export default function Home() {
       </section>
 
       {/* 2. Unlock Potential Section */}
-      <section className="unlock-section relative bg-white py-20 lg:py-28 px-4 sm:px-8 lg:px-12 xl:px-16 overflow-hidden z-20 border-t border-neutral-100">
-        <div className="relative mx-auto max-w-[1510px] w-full flex flex-col lg:flex-row items-start justify-between gap-12 lg:gap-0">
-
-          {/* Left Flanking Image (Collaborating designers in yellow jacket & beanie) */}
-          <div className="unlock-left-wrapper w-full lg:w-[42%] flex justify-start pt-6 lg:pt-16">
-            <div className="unlock-left-inner relative w-full max-w-[480px] aspect-[4/3] lg:aspect-[420/460] overflow-hidden border border-neutral-200/50 shadow-md">
-              <Image
-                src="/unlock_potential_left.png"
-                alt="Collaborating creative designers in yellow jacket"
-                fill
-                sizes="(max-width: 1024px) 100vw, 480px"
-                className="object-cover"
-              />
-            </div>
+      <section className="unlock-section relative bg-white pt-10 pb-20 lg:pt-12 lg:pb-28 px-4 sm:px-8 lg:px-12 xl:px-16 overflow-hidden z-20 border-t border-neutral-100">
+        <div className="relative mx-auto max-w-[1510px] w-full flex flex-col gap-12 sm:gap-16 lg:gap-20">
+          
+          {/* Top Center Heading */}
+          <div className="text-center flex flex-col items-center w-full">
+            <h2 className="what-we-do-heading opacity-0 bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent font-black text-4xl sm:text-5xl lg:text-6xl tracking-tight select-none w-fit pb-1">
+              What we do
+            </h2>
           </div>
 
-          {/* Right Side Content Container */}
-          <div className="w-full lg:w-[58%] lg:pl-8 flex flex-col items-start">
+          <div className="w-full flex flex-col lg:flex-row items-start justify-between gap-12 lg:gap-0">
 
-            {/* Outer Headline Parallax Wrapper */}
-            <div className="unlock-title-container w-full">
-              {/* Headline with 3D Flip perspective wrapper */}
-              <h2 className="bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent font-bold text-[22px] sm:text-[28px] md:text-[32px] lg:text-[36px] xl:text-[40px] leading-[1.2] tracking-tight text-left select-none mb-8 lg:mb-12">
-                We help unlock your business&apos;s potential through creativity, innovation, and online marketing that delivers measurable growth.
-              </h2>
+            {/* Left Flanking Image (Collaborating designers in yellow jacket & beanie) */}
+            <div className="unlock-left-wrapper w-full lg:w-[42%] flex justify-start pt-6 lg:pt-16">
+              <div className="unlock-left-inner relative w-full max-w-[480px] aspect-[4/3] lg:aspect-[420/460] overflow-hidden border border-neutral-200/50 shadow-md">
+                <Image
+                  src="/unlock_potential_left.png"
+                  alt="Collaborating creative designers in yellow jacket"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 480px"
+                  className="object-cover"
+                />
+              </div>
             </div>
 
-            {/* Bottom Row containing Paragraph Block + Explore Us Button AND Right Image */}
-            <div className="w-full flex flex-col lg:flex-row items-stretch lg:items-start justify-between gap-8 lg:gap-6">
+            {/* Right Side Content Container */}
+            <div className="w-full lg:w-[58%] lg:pl-8 flex flex-col items-start">
 
-              {/* Column A: Paragraph & Button */}
-              <div className="w-full lg:w-[55%] flex flex-col items-start justify-start">
-
-                {/* Outer Description Parallax Wrapper */}
-                <div className="unlock-desc-wrapper w-full">
-                  <p className="unlock-desc text-[#555555] text-sm sm:text-base leading-relaxed text-justify max-w-full lg:max-w-[360px]">
-                    Every brand has a story that needs to be told. This is where Bouncy comes in handy since our team helps your brand to tell its story through the implementation of various innovative and effective tactics that ensure sustainability.
-                  </p>
-                </div>
-
-                {/* Interactive Explore Us Button */}
-                <div className="mt-10 lg:mt-14">
-                  <MagneticButton
-                    className="w-32 h-32 lg:w-36 lg:h-36 border-neutral-300 text-sm bg-white"
-                  >
-                    Explore Us
-                  </MagneticButton>
-                </div>
+              {/* Outer Headline Parallax Wrapper */}
+              <div className="unlock-title-container w-full">
+                {/* Headline with 3D Flip perspective wrapper */}
+                <h2 className="opacity-0 bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent font-bold text-[22px] sm:text-[28px] md:text-[32px] lg:text-[36px] xl:text-[40px] leading-[1.2] tracking-tight text-left select-none mb-8 lg:mb-12">
+                  We help unlock your business&apos;s potential through creativity, innovation, and online marketing that delivers measurable growth.
+                </h2>
               </div>
 
-              {/* Column B: Right Elongated Image */}
-              <div className="unlock-right-wrapper w-full lg:w-[45%] flex justify-center lg:justify-end lg:pl-6">
-                <div className="unlock-right-inner relative w-full max-w-[280px] h-[340px] overflow-hidden border border-neutral-200/50 shadow-md">
-                  <Image
-                    src="/unlock_potential_right.png"
-                    alt="Discussing work in modern office space"
-                    fill
-                    sizes="(max-width: 1024px) 280px, 280px"
-                    className="object-cover"
-                  />
+              {/* Bottom Row containing Paragraph Block + Explore Us Button AND Right Image */}
+              <div className="w-full flex flex-col lg:flex-row items-stretch lg:items-start justify-between gap-8 lg:gap-6">
+
+                {/* Column A: Paragraph & Button */}
+                <div className="w-full lg:w-[55%] flex flex-col items-start justify-start">
+
+                  {/* Outer Description Parallax Wrapper */}
+                  <div className="unlock-desc-wrapper w-full">
+                    <p className="unlock-desc opacity-0 text-[#555555] text-sm sm:text-base leading-relaxed text-justify max-w-full lg:max-w-[360px]">
+                      Every successful business is built on trust, purpose, and meaningful connections. At Bouncy Grow Digital, we transform your ideas into impactful digital experiences through strategic marketing solutions that help your brand stand out, connect with the right audience, and grow with confidence.
+                    </p>
+                  </div>
+
+                  {/* Interactive Explore Us Button */}
+                  <div className="explore-btn-container opacity-0 mt-10 lg:mt-14">
+                    <MagneticButton
+                      className="w-32 h-32 lg:w-36 lg:h-36 border-neutral-300 text-sm bg-white"
+                    >
+                      Explore more
+                    </MagneticButton>
+                  </div>
                 </div>
+
+                {/* Column B: Right Elongated Image */}
+                <div className="unlock-right-wrapper w-full lg:w-[45%] flex justify-center lg:justify-end lg:pl-6">
+                  <div className="unlock-right-inner relative w-full max-w-[280px] h-[340px] overflow-hidden border border-neutral-200/50 shadow-md">
+                    <Image
+                      src="/unlock_potential_right.png"
+                      alt="Discussing work in modern office space"
+                      fill
+                      sizes="(max-width: 1024px) 280px, 280px"
+                      className="object-cover"
+                    />
+                  </div>
+                </div>
+
               </div>
 
             </div>
 
           </div>
-
         </div>
       </section>
 
@@ -1083,8 +1099,17 @@ export default function Home() {
         <div className="services-container relative w-full h-screen flex flex-col lg:flex-row items-stretch select-none">
 
           {/* Column 1: Left Stationary Nav Menu */}
-          <div className="w-full lg:w-[25%] flex flex-col justify-center items-start border-b lg:border-b-0 lg:border-r border-neutral-200 pl-4 sm:pl-8 lg:pl-12 xl:pl-16 pr-6 pt-28 lg:pt-36 pb-12 lg:pb-16">
-            <div className="flex flex-row lg:flex-col gap-6 lg:gap-10 overflow-x-auto lg:overflow-x-visible w-full scrollbar-none pr-4">
+          <div className="w-full lg:w-[25%] flex flex-col justify-start items-start gap-y-12 lg:gap-y-16 border-b lg:border-b-0 lg:border-r border-neutral-200 pl-4 sm:pl-8 lg:pl-12 xl:pl-16 pr-6 pt-32 lg:pt-36 pb-12 lg:pb-16">
+            
+            {/* Top Heading */}
+            <div className="text-left w-full">
+              <h2 className="bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent font-black text-2xl sm:text-3xl lg:text-4xl uppercase tracking-wider leading-tight select-none py-2">
+                Our Digital Expertise
+              </h2>
+            </div>
+
+            {/* Nav Links */}
+            <div className="flex flex-row lg:flex-col gap-6 lg:gap-10 overflow-x-auto lg:overflow-x-visible w-full scrollbar-none pr-4 mt-6 lg:mt-8">
               {servicesData.map((service, idx) => (
                 <button
                   key={idx}
@@ -1122,22 +1147,21 @@ export default function Home() {
           </div>
 
           {/* Column 3: Service Details (Right) */}
-          <div className="w-full lg:w-[40%] flex flex-col justify-between pl-6 lg:pl-12 pr-4 sm:pr-8 lg:pr-12 xl:pr-16 pt-28 lg:pt-36 pb-12 lg:pb-16">
+           <div className="w-full lg:w-[40%] flex flex-col justify-between pl-6 lg:pl-12 pr-4 sm:pr-8 lg:pr-12 xl:pr-16 pt-32 lg:pt-36 pb-12 lg:pb-16">
 
-            {/* Top Row: Static branding message */}
-            <div className="text-left mb-6 lg:mb-0">
-              <span className="text-xs uppercase tracking-widest text-[#206cbb] font-semibold">Our Digital Expertise</span>
-              <p className="text-neutral-500 text-xs sm:text-sm mt-2 leading-relaxed max-w-[380px]">
-                Everything that we do is intended to help your business become smarter, faster, and stronger in the world of the internet.
+            {/* Top Row: Description */}
+            <div className="text-left mb-8 lg:mb-4 w-full">
+              <p className="text-neutral-500 text-sm sm:text-base leading-relaxed max-w-[420px] text-justify">
+                Everything we do is designed to help your business grow smarter, move faster, and stay ahead in today&apos;s digital landscape. From building a strong online presence to driving measurable results, our solutions are tailored to support your long-term success.
               </p>
             </div>
 
             {/* Middle Row: Dynamic Details Container */}
-            <div className="relative flex-grow flex flex-col justify-center items-start py-6 lg:py-0 min-h-[220px]">
+            <div className="relative flex-grow flex flex-col justify-start items-start pt-1 lg:pt-2 pb-6 min-h-[260px]">
               {servicesData.map((service, idx) => (
                 <div
                   key={idx}
-                  className={`service-details-wrapper absolute inset-x-0 transition-all duration-700 ease-in-out ${activeService === idx ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-6 pointer-events-none"
+                  className={`service-details-wrapper absolute inset-x-0 top-1 lg:top-2 transition-all duration-700 ease-in-out ${activeService === idx ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-6 pointer-events-none"
                     }`}
                 >
                   <h3 className="bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight mb-4 w-fit">
@@ -1150,7 +1174,7 @@ export default function Home() {
                   {/* Dynamic bullet items */}
                   <div className="grid grid-cols-2 gap-y-3 gap-x-4 w-full max-w-[440px]">
                     {service.bullets.map((bullet, bIdx) => (
-                      <div key={bIdx} className="flex items-center text-xs sm:text-sm text-neutral-500 font-medium">
+                      <div key={bIdx} className="flex items-center text-xs sm:text-sm text-black font-bold">
                         <span className="text-[#206cbb] mr-2 font-bold">+</span>
                         {bullet}
                       </div>
@@ -1161,13 +1185,15 @@ export default function Home() {
             </div>
 
             {/* Bottom Row: Pinned interactive "Explore More" badge */}
-            <Link href={serviceUrls[activeService]} className="block w-fit">
-              <MagneticButton
-                className="w-28 h-28 sm:w-32 sm:h-32 border-neutral-300 text-xs sm:text-sm bg-transparent"
-              >
-                Explore More <span className="text-xs sm:text-sm">↗</span>
-              </MagneticButton>
-            </Link>
+            <div className="mt-8 shrink-0">
+              <Link href={serviceUrls[activeService]} className="block w-fit">
+                <MagneticButton
+                  className="w-28 h-28 sm:w-32 sm:h-32 border-neutral-300 text-xs sm:text-sm bg-transparent"
+                >
+                  Explore More <span className="text-xs sm:text-sm">↗</span>
+                </MagneticButton>
+              </Link>
+            </div>
 
           </div>
 
@@ -1185,10 +1211,10 @@ export default function Home() {
           {/* Header Typography */}
           <div className="text-center mb-20 lg:mb-28 flex flex-col items-center">
             <span className="text-xs uppercase tracking-widest text-[#206cbb] font-bold mb-3 bg-[#206cbb]/10 px-3 py-1 rounded-full select-none">
-              How We Create Success
+              OUR WORKFLOW
             </span>
             <h2 className="workflow-section-title bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent font-black text-4xl sm:text-5xl lg:text-6xl tracking-tight select-none w-fit pb-1">
-              Our Workflow
+              HOW WE CREATE SUCCESS
             </h2>
             <p className="text-neutral-500 text-sm sm:text-base max-w-[500px] mt-4 leading-relaxed">
               We follow a streamlined, data-driven approach to transform your digital presence and ensure sustainable long-term growth.
@@ -1390,13 +1416,22 @@ export default function Home() {
                 </div>
 
                 {/* Step content */}
-                <div className="relative z-10 flex flex-col items-center">
-                  <h3 className="text-lg font-bold bg-gradient-to-r from-neutral-800 to-neutral-900 bg-clip-text text-transparent group-hover:from-[#206cbb] group-hover:to-[#3c9e90] transition-colors duration-500 mt-2 text-center select-none w-fit mx-auto">
+                <div className="relative z-10 flex flex-col items-center w-full">
+                  <h3 className="text-xl lg:text-[22px] font-extrabold bg-gradient-to-r from-neutral-800 to-neutral-900 bg-clip-text text-transparent group-hover:from-[#206cbb] group-hover:to-[#3c9e90] transition-colors duration-500 mt-2 text-center select-none w-fit mx-auto mb-1">
                     Free Discovery Consultation
                   </h3>
-                  <p className="text-neutral-500 transition-colors duration-500 text-xs sm:text-sm leading-relaxed text-center mt-3 max-w-[280px]">
-                    This consultation helps us know more about your business, your aims and target audience so that we can find ways of sustainable development.
+                  <p className={`text-neutral-500 transition-all duration-500 text-sm sm:text-base leading-relaxed text-center mt-3 max-w-[310px] ${
+                    expandedCards[1] ? "" : "line-clamp-2"
+                  }`}>
+                    Before any project can succeed, there needs to be an understanding of your business. This consultation helps us know more about your business, your aims and target audience so that we can find ways of sustainable development.
                   </p>
+                  <button
+                    onClick={() => setExpandedCards(prev => ({ ...prev, 1: !prev[1] }))}
+                    className="mt-3 text-xs font-bold text-[#206cbb] hover:text-[#3c9e90] transition-colors duration-300 select-none cursor-pointer focus:outline-none flex items-center gap-1"
+                  >
+                    {expandedCards[1] ? "See Less" : "See More"}
+                    <span>{expandedCards[1] ? "↑" : "↓"}</span>
+                  </button>
                 </div>
 
                 {/* Faint Background Watermark Number */}
@@ -1455,13 +1490,22 @@ export default function Home() {
                 </div>
 
                 {/* Step content */}
-                <div className="relative z-10 flex flex-col items-center">
-                  <h3 className="text-lg font-bold bg-gradient-to-r from-neutral-800 to-neutral-900 bg-clip-text text-transparent group-hover:from-[#206cbb] group-hover:to-[#3c9e90] transition-colors duration-500 mt-2 text-center select-none w-fit mx-auto">
+                <div className="relative z-10 flex flex-col items-center w-full">
+                  <h3 className="text-xl lg:text-[22px] font-extrabold bg-gradient-to-r from-neutral-800 to-neutral-900 bg-clip-text text-transparent group-hover:from-[#206cbb] group-hover:to-[#3c9e90] transition-colors duration-500 mt-2 text-center select-none w-fit mx-auto mb-1">
                     Personalized Growth Strategy
                   </h3>
-                  <p className="text-neutral-500 transition-colors duration-500 text-xs sm:text-sm leading-relaxed text-center mt-3 max-w-[280px]">
+                  <p className={`text-neutral-500 transition-all duration-500 text-sm sm:text-base leading-relaxed text-center mt-3 max-w-[310px] ${
+                    expandedCards[2] ? "" : "line-clamp-2"
+                  }`}>
                     We conduct thorough research and use all the data to create a personalized strategy for your online growth.
                   </p>
+                  <button
+                    onClick={() => setExpandedCards(prev => ({ ...prev, 2: !prev[2] }))}
+                    className="mt-3 text-xs font-bold text-[#206cbb] hover:text-[#3c9e90] transition-colors duration-300 select-none cursor-pointer focus:outline-none flex items-center gap-1"
+                  >
+                    {expandedCards[2] ? "See Less" : "See More"}
+                    <span>{expandedCards[2] ? "↑" : "↓"}</span>
+                  </button>
                 </div>
 
                 {/* Faint Background Watermark Number */}
@@ -1520,13 +1564,22 @@ export default function Home() {
                 </div>
 
                 {/* Step content */}
-                <div className="relative z-10 flex flex-col items-center">
-                  <h3 className="text-lg font-bold bg-gradient-to-r from-neutral-800 to-neutral-900 bg-clip-text text-transparent group-hover:from-[#206cbb] group-hover:to-[#3c9e90] transition-colors duration-500 mt-2 text-center select-none w-fit mx-auto">
+                <div className="relative z-10 flex flex-col items-center w-full">
+                  <h3 className="text-xl lg:text-[22px] font-extrabold bg-gradient-to-r from-neutral-800 to-neutral-900 bg-clip-text text-transparent group-hover:from-[#206cbb] group-hover:to-[#3c9e90] transition-colors duration-500 mt-2 text-center select-none w-fit mx-auto mb-1">
                     Effective Implementation
                   </h3>
-                  <p className="text-neutral-500 transition-colors duration-500 text-xs sm:text-sm leading-relaxed text-center mt-3 max-w-[280px]">
-                    From developing websites and implementing SEO tactics to managing social media and advertising campaigns - our team implements your strategy in a most creative way.
+                  <p className={`text-neutral-500 transition-all duration-500 text-sm sm:text-base leading-relaxed text-center mt-3 max-w-[310px] ${
+                    expandedCards[3] ? "" : "line-clamp-2"
+                  }`}>
+                    From developing websites and implementing SEO tactics to managing social media and advertising campaigns - Our team implements your vision with creativity and precision.
                   </p>
+                  <button
+                    onClick={() => setExpandedCards(prev => ({ ...prev, 3: !prev[3] }))}
+                    className="mt-3 text-xs font-bold text-[#206cbb] hover:text-[#3c9e90] transition-colors duration-300 select-none cursor-pointer focus:outline-none flex items-center gap-1"
+                  >
+                    {expandedCards[3] ? "See Less" : "See More"}
+                    <span>{expandedCards[3] ? "↑" : "↓"}</span>
+                  </button>
                 </div>
 
                 {/* Faint Background Watermark Number */}
@@ -1585,13 +1638,22 @@ export default function Home() {
                 </div>
 
                 {/* Step content */}
-                <div className="relative z-10 flex flex-col items-center">
-                  <h3 className="text-lg font-bold bg-gradient-to-r from-neutral-800 to-neutral-900 bg-clip-text text-transparent group-hover:from-[#206cbb] group-hover:to-[#3c9e90] transition-colors duration-500 mt-2 text-center select-none w-fit mx-auto">
+                <div className="relative z-10 flex flex-col items-center w-full">
+                  <h3 className="text-xl lg:text-[22px] font-extrabold bg-gradient-to-r from-neutral-800 to-neutral-900 bg-clip-text text-transparent group-hover:from-[#206cbb] group-hover:to-[#3c9e90] transition-colors duration-500 mt-2 text-center select-none w-fit mx-auto mb-1">
                     Optimization & Scaling
                   </h3>
-                  <p className="text-neutral-500 transition-colors duration-500 text-xs sm:text-sm leading-relaxed text-center mt-3 max-w-[280px]">
+                  <p className={`text-neutral-500 transition-all duration-500 text-sm sm:text-base leading-relaxed text-center mt-3 max-w-[310px] ${
+                    expandedCards[4] ? "" : "line-clamp-2"
+                  }`}>
                     Online growth never ends after the implementation phase. It continues through constant optimization and scaling of your efforts.
                   </p>
+                  <button
+                    onClick={() => setExpandedCards(prev => ({ ...prev, 4: !prev[4] }))}
+                    className="mt-3 text-xs font-bold text-[#206cbb] hover:text-[#3c9e90] transition-colors duration-300 select-none cursor-pointer focus:outline-none flex items-center gap-1"
+                  >
+                    {expandedCards[4] ? "See Less" : "See More"}
+                    <span>{expandedCards[4] ? "↑" : "↓"}</span>
+                  </button>
                 </div>
 
                 {/* Faint Background Watermark Number */}
@@ -1641,10 +1703,10 @@ export default function Home() {
                   WHY CHOOSE US ?
                 </span>
                 <h2 className="bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-4xl sm:text-5xl font-extrabold tracking-tight mb-6 py-1">
-                  Bouncy Strategic Core
+                  Why Choose Us
                 </h2>
-                <p className="text-neutral-600 text-sm sm:text-base leading-relaxed">
-                  At Bouncy, we provide not only digital services but also strategies for businesses to grow. Our creativity, analytical approach, and focus on delivering results will become your ally on your way to success online.
+                <p className="text-neutral-600 text-sm sm:text-base leading-relaxed text-justify">
+                  At Bouncy, we don&apos;t just deliver digital services—we build plans that help businesses grow with purpose. By combining creativity, data-driven insights, and innovative thinking, we create digital solutions that strengthen your brand, attract the right audience, and drive measurable business growth.
                 </p>
               </div>
 
@@ -1663,14 +1725,15 @@ export default function Home() {
                       <circle cx="50" cy="50" r="40" stroke="#e5e7eb" strokeWidth="6" fill="transparent" />
                       <circle cx="50" cy="50" r="40" stroke="url(#grad-research)" strokeWidth="6" fill="transparent" strokeDasharray="251.2" strokeDashoffset={251.2 - (251.2 * 85) / 100} strokeLinecap="round" />
                     </svg>
-                    <span className="absolute text-sm sm:text-base font-extrabold text-black">85%</span>
+                    <span className="absolute text-sm sm:text-base font-black text-black">85%</span>
                   </div>
                   <div className="text-left">
-                    <h3 className="text-black text-base sm:text-lg font-bold mb-1 flex items-center gap-1 select-none">
-                      <span>🔍</span> Research
+                    <h3 className="text-black text-base sm:text-lg lg:text-xl font-extrabold mb-1.5 flex items-center gap-1.5 select-none">
+                      <Image src="/workflow_icon_1.png" alt="Research" width={24} height={24} className="object-contain" />
+                      Research
                     </h3>
-                    <p className="text-neutral-500 text-sm sm:text-base leading-relaxed">
-                      Discovering important insights about your market, audience, and competitors is an essential step.
+                    <p className="text-neutral-500 text-sm leading-relaxed text-justify">
+                      Every successful strategy begins with understanding your business. We conduct in-depth research into your industry, target audience, and competitors to uncover valuable insights that guide smarter marketing decisions.
                     </p>
                   </div>
                 </div>
@@ -1688,14 +1751,15 @@ export default function Home() {
                       <circle cx="50" cy="50" r="40" stroke="#e5e7eb" strokeWidth="6" fill="transparent" />
                       <circle cx="50" cy="50" r="40" stroke="url(#grad-strategy)" strokeWidth="6" fill="transparent" strokeDasharray="251.2" strokeDashoffset={251.2 - (251.2 * 90) / 100} strokeLinecap="round" />
                     </svg>
-                    <span className="absolute text-sm sm:text-base font-extrabold text-black">90%</span>
+                    <span className="absolute text-sm sm:text-base font-black text-black">90%</span>
                   </div>
                   <div className="text-left">
-                    <h3 className="text-black text-base sm:text-lg font-bold mb-1 flex items-center gap-1 select-none">
-                      <span>🎯</span> Strategy
+                    <h3 className="text-black text-base sm:text-lg lg:text-xl font-extrabold mb-1.5 flex items-center gap-1.5 select-none">
+                      <Image src="/workflow_icon_2.png" alt="Strategy" width={24} height={24} className="object-contain" />
+                      Strategy
                     </h3>
-                    <p className="text-neutral-500 text-sm sm:text-base leading-relaxed">
-                      Each of our strategies is carefully developed based on your needs to ensure your business grows successfully.
+                    <p className="text-neutral-500 text-sm leading-relaxed text-justify">
+                      We don&apos;t believe in one-size-fits-all solutions. Every strategy is carefully crafted around your business goals, ensuring every campaign, website, and piece of content contributes to your long-term success.
                     </p>
                   </div>
                 </div>
@@ -1713,14 +1777,15 @@ export default function Home() {
                       <circle cx="50" cy="50" r="40" stroke="#e5e7eb" strokeWidth="6" fill="transparent" />
                       <circle cx="50" cy="50" r="40" stroke="url(#grad-analytics)" strokeWidth="6" fill="transparent" strokeDasharray="251.2" strokeDashoffset={251.2 - (251.2 * 75) / 100} strokeLinecap="round" />
                     </svg>
-                    <span className="absolute text-sm sm:text-base font-extrabold text-black">75%</span>
+                    <span className="absolute text-sm sm:text-base font-black text-black">75%</span>
                   </div>
                   <div className="text-left">
-                    <h3 className="text-black text-base sm:text-lg font-bold mb-1 flex items-center gap-1 select-none">
-                      <span>📈</span> Analytics
+                    <h3 className="text-black text-base sm:text-lg lg:text-xl font-extrabold mb-1.5 flex items-center gap-1.5 select-none">
+                      <Image src="/workflow_icon_3.png" alt="Optimization & Analytics" width={24} height={24} className="object-contain" />
+                      Optimization & Analytics
                     </h3>
-                    <p className="text-neutral-500 text-sm sm:text-base leading-relaxed">
-                      We analyze and optimize each of our campaigns to deliver meaningful results.
+                    <p className="text-neutral-500 text-sm leading-relaxed text-justify">
+                      Growth comes from continuous improvement. We monitor performance, analyze data, and optimize every campaign to maximize results, improve efficiency, and deliver the highest possible return on your investment.
                     </p>
                   </div>
                 </div>
@@ -1738,14 +1803,15 @@ export default function Home() {
                       <circle cx="50" cy="50" r="40" stroke="#e5e7eb" strokeWidth="6" fill="transparent" />
                       <circle cx="50" cy="50" r="40" stroke="url(#grad-growth)" strokeWidth="6" fill="transparent" strokeDasharray="251.2" strokeDashoffset={251.2 - (251.2 * 95) / 100} strokeLinecap="round" />
                     </svg>
-                    <span className="absolute text-sm sm:text-base font-extrabold text-black">95%</span>
+                    <span className="absolute text-sm sm:text-base font-black text-black">95%</span>
                   </div>
                   <div className="text-left">
-                    <h3 className="text-black text-base sm:text-lg font-bold mb-1 flex items-center gap-1 select-none">
-                      <span>🚀</span> Growth
+                    <h3 className="text-black text-base sm:text-lg lg:text-xl font-extrabold mb-1.5 flex items-center gap-1.5 select-none">
+                      <Image src="/workflow_icon_4.png" alt="Growth" width={24} height={24} className="object-contain" />
+                      Growth
                     </h3>
-                    <p className="text-neutral-500 text-sm sm:text-base leading-relaxed">
-                      With constant improvement, we will take your brand to new heights.
+                    <p className="text-neutral-500 text-sm leading-relaxed text-justify">
+                      Our mission is to help your business grow beyond expectations. Through strategic execution, ongoing optimization, and a commitment to measurable results, we help transform your digital presence.
                     </p>
                   </div>
                 </div>
@@ -1913,7 +1979,7 @@ export default function Home() {
 
           {/* Image 1: left edge, middle. Square */}
           <div className="floating-img absolute left-6 sm:left-12 top-[42%] w-16 h-16 sm:w-20 sm:h-20 border border-neutral-200 bg-neutral-50 shadow-sm overflow-hidden">
-            <Image src="/portrait_1.png" alt="Testimonial background portrait 1" fill className="object-cover" />
+            <Image src="/meta ad (2).png" alt="Testimonial background portrait 1" fill className="object-cover" />
           </div>
 
           {/* Image 2: top left. Vertical square */}
@@ -1923,7 +1989,7 @@ export default function Home() {
 
           {/* Image 3: bottom left. Vertical rect */}
           <div className="floating-img absolute left-[8%] sm:left-[12%] bottom-[6%] w-28 h-36 sm:w-40 sm:h-52 border border-neutral-200 bg-neutral-50 shadow-sm overflow-hidden">
-            <Image src="/portrait_3.png" alt="Testimonial background portrait 3" fill className="object-cover" />
+            <Image src="/ChatGPT Image Jul 20, 2026, 01_16_39 AM.png" alt="Testimonial background portrait 3" fill className="object-cover" />
           </div>
 
           {/* Image 4: top right. Small square */}

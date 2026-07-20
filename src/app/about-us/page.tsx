@@ -262,14 +262,13 @@ export default function AboutUsPage() {
   };
 
   const clientsList = [
-    { name: "AGN Tax Consultant", id: "agn" },
-    { name: "Modern Paper Product", id: "modern" },
-    { name: "My Fragrance", id: "fragrance" },
-    { name: "Forces School & College", id: "forces" },
-    { name: "The Punjab School", id: "punjab" },
-    { name: "Physician Revenue", id: "physician" },
-    { name: "Gulab Devi Hospital", id: "gulab" },
-    { name: "Headrogen", id: "headrogen" },
+    { name: "AGN Tax Consultant", logo: "/agntax logo (1).png" },
+    { name: "My Fragrance", logo: "/logo.png" },
+    { name: "Forces School & College", logo: "/forces school.png" },
+    { name: "The Punjab School", logo: "/the punjab school logo.png" },
+    { name: "Physician Revenue", logo: "/physician revenue.webp" },
+    { name: "Gulab Devi Hospital", logo: "/gulab devi.png" },
+    { name: "Headrogen", logo: "/headrogen (2).png" },
   ];
 
   const teamList = [
@@ -340,10 +339,10 @@ export default function AboutUsPage() {
             </h1>
             
             <p className="hero-text-animate text-[#555555] text-sm sm:text-base md:text-lg leading-relaxed text-justify mb-6 max-w-2xl font-normal">
-              Every successful enterprise begins with a dream. However, making that dream come true in the current digital era is not something you can achieve by simply creating a website or posting on social media. You need proper strategy, creativity, consistency, and a partner who is truly interested in seeing your business succeed. This is how Bouncy was created.
+              Every successful business begins with an idea, but turning that idea into sustainable growth takes more than just a website or social media presence. It requires a clear strategy, creative thinking, consistent execution, and a team that genuinely cares about your success. That&apos;s exactly why Bouncy was founded.
             </p>
             <p className="hero-text-animate text-[#555555] text-sm sm:text-base md:text-lg leading-relaxed text-justify mb-8 max-w-2xl font-normal">
-              Bouncy is a creative Digital Marketing Agency aimed at helping businesses of any size build their online presence and bring growth. From startups that have yet to take the first step in business development to established companies that wish to expand their reach, we are confident that each enterprise deserves a digital strategy.
+              We are more than a Digital Marketing Agency—we are a growth partner for ambitious businesses. Whether you&apos;re launching a startup, expanding an established company, or looking to generate more leads online, we create tailored digital strategies that help you reach the right audience, build trust, and achieve measurable business growth.
             </p>
 
             <div className="hero-text-animate flex flex-row items-center gap-4">
@@ -598,9 +597,9 @@ export default function AboutUsPage() {
                 <div className="w-10 h-10 rounded-lg bg-neutral-100 flex items-center justify-center mb-4">
                   <span className="text-[#206cbb] font-bold text-lg font-mono">01</span>
                 </div>
-                <h3 className="text-lg font-bold text-neutral-800 mb-3">Our Core Origin</h3>
+                <h3 className="text-lg font-bold text-neutral-800 mb-3">Our Belief & Challenge</h3>
                 <p className="text-neutral-500 text-xs sm:text-sm leading-relaxed text-justify">
-                  When founding Bouncy Grow Digital, we started from one simple thought: any business has all chances to develop if it has the right digital partner. Unfortunately, throughout our experience, we witnessed quite a lot of companies investing into websites, social media marketing, and ads but not getting the desired result.
+                  Bouncy Grow Digital was built on one simple belief: every business deserves the opportunity to grow online with the right strategy. Over the years, we noticed a common challenge. Many businesses were investing in websites, social media, and online advertising, yet they weren&apos;t seeing meaningful results. The problem wasn&apos;t a lack of effort or budget—it was the absence of a clear strategy. Marketing activities were often disconnected from business goals, targeted at the wrong audience, or focused on metrics that didn&apos;t translate into real growth.
                 </p>
               </div>
 
@@ -609,9 +608,9 @@ export default function AboutUsPage() {
                 <div className="w-10 h-10 rounded-lg bg-neutral-100 flex items-center justify-center mb-4">
                   <span className="text-[#3c9e90] font-bold text-lg font-mono">02</span>
                 </div>
-                <h3 className="text-lg font-bold text-neutral-800 mb-3">A Strategic Realignment</h3>
+                <h3 className="text-lg font-bold text-neutral-800 mb-3">Doing Things Differently</h3>
                 <p className="text-neutral-500 text-xs sm:text-sm leading-relaxed text-justify">
-                  Usually, failures happened not because the efforts were lacking; it was mostly about a wrong strategy – the companies spent money on marketing strategies that did not correlate with their objectives, target audience, and customer journey. We believed there should be another way. And this is why we founded Bouncy to provide smart and strategic services.
+                  Instead of accepting that as the norm, we decided to do things differently. That&apos;s how Bouncy came to life. We set out to build an agency that focuses on understanding businesses before marketing them. Every approach we take is built around your goals, your audience, and your vision for the future. Because we believe digital marketing should do more than generate clicks—it should generate opportunities, customers, and long-term business growth.
                 </p>
               </div>
             </div>
@@ -643,7 +642,10 @@ export default function AboutUsPage() {
               </div>
               <h2 className="text-2xl sm:text-3xl font-black text-neutral-800 mb-4 tracking-tight">Our Mission</h2>
               <p className="text-neutral-500 text-sm sm:text-base leading-relaxed text-justify">
-                The purpose to build Bouncy is to provide innovative and data-driven digital marketing services to companies that can foster relationships between the business and its customers and foster growth in the process. Our aim is to provide companies with honest and strategic advice that will allow them to flourish in a constantly evolving digital landscape.
+                Our mission is to help businesses unlock their full potential through digital marketing solutions. We combine creativity with smart planning to build meaningful connections between brands and their audiences, turning digital interactions into lasting customer relationships.
+              </p>
+              <p className="text-neutral-500 text-sm sm:text-base leading-relaxed text-justify mt-3">
+                We are committed to delivering honest guidance, measurable results, and customized marketing solutions that empower businesses to grow with confidence in an ever-evolving digital world.
               </p>
             </div>
             
@@ -672,7 +674,10 @@ export default function AboutUsPage() {
               </div>
               <h2 className="text-2xl sm:text-3xl font-black text-neutral-800 mb-4 tracking-tight">Our Vision</h2>
               <p className="text-neutral-500 text-sm sm:text-base leading-relaxed text-justify">
-                Our vision is to establish ourselves as a reputable global Digital Marketing Agency and growth partner which companies can depend upon for innovation, integrity, and success. We aim at motivating companies to seize digital opportunities, adapt to changes in the market, and create unique brands with confidence.
+                Our vision is to become a trusted global Digital Marketing Agency that businesses choose not only for our expertise but for our commitment to their success. We aspire to inspire businesses to embrace digital transformation, adapt to changing markets, and build brands that create lasting impact.
+              </p>
+              <p className="text-neutral-500 text-sm sm:text-base leading-relaxed text-justify mt-3 font-semibold text-[#3c9e90]">
+                At Bouncy, we don&apos;t measure success by the number of campaigns we launch—we measure it by the businesses we help grow.
               </p>
             </div>
 
@@ -694,19 +699,62 @@ export default function AboutUsPage() {
             Businesses We Help Grow
           </h2>
 
-          <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 max-w-5xl mx-auto">
-            {clientsList.map((client) => (
-              <div
-                key={client.id}
-                className="client-badge group relative px-6 py-4 rounded-xl border border-neutral-200/50 bg-white shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex items-center justify-center cursor-default min-w-[160px] sm:min-w-[200px]"
-              >
-                {/* Accent side tag */}
-                <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#206cbb] to-[#3c9e90] rounded-l-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <span className="text-xs sm:text-sm font-semibold text-neutral-600 group-hover:text-neutral-800 transition-colors tracking-wide">
-                  {client.name}
-                </span>
-              </div>
-            ))}
+          {/* Infinite Smooth Scrolling Ticker Container with fade-out mask */}
+          <div 
+            className="relative w-full overflow-hidden py-6 mt-4 select-none"
+            style={{ 
+              maskImage: "linear-gradient(to right, transparent, white 15%, white 85%, transparent)", 
+              WebkitMaskImage: "linear-gradient(to right, transparent, white 15%, white 85%, transparent)" 
+            }}
+          >
+            <div className="flex animate-marquee gap-8 items-center py-6">
+              {/* First group of logo cards */}
+              {clientsList.map((client, idx) => (
+                <div
+                  key={`first-${idx}`}
+                  onMouseMove={handleCardMouseMove}
+                  onMouseLeave={handleCardMouseLeave}
+                  className="client-badge group relative w-[240px] h-[130px] px-8 rounded-2xl border border-neutral-100 bg-white shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:border-neutral-300 hover:shadow-[0_16px_36px_rgba(32,108,187,0.1)] transition-all duration-300 flex items-center justify-center shrink-0 transform-gpu cursor-pointer"
+                  style={{ transformStyle: "preserve-3d", transform: "perspective(1000px)" }}
+                >
+                  <div 
+                    className="relative w-full h-[90px] transition-transform duration-500"
+                    style={{ transform: "translateZ(25px)" }}
+                  >
+                    <Image
+                      src={client.logo}
+                      alt={client.name}
+                      fill
+                      sizes="200px"
+                      className="object-contain opacity-100 transition-opacity duration-300"
+                    />
+                  </div>
+                </div>
+              ))}
+              {/* Duplicate group of logo cards for seamless loop */}
+              {clientsList.map((client, idx) => (
+                <div
+                  key={`second-${idx}`}
+                  onMouseMove={handleCardMouseMove}
+                  onMouseLeave={handleCardMouseLeave}
+                  className="client-badge group relative w-[240px] h-[130px] px-8 rounded-2xl border border-neutral-100 bg-white shadow-[0_2px_12px_rgba(0,0,0,0.02)] hover:border-neutral-300 hover:shadow-[0_16px_36px_rgba(32,108,187,0.1)] transition-all duration-300 flex items-center justify-center shrink-0 transform-gpu cursor-pointer"
+                  style={{ transformStyle: "preserve-3d", transform: "perspective(1000px)" }}
+                >
+                  <div 
+                    className="relative w-full h-[90px] transition-transform duration-500"
+                    style={{ transform: "translateZ(25px)" }}
+                  >
+                    <Image
+                      src={client.logo}
+                      alt={client.name}
+                      fill
+                      sizes="200px"
+                      className="object-contain opacity-100 transition-opacity duration-300"
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

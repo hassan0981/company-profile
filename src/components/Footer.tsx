@@ -95,7 +95,7 @@ export default function Footer() {
   return (
     <footer
       ref={footerRef}
-      className="relative w-full bg-gradient-to-br from-[#206cbb] to-[#3c9e90] text-white pt-20 pb-12 overflow-hidden border-t border-white/10"
+      className="relative w-full bg-gradient-to-br from-[#206cbb] to-[#3c9e90] text-white pt-14 pb-8 overflow-hidden border-t border-white/10"
     >
       <div className="mx-auto max-w-7xl px-6 sm:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
@@ -108,13 +108,9 @@ export default function Footer() {
                 <img
                   src="/white_outline.png"
                   alt="BouncyDigital Logo"
-                  className="h-40 w-auto object-contain -mt-15"
+                  className="h-48 w-auto object-contain -mt-10"
                 />
               </Link>
-              {/* High contrast paragraph */}
-              <p className="-mt-4 text-sm leading-relaxed text-white/90 text-center">
-                We offer creative minds and intelligent digital marketing solutions ranging from web design/development and SEO to social media management and winning ad campaigns.
-              </p>
             </div>
             {/* Copyright */}
             <div className="text-xs text-white/70 mt-6 lg:mt-0 text-center">
@@ -133,7 +129,7 @@ export default function Footer() {
                 href={social.href}
                 target={social.href !== "#" ? "_blank" : undefined}
                 rel={social.href !== "#" ? "noopener noreferrer" : undefined}
-                className="social-box relative flex items-center justify-center py-5 border-b border-white/20 overflow-hidden group cursor-pointer"
+                className="social-box relative flex items-center justify-center py-3.5 border-b border-white/20 overflow-hidden group cursor-pointer"
                 onMouseEnter={handleSocialMouseEnter}
                 onMouseLeave={handleSocialMouseLeave}
               >

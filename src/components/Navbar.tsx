@@ -42,13 +42,13 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b border-neutral-100 bg-white">
       <div className="mx-auto flex h-28 max-w-7xl items-center justify-between px-6 sm:px-8">
         {/* Logo Section */}
-        <Link href="/" onClick={handleLinkClick} className="flex items-center focus:outline-none -ml-16 sm:-ml-24">
+        <Link href="/" onClick={handleLinkClick} className="flex items-center focus:outline-none -ml-12 sm:-ml-18">
           <Image
             src="/BOUNCY.png"
             alt="Bouncy Logo"
-            width={400}
-            height={220}
-            className="object-contain h-35 w-[400px] -my-6"
+            width={325}
+            height={162}
+            className="object-contain h-[98px] w-[325px] -my-4"
             priority
           />
         </Link>

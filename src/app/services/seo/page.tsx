@@ -6,6 +6,7 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import MagneticButton from "@/components/MagneticButton";
+import FAQ from "@/components/FAQ";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -14,33 +15,45 @@ if (typeof window !== "undefined") {
 const servicesData = [
   {
     title: "Technical SEO",
-    image: "/portrait_2.png",
-    description: "A strong website starts with a solid technical foundation. We identify and resolve issues that prevent search engines from properly crawling, indexing, and ranking your website. Our Technical SEO services include website audits, crawl error fixes, site speed optimization, mobile usability improvements, structured data implementation, indexing solutions, and overall website performance enhancements. By fixing technical barriers, we help search engines understand your website while delivering a faster and smoother experience for your visitors.",
-    bullets: ["Website Audits", "Crawl Error Fixes", "Speed Optimization", "Structured Data"]
+    image: "/technical_seo.png",
+    description: "A well-optimized website starts with a strong technical foundation. We identify and fix issues that can limit your search visibility, including crawl errors, indexing problems, slow loading speeds, mobile usability, structured data, and overall site performance. By improving your website's technical health, we help search engines crawl your pages more efficiently while providing a faster, smoother experience that keeps visitors engaged.",
+    bullets: ["Technical Audit", "Crawl Errors", "Site Speed", "Mobile Optimization", "Core Web Vitals"]
   },
   {
     title: "Keyword Research & SEO Strategy",
-    image: "/portrait_1.png",
-    description: "A good SEO process always starts with understanding the searches of your clients. We do thorough research in the form of Keyword Research to find out the most valuable keywords that would be beneficial for your products/services. The keyword research does not involve selecting only those keywords that are popular; we target the ones that can bring traffic to your site. This process helps us to create an effective SEO strategy for your long-term growth.",
-    bullets: ["Valuable Keywords", "Competitor Research", "Intent Analysis", "Growth Strategy"]
+    image: "/seo.png",
+    description: "Every successful SEO campaign starts with understanding what your potential customers are searching for. We conduct in-depth keyword research to identify high-value search terms based on search intent, competition, and business potential—not just search volume. This allows us to build a customized SEO plan that targets the right audience, uncovers new growth opportunities, and lays the foundation for long-term organic success.",
+    bullets: ["Keyword Research", "Search Intent", "SEO Foundation", "User Intent"]
   },
   {
     title: "On-Page SEO",
-    image: "/portrait_4.png",
-    description: "All pages on your site need to convey their value to the user and to the search engine. In our On-Page SEO services, we optimize title tags, meta descriptions, headings, URL structure, internal linking, images, content structure, and the user experience. Every page will also be optimized for the right keywords, while still being interesting and readable at the same time. The result is a website that is easier to navigate, more relevant to search queries, and better positioned to convert visitors into customers.",
-    bullets: ["Meta Optimization", "Internal Linking", "Image SEO & Alt text", "UX Alignment"]
+    image: "/on_page_seo.png",
+    description: "Your website should not only rank well but also provide an excellent experience for your visitors. We optimize every important on-page element, including titles, meta descriptions, headings, URLs, internal links, images, and content structure, while ensuring each page is aligned with the right keywords. The result is a website that is easier for search engines to understand and more effective at turning visitors into customers.",
+    bullets: ["Title Tags", "Meta Description", "Content Optimization", "Search Optimization"]
   },
   {
     title: "Off-Page SEO & Authority Building",
     image: "/unlock_potential_right.png",
-    description: "Search engines trust websites that are trusted by others. Our Off-Page SEO techniques are based on making your website credible through link building, online outreach, and mentioning your brand through reputable sources. We put quality before quantity to help your website become more authoritative.",
-    bullets: ["Link Building", "Online Outreach", "Brand Mentions", "Authority Building"]
+    description: "Google rewards websites that have earned trust and authority within their industry. Our Off-Page SEO strategy focuses on building your website's credibility through high-quality backlinks, digital outreach, brand mentions, and ethical link-building practices. Rather than chasing large quantities of links, we prioritize quality and relevance to strengthen your online reputation and improve your long-term search performance.",
+    bullets: ["Quality Backlinks", "Link Building", "Citation Building", "Referral Traffic"]
   },
   {
     title: "Local SEO",
-    image: "/unlock_potential_left.png",
-    description: "If your customers are searching for business in their locality, then your business should be visible where they can find you. Our Local SEO services allow you to enhance the visibility of your business on Google Search and Google Maps through the optimization of your business listing, local citation, location-related keywords, online reviews, and local landing pages. Regardless of Whether you serve one city or multiple locations, we help you connect with nearby customers who are ready to take action.",
-    bullets: ["Google Maps Visibility", "Local Citations", "Review Optimization", "Local Keywords"]
+    image: "/service_smm.png",
+    description: "When customers search for businesses near them, your business should be one of the first they find. Our Local SEO services improve your visibility on Google Search and Google Maps by optimizing your Google Business Profile, local citations, location-specific keywords, customer reviews, and local landing pages. Whether you serve a single city or multiple locations, we help you attract nearby customers who are actively searching for the services you offer.",
+    bullets: ["Google Business", "Google Maps", "Business Profile", "Local Ranking"]
+  },
+  {
+    title: "Competitor Analysis",
+    image: "/competitor_analysis_seo.png",
+    description: "Understanding your competition is an important part of every successful SEO campaign. We analyse competitor keywords, backlink profiles, website structure, and content to identify opportunities for growth. These insights help us create a strategy that gives your business a stronger position in search results.",
+    bullets: ["Competitor Research", "Keyword Analysis", "Backlink Analysis", "Website Audit"]
+  },
+  {
+    title: "Ecommerce SEO",
+    image: "/service_seo.png",
+    description: "Ecommerce SEO is designed for businesses that sell products online. We optimize product pages, category pages, product descriptions, images, and website structure to improve search visibility and increase organic sales. Our approach helps customers discover your products more easily while creating a seamless shopping experience.",
+    bullets: ["Product Optimization", "Category Optimization", "Product Pages", "Image Optimization"]
   }
 ];
 
@@ -68,8 +81,8 @@ export default function SEOPage() {
     if (trigger && window.innerWidth >= 1024) {
       const start = trigger.start;
       const end = trigger.end;
-      // Scroll to a scroll position corresponding to the start of each of the 5 services
-      const targetScroll = start + (index / 4) * (end - start) + 1;
+      // Scroll to a scroll position corresponding to the start of each of the 7 services
+      const targetScroll = start + (index / 6) * (end - start) + 1;
       window.scrollTo({
         top: targetScroll,
         behavior: "smooth"
@@ -138,25 +151,20 @@ export default function SEOPage() {
         delay: 0.8,
       });
 
-      // Pinned Services Showcase Section ScrollTrigger (5 items: divide by 0.2 bounds) - Desktop-only
+      // Pinned Services Showcase Section ScrollTrigger (7 items: divide by progress segment) - Desktop-only
       const mm = gsap.matchMedia();
       mm.add("(min-width: 1024px)", () => {
         gsap.timeline({
           scrollTrigger: {
             trigger: ".seo-services-showcase-section",
             start: "top top",
-            end: "+=300%",
+            end: "+=320%",
             pin: true,
             scrub: 0.5,
             id: "seoServicesPin",
             onUpdate: (self) => {
               const progress = self.progress;
-              let activeIndex = 0;
-              if (progress < 0.2) activeIndex = 0;
-              else if (progress < 0.4) activeIndex = 1;
-              else if (progress < 0.6) activeIndex = 2;
-              else if (progress < 0.8) activeIndex = 3;
-              else activeIndex = 4;
+              const activeIndex = Math.min(Math.floor(progress * 7), 6);
 
               if (activeIndex !== lastActiveIndex.current) {
                 lastActiveIndex.current = activeIndex;
@@ -254,8 +262,8 @@ export default function SEOPage() {
                   style={{ borderRadius: "50% 50% 5% 50%" }}
                 >
                   <Image
-                    src="/unlock_potential_left.png"
-                    alt="Creative team workspace discussion"
+                    src="/ChatGPT Image Jul 20, 2026, 01_16_39 AM.png"
+                    alt="Creative 3D abstract shapes"
                     fill
                     sizes="(max-width: 768px) 230px, 290px"
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -282,8 +290,8 @@ export default function SEOPage() {
                   style={{ borderRadius: "5% 50% 50% 50%" }}
                 >
                   <Image
-                    src="/portrait_2.png"
-                    alt="Developer workstation office desk"
+                    src="/meta ad (2).png"
+                    alt="Abstract 3D digital illustration"
                     fill
                     sizes="(max-width: 768px) 190px, 230px"
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -310,7 +318,7 @@ export default function SEOPage() {
 
               {/* Description Paragraph in Solid Black */}
               <p className="text-black text-sm sm:text-base md:text-lg leading-relaxed max-w-[420px] font-normal text-justify">
-                Getting your website online is only the beginning. The real challenge is making sure the right people can find it when they search on Google. At Bouncy, we don&apos;t believe SEO is about chasing rankings alone. We focus on building a long-term search strategy that helps your business attract qualified visitors, earn trust, and convert traffic into loyal customers.
+                Having a website is only the first step—getting it in front of the right people is what drives real business growth. At Bouncy, we use data-driven Search Engine Optimization (SEO) strategies to help your business rank higher on Google, attract qualified visitors, and convert them into paying customers. We don&apos;t chase quick wins or temporary rankings; we build sustainable SEO strategies that strengthen your online presence, increase organic traffic, and deliver long-term results that support your business goals.
               </p>
             </div>
           </div>
@@ -335,8 +343,8 @@ export default function SEOPage() {
                   style={{ borderRadius: "50% 5% 50% 50%" }}
                 >
                   <Image
-                    src="/unlock_potential_right.png"
-                    alt="Modern client office discussion"
+                    src="/portrait_4.png"
+                    alt="Creative visionary portrait"
                     fill
                     sizes="(max-width: 768px) 250px, 330px"
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -352,11 +360,11 @@ export default function SEOPage() {
 
       {/* TAB-SLIDER SECTION (EXACT COPY OF THE SPECIFIC SERVICES SHOWCASE LAYOUT) */}
       <section className="seo-services-showcase-section relative bg-white text-black w-full min-h-screen overflow-hidden z-20 border-t border-neutral-200">
-        <div className="services-container relative w-full h-screen flex flex-col lg:flex-row items-stretch select-none">
+        <div className="services-container relative w-full lg:h-screen flex flex-col lg:flex-row items-stretch select-none">
 
           {/* Column 1: Left Stationary Nav Menu */}
-          <div className="w-full lg:w-[30%] flex flex-col justify-center items-start border-b lg:border-b-0 lg:border-r border-neutral-200 pl-4 sm:pl-8 lg:pl-12 xl:pl-16 pr-6 pt-8 lg:pt-36 pb-6 lg:pb-16 animate-pulse-none">
-            <div className="flex flex-row lg:flex-col gap-6 lg:gap-8 overflow-x-auto lg:overflow-x-visible w-full scrollbar-none pr-4 py-2">
+          <div className="w-full lg:w-[30%] flex flex-col justify-center items-start border-b lg:border-b-0 lg:border-r border-neutral-200 pl-4 sm:pl-8 lg:pl-12 xl:pl-16 pr-6 pt-16 lg:pt-44 pb-6 lg:pb-16 animate-pulse-none">
+            <div className="flex flex-row lg:flex-col gap-6 lg:gap-5 overflow-x-auto lg:overflow-x-visible w-full scrollbar-none pr-4 py-2">
               {servicesData.map((service, idx) => (
                 <button
                   key={idx}
@@ -394,10 +402,10 @@ export default function SEOPage() {
           </div>
 
           {/* Column 3: Service Details (Right) */}
-          <div className="w-full lg:w-[34%] flex flex-col justify-between pl-6 lg:pl-12 pr-4 sm:pr-8 lg:pr-12 xl:pr-16 pt-8 lg:pt-36 pb-6 lg:pb-10">
+          <div className="w-full lg:w-[34%] flex flex-col justify-start pl-6 lg:pl-12 pr-4 sm:pr-8 lg:pr-12 xl:pr-16 pt-16 lg:pt-44 pb-6 lg:pb-10">
 
             {/* Middle Row: Dynamic Details Container */}
-            <div className="relative flex-grow flex flex-col justify-start items-start pt-8 pb-4 lg:py-0">
+            <div className="relative flex-initial flex flex-col justify-start items-start pt-8 pb-4 lg:py-0">
               {servicesData.map((service, idx) => {
                 const isActive = activeService === idx;
                 return (
@@ -419,7 +427,7 @@ export default function SEOPage() {
                     {/* Dynamic bullet items */}
                     <div className="grid grid-cols-2 gap-y-3 gap-x-4 w-full max-w-[440px]">
                       {servicesData[idx].bullets.map((bullet, bIdx) => (
-                        <div key={bIdx} className="flex items-center text-xs sm:text-sm text-neutral-500 font-medium">
+                        <div key={bIdx} className="flex items-center text-xs sm:text-sm text-black font-bold">
                           <span className="text-[#206cbb] mr-2 font-bold">+</span>
                           {bullet}
                         </div>
@@ -431,7 +439,7 @@ export default function SEOPage() {
             </div>
 
             {/* Bottom Row: Pinned interactive "Explore More" badge */}
-            <div className="mt-8 flex justify-start">
+            <div className="mt-14 flex justify-start">
               <Link href="/contact-us">
                 <MagneticButton 
                   className="w-28 h-28 sm:w-32 sm:h-32 border-neutral-300 text-xs sm:text-sm bg-transparent"
@@ -446,8 +454,27 @@ export default function SEOPage() {
         </div>
       </section>
 
+      {/* FAQ Section */}
+      <FAQ
+        title="FAQ'S"
+        items={[
+          {
+            question: "How long does Search Engine Optimization take?",
+            answer: "SEO is a long term investment. Most businesses begin seeing measurable improvements within three to six months, depending on competition and the current condition of the website."
+          },
+          {
+            question: "Is SEO suitable for small businesses?",
+            answer: "Yes. SEO helps businesses of every size attract targeted traffic and compete more effectively in search results. A well executed strategy can generate consistent leads without relying entirely on paid advertising."
+          },
+          {
+            question: "Can you optimize an existing website?",
+            answer: "Yes. We improve both new and existing websites by enhancing technical performance, content quality, website structure, and overall search visibility."
+          }
+        ]}
+      />
+
       {/* Spacer to give the pinned section distance from the footer */}
-      <div className="h-20 lg:h-32 bg-white relative z-30" />
+      <div className="h-[15vh] lg:h-[20vh] bg-white relative z-30" />
 
     </main>
   );

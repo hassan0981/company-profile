@@ -13,84 +13,119 @@ export interface BlogPost {
   };
   readTime: string;
   contentHtml: string;
+  tableOfContents: string[];
 }
 
 export const blogPosts: BlogPost[] = [
   {
     id: "1",
-    slug: "manage-design-team",
-    title: "How to manage a talented and successful design team",
-    category: "UI Design",
-    date: "December 20, 2023",
-    image: "/blog_team.png",
-    excerpt: "Discover the key strategies for leading creative teams, fostering collaboration, and maintaining high productivity in design projects.",
+    slug: "website-conversion-traps",
+    title: "Why Your Business Website Isn't Converting: 5 Common Traps and How to Fix Them",
+    category: "Web Development",
+    date: "July 20, 2026",
+    image: "/blog_laptop.png",
+    excerpt: "Discover why driving traffic to your website isn't enough, the hidden user-experience hurdles killing your conversions, and actionable steps to turn visitors into paying customers.",
     author: {
-      name: "Kamil Shahzad",
+      name: "Sarah Jenkins",
       avatar: "/team_1.png",
-      role: "Creative Director"
+      role: "Founder & CEO"
     },
-    readTime: "5 min read",
+    readTime: "6 min read",
+    tableOfContents: [
+      "1. Slow Page Load Times",
+      "2. Confusing Navigation Paths",
+      "3. Weak Calls to Action (CTAs)",
+      "4. Non-Responsive Mobile Layouts",
+      "5. Absence of Social Proof"
+    ],
     contentHtml: `
       <p class="lead text-xl text-neutral-600 mb-6 font-light leading-relaxed">
-        Managing a creative team is unlike managing any other department. It requires a delicate balance of structure and creative freedom, of metrics and gut feelings, of guiding and stepping back.
+        You've invested time and budget into driving traffic to your website, but the sales aren't coming. The truth is, getting visitors is only half the battle—converting them into active clients is where the real growth happens. At Bouncy, we analyze hundreds of user journeys, and we consistently see five repeating pitfalls.
       </p>
 
-      <h2 class="text-2xl font-bold text-black mt-10 mb-4">1. Fostering Creative Autonomy</h2>
+      <h2 class="text-2xl font-bold text-black mt-10 mb-4">1. Slow Page Load Times</h2>
       <p class="text-neutral-700 mb-6 leading-relaxed">
-        The best designers don't want to be micromanaged. They need to understand the constraints and goals of a project, but should be given full autonomy on how to reach the finish line. When you define the "what" and the "why," and let your designers define the "how," you unlock true innovation.
+        In the digital space, every millisecond counts. If your website takes more than three seconds to load, over half of your visitors will abandon it before even seeing your offer. Slow performance directly damages trust and signals a lack of professional care. Optimizing images, leveraging modern hosting (like Next.js on Vercel), and reducing redundant scripts are critical first steps.
       </p>
 
       <blockquote class="border-l-4 border-[#206cbb] pl-6 my-8 italic text-lg text-neutral-800 bg-neutral-50 py-4 pr-4">
-        "True creative leadership is not about having all the ideas; it's about creating an environment where the best ideas can live, grow, and win."
+        "A slow website is a leaky bucket. No matter how much marketing budget you pour into the top, it will filter out before reaching the bottom."
       </blockquote>
 
-      <h2 class="text-2xl font-bold text-black mt-10 mb-4">2. Building a Culture of Constructive Feedback</h2>
+      <h2 class="text-2xl font-bold text-black mt-10 mb-4">2. Confusing Navigation Paths</h2>
       <p class="text-neutral-700 mb-6 leading-relaxed">
-        Feedback is the lifeblood of design. However, unstructured feedback can hurt morale. Establish clear critique guidelines: focus on the user goals, not personal preferences. Ask "How does this layout support the user journey?" rather than saying "I don't like this color."
+        When visitors land on your website, they should know exactly what to do next. If your menu is cluttered, or your services are difficult to find, users will feel overwhelmed and leave. Keep your layout clean, organize your menu logically, and guide users along a clear journey from discovery to contact.
       </p>
 
-      <h2 class="text-2xl font-bold text-black mt-10 mb-4">3. Striking the Balance with Processes</h2>
+      <h2 class="text-2xl font-bold text-black mt-10 mb-4">3. Weak Calls to Action (CTAs)</h2>
       <p class="text-neutral-700 mb-6 leading-relaxed">
-        Creativity needs boundaries to thrive. Clear briefs, standardized design systems, and transparent sprint planning don't restrict creativity; they eliminate administrative noise so designers can focus entirely on solving problems.
+        Generic buttons like "Submit" or "Learn More" don't inspire action. Your calls to action need to be visually striking and benefit-driven. Instead, use active buttons like "Get Free Consultation" or "Start Your Project Today" to encourage immediate engagement and clear outcomes.
+      </p>
+
+      <h2 class="text-2xl font-bold text-black mt-10 mb-4">4. Non-Responsive Mobile Layouts</h2>
+      <p class="text-neutral-700 mb-6 leading-relaxed">
+        With more than 60% of web traffic coming from mobile devices, a desktop-only layout is a business killer. If mobile visitors have to pinch, zoom, or struggle to click buttons, they will exit immediately. Ensure your layout adapts beautifully to all screens and touch inputs.
+      </p>
+
+      <h2 class="text-2xl font-bold text-black mt-10 mb-4">5. Absence of Social Proof</h2>
+      <p class="text-neutral-700 mb-6 leading-relaxed">
+        People buy from businesses they trust. If your website lacks testimonials, reviews, case studies, or client logos, visitors will look for competitors who display credible success stories. Showcasing actual proof builds instant authority.
       </p>
     `
   },
   {
     id: "2",
-    slug: "startup-company-axtra",
-    title: "How to bring fold to your startup company with Axtra",
-    category: "UI Design",
-    date: "December 20, 2023",
-    image: "/blog_laptop.png",
-    excerpt: "Learn how incorporating modern design frameworks and motion experiences can elevate your startup brand identity.",
+    slug: "meta-ads-seo-integration",
+    title: "The Power of Meta Ads & SEO: How to Create a Unified Growth Engine",
+    category: "Digital Marketing",
+    date: "July 18, 2026",
+    image: "/blog_team.png",
+    excerpt: "Stop treating paid ads and organic search as separate strategies. Learn how combining Meta Ads with SEO creates a powerful multi-channel funnel that drives immediate leads while building long-term authority.",
     author: {
-      name: "Sajjad Ali",
+      name: "Marcus Vance",
       avatar: "/team_2.png",
-      role: "Lead Front-end Architect"
+      role: "Creative Director"
     },
-    readTime: "6 min read",
+    readTime: "7 min read",
+    tableOfContents: [
+      "1. Immediate Traffic vs. Long-Term Visibility",
+      "2. Sharing High-Performing Keyword Data",
+      "3. Retargeting SEO Traffic with Meta Ads",
+      "4. Building Creative Ad Angles from Search Intent",
+      "5. Boosting Overall Brand Trust"
+    ],
     contentHtml: `
       <p class="lead text-xl text-neutral-600 mb-6 font-light leading-relaxed">
-        In today's hyper-competitive startup market, making a strong first impression is everything. Startups need to look premium, modern, and trustworthy from day one.
+        Many agencies treat Search Engine Optimization (SEO) and paid social media advertising (Meta Ads) as separate silos. However, when integrated strategically, they amplify each other to accelerate growth. Here is how you can blend them into a unified growth engine.
       </p>
 
-      <h2 class="text-2xl font-bold text-black mt-10 mb-4">1. The Role of Premium Motion Design</h2>
+      <h2 class="text-2xl font-bold text-black mt-10 mb-4">1. Immediate Traffic vs. Long-Term Visibility</h2>
       <p class="text-neutral-700 mb-6 leading-relaxed">
-        Static pages are a relic of the past. Using interactive 3D elements, parallax scroll effects, and immersive animations tells your users that you care about detail, quality, and user experience. It creates an emotional connection that converts visitors into customers.
-      </p>
-
-      <h2 class="text-2xl font-bold text-black mt-10 mb-4">2. Building Consistency Across the Funnel</h2>
-      <p class="text-neutral-700 mb-6 leading-relaxed">
-        Your brand is not just your logo; it is the sum of all interactions. A cohesive design system, shared interactive patterns, and unified typography create a reliable funnel. When a user transitions from your social media ads to your landing page, they should feel like they never left your brand universe.
+        SEO is a powerful asset, but it takes time to rank organically. Meta Ads, on the other hand, drive instant traffic to your landing pages. By launching paid ads, you generate immediate leads and conversions while your SEO strategy builds long-term domain authority and steady organic traffic.
       </p>
 
       <blockquote class="border-l-4 border-[#3c9e90] pl-6 my-8 italic text-lg text-neutral-800 bg-neutral-50 py-4 pr-4">
-        "A premium design tells the world you are serious. In the startup world, premium design is the ultimate shortcut to building trust."
+        "Paid ads drive the present, while SEO builds the future. Together, they create a balanced, resilient business acquisition model."
       </blockquote>
 
-      <h2 class="text-2xl font-bold text-black mt-10 mb-4">3. Leverage Modern Frameworks</h2>
+      <h2 class="text-2xl font-bold text-black mt-10 mb-4">2. Sharing High-Performing Keyword Data</h2>
       <p class="text-neutral-700 mb-6 leading-relaxed">
-        Building on Next.js and implementing GSAP animations ensures that your premium interactions don't sacrifice performance. Fast loading times coupled with high-end animations is the winning combination for modern startup websites.
+        Use search intent insights from your SEO audits to design better Meta Ads copy. If you know certain keywords or questions have high search volume, write ad headlines addressing those exact pain points. Conversely, target ads to terms showing high conversion rates in search logs.
+      </p>
+
+      <h2 class="text-2xl font-bold text-black mt-10 mb-4">3. Retargeting SEO Traffic with Meta Ads</h2>
+      <p class="text-neutral-700 mb-6 leading-relaxed">
+        One of the highest-ROI tactics is retargeting. When a user finds your website organically via an educational blog post (SEO), you can drop a pixel and retarget them on Instagram and Facebook (Meta Ads) with a specific product offer, converting cold researchers into hot buyers.
+      </p>
+
+      <h2 class="text-2xl font-bold text-black mt-10 mb-4">4. Building Creative Ad Angles from Search Intent</h2>
+      <p class="text-neutral-700 mb-6 leading-relaxed">
+        Understanding search intent helps you build ads that resonate. Are people searching for "how-to" guides or ready to buy? Aligning your Facebook and Instagram ad creatives with these phases in the customer journey ensures your ad spend is never wasted.
+      </p>
+
+      <h2 class="text-2xl font-bold text-black mt-10 mb-4">5. Boosting Overall Brand Trust</h2>
+      <p class="text-neutral-700 mb-6 leading-relaxed">
+        When potential customers see your brand appearing in both organic Google searches and their social feeds, it builds strong psychological authority. Multi-channel presence validates your brand and increases conversion confidence across the board.
       </p>
     `
   }

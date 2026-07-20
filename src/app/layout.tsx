@@ -33,9 +33,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${kanit.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${kanit.variable} h-full antialiased overflow-x-hidden`}
     >
-      <body className="min-h-full flex flex-col bg-white text-black">
+      <body className="min-h-full flex flex-col bg-white text-black overflow-x-hidden">
         <Navbar />
         {children}
         <Footer />

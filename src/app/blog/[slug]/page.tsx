@@ -312,20 +312,18 @@ export default function BlogPostDetail({ params }: PageProps) {
               <div className="blog-sidebar-widget space-y-8 bg-neutral-50/50 border border-neutral-100 rounded-2xl p-8">
                 
                 {/* Table of Contents */}
-                <div>
-                  <h3 className="text-xs font-extrabold uppercase tracking-widest text-[#206cbb] mb-4">Table of Contents</h3>
-                  <ul className="space-y-3 text-sm font-medium text-neutral-500">
-                    <li>
-                      <span className="hover:text-black transition-colors block cursor-pointer">1. Fostering Creative Autonomy</span>
-                    </li>
-                    <li>
-                      <span className="hover:text-black transition-colors block cursor-pointer">2. Building a Culture of Critique</span>
-                    </li>
-                    <li>
-                      <span className="hover:text-black transition-colors block cursor-pointer">3. Striking the Balance with Processes</span>
-                    </li>
-                  </ul>
-                </div>
+                {post.tableOfContents && post.tableOfContents.length > 0 && (
+                  <div>
+                    <h3 className="text-xs font-extrabold uppercase tracking-widest text-[#206cbb] mb-4">Table of Contents</h3>
+                    <ul className="space-y-3 text-sm font-medium text-neutral-500">
+                      {post.tableOfContents.map((heading, index) => (
+                        <li key={index}>
+                          <span className="hover:text-black transition-colors block cursor-pointer">{heading}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
 
                 <div className="border-t border-neutral-100 pt-6">
                   <h3 className="text-xs font-extrabold uppercase tracking-widest text-[#206cbb] mb-4">Share this Article</h3>

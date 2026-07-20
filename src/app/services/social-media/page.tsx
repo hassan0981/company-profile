@@ -6,6 +6,7 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import MagneticButton from "@/components/MagneticButton";
+import FAQ from "@/components/FAQ";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -14,33 +15,39 @@ if (typeof window !== "undefined") {
 const servicesData = [
   {
     title: "Content Strategy & Planning",
-    image: "/portrait_2.png",
-    description: "Social media success starts with clear strategy. We begin by learning about your business, target market, and goals prior to putting together an effective content strategy tailored specifically for you. We always keep in mind your marketing goals when we create posts, but we ensure consistency in branding regardless of platform. The ultimate goal of our content is education, inspiration, and engagement of your business.",
-    bullets: ["Target Market Study", "Consistency & Branding", "Education & Inspiration", "Goal-Oriented Planning"]
+    image: "/Content strategy social.png",
+    description: "Every successful social media presence starts with a clear strategy. We take the time to understand your business, audience, and objectives before creating a tailored content plan that keeps your brand consistent, relevant, and aligned with your marketing goals across every platform.",
+    bullets: ["Audience Research", "Content Planning", "Brand Consistency", "Business Analysis"]
   },
   {
     title: "Creation of Creative Content",
-    image: "/portrait_1.png",
-    description: "High-quality content forms the cornerstone of all effective social media campaigns. The Content Creation team creates attractive visuals, compelling copy text, short form videos, and promotional material that aligns with your brand identity and gets your target audiences hooked. We believe in crafting content that does more than just look great; it interacts, inspires trust, and generates results.",
-    bullets: ["Short-Form Videos", "Compelling Copywriting", "Branded Visuals", "High Engagement Rates"]
+    image: "/service_smm.png",
+    description: "Great content captures attention, but meaningful content drives action. Our team creates engaging graphics, compelling captions, short-form videos, and branded creatives designed to stop users from scrolling on Instagram and encourage them to connect with your business.",
+    bullets: ["Scroll-Stopping Creatives", "Engaging Visuals", "Compelling Captions", "Action-Driven Content"]
   },
   {
     title: "Content Calendar and Planning",
-    image: "/portrait_4.png",
-    description: "One of the most important aspects of a successful social media strategy is consistency. We develop a well-planned and structured content calendar to keep all your social channels updated and messaging timely. This allows you to provide your followers with regular, high-quality content with consistent branding on all platforms.",
-    bullets: ["Timely Scheduling", "Multi-Channel Sync", "Regular Posting Routine", "Structured Calendar Work"]
+    image: "/Content Planning social.png",
+    description: "Consistency is what keeps your audience engaged. We develop a structured content calendar that ensures your Facebook page and other social channels stay active with timely, well-planned content that reinforces your brand and keeps your business top of mind.",
+    bullets: ["Content Planning", "Consistent Posting", "Brand Visibility", "Multi Channel Sync"]
   },
   {
     title: "Community Management",
-    image: "/unlock_potential_right.png",
-    description: "Creating a loyal fan base involves much more than just posting updates. With our Community Management package, we assist you in forming real connections with your fans through engaging comments, messages, and dialogues. Through interaction with your community, we can help build trust and loyalty from your customers.",
-    bullets: ["Engaging Conversations", "Comment & Message Reply", "Real Connections", "Audience Trust Building"]
+    image: "/Community management social.png",
+    description: "A growing community is built through genuine conversations. We manage comments, messages, and customer interactions across your social media platforms, helping you build trust, strengthen relationships, and create a positive experience that encourages long-term customer loyalty.",
+    bullets: ["Comment Management", "Message Responses", "Customer Engagement", "Community Growth"]
   },
   {
     title: "Brand Awareness & Growth",
-    image: "/unlock_potential_left.png",
-    description: "Your business needs to be known to the right audiences. We create focused social media marketing campaigns which will make sure that your brand is visible and reaches out to potential clients who really need your products or services. With focused campaigns and consistent messaging on social media platforms, we will help your business grow.",
-    bullets: ["Focused Campaigns", "Brand Visibility", "Target Audience Reach", "Consistent Messaging"]
+    image: "/Brand awareness social.png",
+    description: "Brand growth doesn't happen by chance—it happens through the right strategy, consistent messaging, and content that resonates with your audience. At Bouncy, we help businesses build a strong social media presence that increases brand awareness, attracts potential customers, and supports long-term business growth.",
+    bullets: ["Brand Awareness", "Audience Growth", "Consistent Branding", "Business Growth"]
+  },
+  {
+    title: "Performance Analytics & Reporting",
+    image: "/Performance reporting social.png",
+    description: "Every strategy is backed by data. We track key performance metrics such as reach, engagement, follower growth, and content performance, providing clear reports and actionable insights to continuously improve your social media results.",
+    bullets: ["Performance Tracking", "Engagement Insights", "Follower Growth", "Data-Driven Reports"]
   }
 ];
 
@@ -68,8 +75,8 @@ export default function SocialMediaPage() {
     if (trigger && window.innerWidth >= 1024) {
       const start = trigger.start;
       const end = trigger.end;
-      // Scroll to a scroll position corresponding to the start of each of the 5 services
-      const targetScroll = start + (index / 4) * (end - start) + 1;
+      // Scroll to a scroll position corresponding to the start of each of the 6 services
+      const targetScroll = start + (index / 5) * (end - start) + 1;
       window.scrollTo({
         top: targetScroll,
         behavior: "smooth"
@@ -138,7 +145,7 @@ export default function SocialMediaPage() {
         delay: 0.8,
       });
 
-      // Pinned Services Showcase Section ScrollTrigger (5 items: divide by 0.2 bounds) - Desktop-only
+      // Pinned Services Showcase Section ScrollTrigger (6 items) - Desktop-only
       const mm = gsap.matchMedia();
       mm.add("(min-width: 1024px)", () => {
         gsap.timeline({
@@ -151,12 +158,7 @@ export default function SocialMediaPage() {
             id: "socialServicesPin",
             onUpdate: (self) => {
               const progress = self.progress;
-              let activeIndex = 0;
-              if (progress < 0.2) activeIndex = 0;
-              else if (progress < 0.4) activeIndex = 1;
-              else if (progress < 0.6) activeIndex = 2;
-              else if (progress < 0.8) activeIndex = 3;
-              else activeIndex = 4;
+              const activeIndex = Math.min(Math.floor(progress * 6), 5);
 
               if (activeIndex !== lastActiveIndex.current) {
                 lastActiveIndex.current = activeIndex;
@@ -254,8 +256,8 @@ export default function SocialMediaPage() {
                   style={{ borderRadius: "50% 50% 5% 50%" }}
                 >
                   <Image
-                    src="/unlock_potential_left.png"
-                    alt="Creative team workspace discussion"
+                    src="/social hero 2 (1).png"
+                    alt="Creative social media marketing"
                     fill
                     sizes="(max-width: 768px) 230px, 290px"
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -282,8 +284,8 @@ export default function SocialMediaPage() {
                   style={{ borderRadius: "5% 50% 50% 50%" }}
                 >
                   <Image
-                    src="/portrait_2.png"
-                    alt="Developer workstation office desk"
+                    src="/content strategy social1.png"
+                    alt="Social media strategic graphics"
                     fill
                     sizes="(max-width: 768px) 190px, 230px"
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -310,7 +312,7 @@ export default function SocialMediaPage() {
 
               {/* Description Paragraph in Solid Black */}
               <p className="text-black text-sm sm:text-base md:text-lg leading-relaxed max-w-[420px] font-normal text-justify">
-                Social media is not just about sharing content; it is about building connections and earning trust and having productive conversations with your audiences. At Bouncy, we offer Social Media Management services designed for professionals who want to build up their brands and expand their businesses through social networks.
+                Social media is more than just posting content—it&apos;s about building a brand people recognize, trust, and choose. At Bouncy, we help businesses turn platforms like Instagram, Facebook, LinkedIn, TikTok, and X (Twitter) into powerful marketing channels that attract the right audience, strengthen customer relationships, and support long-term business growth through social media management.
               </p>
             </div>
           </div>
@@ -335,8 +337,8 @@ export default function SocialMediaPage() {
                   style={{ borderRadius: "50% 5% 50% 50%" }}
                 >
                   <Image
-                    src="/unlock_potential_right.png"
-                    alt="Modern client office discussion"
+                    src="/service_metaads.png"
+                    alt="Digital advertising campaign illustration"
                     fill
                     sizes="(max-width: 768px) 250px, 330px"
                     className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -352,11 +354,11 @@ export default function SocialMediaPage() {
 
       {/* TAB-SLIDER SECTION (EXACT COPY OF THE SPECIFIC SERVICES SHOWCASE LAYOUT) */}
       <section className="social-services-showcase-section relative bg-white text-black w-full min-h-screen overflow-hidden z-20 border-t border-neutral-200">
-        <div className="services-container relative w-full h-screen flex flex-col lg:flex-row items-stretch select-none">
+        <div className="services-container relative w-full lg:h-screen flex flex-col lg:flex-row items-stretch select-none">
 
           {/* Column 1: Left Stationary Nav Menu */}
-          <div className="w-full lg:w-[30%] flex flex-col justify-center items-start border-b lg:border-b-0 lg:border-r border-neutral-200 pl-4 sm:pl-8 lg:pl-12 xl:pl-16 pr-6 pt-8 lg:pt-36 pb-6 lg:pb-16 animate-pulse-none">
-            <div className="flex flex-row lg:flex-col gap-6 lg:gap-8 overflow-x-auto lg:overflow-x-visible w-full scrollbar-none pr-4 py-2">
+          <div className="w-full lg:w-[30%] flex flex-col justify-center items-start border-b lg:border-b-0 lg:border-r border-neutral-200 pl-4 sm:pl-8 lg:pl-12 xl:pl-16 pr-6 pt-16 lg:pt-44 pb-6 lg:pb-16 animate-pulse-none">
+            <div className="flex flex-row lg:flex-col gap-6 lg:gap-6 overflow-x-auto lg:overflow-x-visible w-full scrollbar-none pr-4 py-2">
               {servicesData.map((service, idx) => (
                 <button
                   key={idx}
@@ -394,10 +396,10 @@ export default function SocialMediaPage() {
           </div>
 
           {/* Column 3: Service Details (Right) */}
-          <div className="w-full lg:w-[34%] flex flex-col justify-between pl-6 lg:pl-12 pr-4 sm:pr-8 lg:pr-12 xl:pr-16 pt-8 lg:pt-36 pb-6 lg:pb-10">
+          <div className="w-full lg:w-[34%] flex flex-col justify-start pl-6 lg:pl-12 pr-4 sm:pr-8 lg:pr-12 xl:pr-16 pt-16 lg:pt-44 pb-6 lg:pb-10">
 
             {/* Middle Row: Dynamic Details Container */}
-            <div className="relative flex-grow flex flex-col justify-start items-start pt-8 pb-4 lg:py-0">
+            <div className="relative flex-initial flex flex-col justify-start items-start pt-8 pb-4 lg:py-0">
               {servicesData.map((service, idx) => {
                 const isActive = activeService === idx;
                 return (
@@ -419,7 +421,7 @@ export default function SocialMediaPage() {
                     {/* Dynamic bullet items */}
                     <div className="grid grid-cols-2 gap-y-3 gap-x-4 w-full max-w-[440px]">
                       {servicesData[idx].bullets.map((bullet, bIdx) => (
-                        <div key={bIdx} className="flex items-center text-xs sm:text-sm text-neutral-500 font-medium">
+                        <div key={bIdx} className="flex items-center text-xs sm:text-sm text-black font-bold">
                           <span className="text-[#206cbb] mr-2 font-bold">+</span>
                           {bullet}
                         </div>
@@ -431,7 +433,7 @@ export default function SocialMediaPage() {
             </div>
 
             {/* Bottom Row: Pinned interactive "Explore More" badge */}
-            <div className="mt-8 flex justify-start">
+            <div className="mt-14 flex justify-start">
               <Link href="/contact-us">
                 <MagneticButton 
                   className="w-28 h-28 sm:w-32 sm:h-32 border-neutral-300 text-xs sm:text-sm bg-transparent"
@@ -446,8 +448,27 @@ export default function SocialMediaPage() {
         </div>
       </section>
 
+      {/* FAQ Section */}
+      <FAQ
+        title="FAQ'S"
+        items={[
+          {
+            question: "What does Bouncy Grow Digital manage?",
+            answer: "We handle everything from content planning and design to posting, community management, and performance tracking, so you can focus on running your business."
+          },
+          {
+            question: "Which social media platforms do you manage?",
+            answer: "We manage Instagram, Facebook, LinkedIn, TikTok, and X (Twitter), Thread creating platform—that help your business reach the right audience."
+          },
+          {
+            question: "How do you measure social media success?",
+            answer: "We track meaningful metrics such as reach, engagement, audience growth, website traffic, and leads—not just likes and followers."
+          }
+        ]}
+      />
+
       {/* Spacer to give the pinned section distance from the footer */}
-      <div className="h-20 lg:h-32 bg-white relative z-30" />
+      <div className="h-[15vh] lg:h-[20vh] bg-white relative z-30" />
 
     </main>
   );
