@@ -363,7 +363,7 @@ export default function SEOPage() {
         <div className="services-container relative w-full lg:h-screen flex flex-col lg:flex-row items-stretch select-none">
 
           {/* Column 1: Left Stationary Nav Menu */}
-          <div className="w-full lg:w-[30%] flex flex-col justify-center items-start border-b lg:border-b-0 lg:border-r border-neutral-200 pl-4 sm:pl-8 lg:pl-12 xl:pl-16 pr-6 pt-16 lg:pt-44 pb-6 lg:pb-16 animate-pulse-none">
+          <div className="w-full lg:w-[30%] flex flex-col justify-center items-start border-b lg:border-b-0 lg:border-r border-neutral-200 pl-4 sm:pl-8 lg:pl-12 xl:pl-16 pr-6 py-8 lg:py-12 animate-pulse-none">
             <div className="flex flex-row lg:flex-col gap-6 lg:gap-5 overflow-x-auto lg:overflow-x-visible w-full scrollbar-none pr-4 py-2">
               {servicesData.map((service, idx) => (
                 <button
@@ -402,7 +402,7 @@ export default function SEOPage() {
           </div>
 
           {/* Column 3: Service Details (Right) */}
-          <div className="w-full lg:w-[34%] flex flex-col justify-start pl-6 lg:pl-12 pr-4 sm:pr-8 lg:pr-12 xl:pr-16 pt-16 lg:pt-44 pb-6 lg:pb-10">
+          <div className="w-full lg:w-[34%] flex flex-col justify-center pl-6 lg:pl-12 pr-4 sm:pr-8 lg:pr-12 xl:pr-16 py-6 lg:py-10">
 
             {/* Middle Row: Dynamic Details Container */}
             <div className="relative flex-initial flex flex-col justify-start items-start pt-8 pb-4 lg:py-0">
@@ -438,13 +438,13 @@ export default function SEOPage() {
               })}
             </div>
 
-            {/* Bottom Row: Pinned interactive "Explore More" badge */}
-            <div className="mt-14 flex justify-start">
+            {/* Bottom Row: Pinned interactive "Contact Us" badge */}
+            <div className="mt-6 sm:mt-8 flex justify-start">
               <Link href="/contact-us">
                 <MagneticButton 
                   className="w-28 h-28 sm:w-32 sm:h-32 border-neutral-300 text-xs sm:text-sm bg-transparent"
                 >
-                  Explore More <span className="text-xs sm:text-sm">↗</span>
+                  Contact Us <span className="text-xs sm:text-sm">↗</span>
                 </MagneticButton>
               </Link>
             </div>

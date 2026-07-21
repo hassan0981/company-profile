@@ -73,7 +73,7 @@ export default function ContactUsPage() {
     return () => ctx.revert();
   }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -147,13 +147,6 @@ export default function ContactUsPage() {
 
             {/* Sub-heading & details directly below heading (reduced size) */}
             <div className="flex flex-col gap-6 font-sans">
-              <h3 
-                className="text-[18px] sm:text-[22px] font-bold text-black leading-tight"
-                style={{ fontWeight: 700 }}
-              >
-                Don&apos;t be afraid man !<br />
-                say hello
-              </h3>
 
               <div className="flex flex-col gap-4 text-[15px] sm:text-[17px] font-medium text-black">
                 <div>
@@ -221,27 +214,33 @@ export default function ContactUsPage() {
 
                   {/* Input: Phone */}
                   <div className="animate-field flex flex-col">
-                    <label className="text-[15px] sm:text-[16px] font-bold text-black mb-4">Phone</label>
+                    <label className="text-[15px] sm:text-[16px] font-bold text-black mb-4">Phone *</label>
                     <input
                       type="tel"
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
+                      required
                       className="w-full bg-transparent border-0 border-b border-[#D8D8D8] focus:border-black focus:ring-0 focus:outline-none pb-4 text-[18px] text-black transition-colors duration-300 rounded-none shadow-none"
                     />
                   </div>
 
-                  {/* Input: Subject */}
+                  {/* Select: Service */}
                   <div className="animate-field flex flex-col">
-                    <label className="text-[15px] sm:text-[16px] font-bold text-black mb-4">Subject *</label>
-                    <input
-                      type="text"
+                    <label className="text-[15px] sm:text-[16px] font-bold text-black mb-4">Service *</label>
+                    <select
                       name="subject"
                       value={formData.subject}
                       onChange={handleChange}
                       required
-                      className="w-full bg-transparent border-0 border-b border-[#D8D8D8] focus:border-black focus:ring-0 focus:outline-none pb-4 text-[18px] text-black transition-colors duration-300 rounded-none shadow-none"
-                    />
+                      className="w-full bg-transparent border-0 border-b border-[#D8D8D8] focus:border-black focus:ring-0 focus:outline-none pb-4 text-[18px] text-black transition-colors duration-300 rounded-none shadow-none cursor-pointer"
+                    >
+                      <option value="" disabled className="text-neutral-400">Select a Service</option>
+                      <option value="Web Development" className="text-black">Web Development</option>
+                      <option value="SEO" className="text-black">SEO</option>
+                      <option value="Social Media Marketing" className="text-black">Social Media Marketing</option>
+                      <option value="Meta Ads" className="text-black">Meta Ads</option>
+                    </select>
                   </div>
 
                   {/* Input: Message */}

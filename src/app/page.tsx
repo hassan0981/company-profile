@@ -1065,11 +1065,13 @@ export default function Home() {
 
                   {/* Interactive Explore Us Button */}
                   <div className="explore-btn-container opacity-0 mt-10 lg:mt-14">
-                    <MagneticButton
-                      className="w-32 h-32 lg:w-36 lg:h-36 border-neutral-300 text-sm bg-white"
-                    >
-                      Explore more
-                    </MagneticButton>
+                    <Link href="/contact-us">
+                      <MagneticButton
+                        className="w-32 h-32 lg:w-36 lg:h-36 border-neutral-300 text-sm bg-white"
+                      >
+                        Explore more
+                      </MagneticButton>
+                    </Link>
                   </div>
                 </div>
 
@@ -1099,7 +1101,7 @@ export default function Home() {
         <div className="services-container relative w-full h-screen flex flex-col lg:flex-row items-stretch select-none">
 
           {/* Column 1: Left Stationary Nav Menu */}
-          <div className="w-full lg:w-[25%] flex flex-col justify-start items-start gap-y-12 lg:gap-y-16 border-b lg:border-b-0 lg:border-r border-neutral-200 pl-4 sm:pl-8 lg:pl-12 xl:pl-16 pr-6 pt-32 lg:pt-36 pb-12 lg:pb-16">
+          <div className="w-full lg:w-[25%] flex flex-col justify-start items-start gap-y-10 lg:gap-y-12 border-b lg:border-b-0 lg:border-r border-neutral-200 pl-4 sm:pl-8 lg:pl-12 xl:pl-16 pr-6 pt-16 lg:pt-20 pb-10 lg:pb-12">
             
             {/* Top Heading */}
             <div className="text-left w-full">
@@ -1109,7 +1111,7 @@ export default function Home() {
             </div>
 
             {/* Nav Links */}
-            <div className="flex flex-row lg:flex-col gap-6 lg:gap-10 overflow-x-auto lg:overflow-x-visible w-full scrollbar-none pr-4 mt-6 lg:mt-8">
+            <div className="flex flex-row lg:flex-col gap-6 lg:gap-10 overflow-x-auto lg:overflow-x-visible w-full scrollbar-none pr-4 mt-4 lg:mt-6">
               {servicesData.map((service, idx) => (
                 <button
                   key={idx}
@@ -1147,7 +1149,7 @@ export default function Home() {
           </div>
 
           {/* Column 3: Service Details (Right) */}
-           <div className="w-full lg:w-[40%] flex flex-col justify-between pl-6 lg:pl-12 pr-4 sm:pr-8 lg:pr-12 xl:pr-16 pt-32 lg:pt-36 pb-12 lg:pb-16">
+           <div className="w-full lg:w-[40%] flex flex-col justify-center pl-6 lg:pl-12 pr-4 sm:pr-8 lg:pr-12 xl:pr-16 py-6 lg:py-10">
 
             {/* Top Row: Description */}
             <div className="text-left mb-8 lg:mb-4 w-full">
@@ -2089,9 +2091,10 @@ export default function Home() {
           {/* Cards Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
             {blogPosts.map((post) => (
-              <div
+              <Link
                 key={post.id}
-                className="blog-card-container group relative w-full h-[380px] sm:h-[400px] lg:h-[420px] [perspective:2000px] select-none"
+                href={`/blog/${post.slug}`}
+                className="blog-card-container group relative w-full h-[380px] sm:h-[400px] lg:h-[420px] [perspective:2000px] select-none block cursor-pointer"
               >
                 {/* Book Wrapper */}
                 <div className="book-wrapper relative w-full h-full [transform-style:preserve-3d] transition-transform duration-700 ease-out group-hover:[transform:rotateY(-10deg)_rotateX(5deg)] shadow-xl rounded-lg">
@@ -2118,12 +2121,11 @@ export default function Home() {
                           <span className="text-[10px] text-neutral-400 block uppercase tracking-wider">{post.author.role}</span>
                         </div>
                       </div>
-                      <Link
-                        href={`/blog/${post.slug}`}
-                        className="inline-flex items-center gap-1.5 text-xs font-bold text-[#3c9e90] hover:text-[#206cbb] transition-colors pointer-events-auto cursor-pointer"
+                      <div
+                        className="inline-flex items-center gap-1.5 text-xs font-bold text-[#3c9e90] group-hover:text-[#206cbb] transition-colors cursor-pointer"
                       >
                         Go to Article &rarr;
-                      </Link>
+                      </div>
                     </div>
                   </div>
 
@@ -2162,15 +2164,14 @@ export default function Home() {
                         </div>
 
                         <div className="pt-4 border-t border-neutral-100 flex items-center justify-between">
-                          <Link
-                            href={`/blog/${post.slug}`}
+                          <div
                             className="inline-flex items-center gap-2 text-xs sm:text-sm font-extrabold text-black group-hover:text-[#206cbb] transition-colors cursor-pointer"
                           >
                             Read More
                             <svg className="w-3.5 h-3.5 transform transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                               <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
                             </svg>
-                          </Link>
+                          </div>
                         </div>
                       </div>
 
@@ -2188,7 +2189,7 @@ export default function Home() {
                   </div>
 
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
 

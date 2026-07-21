@@ -273,40 +273,40 @@ export default function AboutUsPage() {
 
   const teamList = [
     {
-      name: "Sarah Jenkins",
-      role: "Founder & CEO",
-      image: "/team_1.png",
-      bio: "Visionary entrepreneur driving client growth strategies.",
+      name: "Abdul Samad",
+      role: "CEO and Head Marketing",
+      image: "/team/abdul_samad.jpg",
+      bio: "Leading strategic growth and driving high-impact marketing initiatives.",
     },
     {
-      name: "Marcus Vance",
-      role: "Creative Director",
-      image: "/team_2.png",
-      bio: "Crafting modern identity and premium design structures.",
+      name: "Saba Samad",
+      role: "Seo Expert",
+      image: "/team/saba_samad.jpg",
+      bio: "Boosting organic visibility, keyword authority, and search rankings.",
     },
     {
-      name: "Alex Chen",
-      role: "Head of Development",
-      image: "/team_3.png",
-      bio: "Engine behind high-performance digital architectures.",
+      name: "Muhammad Hassan",
+      role: "Full stack developer",
+      image: "/team/muhammad_hassan.jpg",
+      bio: "Architecting high-performance digital solutions and modern web apps.",
     },
     {
-      name: "Elena Rostova",
-      role: "Head of SEO",
-      image: "/team_4.png",
-      bio: "Boosting visibility and organic authority for partners.",
+      name: "Kashmaila Javed",
+      role: "Head Business development",
+      image: "/team/kashmaila_javed.jpg",
+      bio: "Expanding client partnerships and cultivating strategic opportunities.",
     },
     {
-      name: "Jessica Thompson",
-      role: "Social Media Lead",
-      image: "/team_5.png",
-      bio: "Creating community bonds and high-converting posts.",
+      name: "Wajeeha Javed",
+      role: "Head Tech n Design",
+      image: "/team/wajeeha_javed.jpg",
+      bio: "Pioneering technology innovation and leading design excellence.",
     },
     {
-      name: "David Kross",
-      role: "Head of Paid Ads",
-      image: "/team_6.png",
-      bio: "Optimizing ROI through hyper-targeted media acquisition.",
+      name: "Ali Arif",
+      role: "Figma Expert",
+      image: "/team/ali_arif.jpg",
+      bio: "Designing intuitive user experiences and sleek digital interfaces.",
     },
   ];
 
@@ -348,7 +348,7 @@ export default function AboutUsPage() {
             <div className="hero-text-animate flex flex-row items-center gap-4">
               <Link href="/contact-us">
                 <MagneticButton className="w-32 h-32 border-neutral-300 text-sm bg-white">
-                  Get Started
+                  Contact Us
                 </MagneticButton>
               </Link>
             </div>
@@ -693,7 +693,7 @@ export default function AboutUsPage() {
       <section ref={clientsSectionRef} className="relative py-20 px-6 sm:px-12 lg:px-20 xl:px-24 z-10 bg-neutral-50/70 border-y border-neutral-100">
         <div className="mx-auto max-w-7xl w-full text-center">
           <span className="text-xs uppercase tracking-widest bg-gradient-to-r from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent font-bold mb-4 block">
-            Trusted Partners & Clients
+            Trusted Clients
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold text-neutral-800 mb-10 tracking-tight">
             Businesses We Help Grow
@@ -764,11 +764,8 @@ export default function AboutUsPage() {
         <div className="mx-auto max-w-7xl w-full">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs uppercase tracking-widest bg-gradient-to-r from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent font-bold mb-3 block">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black bg-gradient-to-r from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent tracking-tight mb-4">
               Meet Our Crew
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-neutral-800 tracking-tight mb-4">
-              The Creative Minds
             </h2>
             <p className="text-neutral-500 text-sm sm:text-base leading-relaxed">
               We bring together diverse digital talents, specialists in growth strategies, high-performance web engineering, conversion optimization, and brand narrative.
@@ -795,7 +792,7 @@ export default function AboutUsPage() {
                     alt={member.name}
                     fill
                     sizes="(max-width: 768px) 100vw, 380px"
-                    className="object-cover"
+                    className="object-cover object-top"
                   />
                 </div>
 

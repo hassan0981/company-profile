@@ -53,9 +53,10 @@ export default function BlogPage() {
         {/* Grid Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
           {blogPosts.map((post) => (
-            <article 
-              key={post.id} 
-              className="blog-card-item group relative bg-white border border-neutral-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col justify-between"
+            <Link
+              key={post.id}
+              href={`/blog/${post.slug}`}
+              className="blog-card-item group relative bg-white border border-neutral-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col justify-between cursor-pointer"
             >
               <div>
                 {/* Image Section */}
@@ -104,17 +105,16 @@ export default function BlogPage() {
                   </div>
                 </div>
 
-                <Link 
-                  href={`/blog/${post.slug}`} 
+                <div 
                   className="inline-flex items-center gap-1.5 text-xs font-bold text-black group-hover:text-[#206cbb] transition-colors cursor-pointer"
                 >
                   Read Post 
                   <svg className="w-3.5 h-3.5 transform transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                   </svg>
-                </Link>
+                </div>
               </div>
-            </article>
+            </Link>
           ))}
         </div>
 

@@ -26,9 +26,9 @@ export const blogPosts: BlogPost[] = [
     image: "/blog_laptop.png",
     excerpt: "Discover why driving traffic to your website isn't enough, the hidden user-experience hurdles killing your conversions, and actionable steps to turn visitors into paying customers.",
     author: {
-      name: "Sarah Jenkins",
-      avatar: "/team_1.png",
-      role: "Founder & CEO"
+      name: "Wajeeha Javed",
+      avatar: "/team/wajeeha_javed.jpg",
+      role: "Head Tech n Design"
     },
     readTime: "6 min read",
     tableOfContents: [
@@ -82,9 +82,9 @@ export const blogPosts: BlogPost[] = [
     image: "/blog_team.png",
     excerpt: "Stop treating paid ads and organic search as separate strategies. Learn how combining Meta Ads with SEO creates a powerful multi-channel funnel that drives immediate leads while building long-term authority.",
     author: {
-      name: "Marcus Vance",
-      avatar: "/team_2.png",
-      role: "Creative Director"
+      name: "Wajeeha Javed",
+      avatar: "/team/wajeeha_javed.jpg",
+      role: "Head Tech n Design"
     },
     readTime: "7 min read",
     tableOfContents: [

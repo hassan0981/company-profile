@@ -175,21 +175,7 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Bottom Row (Utility Links only) */}
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between w-full mt-6 lg:mt-0 gap-6 sm:gap-0">
-              {/* Utility Links */}
-              <nav className="flex flex-wrap gap-x-6 gap-y-2 text-xs font-bold tracking-widest text-white/80">
-                <Link href="/about-us" className="hover:text-white transition-colors">
-                  ABOUT US
-                </Link>
-                <Link href="/contact-us" className="hover:text-white transition-colors">
-                  CONTACT
-                </Link>
-                <Link href="/blog" className="hover:text-white transition-colors">
-                  BLOGS
-                </Link>
-              </nav>
-            </div>
+
 
           </div>
 
