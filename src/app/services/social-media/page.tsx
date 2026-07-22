@@ -15,7 +15,7 @@ if (typeof window !== "undefined") {
 const servicesData = [
   {
     title: "Content Strategy & Planning",
-    image: "/Content strategy social.png",
+    image: "/content_strategy_social.png",
     description: "Every successful social media presence starts with a clear strategy. We take the time to understand your business, audience, and objectives before creating a tailored content plan that keeps your brand consistent, relevant, and aligned with your marketing goals across every platform.",
     bullets: ["Audience Research", "Content Planning", "Brand Consistency", "Business Analysis"]
   },
@@ -27,25 +27,25 @@ const servicesData = [
   },
   {
     title: "Content Calendar and Planning",
-    image: "/Content Planning social.png",
+    image: "/content_planning_social.png",
     description: "Consistency is what keeps your audience engaged. We develop a structured content calendar that ensures your Facebook page and other social channels stay active with timely, well-planned content that reinforces your brand and keeps your business top of mind.",
     bullets: ["Content Planning", "Consistent Posting", "Brand Visibility", "Multi Channel Sync"]
   },
   {
     title: "Community Management",
-    image: "/Community management social.png",
+    image: "/community_management_social.png",
     description: "A growing community is built through genuine conversations. We manage comments, messages, and customer interactions across your social media platforms, helping you build trust, strengthen relationships, and create a positive experience that encourages long-term customer loyalty.",
     bullets: ["Comment Management", "Message Responses", "Customer Engagement", "Community Growth"]
   },
   {
     title: "Brand Awareness & Growth",
-    image: "/Brand awareness social.png",
+    image: "/brand_awareness_social.png",
     description: "Brand growth doesn't happen by chance—it happens through the right strategy, consistent messaging, and content that resonates with your audience. At Bouncy, we help businesses build a strong social media presence that increases brand awareness, attracts potential customers, and supports long-term business growth.",
     bullets: ["Brand Awareness", "Audience Growth", "Consistent Branding", "Business Growth"]
   },
   {
     title: "Performance Analytics & Reporting",
-    image: "/Performance reporting social.png",
+    image: "/performance_reporting_social.png",
     description: "Every strategy is backed by data. We track key performance metrics such as reach, engagement, follower growth, and content performance, providing clear reports and actionable insights to continuously improve your social media results.",
     bullets: ["Performance Tracking", "Engagement Insights", "Follower Growth", "Data-Driven Reports"]
   }
@@ -256,7 +256,7 @@ export default function SocialMediaPage() {
                   style={{ borderRadius: "50% 50% 5% 50%" }}
                 >
                   <Image
-                    src="/social hero 2 (1).png"
+                    src="/social_hero_2_1.png"
                     alt="Creative social media marketing"
                     fill
                     sizes="(max-width: 768px) 230px, 290px"
@@ -284,7 +284,7 @@ export default function SocialMediaPage() {
                   style={{ borderRadius: "5% 50% 50% 50%" }}
                 >
                   <Image
-                    src="/content strategy social1.png"
+                    src="/content_strategy_social1.png"
                     alt="Social media strategic graphics"
                     fill
                     sizes="(max-width: 768px) 190px, 230px"

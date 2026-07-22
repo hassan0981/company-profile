@@ -262,7 +262,7 @@ export default function SEOPage() {
                   style={{ borderRadius: "50% 50% 5% 50%" }}
                 >
                   <Image
-                    src="/ChatGPT Image Jul 20, 2026, 01_16_39 AM.png"
+                    src="/chatgpt_image_jul_20.png"
                     alt="Creative 3D abstract shapes"
                     fill
                     sizes="(max-width: 768px) 230px, 290px"
@@ -290,7 +290,7 @@ export default function SEOPage() {
                   style={{ borderRadius: "5% 50% 50% 50%" }}
                 >
                   <Image
-                    src="/meta ad (2).png"
+                    src="/meta_ad_2.png"
                     alt="Abstract 3D digital illustration"
                     fill
                     sizes="(max-width: 768px) 190px, 230px"

@@ -867,7 +867,7 @@ export default function Home() {
             <div className="portrait-img-1 shrink-0 relative w-[180px] h-[180px] sm:w-[220px] sm:h-[220px] lg:w-[240px] lg:h-[240px] border border-neutral-200/50 bg-neutral-50 shadow-md">
               <div className="portrait-img-1-inner relative w-full h-full">
                 <Image
-                  src="/meta%20ad%202.png"
+                  src="/meta_ad_2_1.png"
                   alt="Digital design collage 1"
                   fill
                   sizes="(max-width: 768px) 180px, 240px"
@@ -895,7 +895,7 @@ export default function Home() {
             <div className="portrait-img-3 shrink-0 relative w-[180px] h-[180px] sm:w-[220px] sm:h-[220px] lg:w-[240px] lg:h-[240px] border border-neutral-200/50 bg-neutral-50 shadow-md">
               <div className="portrait-img-3-inner relative w-full h-full">
                 <Image
-                  src="/meta%20ad%20(1).png"
+                  src="/meta_ad_2.png"
                   alt="Digital design collage 3"
                   fill
                   sizes="(max-width: 768px) 180px, 240px"
@@ -1981,7 +1981,7 @@ export default function Home() {
 
           {/* Image 1: left edge, middle. Square */}
           <div className="floating-img absolute left-6 sm:left-12 top-[42%] w-16 h-16 sm:w-20 sm:h-20 border border-neutral-200 bg-neutral-50 shadow-sm overflow-hidden">
-            <Image src="/meta ad (2).png" alt="Testimonial background portrait 1" fill className="object-cover" />
+            <Image src="/meta_ad_2.png" alt="Testimonial background portrait 1" fill className="object-cover" />
           </div>
 
           {/* Image 2: top left. Vertical square */}
@@ -1991,7 +1991,7 @@ export default function Home() {
 
           {/* Image 3: bottom left. Vertical rect */}
           <div className="floating-img absolute left-[8%] sm:left-[12%] bottom-[6%] w-28 h-36 sm:w-40 sm:h-52 border border-neutral-200 bg-neutral-50 shadow-sm overflow-hidden">
-            <Image src="/ChatGPT Image Jul 20, 2026, 01_16_39 AM.png" alt="Testimonial background portrait 3" fill className="object-cover" />
+            <Image src="/chatgpt_image_jul_20.png" alt="Testimonial background portrait 3" fill className="object-cover" />
           </div>
 
           {/* Image 4: top right. Small square */}

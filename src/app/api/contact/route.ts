@@ -14,44 +14,42 @@ export async function POST(request: Request) {
       );
     }
 
-    // Save to Supabase first
+    // Save to Supabase (Non-blocking fallback so email always delivers)
     try {
-      const { error: dbError } = await supabaseAdmin
-        .from("contact_enquiries")
-        .insert([
-          {
-            name,
-            email,
-            phone: phone || null,
-            subject,
-            message,
-          },
-        ]);
+      if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KEY) {
+        const { error: dbError } = await supabaseAdmin
+          .from("contact_enquiries")
+          .insert([
+            {
+              name,
+              email,
+              phone: phone || null,
+              subject,
+              message,
+            },
+          ]);
 
-      if (dbError) {
-        console.error("Supabase Save Error:", dbError);
-        return NextResponse.json(
-          { error: `Database error: ${dbError.message}. Please verify that the 'contact_enquiries' table is created in Supabase.` },
-          { status: 500 }
-        );
+        if (dbError) {
+          console.warn("Supabase Save Warning (continuing to send email):", dbError.message);
+        }
       }
     } catch (dbEx: unknown) {
-      console.error("Supabase Exception:", dbEx);
-      const errorMessage = dbEx instanceof Error ? dbEx.message : "Unknown error";
-      return NextResponse.json(
-        { error: `Database connection failed: ${errorMessage}. Check Supabase env configurations.` },
-        { status: 500 }
-      );
+      console.warn("Supabase Exception (continuing to send email):", dbEx);
     }
 
-    // Configure Transporter
+    // Configure Transporter with fallbacks for cPanel environments
+    const smtpHost = process.env.SMTP_HOST || "smtp-relay.brevo.com";
+    const smtpPort = parseInt(process.env.SMTP_PORT || "587");
+    const smtpUser = process.env.SMTP_USER || "b20534001@smtp-brevo.com";
+    const smtpPass = process.env.SMTP_PASS || "xsmtpsib-2a13902958ffb0d71b8b6bef1e3e3a57b8d17564a9c4235df3d03a87732c42e3-MZ6mPECpeT7xPiwD";
+
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: parseInt(process.env.SMTP_PORT || "465"),
-      secure: process.env.SMTP_PORT === "465",
+      host: smtpHost,
+      port: smtpPort,
+      secure: smtpPort === 465,
       auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
+        user: smtpUser,
+        pass: smtpPass,
       },
     });
 

@@ -15,25 +15,25 @@ if (typeof window !== "undefined") {
 const servicesData = [
   {
     title: "Business Website Design & Development",
-    image: "/web 2.png",
+    image: "/web_2.png",
     description: "Your business deserves a website that creates a powerful first impression and inspires confidence from the very first click. We build professional business websites that reflect your brand, clearly communicate your value, and guide visitors toward taking action. Every website is designed with intuitive navigation, mobile responsiveness, and conversion-focused layouts to help turn visitors into loyal customers.",
     bullets: ["One Page Sites", "Design Focus", "SEO Optimization", "Multi Page Sites"]
   },
   {
     title: "WordPress Website Development",
-    image: "/web 3.png",
+    image: "/web_3.png",
     description: "WordPress powers millions of successful websites for a reason—it's flexible, scalable, and easy to manage. We develop custom WordPress websites tailored to your business needs, giving you complete control over your content while ensuring fast performance, strong security, and room to grow. From service-based businesses to corporate websites and blogs, we build solutions that are ready for the future.",
     bullets: ["Custom Themes", "Easy Management", "High Security", "Fast Loading"]
   },
   {
     title: "Portfolio Website Design",
-    image: "/web 4.png",
+    image: "/web_4.png",
     description: "Your portfolio should do more than display your work—it should tell your story and showcase your expertise. We create clean, modern portfolio websites that highlight your achievements, strengthen your credibility, and leave a lasting impression on potential clients. Every design is crafted to make your work stand out while encouraging visitors to connect with you.",
     bullets: ["Work Showcase", "Personal Branding", "Creative Layouts", "Contact Forms"]
   },
   {
     title: "Landing Page Design",
-    image: "/web 5.png",
+    image: "/web_5.png",
     description: "A successful landing page has one goal: turning visitors into leads or customers. We design high-converting landing pages with clear messaging, persuasive layouts, and calls-to-action that eliminate distractions and drive results. Whether you're running Google Ads, Meta Ads, or launching a new product or service, our landing pages are built to maximize conversions.",
     bullets: ["Lead Generation", "Ad Campaign", "Clean Layout", "High Conversion"]
   },
@@ -45,7 +45,7 @@ const servicesData = [
   },
   {
     title: "Ongoing Website Support & Maintenance",
-    image: "/web 7.png",
+    image: "/web_7.png",
     description: "Launching your website is only the beginning. To keep it performing at its best, we provide ongoing support, security updates, performance optimization, and technical maintenance. As your business grows, we ensure your website stays secure, up to date, and ready to support your next stage of growth—so you can focus on running your business with confidence.",
     bullets: ["System Updates", "Security Backups", "Speed Tuning", "Bug Fixing"]
   }
@@ -343,7 +343,7 @@ export default function WebDevelopmentPage() {
                   style={{ borderRadius: "50% 5% 50% 50%" }}
                 >
                   <Image
-                    src="/web development 1.png"
+                    src="/web_development_1.png"
                     alt="Creative team workspace discussion"
                     fill
                     sizes="(max-width: 768px) 250px, 330px"

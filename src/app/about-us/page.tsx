@@ -262,13 +262,13 @@ export default function AboutUsPage() {
   };
 
   const clientsList = [
-    { name: "AGN Tax Consultant", logo: "/agntax logo (1).png" },
+    { name: "AGN Tax Consultant", logo: "/agntax_logo_1.png" },
     { name: "My Fragrance", logo: "/logo.png" },
-    { name: "Forces School & College", logo: "/forces school.png" },
-    { name: "The Punjab School", logo: "/the punjab school logo.png" },
-    { name: "Physician Revenue", logo: "/physician revenue.webp" },
-    { name: "Gulab Devi Hospital", logo: "/gulab devi.png" },
-    { name: "Headrogen", logo: "/headrogen (2).png" },
+    { name: "Forces School & College", logo: "/forces_school.png" },
+    { name: "The Punjab School", logo: "/the_punjab_school_logo.png" },
+    { name: "Physician Revenue", logo: "/physician_revenue.webp" },
+    { name: "Gulab Devi Hospital", logo: "/gulab_devi.png" },
+    { name: "Headrogen", logo: "/headrogen_2.png" },
   ];
 
   const teamList = [

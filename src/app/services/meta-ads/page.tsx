@@ -15,37 +15,37 @@ if (typeof window !== "undefined") {
 const servicesData = [
   {
     title: "Audience Research & Targeting",
-    image: "/meta ad (3).png",
+    image: "/meta_ad_3.png",
     description: "The success of every Meta Ads campaign begins with reaching the right audience. We research your ideal customers and build highly targeted audiences based on demographics, interests, behaviors, and location, ensuring your ads are shown to people who are most likely to convert.",
     bullets: ["Audience Research", "Demographic Targeting", "Location-Based Reach", "Higher Conversions"]
   },
   {
     title: "Creative Ad Design",
-    image: "/meta creative.png",
+    image: "/meta_creative.png",
     description: "Great advertising starts with great creativity. Our team designs scroll-stopping visuals and compelling ad copy that capture attention on Facebook and Instagram, encourage engagement, and motivate potential customers to take action.",
     bullets: ["Creative Ad Design", "Compelling Ad Copy", "Scroll-Stopping Visuals", "Higher Customer Engagement"]
   },
   {
     title: "Campaign Strategy & Management",
-    image: "/meta ad 2 (1).png",
+    image: "/meta_ad_2_1.png",
     description: "Running ads without a strategy often leads to wasted budget. We create customized advertising campaigns aligned with your business objectives, manage every aspect of your campaigns, and continuously monitor performance to keep your advertising effective and efficient.",
     bullets: ["Custom Campaign Strategy", "Campaign Management", "Performance Monitoring", "Budget Optimization"]
   },
   {
     title: "Performance Optimization",
-    image: "/meta ad 3.png",
+    image: "/meta_ad_3.png",
     description: "Digital advertising requires constant improvement. We regularly test audiences, creatives, placements, and campaign setup to improve results, lower advertising costs, and maximize your return on ad spend (ROAS).",
     bullets: ["A/B Testing", "Audience Optimization", "Lower Ad Costs", "Higher ROAS"]
   },
   {
     title: "Lead Generation & Business Growth",
-    image: "/meta 4.png",
+    image: "/meta_4.png",
     description: "Our goal is more than generating clicks—we focus on generating business. Whether you want more inquiries, website traffic, online sales, or brand awareness, our Facebook and Instagram advertising are designed to attract quality customers and support long-term business growth.",
     bullets: ["Qualified Lead Generation", "Website Traffic Growth", "Increased Online Sales", "Long-Term Business Growth"]
   },
   {
     title: "Reporting & Insights",
-    image: "/Performance reporting social (1).png",
+    image: "/performance_reporting_social_1.png",
     description: "Every successful campaign is backed by data. We provide clear performance reports and actionable insights, allowing you to understand what's working, track your growth, and make informed decisions for future marketing campaigns.",
     bullets: ["Performance Reporting", "Growth Tracking", "Actionable Insights", "Data-Driven Decisions"]
   }
