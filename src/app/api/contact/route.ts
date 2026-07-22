@@ -162,6 +162,36 @@ export async function POST(request: Request) {
       </html>
     `;
 
+    // 1. Try Brevo HTTPS REST API (Port 443 - HTTPS - Never blocked by cPanel host firewalls)
+    try {
+      const apiKey = process.env.SMTP_PASS || "xsmtpsib-2a13902958ffb0d71b8b6bef1e3e3a57b8d17564a9c4235df3d03a87732c42e3-MZ6mPECpeT7xPiwD";
+      const apiResponse = await fetch("https://api.brevo.com/v3/smtp/email", {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+          "api-key": apiKey,
+        },
+        body: JSON.stringify({
+          sender: { name: name, email: "info@bouncydigital.com" },
+          to: [{ email: "info@bouncydigital.com", name: "Bouncy Digital Admin" }],
+          replyTo: { email: email, name: name },
+          subject: `[Website Contact] ${subject}`,
+          htmlContent: htmlContent,
+        }),
+      });
+
+      if (apiResponse.ok) {
+        console.log("Email successfully dispatched via Brevo HTTPS REST API (Port 443)");
+        return NextResponse.json({ success: true, message: "Enquiry sent successfully!" });
+      } else {
+        const errorText = await apiResponse.text();
+        console.warn("Brevo HTTPS REST API returned warning:", apiResponse.status, errorText);
+      }
+    } catch (apiErr) {
+      console.warn("Brevo HTTPS REST API exception (falling back to SMTP):", apiErr);
+    }
+
     // Mail configurations
     const mailOptions = {
       from: `"${name} via Bouncy Contact" <info@bouncydigital.com>`,
