@@ -164,7 +164,7 @@ export async function POST(request: Request) {
 
     // 1. Try Brevo HTTPS REST API (Port 443 - HTTPS - Never blocked by cPanel host firewalls)
     try {
-      const apiKey = process.env.BREVO_API_KEY || process.env.SMTP_PASS || "xsmtpsib-2a13902958ffb0d71b8b6bef1e3e3a57b8d17564a9c4235df3d03a87732c42e3-MZ6mPECpeT7xPiwD";
+      const apiKey = process.env.BREVO_API_KEY || "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";
       const apiResponse = await fetch("https://api.brevo.com/v3/smtp/email", {
         method: "POST",
         headers: {
