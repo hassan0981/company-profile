@@ -23,6 +23,11 @@ const kanit = Kanit({
 export const metadata: Metadata = {
   title: "BouncyDigital - Creative Digital Marketing Agency",
   description: "Professional company profile website",
+  icons: {
+    icon: "/white_outline.png",
+    shortcut: "/white_outline.png",
+    apple: "/white_outline.png",
+  },
 };
 
 export default function RootLayout({

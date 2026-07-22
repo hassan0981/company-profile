@@ -801,11 +801,8 @@ export default function AboutUsPage() {
                   className="absolute inset-0 flex flex-col justify-end p-6 z-20 text-left select-none text-white"
                   style={{ transform: "translateZ(40px)" }}
                 >
-                  <span className="text-[10px] uppercase tracking-widest text-[#3c9e90] font-bold mb-1">
+                  <h3 className="text-base sm:text-lg font-extrabold uppercase tracking-wide text-white mb-2 group-hover:text-[#3c9e90] transition-colors">
                     {member.role}
-                  </span>
-                  <h3 className="text-xl font-bold tracking-tight mb-2 group-hover:text-[#206cbb] transition-colors">
-                    {member.name}
                   </h3>
                   
                   {/* Bio block sliding up */}
