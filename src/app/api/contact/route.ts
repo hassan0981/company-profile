@@ -164,7 +164,7 @@ export async function POST(request: Request) {
 
     // 1. Try Brevo HTTPS REST API (Port 443 - HTTPS - Never blocked by cPanel host firewalls)
     try {
-      const apiKey = process.env.SMTP_PASS || "xsmtpsib-2a13902958ffb0d71b8b6bef1e3e3a57b8d17564a9c4235df3d03a87732c42e3-MZ6mPECpeT7xPiwD";
+      const apiKey = process.env.BREVO_API_KEY || process.env.SMTP_PASS || "xsmtpsib-2a13902958ffb0d71b8b6bef1e3e3a57b8d17564a9c4235df3d03a87732c42e3-MZ6mPECpeT7xPiwD";
       const apiResponse = await fetch("https://api.brevo.com/v3/smtp/email", {
         method: "POST",
         headers: {
@@ -201,7 +201,7 @@ export async function POST(request: Request) {
       html: htmlContent,
     };
 
-    // Try sending email across available ports (465 SSL -> 2525 TLS -> 587 TLS -> localhost)
+    // Try sending email across available transports (Brevo SMTP -> cPanel Local SMTP -> Linux Sendmail)
     let emailSent = false;
     let lastError: unknown = null;
 
@@ -210,6 +210,7 @@ export async function POST(request: Request) {
       { host: process.env.SMTP_HOST || "smtp-relay.brevo.com", port: 2525, secure: false },
       { host: process.env.SMTP_HOST || "smtp-relay.brevo.com", port: 587, secure: false },
       { host: "127.0.0.1", port: 25, secure: false },
+      { host: "localhost", port: 25, secure: false },
     ];
 
     for (const cfg of smtpConfigs) {
@@ -222,6 +223,9 @@ export async function POST(request: Request) {
             user: process.env.SMTP_USER || "b20534001@smtp-brevo.com",
             pass: process.env.SMTP_PASS || "xsmtpsib-2a13902958ffb0d71b8b6bef1e3e3a57b8d17564a9c4235df3d03a87732c42e3-MZ6mPECpeT7xPiwD",
           },
+          tls: {
+            rejectUnauthorized: false
+          },
           connectionTimeout: 5000,
         });
 
@@ -232,6 +236,22 @@ export async function POST(request: Request) {
       } catch (err) {
         console.warn(`SMTP send failed on ${cfg.host}:${cfg.port}:`, err);
         lastError = err;
+      }
+    }
+
+    // If socket SMTP failed, try cPanel native sendmail binary (/usr/sbin/sendmail)
+    if (!emailSent) {
+      try {
+        const sendmailTransporter = nodemailer.createTransport({
+          sendmail: true,
+          newline: 'unix',
+          path: '/usr/sbin/sendmail',
+        });
+        await sendmailTransporter.sendMail(mailOptions);
+        emailSent = true;
+        console.log("Email successfully dispatched via cPanel native Sendmail binary");
+      } catch (smErr) {
+        console.warn("cPanel native Sendmail failed:", smErr);
       }
     }
 
