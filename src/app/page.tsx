@@ -699,43 +699,74 @@ export default function Home() {
         cardListeners.push({ card, move: handleMouseMove, leave: handleMouseLeave });
       });
 
-      // 9. Pinned Horizontal Page Slider (Why Choose Us)
-      const sliderTl = gsap.to(".why-choose-us-slider", {
-        xPercent: -75,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".why-choose-us-wrapper",
-          start: "top top",
-          end: "+=300%",
-          pin: true,
-          scrub: 0.5,
-          id: "horizontalSlider"
-        }
-      });
+      // 9. Pinned Horizontal Page Slider (Why Choose Us) - Desktop Only
+      ScrollTrigger.matchMedia({
+        // Desktop
+        "(min-width: 1024px)": function () {
+          const sliderTl = gsap.to(".why-choose-us-slider", {
+            xPercent: -75,
+            ease: "none",
+            scrollTrigger: {
+              trigger: ".why-choose-us-wrapper",
+              start: "top top",
+              end: "+=300%",
+              pin: true,
+              scrub: 0.5,
+              id: "horizontalSlider"
+            }
+          });
 
-      // 10. Slide 3 Metrics Count-up animation triggered when Slide 3 enters center screen
-      ScrollTrigger.create({
-        trigger: ".slide-metrics-trigger",
-        containerAnimation: sliderTl,
-        start: "left 65%",
-        onEnter: () => {
-          const counters = document.querySelectorAll(".counter-val");
-          counters.forEach(counter => {
-            // Guard to prevent re-running if already counting/completed
-            if (counter.classList.contains("counted")) return;
-            counter.classList.add("counted");
+          // Slide 3 Metrics Count-up animation on Desktop
+          ScrollTrigger.create({
+            trigger: ".slide-metrics-trigger",
+            containerAnimation: sliderTl,
+            start: "left 65%",
+            onEnter: () => {
+              const counters = document.querySelectorAll(".counter-val");
+              counters.forEach(counter => {
+                if (counter.classList.contains("counted")) return;
+                counter.classList.add("counted");
 
-            const targetVal = parseInt(counter.getAttribute("data-target") || "0", 10);
-            const suffix = counter.getAttribute("data-suffix") || "";
-            const obj = { val: 0 };
-            gsap.to(obj, {
-              val: targetVal,
-              duration: 2.2,
-              ease: "power2.out",
-              onUpdate: () => {
-                counter.textContent = Math.floor(obj.val) + suffix;
-              }
-            });
+                const targetVal = parseInt(counter.getAttribute("data-target") || "0", 10);
+                const suffix = counter.getAttribute("data-suffix") || "";
+                const obj = { val: 0 };
+                gsap.to(obj, {
+                  val: targetVal,
+                  duration: 2.2,
+                  ease: "power2.out",
+                  onUpdate: () => {
+                    counter.textContent = Math.floor(obj.val) + suffix;
+                  }
+                });
+              });
+            }
+          });
+        },
+        // Mobile & Tablet
+        "(max-width: 1023px)": function () {
+          // Slide 3 Metrics Count-up animation on Mobile
+          ScrollTrigger.create({
+            trigger: ".slide-metrics-trigger",
+            start: "top 80%",
+            onEnter: () => {
+              const counters = document.querySelectorAll(".counter-val");
+              counters.forEach(counter => {
+                if (counter.classList.contains("counted")) return;
+                counter.classList.add("counted");
+
+                const targetVal = parseInt(counter.getAttribute("data-target") || "0", 10);
+                const suffix = counter.getAttribute("data-suffix") || "";
+                const obj = { val: 0 };
+                gsap.to(obj, {
+                  val: targetVal,
+                  duration: 2.2,
+                  ease: "power2.out",
+                  onUpdate: () => {
+                    counter.textContent = Math.floor(obj.val) + suffix;
+                  }
+                });
+              });
+            }
           });
         }
       });
@@ -862,7 +893,7 @@ export default function Home() {
         <div className="relative mx-auto max-w-[1510px] w-full flex flex-col lg:flex-row items-center lg:items-stretch gap-10 lg:gap-0 z-10">
 
           {/* Left Column: 3-Image Collage (Stacked Vertically on Desktop) */}
-          <div className="w-full lg:w-[26.7%] flex flex-row flex-nowrap lg:flex-col gap-[15px] items-center lg:items-start overflow-x-auto lg:overflow-x-visible pb-4 lg:pb-0 scrollbar-none">
+          <div className="w-full lg:w-[26.7%] flex flex-row flex-nowrap lg:flex-col gap-[12px] sm:gap-[15px] items-center lg:items-start overflow-x-auto lg:overflow-x-visible pb-4 lg:pb-0 scrollbar-none">
             {/* Image 1 */}
             <div className="portrait-img-1 shrink-0 relative w-[180px] h-[180px] sm:w-[220px] sm:h-[220px] lg:w-[240px] lg:h-[240px] border border-neutral-200/50 bg-neutral-50 shadow-md">
               <div className="portrait-img-1-inner relative w-full h-full">
@@ -877,8 +908,8 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Image 2 - Shifted right (self-end) on both mobile and desktop for zig-zag */}
-            <div className="portrait-img-2 shrink-0 relative w-[180px] h-[180px] sm:w-[220px] sm:h-[220px] lg:w-[240px] lg:h-[240px] border border-neutral-200/50 bg-neutral-50 shadow-md self-end lg:self-end">
+            {/* Image 2 */}
+            <div className="portrait-img-2 shrink-0 relative w-[180px] h-[180px] sm:w-[220px] sm:h-[220px] lg:w-[240px] lg:h-[240px] border border-neutral-200/50 bg-neutral-50 shadow-md self-center lg:self-end">
               <div className="portrait-img-2-inner relative w-full h-full">
                 <Image
                   src="/service_smm.png"
@@ -915,7 +946,7 @@ export default function Home() {
               <div className="w-full lg:w-[75%] flex flex-col text-left">
                 <h1 className="select-none leading-none flex flex-col font-medium tracking-tight">
                   {/* Line 1: Bounce */}
-                  <span className="block text-[32px] sm:text-[48px] md:text-[64px] lg:text-[76px] xl:text-[90px] font-semibold tracking-tight leading-[0.95] pl-0 lg:pl-[30px] whitespace-nowrap">
+                  <span className="block text-[28px] xs:text-[34px] sm:text-[48px] md:text-[64px] lg:text-[76px] xl:text-[90px] font-semibold tracking-tight leading-[0.95] pl-0 lg:pl-[30px] whitespace-normal sm:whitespace-nowrap">
                     {line1Words.map((char, index) => (
                       <span
                         key={index}
@@ -929,7 +960,7 @@ export default function Home() {
                   </span>
 
                   {/* Line 2: Beyond */}
-                  <span className="block text-[32px] sm:text-[48px] md:text-[64px] lg:text-[76px] xl:text-[90px] font-semibold tracking-tight leading-[0.95] text-center w-full mt-1 lg:mt-2 whitespace-nowrap">
+                  <span className="block text-[28px] xs:text-[34px] sm:text-[48px] md:text-[64px] lg:text-[76px] xl:text-[90px] font-semibold tracking-tight leading-[0.95] text-center w-full mt-1 lg:mt-2 whitespace-normal sm:whitespace-nowrap">
                     {line2Words.map((char, index) => (
                       <span
                         key={index}
@@ -944,7 +975,7 @@ export default function Home() {
                 </h1>
 
                 {/* Line 3: Ordinary */}
-                <h2 className="block select-none leading-none font-medium tracking-tight text-[15px] sm:text-[22px] md:text-[29px] lg:text-[36px] xl:text-[44px] font-semibold tracking-tight leading-[0.95] text-center w-full mt-4 lg:mt-8 whitespace-nowrap">
+                <h2 className="block select-none leading-none font-medium tracking-tight text-[16px] sm:text-[22px] md:text-[29px] lg:text-[36px] xl:text-[44px] font-semibold tracking-tight leading-[0.95] text-center w-full mt-3 sm:mt-4 lg:mt-8 whitespace-normal sm:whitespace-nowrap">
                   {line3Words.map((char, index) => (
                     <span
                       key={index}
@@ -959,23 +990,23 @@ export default function Home() {
               </div>
 
               {/* Decorative Blocks - Nesting overlapping squares */}
-              <div className="w-full lg:w-[25%] flex items-end justify-start lg:justify-end pt-6 lg:pt-0 lg:pb-[15px]">
-                <div className="relative w-[100px] h-[100px] lg:w-[120px] lg:h-[120px] lg:mr-[40px] shrink-0">
+              <div className="w-full lg:w-[25%] flex items-end justify-center lg:justify-end pt-4 lg:pt-0 lg:pb-[15px]">
+                <div className="relative w-[80px] h-[80px] lg:w-[120px] lg:h-[120px] lg:mr-[40px] shrink-0">
                   {/* Green Square */}
-                  <div className="peach-box opacity-0 absolute top-0 right-0 w-[50px] h-[50px] lg:w-[75px] lg:h-[75px] bg-[#3c9e90] shadow-sm" />
+                  <div className="peach-box opacity-0 absolute top-0 right-0 w-[40px] h-[40px] lg:w-[75px] lg:h-[75px] bg-[#3c9e90] shadow-sm" />
                   {/* Blue Square (Overlaps bottom-left of Green Square) */}
-                  <div className="dark-box opacity-0 absolute bottom-0 left-0 w-[40px] h-[40px] lg:w-[57px] lg:h-[57px] bg-[#206cbb] shadow-sm z-10" />
+                  <div className="dark-box opacity-0 absolute bottom-0 left-0 w-[32px] h-[32px] lg:w-[57px] lg:h-[57px] bg-[#206cbb] shadow-sm z-10" />
                 </div>
               </div>
 
             </div>
 
             {/* Bottom Row: 4th Portrait & Indented Copywriting */}
-            <div className="flex flex-col-reverse lg:flex-row items-stretch lg:items-end justify-between w-full pt-4 lg:pt-6 gap-8 lg:gap-0">
+            <div className="flex flex-col-reverse lg:flex-row items-stretch lg:items-end justify-between w-full pt-4 lg:pt-6 gap-6 lg:gap-0">
 
-              {/* 4th Image (Portrait 4) - Loaded when scrolling slightly down */}
+              {/* 4th Image (Portrait 4) */}
               <div className="w-full lg:w-[33%] pt-0 flex justify-center lg:justify-start">
-                <div className="portrait-img-4 relative w-full h-[150px] sm:h-[200px] lg:h-[240px] aspect-[240/150] lg:aspect-square border border-neutral-200/50 bg-neutral-50 shadow-md">
+                <div className="portrait-img-4 relative w-full h-[160px] sm:h-[200px] lg:h-[240px] aspect-[240/150] lg:aspect-square border border-neutral-200/50 bg-neutral-50 shadow-md">
                   <div className="portrait-img-4-inner relative w-full h-full">
                     <Image
                       src="/portrait_4.png"
@@ -988,10 +1019,10 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* Copywriting Paragraph & Scroll Indicator */}
-              <div className="w-full lg:w-[67%] flex flex-col items-start justify-between min-h-[150px] sm:min-h-[180px] lg:min-h-[240px] pl-0 lg:pl-[15px]">
+              {/* Copywriting Paragraph */}
+              <div className="w-full lg:w-[67%] flex flex-col items-start justify-between min-h-auto lg:min-h-[240px] pl-0 lg:pl-[15px]">
 
-                <p className="desc-text text-sm sm:text-base lg:text-[18px] text-[#555555] font-normal leading-[1.42] max-w-full lg:max-w-[460px] pl-0 lg:pl-[80px] text-justify">
+                <p className="desc-text text-sm sm:text-base lg:text-[18px] text-[#555555] font-normal leading-[1.5] lg:leading-[1.42] max-w-full lg:max-w-[460px] pl-0 lg:pl-[80px] text-left lg:text-justify">
                   {descParagraph.map((word, index) => (
                     <span
                       key={index}
@@ -1058,16 +1089,16 @@ export default function Home() {
 
                   {/* Outer Description Parallax Wrapper */}
                   <div className="unlock-desc-wrapper w-full">
-                    <p className="unlock-desc opacity-0 text-[#555555] text-sm sm:text-base leading-relaxed text-justify max-w-full lg:max-w-[360px]">
+                    <p className="unlock-desc opacity-0 text-[#555555] text-sm sm:text-base leading-relaxed text-left lg:text-justify max-w-full lg:max-w-[360px]">
                       Every successful business is built on trust, purpose, and meaningful connections. At Bouncy Grow Digital, we transform your ideas into impactful digital experiences through strategic marketing solutions that help your brand stand out, connect with the right audience, and grow with confidence.
                     </p>
                   </div>
 
                   {/* Interactive Explore Us Button */}
-                  <div className="explore-btn-container opacity-0 mt-10 lg:mt-14">
+                  <div className="explore-btn-container opacity-0 mt-8 lg:mt-14">
                     <Link href="/contact-us">
                       <MagneticButton
-                        className="w-32 h-32 lg:w-36 lg:h-36 border-neutral-300 text-sm bg-white"
+                        className="w-28 h-28 sm:w-32 sm:h-32 lg:w-36 lg:h-36 border-neutral-300 text-xs sm:text-sm bg-white"
                       >
                         Explore more
                       </MagneticButton>
@@ -1077,7 +1108,7 @@ export default function Home() {
 
                 {/* Column B: Right Elongated Image */}
                 <div className="unlock-right-wrapper w-full lg:w-[45%] flex justify-center lg:justify-end lg:pl-6">
-                  <div className="unlock-right-inner relative w-full max-w-[280px] h-[340px] overflow-hidden border border-neutral-200/50 shadow-md">
+                  <div className="unlock-right-inner relative w-full max-w-full sm:max-w-[280px] h-[260px] sm:h-[340px] overflow-hidden border border-neutral-200/50 shadow-md">
                     <Image
                       src="/unlock_potential_right.png"
                       alt="Discussing work in modern office space"
@@ -1098,28 +1129,29 @@ export default function Home() {
 
       {/* 3. Services Showcase Pinned Section */}
       <section className="services-showcase-section relative bg-white text-black w-full min-h-screen overflow-hidden z-20 border-t border-neutral-200">
-        <div className="services-container relative w-full h-screen flex flex-col lg:flex-row items-stretch select-none">
+        <div className="services-container relative w-full min-h-screen h-auto lg:h-screen flex flex-col lg:flex-row items-stretch select-none">
 
           {/* Column 1: Left Stationary Nav Menu */}
-          <div className="w-full lg:w-[25%] flex flex-col justify-start items-start gap-y-10 lg:gap-y-12 border-b lg:border-b-0 lg:border-r border-neutral-200 pl-4 sm:pl-8 lg:pl-12 xl:pl-16 pr-6 pt-16 lg:pt-20 pb-10 lg:pb-12">
+          <div className="w-full lg:w-[25%] flex flex-col justify-start items-start gap-y-4 sm:gap-y-8 lg:gap-y-12 border-b lg:border-b-0 lg:border-r border-neutral-200 pl-4 sm:pl-8 lg:pl-12 xl:pl-16 pr-4 sm:pr-6 pt-8 sm:pt-12 lg:pt-20 pb-4 sm:pb-6 lg:pb-12">
             
             {/* Top Heading */}
             <div className="text-left w-full">
-              <h2 className="bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent font-black text-2xl sm:text-3xl lg:text-4xl uppercase tracking-wider leading-tight select-none py-2">
+              <h2 className="bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent font-black text-xl sm:text-3xl lg:text-4xl uppercase tracking-wider leading-tight select-none py-1 lg:py-2">
                 Our Digital Expertise
               </h2>
             </div>
 
             {/* Nav Links */}
-            <div className="flex flex-row lg:flex-col gap-6 lg:gap-10 overflow-x-auto lg:overflow-x-visible w-full scrollbar-none pr-4 mt-4 lg:mt-6">
+            <div className="flex flex-wrap lg:flex-col gap-2 sm:gap-4 lg:gap-10 w-full mt-2 lg:mt-6">
               {servicesData.map((service, idx) => (
                 <button
                   key={idx}
                   onClick={() => handleNavClick(idx)}
-                  className={`service-nav-btn text-left text-lg sm:text-xl lg:text-2xl font-bold tracking-tight transition-all duration-500 whitespace-nowrap cursor-pointer hover:text-black ${activeService === idx
-                    ? "bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent opacity-100 scale-105 origin-left w-fit"
-                    : "text-neutral-400 opacity-50 hover:opacity-80"
-                    }`}
+                  className={`service-nav-btn text-left text-xs sm:text-lg lg:text-2xl font-bold tracking-tight transition-all duration-300 cursor-pointer px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full lg:p-0 lg:rounded-none border lg:border-none ${
+                    activeService === idx
+                      ? "bg-gradient-to-br from-[#206cbb] to-[#3c9e90] text-white lg:bg-clip-text lg:text-transparent opacity-100 scale-105 origin-left border-transparent shadow-sm lg:shadow-none"
+                      : "text-neutral-600 border-neutral-200 bg-neutral-50 lg:bg-transparent lg:text-neutral-400 opacity-80 lg:opacity-50 hover:opacity-100"
+                  }`}
                 >
                   {service.title}
                 </button>
@@ -1127,8 +1159,8 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Column 2: Dynamic Media Center (Middle - covers vertically completely from top to bottom) */}
-          <div className="w-full lg:w-[35%] h-full relative overflow-hidden border-b lg:border-b-0 lg:border-r border-neutral-200 shrink-0">
+          {/* Column 2: Dynamic Media Center */}
+          <div className="w-full lg:w-[35%] h-[240px] sm:h-[320px] lg:h-full relative overflow-hidden border-b lg:border-b-0 lg:border-r border-neutral-200 shrink-0">
             <div className="absolute inset-0 w-full h-full">
               {servicesData.map((service, idx) => (
                 <div
@@ -1140,7 +1172,7 @@ export default function Home() {
                     src={service.image}
                     alt={service.title}
                     fill
-                    sizes="(max-width: 1024px) 50vw, 35vw"
+                    sizes="(max-width: 1024px) 100vw, 35vw"
                     className="object-cover brightness-[0.95] contrast-[1.02]"
                   />
                 </div>
@@ -1149,32 +1181,35 @@ export default function Home() {
           </div>
 
           {/* Column 3: Service Details (Right) */}
-           <div className="w-full lg:w-[40%] flex flex-col justify-center pl-6 lg:pl-12 pr-4 sm:pr-8 lg:pr-12 xl:pr-16 py-6 lg:py-10">
+          <div className="w-full lg:w-[40%] flex flex-col justify-center pl-4 sm:pl-8 lg:pl-12 pr-4 sm:pr-8 lg:pr-12 xl:pr-16 py-6 lg:py-10">
 
             {/* Top Row: Description */}
-            <div className="text-left mb-8 lg:mb-4 w-full">
-              <p className="text-neutral-500 text-sm sm:text-base leading-relaxed max-w-[420px] text-justify">
+            <div className="text-left mb-6 lg:mb-4 w-full">
+              <p className="text-neutral-500 text-xs sm:text-base leading-relaxed max-w-[420px] text-left lg:text-justify">
                 Everything we do is designed to help your business grow smarter, move faster, and stay ahead in today&apos;s digital landscape. From building a strong online presence to driving measurable results, our solutions are tailored to support your long-term success.
               </p>
             </div>
 
             {/* Middle Row: Dynamic Details Container */}
-            <div className="relative flex-grow flex flex-col justify-start items-start pt-1 lg:pt-2 pb-6 min-h-[260px]">
+            <div className="relative flex-grow flex flex-col justify-start items-start pt-1 lg:pt-2 pb-4 sm:pb-6">
               {servicesData.map((service, idx) => (
                 <div
                   key={idx}
-                  className={`service-details-wrapper absolute inset-x-0 top-1 lg:top-2 transition-all duration-700 ease-in-out ${activeService === idx ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 -translate-y-6 pointer-events-none"
-                    }`}
+                  className={`service-details-wrapper transition-all duration-500 ease-in-out ${
+                    activeService === idx
+                      ? "block opacity-100 relative lg:absolute lg:inset-x-0 lg:top-2 translate-y-0 pointer-events-auto"
+                      : "hidden lg:block opacity-0 lg:absolute lg:inset-x-0 lg:top-2 -translate-y-6 pointer-events-none"
+                  }`}
                 >
-                  <h3 className="bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight mb-4 w-fit">
+                  <h3 className="bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight mb-3 sm:mb-4 w-fit">
                     {service.title}
                   </h3>
-                  <p className="text-neutral-600 text-sm sm:text-base leading-relaxed mb-6 max-w-[420px] text-justify">
+                  <p className="text-neutral-600 text-xs sm:text-base leading-relaxed mb-4 sm:mb-6 max-w-[420px] text-left lg:text-justify">
                     {service.description}
                   </p>
 
                   {/* Dynamic bullet items */}
-                  <div className="grid grid-cols-2 gap-y-3 gap-x-4 w-full max-w-[440px]">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-2.5 sm:gap-y-3 gap-x-4 w-full max-w-[440px]">
                     {service.bullets.map((bullet, bIdx) => (
                       <div key={bIdx} className="flex items-center text-xs sm:text-sm text-black font-bold">
                         <span className="text-[#206cbb] mr-2 font-bold">+</span>
@@ -1673,50 +1708,50 @@ export default function Home() {
 
       {/* 5. Horizontal Slider Section (Why Choose Us) */}
       <div className="why-choose-us-wrapper relative w-full overflow-hidden bg-white border-t border-neutral-100">
-        <div className="why-choose-us-slider flex flex-row flex-nowrap w-[400vw] h-screen">
+        <div className="why-choose-us-slider flex flex-col lg:flex-row lg:flex-nowrap w-full lg:w-[400vw] lg:h-screen">
 
           {/* Slide 1: Welcome Intro */}
-          <div className="w-screen h-screen shrink-0 bg-[#faf8f5] flex items-center justify-center relative select-none">
+          <div className="w-full lg:w-screen py-16 lg:py-0 min-h-[300px] lg:h-screen shrink-0 bg-[#faf8f5] flex items-center justify-center relative select-none overflow-hidden">
             {/* Decorative Overlapping Boxes (Top-Left) */}
-            <div className="absolute top-28 left-6 sm:top-36 sm:left-16 md:left-24 w-[110px] h-[110px] sm:w-[150px] sm:h-[150px] pointer-events-none">
+            <div className="absolute top-8 left-6 sm:top-36 sm:left-16 md:left-24 w-[90px] h-[90px] sm:w-[150px] sm:h-[150px] pointer-events-none">
               {/* Green Box (Behind) */}
               <div
-                className="absolute top-0 right-0 w-[70px] h-[70px] sm:w-[100px] sm:h-[100px] rounded-sm shadow-sm"
+                className="absolute top-0 right-0 w-[55px] h-[55px] sm:w-[100px] sm:h-[100px] rounded-sm shadow-sm"
                 style={{ backgroundColor: "#3c9e90" }}
               />
               {/* Blue Box (In Front, Overlapping) */}
               <div
-                className="absolute bottom-0 left-0 w-[55px] h-[55px] sm:w-[80px] sm:h-[80px] rounded-sm shadow-md z-10"
+                className="absolute bottom-0 left-0 w-[45px] h-[45px] sm:w-[80px] sm:h-[80px] rounded-sm shadow-md z-10"
                 style={{ backgroundColor: "#206cbb" }}
               />
             </div>
 
-            <h2 className="bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent font-black text-6xl sm:text-8xl lg:text-[110px] tracking-tight leading-none text-center py-2">
+            <h2 className="bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent font-black text-4xl sm:text-7xl lg:text-[110px] tracking-tight leading-none text-center py-2">
               WHY<br />CHOOSE US ?
             </h2>
           </div>
 
           {/* Slide 2: Core Philosophy & Competencies */}
-          <div className="w-screen h-screen shrink-0 bg-[#faf8f5] flex items-center justify-center relative px-6 sm:px-12 lg:px-24">
-            <div className="mx-auto max-w-[1510px] w-full flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-6">
+          <div className="w-full lg:w-screen py-12 sm:py-16 lg:py-0 min-h-auto lg:h-screen shrink-0 bg-[#faf8f5] flex items-center justify-center relative px-4 sm:px-12 lg:px-24 overflow-hidden">
+            <div className="mx-auto max-w-[1510px] w-full flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 sm:gap-12 lg:gap-6">
               {/* Left Column (40%) */}
               <div className="w-full lg:w-[40%] text-left flex flex-col items-start pr-0 lg:pr-8">
-                <span className="text-xs uppercase tracking-widest text-neutral-500 font-semibold mb-3 select-none">
+                <span className="text-xs uppercase tracking-widest text-neutral-500 font-semibold mb-2 sm:mb-3 select-none">
                   WHY CHOOSE US ?
                 </span>
-                <h2 className="bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-4xl sm:text-5xl font-extrabold tracking-tight mb-6 py-1">
+                <h2 className="bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-3xl sm:text-5xl font-extrabold tracking-tight mb-4 sm:mb-6 py-1">
                   Why Choose Us
                 </h2>
-                <p className="text-neutral-600 text-sm sm:text-base leading-relaxed text-justify">
+                <p className="text-neutral-600 text-xs sm:text-base leading-relaxed text-left lg:text-justify">
                   At Bouncy, we don&apos;t just deliver digital services—we build plans that help businesses grow with purpose. By combining creativity, data-driven insights, and innovative thinking, we create digital solutions that strengthen your brand, attract the right audience, and drive measurable business growth.
                 </p>
               </div>
 
               {/* Right Column (60%): 2x2 grid of circular progress rings */}
-              <div className="w-full lg:w-[60%] grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-8 lg:gap-y-10 pl-0 lg:pl-8">
+              <div className="w-full lg:w-[60%] grid grid-cols-1 sm:grid-cols-2 gap-x-8 lg:gap-x-12 gap-y-5 sm:gap-y-8 lg:gap-y-10 pl-0 lg:pl-8">
                 {/* Value 1: Research */}
-                <div className="flex items-start gap-4">
-                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 shrink-0 flex items-center justify-center select-none">
+                <div className="flex flex-row items-start gap-3 sm:gap-4">
+                  <div className="relative w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 shrink-0 flex items-center justify-center select-none pt-0.5">
                     <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
                       <defs>
                         <linearGradient id="grad-research" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -1724,25 +1759,25 @@ export default function Home() {
                           <stop offset="100%" stopColor="#3c9e90" />
                         </linearGradient>
                       </defs>
-                      <circle cx="50" cy="50" r="40" stroke="#e5e7eb" strokeWidth="6" fill="transparent" />
-                      <circle cx="50" cy="50" r="40" stroke="url(#grad-research)" strokeWidth="6" fill="transparent" strokeDasharray="251.2" strokeDashoffset={251.2 - (251.2 * 85) / 100} strokeLinecap="round" />
+                      <circle cx="50" cy="50" r="38" stroke="#e5e7eb" strokeWidth="6" fill="transparent" />
+                      <circle cx="50" cy="50" r="38" stroke="url(#grad-research)" strokeWidth="6" fill="transparent" strokeDasharray="238.7" strokeDashoffset={238.7 - (238.7 * 85) / 100} strokeLinecap="round" />
                     </svg>
-                    <span className="absolute text-sm sm:text-base font-black text-black">85%</span>
+                    <span className="absolute text-xs sm:text-base font-black text-black">85%</span>
                   </div>
                   <div className="text-left">
-                    <h3 className="text-black text-base sm:text-lg lg:text-xl font-extrabold mb-1.5 flex items-center gap-1.5 select-none">
-                      <Image src="/workflow_icon_1.png" alt="Research" width={24} height={24} className="object-contain" />
-                      Research
+                    <h3 className="text-black text-sm sm:text-lg lg:text-xl font-extrabold mb-1 flex items-center gap-2 select-none">
+                      <Image src="/workflow_icon_1.png" alt="Research" width={20} height={20} className="object-contain shrink-0" />
+                      <span>Research</span>
                     </h3>
-                    <p className="text-neutral-500 text-sm leading-relaxed text-justify">
+                    <p className="text-neutral-500 text-xs sm:text-sm leading-normal sm:leading-relaxed text-left lg:text-justify">
                       Every successful strategy begins with understanding your business. We conduct in-depth research into your industry, target audience, and competitors to uncover valuable insights that guide smarter marketing decisions.
                     </p>
                   </div>
                 </div>
 
                 {/* Value 2: Strategy */}
-                <div className="flex items-start gap-4">
-                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 shrink-0 flex items-center justify-center select-none">
+                <div className="flex flex-row items-start gap-3 sm:gap-4">
+                  <div className="relative w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 shrink-0 flex items-center justify-center select-none pt-0.5">
                     <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
                       <defs>
                         <linearGradient id="grad-strategy" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -1750,25 +1785,25 @@ export default function Home() {
                           <stop offset="100%" stopColor="#3c9e90" />
                         </linearGradient>
                       </defs>
-                      <circle cx="50" cy="50" r="40" stroke="#e5e7eb" strokeWidth="6" fill="transparent" />
-                      <circle cx="50" cy="50" r="40" stroke="url(#grad-strategy)" strokeWidth="6" fill="transparent" strokeDasharray="251.2" strokeDashoffset={251.2 - (251.2 * 90) / 100} strokeLinecap="round" />
+                      <circle cx="50" cy="50" r="38" stroke="#e5e7eb" strokeWidth="6" fill="transparent" />
+                      <circle cx="50" cy="50" r="38" stroke="url(#grad-strategy)" strokeWidth="6" fill="transparent" strokeDasharray="238.7" strokeDashoffset={238.7 - (238.7 * 90) / 100} strokeLinecap="round" />
                     </svg>
-                    <span className="absolute text-sm sm:text-base font-black text-black">90%</span>
+                    <span className="absolute text-xs sm:text-base font-black text-black">90%</span>
                   </div>
                   <div className="text-left">
-                    <h3 className="text-black text-base sm:text-lg lg:text-xl font-extrabold mb-1.5 flex items-center gap-1.5 select-none">
-                      <Image src="/workflow_icon_2.png" alt="Strategy" width={24} height={24} className="object-contain" />
-                      Strategy
+                    <h3 className="text-black text-sm sm:text-lg lg:text-xl font-extrabold mb-1 flex items-center gap-2 select-none">
+                      <Image src="/workflow_icon_2.png" alt="Strategy" width={20} height={20} className="object-contain shrink-0" />
+                      <span>Strategy</span>
                     </h3>
-                    <p className="text-neutral-500 text-sm leading-relaxed text-justify">
+                    <p className="text-neutral-500 text-xs sm:text-sm leading-normal sm:leading-relaxed text-left lg:text-justify">
                       We don&apos;t believe in one-size-fits-all solutions. Every strategy is carefully crafted around your business goals, ensuring every campaign, website, and piece of content contributes to your long-term success.
                     </p>
                   </div>
                 </div>
 
                 {/* Value 3: Analytics */}
-                <div className="flex items-start gap-4">
-                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 shrink-0 flex items-center justify-center select-none">
+                <div className="flex flex-row items-start gap-3 sm:gap-4">
+                  <div className="relative w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 shrink-0 flex items-center justify-center select-none pt-0.5">
                     <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
                       <defs>
                         <linearGradient id="grad-analytics" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -1776,25 +1811,25 @@ export default function Home() {
                           <stop offset="100%" stopColor="#3c9e90" />
                         </linearGradient>
                       </defs>
-                      <circle cx="50" cy="50" r="40" stroke="#e5e7eb" strokeWidth="6" fill="transparent" />
-                      <circle cx="50" cy="50" r="40" stroke="url(#grad-analytics)" strokeWidth="6" fill="transparent" strokeDasharray="251.2" strokeDashoffset={251.2 - (251.2 * 75) / 100} strokeLinecap="round" />
+                      <circle cx="50" cy="50" r="38" stroke="#e5e7eb" strokeWidth="6" fill="transparent" />
+                      <circle cx="50" cy="50" r="38" stroke="url(#grad-analytics)" strokeWidth="6" fill="transparent" strokeDasharray="238.7" strokeDashoffset={238.7 - (238.7 * 75) / 100} strokeLinecap="round" />
                     </svg>
-                    <span className="absolute text-sm sm:text-base font-black text-black">75%</span>
+                    <span className="absolute text-xs sm:text-base font-black text-black">75%</span>
                   </div>
                   <div className="text-left">
-                    <h3 className="text-black text-base sm:text-lg lg:text-xl font-extrabold mb-1.5 flex items-center gap-1.5 select-none">
-                      <Image src="/workflow_icon_3.png" alt="Optimization & Analytics" width={24} height={24} className="object-contain" />
-                      Optimization & Analytics
+                    <h3 className="text-black text-sm sm:text-lg lg:text-xl font-extrabold mb-1 flex items-center gap-2 select-none">
+                      <Image src="/workflow_icon_3.png" alt="Optimization & Analytics" width={20} height={20} className="object-contain shrink-0" />
+                      <span>Optimization & Analytics</span>
                     </h3>
-                    <p className="text-neutral-500 text-sm leading-relaxed text-justify">
+                    <p className="text-neutral-500 text-xs sm:text-sm leading-normal sm:leading-relaxed text-left lg:text-justify">
                       Growth comes from continuous improvement. We monitor performance, analyze data, and optimize every campaign to maximize results, improve efficiency, and deliver the highest possible return on your investment.
                     </p>
                   </div>
                 </div>
 
                 {/* Value 4: Growth */}
-                <div className="flex items-start gap-4">
-                  <div className="relative w-20 h-20 sm:w-24 sm:h-24 shrink-0 flex items-center justify-center select-none">
+                <div className="flex flex-row items-start gap-3 sm:gap-4">
+                  <div className="relative w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24 shrink-0 flex items-center justify-center select-none pt-0.5">
                     <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
                       <defs>
                         <linearGradient id="grad-growth" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -1802,17 +1837,17 @@ export default function Home() {
                           <stop offset="100%" stopColor="#3c9e90" />
                         </linearGradient>
                       </defs>
-                      <circle cx="50" cy="50" r="40" stroke="#e5e7eb" strokeWidth="6" fill="transparent" />
-                      <circle cx="50" cy="50" r="40" stroke="url(#grad-growth)" strokeWidth="6" fill="transparent" strokeDasharray="251.2" strokeDashoffset={251.2 - (251.2 * 95) / 100} strokeLinecap="round" />
+                      <circle cx="50" cy="50" r="38" stroke="#e5e7eb" strokeWidth="6" fill="transparent" />
+                      <circle cx="50" cy="50" r="38" stroke="url(#grad-growth)" strokeWidth="6" fill="transparent" strokeDasharray="238.7" strokeDashoffset={238.7 - (238.7 * 95) / 100} strokeLinecap="round" />
                     </svg>
-                    <span className="absolute text-sm sm:text-base font-black text-black">95%</span>
+                    <span className="absolute text-xs sm:text-base font-black text-black">95%</span>
                   </div>
                   <div className="text-left">
-                    <h3 className="text-black text-base sm:text-lg lg:text-xl font-extrabold mb-1.5 flex items-center gap-1.5 select-none">
-                      <Image src="/workflow_icon_4.png" alt="Growth" width={24} height={24} className="object-contain" />
-                      Growth
+                    <h3 className="text-black text-sm sm:text-lg lg:text-xl font-extrabold mb-1 flex items-center gap-2 select-none">
+                      <Image src="/workflow_icon_4.png" alt="Growth" width={20} height={20} className="object-contain shrink-0" />
+                      <span>Growth</span>
                     </h3>
-                    <p className="text-neutral-500 text-sm leading-relaxed text-justify">
+                    <p className="text-neutral-500 text-xs sm:text-sm leading-normal sm:leading-relaxed text-left lg:text-justify">
                       Our mission is to help your business grow beyond expectations. Through strategic execution, ongoing optimization, and a commitment to measurable results, we help transform your digital presence.
                     </p>
                   </div>
@@ -1822,60 +1857,60 @@ export default function Home() {
           </div>
 
           {/* Slide 3: Growth Metrics Counter */}
-          <div className="slide-metrics-trigger w-screen h-screen shrink-0 bg-[#faf8f5] flex items-center justify-center relative px-6 sm:px-12 lg:px-24">
-            <div className="mx-auto max-w-[1150px] w-full flex flex-col lg:flex-row items-center justify-between gap-12">
+          <div className="slide-metrics-trigger w-full lg:w-screen py-12 sm:py-16 lg:py-0 min-h-auto lg:h-screen shrink-0 bg-[#faf8f5] flex items-center justify-center relative px-4 sm:px-12 lg:px-24 overflow-hidden">
+            <div className="mx-auto max-w-[1150px] w-full flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
 
               {/* Left Side: 3 statistical counters */}
-              <div className="w-full lg:w-[40%] flex flex-col justify-center items-start gap-10 lg:gap-14">
+              <div className="w-full lg:w-[40%] grid grid-cols-3 gap-2 lg:flex lg:flex-col justify-between lg:justify-center items-center lg:items-start lg:gap-14 text-center lg:text-left">
                 {/* Metric 1 */}
-                <div className="text-left">
+                <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
                   <span
-                    className="counter-val bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight select-none leading-none inline-block py-1"
+                    className="counter-val bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-2xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight select-none leading-none inline-block py-1 whitespace-nowrap"
                     data-target="5"
                     data-suffix=" yrs+"
                   >
                     0
                   </span>
-                  <p className="text-neutral-500 text-sm uppercase tracking-widest font-semibold mt-2 select-none">
+                  <p className="text-neutral-500 text-[10px] sm:text-sm uppercase tracking-widest font-semibold mt-1 sm:mt-2 select-none">
                     Experience
                   </p>
                 </div>
 
                 {/* Metric 2 */}
-                <div className="text-left">
+                <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
                   <span
-                    className="counter-val bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight select-none leading-none inline-block py-1"
+                    className="counter-val bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-2xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight select-none leading-none inline-block py-1 whitespace-nowrap"
                     data-target="200"
                     data-suffix="+"
                   >
                     0
                   </span>
-                  <p className="text-neutral-500 text-sm uppercase tracking-widest font-semibold mt-2 select-none">
+                  <p className="text-neutral-500 text-[10px] sm:text-sm uppercase tracking-widest font-semibold mt-1 sm:mt-2 select-none">
                     Project Completed
                   </p>
                 </div>
 
                 {/* Metric 3 */}
-                <div className="text-left">
+                <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
                   <span
-                    className="counter-val bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-5xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight select-none leading-none inline-block py-1"
+                    className="counter-val bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-2xl sm:text-5xl lg:text-7xl font-extrabold tracking-tight select-none leading-none inline-block py-1 whitespace-nowrap"
                     data-target="150"
                     data-suffix="+"
                   >
                     0
                   </span>
-                  <p className="text-neutral-500 text-sm uppercase tracking-widest font-semibold mt-2 select-none">
+                  <p className="text-neutral-500 text-[10px] sm:text-sm uppercase tracking-widest font-semibold mt-1 sm:mt-2 select-none">
                     Happy Customers
                   </p>
                 </div>
               </div>
 
               {/* Right Side: Dot Pattern Grid and Triangular Masked Image Collage */}
-              <div className="w-full lg:w-[50%] flex items-center justify-center relative py-12 lg:py-0">
+              <div className="w-full lg:w-[50%] flex items-center justify-center relative py-6 lg:py-0">
 
                 {/* Grid Overlay with Repeating Dot Pattern */}
                 <div
-                  className="relative w-[340px] h-[340px] sm:w-[460px] sm:h-[460px] flex items-center justify-center"
+                  className="relative w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] lg:w-[460px] lg:h-[460px] flex items-center justify-center"
                   style={{
                     backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 60 0 L 0 0 0 60' stroke='%23e6e6e6' stroke-width='1'/%3E%3Ccircle cx='0' cy='0' r='3.5' fill='%23121212'/%3E%3C/svg%3E")`,
                     backgroundSize: "60px 60px"
@@ -1884,7 +1919,7 @@ export default function Home() {
 
                   {/* Triangle Image 1 (Left / Lower) */}
                   <div
-                    className="absolute bottom-6 left-6 w-[110px] h-[150px] sm:w-[150px] sm:h-[200px] overflow-hidden border border-neutral-300 shadow-md"
+                    className="absolute bottom-6 left-6 w-[90px] h-[120px] sm:w-[130px] sm:h-[170px] lg:w-[150px] lg:h-[200px] overflow-hidden border border-neutral-300 shadow-md"
                     style={{ clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)" }}
                   >
                     <Image
@@ -1898,7 +1933,7 @@ export default function Home() {
 
                   {/* Triangle Image 2 (Middle / High) */}
                   <div
-                    className="absolute top-6 left-[110px] sm:left-[150px] w-[140px] h-[210px] sm:w-[190px] sm:h-[280px] overflow-hidden border border-neutral-300 shadow-lg z-10"
+                    className="absolute top-6 left-[80px] sm:left-[120px] lg:left-[150px] w-[110px] h-[170px] sm:w-[160px] sm:h-[230px] lg:w-[190px] lg:h-[280px] overflow-hidden border border-neutral-300 shadow-lg z-10"
                     style={{ clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)" }}
                   >
                     <Image
@@ -1912,7 +1947,7 @@ export default function Home() {
 
                   {/* Triangle Image 3 (Right / Lower) */}
                   <div
-                    className="absolute bottom-12 right-6 w-[100px] h-[130px] sm:w-[130px] sm:h-[180px] overflow-hidden border border-neutral-300 shadow-md"
+                    className="absolute bottom-8 right-4 sm:bottom-12 sm:right-6 w-[80px] h-[100px] sm:w-[110px] sm:h-[150px] lg:w-[130px] lg:h-[180px] overflow-hidden border border-neutral-300 shadow-md"
                     style={{ clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)" }}
                   >
                     <Image
@@ -1924,14 +1959,14 @@ export default function Home() {
                     />
                   </div>
 
-                  {/* Faint floating text label badges (stamped on pattern intersections) */}
-                  <span className="absolute top-16 left-6 text-[9px] font-bold tracking-widest text-neutral-400 select-none uppercase">
+                  {/* Faint floating text label badges */}
+                  <span className="absolute top-12 left-4 sm:top-16 sm:left-6 text-[8px] sm:text-[9px] font-bold tracking-widest text-neutral-400 select-none uppercase">
                     Team work
                   </span>
-                  <span className="absolute top-24 right-12 text-[9px] font-bold tracking-widest text-neutral-400 select-none uppercase">
+                  <span className="absolute top-16 right-6 sm:top-24 sm:right-12 text-[8px] sm:text-[9px] font-bold tracking-widest text-neutral-400 select-none uppercase">
                     Skill & Exp
                   </span>
-                  <span className="absolute bottom-36 left-36 text-[9px] font-bold tracking-widest text-neutral-400 select-none uppercase z-20 bg-[#faf8f5]/80 px-1 py-0.5 rounded-sm">
+                  <span className="absolute bottom-24 left-24 sm:bottom-36 sm:left-36 text-[8px] sm:text-[9px] font-bold tracking-widest text-neutral-400 select-none uppercase z-20 bg-[#faf8f5]/80 px-1 py-0.5 rounded-sm">
                     Happiness
                   </span>
 
@@ -1943,19 +1978,19 @@ export default function Home() {
           </div>
 
           {/* Slide 4: Final Call To Action (CTA) */}
-          <div className="w-screen h-screen shrink-0 bg-[#dbe1d4] flex flex-col items-center justify-center relative px-6 select-none">
+          <div className="w-full lg:w-screen py-16 lg:py-0 min-h-[350px] lg:h-screen shrink-0 bg-[#dbe1d4] flex flex-col items-center justify-center relative px-6 select-none overflow-hidden">
 
             {/* Center Content Text Stack */}
             <span className="text-xs uppercase tracking-widest text-neutral-600 font-semibold mb-4">
               Have you project in mind?
             </span>
-            <h2 className="bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent font-extrabold text-4xl sm:text-6xl lg:text-[76px] tracking-tight leading-none text-center max-w-[900px] mb-12 py-2">
+            <h2 className="bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent font-extrabold text-3xl sm:text-6xl lg:text-[76px] tracking-tight leading-none text-center max-w-[900px] mb-8 lg:mb-12 py-2">
               Let’s make something great together!
             </h2>
 
             {/* Interactive Magnetic Outline Circle Button */}
             <MagneticButton
-              className="w-36 h-36 sm:w-44 sm:h-44 border-neutral-800 font-bold text-xs sm:text-sm bg-transparent hover:border-transparent"
+              className="w-32 h-32 sm:w-44 sm:h-44 border-neutral-800 font-bold text-xs sm:text-sm bg-transparent hover:border-transparent"
               magneticStrength={0.25}
             >
               Contact With Us <span>→</span>
@@ -1967,7 +2002,7 @@ export default function Home() {
       </div>
 
       {/* 6. Testimonials Section */}
-      <section className="testimonial-section relative w-full h-screen bg-white overflow-hidden flex items-center justify-center border-t border-neutral-100 select-none">
+      <section className="testimonial-section relative w-full min-h-screen py-16 lg:py-0 bg-white overflow-hidden flex items-center justify-center border-t border-neutral-100 select-none">
 
         {/* Background Diagonal Diamond Lines matching user screenshot */}
         <div className="absolute inset-0 pointer-events-none z-0">
@@ -1976,53 +2011,53 @@ export default function Home() {
           </svg>
         </div>
 
-        {/* Scattered Floating Media Grid (Asymmetric Periphery) */}
+        {/* Scattered Floating Media Grid */}
         <div className="absolute inset-0 w-full h-full z-10 pointer-events-none">
 
           {/* Image 1: left edge, middle. Square */}
-          <div className="floating-img absolute left-6 sm:left-12 top-[42%] w-16 h-16 sm:w-20 sm:h-20 border border-neutral-200 bg-neutral-50 shadow-sm overflow-hidden">
+          <div className="floating-img absolute left-4 top-4 sm:left-12 sm:top-[12%] lg:left-6 xl:left-12 lg:top-[42%] w-16 h-16 sm:w-20 sm:h-20 lg:w-16 lg:h-16 xl:w-20 xl:h-20 border border-neutral-200 bg-neutral-50 shadow-sm overflow-hidden rounded-xl lg:rounded-none opacity-90 lg:opacity-100">
             <Image src="/meta_ad_2.png" alt="Testimonial background portrait 1" fill className="object-cover" />
           </div>
 
           {/* Image 2: top left. Vertical square */}
-          <div className="floating-img absolute left-[22%] top-[8%] sm:top-[12%] w-24 h-24 sm:w-32 sm:h-32 border border-neutral-200 bg-neutral-50 shadow-sm overflow-hidden">
+          <div className="floating-img absolute left-[22%] top-[8%] sm:top-[12%] w-24 h-24 sm:w-32 sm:h-32 border border-neutral-200 bg-neutral-50 shadow-sm overflow-hidden rounded-xl lg:rounded-none hidden lg:block opacity-90 lg:opacity-100">
             <Image src="/portrait_2.png" alt="Testimonial background portrait 2" fill className="object-cover" />
           </div>
 
           {/* Image 3: bottom left. Vertical rect */}
-          <div className="floating-img absolute left-[8%] sm:left-[12%] bottom-[6%] w-28 h-36 sm:w-40 sm:h-52 border border-neutral-200 bg-neutral-50 shadow-sm overflow-hidden">
+          <div className="floating-img absolute left-4 bottom-14 sm:left-12 sm:bottom-[10%] lg:left-[8%] xl:left-[12%] lg:bottom-[6%] w-16 h-20 sm:w-24 sm:h-32 lg:w-28 lg:h-36 xl:w-40 xl:h-52 border border-neutral-200 bg-neutral-50 shadow-sm overflow-hidden rounded-xl lg:rounded-none opacity-90 lg:opacity-100">
             <Image src="/chatgpt_image_jul_20.png" alt="Testimonial background portrait 3" fill className="object-cover" />
           </div>
 
           {/* Image 4: top right. Small square */}
-          <div className="floating-img absolute right-[22%] top-[12%] w-16 h-16 sm:w-20 sm:h-20 border border-neutral-200 bg-neutral-50 shadow-sm overflow-hidden">
+          <div className="floating-img absolute right-4 top-4 sm:right-12 sm:top-[12%] lg:right-[22%] lg:top-[12%] w-16 h-16 sm:w-20 sm:h-20 lg:w-16 lg:h-16 xl:w-20 xl:h-20 border border-neutral-200 bg-neutral-50 shadow-sm overflow-hidden rounded-xl lg:rounded-none opacity-90 lg:opacity-100">
             <Image src="/portrait_4.png" alt="Testimonial background portrait 4" fill className="object-cover" />
           </div>
 
           {/* Image 5: right edge, middle. Square */}
-          <div className="floating-img absolute right-6 sm:right-12 top-[45%] w-24 h-24 sm:w-32 sm:h-32 border border-neutral-200 bg-neutral-50 shadow-sm overflow-hidden">
+          <div className="floating-img absolute right-6 sm:right-12 top-[45%] w-24 h-24 sm:w-32 sm:h-32 border border-neutral-200 bg-neutral-50 shadow-sm overflow-hidden rounded-xl lg:rounded-none hidden lg:block opacity-90 lg:opacity-100">
             <Image src="/unlock_potential_left.png" alt="Testimonial background portrait 5" fill className="object-cover" />
           </div>
 
           {/* Image 6: bottom right. Vertical square */}
-          <div className="floating-img absolute right-[15%] bottom-[12%] w-20 h-24 sm:w-24 sm:h-28 border border-neutral-200 bg-neutral-50 shadow-sm overflow-hidden">
+          <div className="floating-img absolute right-4 bottom-14 sm:right-12 sm:bottom-[10%] lg:right-[15%] lg:bottom-[12%] w-16 h-20 sm:w-24 sm:h-28 lg:w-20 lg:h-24 xl:w-24 xl:h-28 border border-neutral-200 bg-neutral-50 shadow-sm overflow-hidden rounded-xl lg:rounded-none opacity-90 lg:opacity-100">
             <Image src="/unlock_potential_right.png" alt="Testimonial background portrait 6" fill className="object-cover" />
           </div>
 
         </div>
 
         {/* Central Content Slider Container */}
-        <div className="relative z-20 mx-auto max-w-[800px] w-full px-6 flex flex-col items-center text-center">
+        <div className="relative z-20 mx-auto max-w-[800px] w-full px-4 sm:px-6 flex flex-col items-center text-center">
 
           {/* Top Quote Icon */}
-          <span className="bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-7xl sm:text-[90px] font-serif leading-none mb-4 select-none inline-block">
+          <span className="bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-5xl sm:text-7xl lg:text-[90px] font-serif leading-none mb-2 sm:mb-4 select-none inline-block">
             “
           </span>
 
           {/* Testimonial Quote Wrapper */}
           <div className="testimonial-quote-wrapper w-full flex flex-col items-center">
 
-            <p className="text-black italic text-base sm:text-lg md:text-xl lg:text-2xl font-light leading-relaxed mb-8 max-w-[680px]">
+            <p className="text-black italic text-sm sm:text-base md:text-xl lg:text-2xl font-light leading-relaxed mb-6 sm:mb-8 max-w-[680px] px-2 sm:px-0">
               {testimonials[currentTestimonial].quote}
             </p>
 
