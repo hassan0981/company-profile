@@ -71,6 +71,7 @@ export default function WebDevelopmentPage() {
   const lastActiveIndex = useRef<number>(0);
 
   const handleNavClick = (index: number) => {
+    setActiveService(index);
     const trigger = ScrollTrigger.getById("webServicesPin");
     if (trigger && window.innerWidth >= 1024) {
       const start = trigger.start;
@@ -81,8 +82,6 @@ export default function WebDevelopmentPage() {
         top: targetScroll,
         behavior: "smooth"
       });
-    } else {
-      setActiveService(index);
     }
   };
 
@@ -363,20 +362,43 @@ export default function WebDevelopmentPage() {
         <div className="services-container relative w-full lg:h-screen flex flex-col lg:flex-row items-stretch select-none">
 
           {/* Column 1: Left Stationary Nav Menu */}
-          <div className="w-full lg:w-[30%] flex flex-col justify-center items-start border-b lg:border-b-0 lg:border-r border-neutral-200 pl-4 sm:pl-8 lg:pl-12 xl:pl-16 pr-6 py-8 lg:py-12 animate-pulse-none">
-            <div className="flex flex-row lg:flex-col gap-6 lg:gap-6 overflow-x-auto lg:overflow-x-visible w-full scrollbar-none pr-4 py-2">
-              {servicesData.map((service, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => handleNavClick(idx)}
-                  className={`service-nav-btn text-left text-base sm:text-lg lg:text-[19px] font-bold tracking-tight transition-all duration-500 whitespace-normal cursor-pointer hover:text-black ${activeService === idx
-                    ? "bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent opacity-100 scale-[1.02] origin-left"
-                    : "text-neutral-400 opacity-50 hover:opacity-80"
+          <div className="w-full lg:w-[30%] flex flex-col justify-start lg:justify-center items-start border-b lg:border-b-0 lg:border-r border-neutral-200 px-4 sm:px-6 lg:pl-12 xl:pl-16 lg:pr-6 py-4 lg:py-12">
+            <div className="relative w-full">
+              <div className="flex flex-row flex-nowrap overflow-x-auto lg:flex-col lg:flex-wrap gap-2.5 sm:gap-3 lg:gap-5 w-full py-2 pr-10 lg:pr-0 scrollbar-none scroll-smooth">
+                {servicesData.map((service, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => handleNavClick(idx)}
+                    className={`service-nav-btn shrink-0 text-left text-xs sm:text-sm lg:text-[19px] font-bold tracking-tight transition-all duration-300 cursor-pointer px-4 py-2.5 sm:px-5 sm:py-2.5 rounded-xl lg:p-0 lg:rounded-none border lg:border-none flex items-center gap-2 ${
+                      activeService === idx
+                        ? "bg-gradient-to-r from-[#206cbb] to-[#3c9e90] text-white shadow-md shadow-[#206cbb]/25 lg:bg-clip-text lg:text-transparent lg:shadow-none border-transparent font-extrabold scale-102 lg:scale-105 origin-left"
+                        : "text-neutral-700 border-neutral-200/80 bg-white/90 lg:bg-transparent lg:text-neutral-400 opacity-90 lg:opacity-50 hover:opacity-100 hover:border-neutral-300 active:scale-95"
                     }`}
-                >
-                  {service.title}
-                </button>
-              ))}
+                  >
+                    {activeService === idx && (
+                      <span className="h-1.5 w-1.5 rounded-full bg-white lg:hidden animate-pulse" />
+                    )}
+                    <span>{service.title}</span>
+                  </button>
+                ))}
+              </div>
+
+              {/* Mobile Scroll Right Arrow Button */}
+              <button
+                type="button"
+                onClick={(e) => {
+                  const container = e.currentTarget.previousElementSibling as HTMLElement;
+                  if (container) {
+                    container.scrollBy({ left: 160, behavior: "smooth" });
+                  }
+                }}
+                className="lg:hidden absolute right-0 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center w-8 h-8 rounded-full bg-white border border-neutral-200 text-[#206cbb] shadow-md active:scale-95 transition-all"
+                aria-label="Scroll right to see more options"
+              >
+                <svg className="w-4 h-4 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
             </div>
           </div>
 

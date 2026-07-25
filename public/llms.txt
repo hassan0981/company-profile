@@ -1,0 +1,25 @@
+# Bouncy Digital Marketing Agency
+
+> Creative digital marketing agency providing SEO, web development, social media management, Meta Ads, and growth strategies to help businesses grow traffic, leads, and sales.
+
+## Core Services
+
+- [Web Development](https://bouncydigital.com/services/web-development): Custom business websites, WordPress development, eCommerce stores, landing pages, and ongoing maintenance.
+- [SEO Services](https://bouncydigital.com/services/seo): Technical SEO, keyword research, on-page and off-page SEO, local SEO, and authority building to increase search rankings and organic traffic.
+- [Social Media Management](https://bouncydigital.com/services/social-media): Strategic content creation, content calendars, community management, and targeted social media campaigns across Instagram, Facebook, and LinkedIn.
+- [Meta Ads Services](https://bouncydigital.com/services/meta-ads): High-converting Facebook and Instagram ad campaigns, retargeting, and conversion rate optimization to drive leads and sales.
+
+## Company Details
+
+- **Website**: https://bouncydigital.com
+- **Email**: info@bouncydigital.com
+- **About Bouncy**: https://bouncydigital.com/about-us
+- **Contact Us**: https://bouncydigital.com/contact-us
+- **Latest Insights & Blog**: https://bouncydigital.com/blog
+
+## Key Highlights
+
+- **Experience**: 5+ Years in Digital Marketing & Web Development
+- **Projects**: 200+ Completed Projects
+- **Client Satisfaction**: 150+ Happy Business Clients
+- **Approach**: Data-driven, creative, and transparent digital growth solutions tailored to long-term success.

@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://bouncydigital.com/sitemap.xml
+# LLM & AI Search File
+# https://bouncydigital.com/llms.txt

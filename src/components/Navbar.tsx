@@ -41,14 +41,14 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-neutral-100 bg-white">
       <div className="mx-auto flex h-28 max-w-7xl items-center justify-between px-6 sm:px-8">
-        {/* Logo Section */}
-        <Link href="/" onClick={handleLinkClick} className="flex items-center focus:outline-none -ml-12 sm:-ml-18">
+        {/* Logo Section (Right on Mobile, Left on Desktop) */}
+        <Link href="/" onClick={handleLinkClick} className="flex items-center focus:outline-none -mr-4 sm:-mr-8 md:-ml-18 md:mr-0 order-last md:order-first">
           <Image
             src="/BOUNCY.png"
             alt="Bouncy Logo"
             width={325}
             height={162}
-            className="object-contain h-[98px] w-[325px] -my-4"
+            className="object-contain h-[85px] sm:h-[98px] w-auto -my-4"
             priority
           />
         </Link>
@@ -136,124 +136,182 @@ export default function Navbar() {
           </Link>
         </nav>
 
-        {/* Mobile Menu Button */}
-        <div className="flex md:hidden">
+        {/* Mobile Menu Button (Left on Mobile) */}
+        <div className="flex md:hidden order-first md:order-last">
           <button
             type="button"
-            className="inline-flex items-center justify-center p-2 text-neutral-500 hover:text-black focus:outline-none"
+            className="inline-flex items-center justify-center p-2 text-neutral-800 hover:text-black focus:outline-none"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle Menu"
           >
-            {isMobileMenuOpen ? (
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            )}
+            <div className={`transition-transform duration-300 ${isMobileMenuOpen ? "rotate-90" : ""}`}>
+              {isMobileMenuOpen ? (
+                <svg
+                  className="h-7 w-7 text-neutral-900"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2.2}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              ) : (
+                <svg
+                  className="h-7 w-7 text-neutral-900"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2.2}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              )}
+            </div>
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu Drawer */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden border-t border-neutral-100 bg-white py-4 shadow-inner">
-          <div className="space-y-1 px-6">
-            <Link
-              href="/"
-              onClick={handleLinkClick}
-              className={`block py-2 text-xs font-bold tracking-widest ${pathname === "/" ? "text-black" : "text-neutral-500"
-                }`}
-            >
-              HOME
-            </Link>
+      {/* Mobile Menu Drawer with Smooth Slide & Fade Animation */}
+      <div
+        className={`md:hidden border-t border-neutral-100 bg-white/95 backdrop-blur-md transition-all duration-500 ease-in-out overflow-hidden shadow-2xl ${
+          isMobileMenuOpen
+            ? "max-h-[600px] opacity-100 py-6 px-6"
+            : "max-h-0 opacity-0 py-0 px-6 pointer-events-none"
+        }`}
+      >
+        <div className="space-y-1">
+          
+          {/* HOME */}
+          <Link
+            href="/"
+            onClick={handleLinkClick}
+            className={`flex items-center justify-between py-3.5 border-b border-neutral-100 text-sm font-extrabold tracking-widest transition-colors ${
+              pathname === "/" ? "text-[#206cbb]" : "text-neutral-800 hover:text-black"
+            }`}
+          >
+            <span>HOME</span>
+            {pathname === "/" && (
+              <span className="h-2 w-2 rounded-full bg-gradient-to-r from-[#206cbb] to-[#3c9e90]"></span>
+            )}
+          </Link>
 
-            {/* Mobile Services Accordion */}
-            <div>
-              <button
-                type="button"
-                onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
-                className="flex items-center justify-between w-full py-2 text-left focus:outline-none"
-                aria-label="Toggle Services Dropdown"
+          {/* SERVICES */}
+          <div className="border-b border-neutral-100 py-1">
+            <button
+              type="button"
+              onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
+              className="flex items-center justify-between w-full py-2.5 text-left focus:outline-none"
+              aria-label="Toggle Services Dropdown"
+            >
+              <span
+                className={`text-sm font-extrabold tracking-widest ${
+                  pathname.startsWith("/services") ? "text-[#206cbb]" : "text-neutral-800"
+                }`}
               >
-                <span
-                  className={`text-xs font-bold tracking-widest ${pathname.startsWith("/services") ? "text-black" : "text-neutral-500"
-                    }`}
-                >
-                  SERVICES
-                </span>
+                SERVICES
+              </span>
+              <div className={`p-1 rounded-full transition-transform duration-300 ${
+                isMobileServicesOpen ? "rotate-180 bg-neutral-100" : "bg-neutral-50"
+              }`}>
                 <svg
-                  className={`h-4 w-4 text-neutral-500 transition-transform duration-200 ${isMobileServicesOpen ? "rotate-180" : ""
-                    }`}
+                  className="h-4 w-4 text-neutral-600"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  strokeWidth={2}
+                  strokeWidth={2.5}
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                 </svg>
-              </button>
+              </div>
+            </button>
 
-              {isMobileServicesOpen && (
-                <div className="pl-4 space-y-1 border-l border-neutral-100 mt-1 mb-2">
-                  {serviceItems.map((item) => (
-                    <Link
-                      key={item.href}
-                      href={item.href}
-                      onClick={handleLinkClick}
-                      className={`block py-2 text-xs font-bold tracking-wider ${pathname === item.href ? "text-black" : "text-neutral-500"
-                        }`}
-                    >
-                      {item.name.toUpperCase()}
-                    </Link>
-                  ))}
-                </div>
-              )}
+            {/* Dynamic Gradient Card Box for Services Sub-items with smooth expansion */}
+            <div
+              className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                isMobileServicesOpen
+                  ? "max-h-96 opacity-100 my-3"
+                  : "max-h-0 opacity-0 my-0 pointer-events-none"
+              }`}
+            >
+              <div className="rounded-2xl bg-gradient-to-br from-[#206cbb] to-[#3c9e90] p-4.5 sm:p-5 shadow-xl space-y-3.5 border border-white/10">
+                {serviceItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={handleLinkClick}
+                    className={`flex items-center justify-between text-xs font-bold tracking-wider text-white transition-opacity hover:opacity-100 ${
+                      pathname === item.href ? "opacity-100 font-black underline underline-offset-4" : "opacity-85"
+                    }`}
+                  >
+                    <span>{item.name.toUpperCase()}</span>
+                    <span className="text-xs opacity-75">↗</span>
+                  </Link>
+                ))}
+              </div>
             </div>
+          </div>
 
-            <Link
-              href="/about-us"
-              onClick={handleLinkClick}
-              className={`block py-2 text-xs font-bold tracking-widest ${pathname === "/about-us" ? "text-black" : "text-neutral-500"
-                }`}
-            >
-              ABOUT US
-            </Link>
+          {/* ABOUT US */}
+          <Link
+            href="/about-us"
+            onClick={handleLinkClick}
+            className={`flex items-center justify-between py-3.5 border-b border-neutral-100 text-sm font-extrabold tracking-widest transition-colors ${
+              pathname === "/about-us" ? "text-[#206cbb]" : "text-neutral-800 hover:text-black"
+            }`}
+          >
+            <span>ABOUT US</span>
+            {pathname === "/about-us" && (
+              <span className="h-2 w-2 rounded-full bg-gradient-to-r from-[#206cbb] to-[#3c9e90]"></span>
+            )}
+          </Link>
 
-            <Link
-              href="/blog"
-              onClick={handleLinkClick}
-              className={`block py-2 text-xs font-bold tracking-widest ${pathname === "/blog" ? "text-black" : "text-neutral-500"
-                }`}
-            >
-              BLOG
-            </Link>
+          {/* BLOG */}
+          <Link
+            href="/blog"
+            onClick={handleLinkClick}
+            className={`flex items-center justify-between py-3.5 border-b border-neutral-100 text-sm font-extrabold tracking-widest transition-colors ${
+              pathname === "/blog" ? "text-[#206cbb]" : "text-neutral-800 hover:text-black"
+            }`}
+          >
+            <span>BLOG</span>
+            {pathname === "/blog" && (
+              <span className="h-2 w-2 rounded-full bg-gradient-to-r from-[#206cbb] to-[#3c9e90]"></span>
+            )}
+          </Link>
 
+          {/* CONTACT US */}
+          <Link
+            href="/contact-us"
+            onClick={handleLinkClick}
+            className={`flex items-center justify-between py-3.5 text-sm font-extrabold tracking-widest transition-colors ${
+              pathname === "/contact-us" ? "text-[#206cbb]" : "text-neutral-800 hover:text-black"
+            }`}
+          >
+            <span>CONTACT US</span>
+            {pathname === "/contact-us" && (
+              <span className="h-2 w-2 rounded-full bg-gradient-to-r from-[#206cbb] to-[#3c9e90]"></span>
+            )}
+          </Link>
+
+          {/* Quick Contact CTA */}
+          <div className="pt-4 mt-2 border-t border-neutral-100">
             <Link
               href="/contact-us"
               onClick={handleLinkClick}
-              className={`block py-2 text-xs font-bold tracking-widest ${pathname === "/contact-us" ? "text-black" : "text-neutral-500"
-                }`}
+              className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-gradient-to-r from-[#206cbb] to-[#3c9e90] text-white text-xs font-black tracking-widest uppercase shadow-md active:scale-95 transition-all"
             >
-              CONTACT US
+              <span>GET IN TOUCH</span>
+              <span>↗</span>
             </Link>
+            <div className="text-center mt-3">
+              <a href="mailto:info@bouncydigital.com" className="text-[11px] font-semibold text-neutral-400 hover:text-[#206cbb] transition-colors">
+                info@bouncydigital.com
+              </a>
+            </div>
           </div>
+
         </div>
-      )}
+      </div>
     </header>
   );
 }

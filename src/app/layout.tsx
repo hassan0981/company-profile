@@ -22,8 +22,62 @@ const kanit = Kanit({
 });
 
 export const metadata: Metadata = {
-  title: "BouncyDigital - Creative Digital Marketing Agency",
-  description: "Professional company profile website",
+  metadataBase: new URL("https://bouncydigital.com"),
+  title: "Digital Marketing Agency for Business Growth | Bouncy",
+  description:
+    "Bouncy is a creative digital marketing agency providing SEO, web design, social media management, Meta Ads and growth strategies to help businesses grow traffic, leads and sales.",
+  keywords: [
+    "Digital Marketing Agency",
+    "Creative Digital Marketing",
+    "SEO Services",
+    "Web Development Services",
+    "Social Media Management",
+    "Meta Ads Agency",
+    "Facebook Ads",
+    "Instagram Ads",
+    "Business Growth Strategies",
+  ],
+  authors: [{ name: "Bouncy Digital" }],
+  creator: "Bouncy Digital",
+  publisher: "Bouncy Digital",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    title: "Digital Marketing Agency for Business Growth | Bouncy",
+    description:
+      "Bouncy is a creative digital marketing agency providing SEO, web design, social media management, Meta Ads and growth strategies to help businesses grow traffic, leads and sales.",
+    url: "https://bouncydigital.com",
+    siteName: "Bouncy Digital",
+    locale: "en_US",
+    type: "website",
+    images: [
+      {
+        url: "/BOUNCY.png",
+        width: 1200,
+        height: 630,
+        alt: "Bouncy Digital Marketing Agency",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Digital Marketing Agency for Business Growth | Bouncy",
+    description:
+      "Bouncy is a creative digital marketing agency providing SEO, web design, social media management, Meta Ads and growth strategies to help businesses grow traffic, leads and sales.",
+    images: ["/BOUNCY.png"],
+  },
+  alternates: {
+    canonical: "https://bouncydigital.com",
+  },
   icons: {
     icon: "/white_outline.png",
     shortcut: "/white_outline.png",
@@ -41,6 +95,10 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${kanit.variable} h-full antialiased overflow-x-hidden`}
     >
+      <head>
+        <link rel="preload" href="/BOUNCY.png" as="image" type="image/png" />
+        <link rel="preload" href="/sh-bg.webp" as="image" type="image/webp" />
+      </head>
       {/* Google Tag Manager Script */}
       <Script
         id="gtm-script"

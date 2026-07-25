@@ -122,6 +122,7 @@ export default function Home() {
   };
 
   const handleNavClick = (index: number) => {
+    setActiveService(index);
     const trigger = ScrollTrigger.getById("servicesPin");
     if (trigger) {
       const start = trigger.start;
@@ -144,7 +145,7 @@ export default function Home() {
     // A. Animate Preloader Progress Circle (0% to 100%)
     masterTimeline.to(".preloader-progress-circle", {
       strokeDashoffset: 0,
-      duration: 1.5,
+      duration: 0.7,
       ease: "power2.inOut",
     });
 
@@ -154,7 +155,7 @@ export default function Home() {
       {
         scale: 0.8,
         opacity: 0,
-        duration: 0.3,
+        duration: 0.2,
         ease: "power2.in",
       },
       "-=0.1"
@@ -163,7 +164,7 @@ export default function Home() {
     // C. Slide out preloader black screen layer via circular clip-path wipe
     masterTimeline.to(".preloader-layer", {
       clipPath: "circle(0% at 50% 50%)",
-      duration: 1.2,
+      duration: 0.6,
       ease: "power4.inOut",
     });
 
@@ -370,53 +371,57 @@ export default function Home() {
       delay: 0.3,
     });
 
-    // 4. Scroll Trigger Parallax Animations (Drifting Depth)
+    // 4. Scroll Trigger Parallax Animations (Desktop Only: min-width 1024px)
     const ctx = gsap.context(() => {
-      // Image 1: Slow Parallax
-      gsap.to(".portrait-img-1", {
-        y: -30,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".hero-section",
-          start: "top top",
-          end: "bottom top",
-          scrub: 1.0,
-        },
-      });
+      ScrollTrigger.matchMedia({
+        "(min-width: 1024px)": function () {
+          // Image 1: Slow Parallax
+          gsap.to(".portrait-img-1", {
+            y: -30,
+            ease: "none",
+            scrollTrigger: {
+              trigger: ".hero-section",
+              start: "top top",
+              end: "bottom top",
+              scrub: 1.0,
+            },
+          });
 
-      // Image 2: Medium Parallax
-      gsap.to(".portrait-img-2", {
-        y: -80,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".hero-section",
-          start: "top top",
-          end: "bottom top",
-          scrub: 1.2,
-        },
-      });
+          // Image 2: Medium Parallax
+          gsap.to(".portrait-img-2", {
+            y: -80,
+            ease: "none",
+            scrollTrigger: {
+              trigger: ".hero-section",
+              start: "top top",
+              end: "bottom top",
+              scrub: 1.2,
+            },
+          });
 
-      // Image 3: Slow-Medium Parallax
-      gsap.to(".portrait-img-3", {
-        y: -60,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".hero-section",
-          start: "top top",
-          end: "bottom top",
-          scrub: 0.9,
-        },
-      });
+          // Image 3: Slow-Medium Parallax
+          gsap.to(".portrait-img-3", {
+            y: -60,
+            ease: "none",
+            scrollTrigger: {
+              trigger: ".hero-section",
+              start: "top top",
+              end: "bottom top",
+              scrub: 0.9,
+            },
+          });
 
-      // Image 4: Fast Parallax
-      gsap.to(".portrait-img-4", {
-        y: -100,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".hero-section",
-          start: "top top",
-          end: "bottom top",
-          scrub: 1.4,
+          // Image 4: Fast Parallax
+          gsap.to(".portrait-img-4", {
+            y: -100,
+            ease: "none",
+            scrollTrigger: {
+              trigger: ".hero-section",
+              start: "top top",
+              end: "bottom top",
+              scrub: 1.4,
+            },
+          });
         },
       });
 
@@ -546,28 +551,32 @@ export default function Home() {
         "-=0.6"
       );
 
-      // 7. Pinned Services Showcase Section Timeline
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: ".services-showcase-section",
-          start: "top top",
-          end: "+=300%",
-          pin: true,
-          scrub: 0.5,
-          id: "servicesPin",
-          onUpdate: (self) => {
-            const progress = self.progress;
-            let activeIndex = 0;
-            if (progress < 0.25) activeIndex = 0;
-            else if (progress < 0.5) activeIndex = 1;
-            else if (progress < 0.75) activeIndex = 2;
-            else activeIndex = 3;
+      // 7. Pinned Services Showcase Section Timeline (Desktop Only)
+      ScrollTrigger.matchMedia({
+        "(min-width: 1024px)": function () {
+          gsap.timeline({
+            scrollTrigger: {
+              trigger: ".services-showcase-section",
+              start: "top top",
+              end: "+=300%",
+              pin: true,
+              scrub: 0.5,
+              id: "servicesPin",
+              onUpdate: (self) => {
+                const progress = self.progress;
+                let activeIndex = 0;
+                if (progress < 0.25) activeIndex = 0;
+                else if (progress < 0.5) activeIndex = 1;
+                else if (progress < 0.75) activeIndex = 2;
+                else activeIndex = 3;
 
-            if (activeIndex !== lastActiveIndex.current) {
-              lastActiveIndex.current = activeIndex;
-              setActiveService(activeIndex);
+                if (activeIndex !== lastActiveIndex.current) {
+                  lastActiveIndex.current = activeIndex;
+                  setActiveService(activeIndex);
+                }
+              }
             }
-          }
+          });
         }
       });
 
@@ -771,7 +780,98 @@ export default function Home() {
         }
       });
 
-    }, containerRef);
+      // 10. Mobile-Only Scroll-Driven Animations (Reveals, Workflow Stagger, Why Choose Us Slide-Ins, Blog & Testimonials)
+      ScrollTrigger.matchMedia({
+        "(max-width: 1023px)": function () {
+          // A. Mobile Section Headings & Intros Fade + Slide Up
+          const mobileRevealElements = gsap.utils.toArray<HTMLElement>(
+            ".unlock-heading-wrapper, .unlock-desc, .workflow-header, .why-choose-header, .testimonial-header, .blog-header"
+          );
+          mobileRevealElements.forEach((el) => {
+            gsap.fromTo(
+              el,
+              { opacity: 0, y: 35 },
+              {
+                opacity: 1,
+                y: 0,
+                duration: 0.9,
+                ease: "power3.out",
+                scrollTrigger: {
+                  trigger: el,
+                  start: "top 85%",
+                  toggleActions: "play none none none",
+                },
+              }
+            );
+          });
+
+          // B. Why Choose Us Mobile Slide-Ins & Stagger
+          const mobileWhySlides = gsap.utils.toArray<HTMLElement>(".why-choose-us-slider > div");
+          if (mobileWhySlides.length > 0) {
+            gsap.fromTo(
+              mobileWhySlides,
+              { opacity: 0, y: 45, scale: 0.96 },
+              {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 0.8,
+                stagger: 0.15,
+                ease: "power2.out",
+                scrollTrigger: {
+                  trigger: ".why-choose-us-wrapper",
+                  start: "top 80%",
+                  toggleActions: "play none none none",
+                },
+              }
+            );
+          }
+
+          // C. Blog Cards Mobile Staggered Scroll-Reveal
+          const mobileBlogCards = gsap.utils.toArray<HTMLElement>(".blog-section .grid > div");
+          if (mobileBlogCards.length > 0) {
+            gsap.fromTo(
+              mobileBlogCards,
+              { opacity: 0, y: 45 },
+              {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                stagger: 0.15,
+                ease: "power3.out",
+                scrollTrigger: {
+                  trigger: ".blog-section",
+                  start: "top 80%",
+                  toggleActions: "play none none none",
+                },
+              }
+            );
+          }
+
+          // D. Testimonial Card Mobile Reveal
+          const mobileTestimonialCard = document.querySelector(".testimonial-quote-wrapper");
+          if (mobileTestimonialCard) {
+            gsap.fromTo(
+              mobileTestimonialCard,
+              { opacity: 0, y: 40, scale: 0.96 },
+              {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 0.9,
+                ease: "power3.out",
+                scrollTrigger: {
+                  trigger: ".testimonial-section",
+                  start: "top 80%",
+                  toggleActions: "play none none none",
+                },
+              }
+            );
+          }
+        }
+      });
+
+    });
 
     // 11. Testimonial Parallax Grid Shift (surrounding scattered images float relative to cursor)
     const testimonialSect = document.querySelector(".testimonial-section");
@@ -835,7 +935,7 @@ export default function Home() {
 
   const line1Words = "Creative Digital".split("");
   const line2Words = "Marketing Agency".split("");
-  const line3Words = "Bouncy Beyond Ordinary".split("");
+  const line3Words = "Bounce Beyond Ordinary".split("");
   const descParagraph = "We combine creative thinking with data-driven digital marketing strategies. From website development and SEO to social media management and high-performing ad campaigns, we help your business attract the right audience, build trust, and achieve sustainable growth. ".split(" ");
 
   return (
@@ -843,33 +943,65 @@ export default function Home() {
       ref={containerRef}
       className="relative flex-grow bg-white text-black overflow-hidden font-kanit"
     >
-      {/* 1. Circular Preloader Layer */}
+      {/* 1. Theme-Branded Circular Preloader Layer */}
       <div
-        className="preloader-layer fixed inset-0 z-[9999] bg-[#0b0b0b] flex items-center justify-center pointer-events-none"
+        className="preloader-layer fixed inset-0 z-[9999] bg-gradient-to-br from-[#060c16] via-[#091526] to-[#051117] flex flex-col items-center justify-center pointer-events-none select-none"
         style={{ clipPath: "circle(100% at 50% 50%)" }}
       >
-        <svg className="preloader-svg w-20 h-20 sm:w-24 sm:h-24" viewBox="0 0 100 100">
-          <circle
-            cx="50"
-            cy="50"
-            r="40"
-            stroke="#1a1a1a"
-            strokeWidth="4"
-            fill="transparent"
-          />
-          <circle
-            className="preloader-progress-circle"
-            cx="50"
-            cy="50"
-            r="40"
-            stroke="#ffffff"
-            strokeWidth="4"
-            fill="transparent"
-            strokeDasharray="251.2"
-            strokeDashoffset="251.2"
-            strokeLinecap="round"
-          />
-        </svg>
+        <div className="preloader-svg relative flex flex-col items-center justify-center">
+          
+          {/* Glowing Animated Ring with Bouncy Theme Gradient */}
+          <div className="relative w-28 h-28 sm:w-32 sm:h-32 flex items-center justify-center">
+            <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
+              <defs>
+                <linearGradient id="preloader-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#206cbb" />
+                  <stop offset="100%" stopColor="#3c9e90" />
+                </linearGradient>
+              </defs>
+              {/* Background Track Circle */}
+              <circle
+                cx="50"
+                cy="50"
+                r="42"
+                stroke="rgba(255, 255, 255, 0.08)"
+                strokeWidth="4"
+                fill="transparent"
+              />
+              {/* Animated Bouncy Theme Progress Circle */}
+              <circle
+                className="preloader-progress-circle"
+                cx="50"
+                cy="50"
+                r="42"
+                stroke="url(#preloader-grad)"
+                strokeWidth="4.5"
+                fill="transparent"
+                strokeDasharray="263.8"
+                strokeDashoffset="263.8"
+                strokeLinecap="round"
+                style={{ filter: "drop-shadow(0px 0px 8px rgba(60, 158, 144, 0.6))" }}
+              />
+            </svg>
+
+            {/* Bouncy Logo in Preloader Center */}
+            <div className="absolute inset-0 flex items-center justify-center p-4">
+              <Image
+                src="/BOUNCY.png"
+                alt="Bouncy Logo"
+                width={120}
+                height={60}
+                className="object-contain w-20 sm:w-24 h-auto brightness-110 drop-shadow-[0_0_12px_rgba(32,108,187,0.5)]"
+                priority
+              />
+            </div>
+          </div>
+
+          {/* Subtitle Brand Tagline */}
+          <span className="mt-6 text-[10px] sm:text-xs font-black tracking-[0.25em] text-white/80 uppercase bg-gradient-to-r from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent animate-pulse">
+            Bouncy Grow Digital
+          </span>
+        </div>
       </div>
 
       {/* Main Hero Section */}
@@ -892,10 +1024,10 @@ export default function Home() {
 
         <div className="relative mx-auto max-w-[1510px] w-full flex flex-col lg:flex-row items-center lg:items-stretch gap-10 lg:gap-0 z-10">
 
-          {/* Left Column: 3-Image Collage (Stacked Vertically on Desktop) */}
-          <div className="w-full lg:w-[26.7%] flex flex-row flex-nowrap lg:flex-col gap-[12px] sm:gap-[15px] items-center lg:items-start overflow-x-auto lg:overflow-x-visible pb-4 lg:pb-0 scrollbar-none">
+          {/* Left Column: Hero Collage (2 Images on Mobile, 3 Stacked Vertically on Desktop) */}
+          <div className="w-full lg:w-[26.7%] flex flex-row lg:flex-col justify-center lg:justify-start gap-[12px] sm:gap-[15px] items-center lg:items-start pb-2 lg:pb-0">
             {/* Image 1 */}
-            <div className="portrait-img-1 shrink-0 relative w-[180px] h-[180px] sm:w-[220px] sm:h-[220px] lg:w-[240px] lg:h-[240px] border border-neutral-200/50 bg-neutral-50 shadow-md">
+            <div className="portrait-img-1 shrink-0 relative w-[155px] h-[155px] xs:w-[175px] xs:h-[175px] sm:w-[220px] sm:h-[220px] lg:w-[240px] lg:h-[240px] border border-neutral-200/50 bg-neutral-50 shadow-md rounded-lg overflow-hidden">
               <div className="portrait-img-1-inner relative w-full h-full">
                 <Image
                   src="/meta_ad_2_1.png"
@@ -909,7 +1041,7 @@ export default function Home() {
             </div>
 
             {/* Image 2 */}
-            <div className="portrait-img-2 shrink-0 relative w-[180px] h-[180px] sm:w-[220px] sm:h-[220px] lg:w-[240px] lg:h-[240px] border border-neutral-200/50 bg-neutral-50 shadow-md self-center lg:self-end">
+            <div className="portrait-img-2 shrink-0 relative w-[155px] h-[155px] xs:w-[175px] xs:h-[175px] sm:w-[220px] sm:h-[220px] lg:w-[240px] lg:h-[240px] border border-neutral-200/50 bg-neutral-50 shadow-md self-center lg:self-end rounded-lg overflow-hidden">
               <div className="portrait-img-2-inner relative w-full h-full">
                 <Image
                   src="/service_smm.png"
@@ -922,8 +1054,8 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Image 3 */}
-            <div className="portrait-img-3 shrink-0 relative w-[180px] h-[180px] sm:w-[220px] sm:h-[220px] lg:w-[240px] lg:h-[240px] border border-neutral-200/50 bg-neutral-50 shadow-md">
+            {/* Image 3 (Hidden on mobile screens, stacked vertically on desktop) */}
+            <div className="portrait-img-3 hidden lg:block shrink-0 relative w-[180px] h-[180px] sm:w-[220px] sm:h-[220px] lg:w-[240px] lg:h-[240px] border border-neutral-200/50 bg-neutral-50 shadow-md rounded-lg overflow-hidden">
               <div className="portrait-img-3-inner relative w-full h-full">
                 <Image
                   src="/meta_ad_2.png"
@@ -1128,34 +1260,60 @@ export default function Home() {
       </section>
 
       {/* 3. Services Showcase Pinned Section */}
-      <section className="services-showcase-section relative bg-white text-black w-full min-h-screen overflow-hidden z-20 border-t border-neutral-200">
-        <div className="services-container relative w-full min-h-screen h-auto lg:h-screen flex flex-col lg:flex-row items-stretch select-none">
+      <section className="services-showcase-section relative bg-white text-black w-full min-h-fit lg:min-h-screen overflow-visible lg:overflow-hidden z-20 border-t border-neutral-200">
+        <div className="services-container relative w-full h-auto lg:h-screen flex flex-col lg:flex-row items-stretch select-none">
 
           {/* Column 1: Left Stationary Nav Menu */}
           <div className="w-full lg:w-[25%] flex flex-col justify-start items-start gap-y-4 sm:gap-y-8 lg:gap-y-12 border-b lg:border-b-0 lg:border-r border-neutral-200 pl-4 sm:pl-8 lg:pl-12 xl:pl-16 pr-4 sm:pr-6 pt-8 sm:pt-12 lg:pt-20 pb-4 sm:pb-6 lg:pb-12">
             
-            {/* Top Heading */}
+            {/* Top Heading & Mobile Intro Description */}
             <div className="text-left w-full">
               <h2 className="bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent font-black text-xl sm:text-3xl lg:text-4xl uppercase tracking-wider leading-tight select-none py-1 lg:py-2">
                 Our Digital Expertise
               </h2>
+              {/* Mobile-Only Intro Description */}
+              <p className="block lg:hidden text-neutral-500 text-xs sm:text-sm leading-relaxed mt-2 max-w-[420px] text-left">
+                Everything we do is designed to help your business grow smarter, move faster, and stay ahead in today&apos;s digital landscape. From building a strong online presence to driving measurable results, our solutions are tailored to support your long-term success.
+              </p>
             </div>
 
-            {/* Nav Links */}
-            <div className="flex flex-wrap lg:flex-col gap-2 sm:gap-4 lg:gap-10 w-full mt-2 lg:mt-6">
-              {servicesData.map((service, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => handleNavClick(idx)}
-                  className={`service-nav-btn text-left text-xs sm:text-lg lg:text-2xl font-bold tracking-tight transition-all duration-300 cursor-pointer px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full lg:p-0 lg:rounded-none border lg:border-none ${
-                    activeService === idx
-                      ? "bg-gradient-to-br from-[#206cbb] to-[#3c9e90] text-white lg:bg-clip-text lg:text-transparent opacity-100 scale-105 origin-left border-transparent shadow-sm lg:shadow-none"
-                      : "text-neutral-600 border-neutral-200 bg-neutral-50 lg:bg-transparent lg:text-neutral-400 opacity-80 lg:opacity-50 hover:opacity-100"
-                  }`}
-                >
-                  {service.title}
-                </button>
-              ))}
+            {/* Nav Links with Mobile Horizontal Swipe & Scroll Right Arrow Button */}
+            <div className="relative w-full mt-2 lg:mt-6">
+              <div className="flex flex-row flex-nowrap overflow-x-auto lg:flex-col lg:flex-wrap gap-2.5 sm:gap-3 lg:gap-10 w-full py-2 pr-10 lg:pr-0 scrollbar-none scroll-smooth">
+                {servicesData.map((service, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => handleNavClick(idx)}
+                    className={`service-nav-btn shrink-0 text-left text-xs sm:text-sm lg:text-2xl font-bold tracking-tight transition-all duration-300 cursor-pointer px-4 py-2.5 sm:px-5 sm:py-2.5 rounded-xl lg:p-0 lg:rounded-none border lg:border-none flex items-center gap-2 ${
+                      activeService === idx
+                        ? "bg-gradient-to-r from-[#206cbb] to-[#3c9e90] text-white shadow-md shadow-[#206cbb]/25 lg:bg-clip-text lg:text-transparent lg:shadow-none border-transparent font-extrabold scale-102 lg:scale-105 origin-left"
+                        : "text-neutral-700 border-neutral-200/80 bg-white/90 lg:bg-transparent lg:text-neutral-400 opacity-90 lg:opacity-50 hover:opacity-100 hover:border-neutral-300 active:scale-95"
+                    }`}
+                  >
+                    {activeService === idx && (
+                      <span className="h-1.5 w-1.5 rounded-full bg-white lg:hidden animate-pulse" />
+                    )}
+                    <span>{service.title}</span>
+                  </button>
+                ))}
+              </div>
+
+              {/* Mobile Scroll Right Arrow Button */}
+              <button
+                type="button"
+                onClick={(e) => {
+                  const container = e.currentTarget.previousElementSibling as HTMLElement;
+                  if (container) {
+                    container.scrollBy({ left: 160, behavior: "smooth" });
+                  }
+                }}
+                className="lg:hidden absolute right-0 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center w-8 h-8 rounded-full bg-white border border-neutral-200 text-[#206cbb] shadow-md active:scale-95 transition-all"
+                aria-label="Scroll right to see more options"
+              >
+                <svg className="w-4 h-4 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
             </div>
           </div>
 
@@ -1181,14 +1339,12 @@ export default function Home() {
           </div>
 
           {/* Column 3: Service Details (Right) */}
-          <div className="w-full lg:w-[40%] flex flex-col justify-center pl-4 sm:pl-8 lg:pl-12 pr-4 sm:pr-8 lg:pr-12 xl:pr-16 py-6 lg:py-10">
+          <div className="w-full lg:w-[40%] flex flex-col justify-center pl-4 sm:pl-8 lg:pl-12 pr-4 sm:pr-8 lg:pr-12 xl:pr-16 py-6 lg:py-10 pb-16 sm:pb-20 lg:pb-10">
 
-            {/* Top Row: Description */}
-            <div className="text-left mb-6 lg:mb-4 w-full">
-              <p className="text-neutral-500 text-xs sm:text-base leading-relaxed max-w-[420px] text-left lg:text-justify">
-                Everything we do is designed to help your business grow smarter, move faster, and stay ahead in today&apos;s digital landscape. From building a strong online presence to driving measurable results, our solutions are tailored to support your long-term success.
-              </p>
-            </div>
+            {/* Desktop-Only Section Intro Description */}
+            <p className="hidden lg:block text-neutral-500 text-sm lg:text-base leading-relaxed mb-6 max-w-[420px] text-justify">
+              Everything we do is designed to help your business grow smarter, move faster, and stay ahead in today&apos;s digital landscape. From building a strong online presence to driving measurable results, our solutions are tailored to support your long-term success.
+            </p>
 
             {/* Middle Row: Dynamic Details Container */}
             <div className="relative flex-grow flex flex-col justify-start items-start pt-1 lg:pt-2 pb-4 sm:pb-6">
@@ -1204,7 +1360,7 @@ export default function Home() {
                   <h3 className="bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight mb-3 sm:mb-4 w-fit">
                     {service.title}
                   </h3>
-                  <p className="text-neutral-600 text-xs sm:text-base leading-relaxed mb-4 sm:mb-6 max-w-[420px] text-left lg:text-justify">
+                  <p className="text-neutral-600 text-sm sm:text-base leading-relaxed mb-4 sm:mb-6 max-w-full lg:max-w-[420px] text-left lg:text-justify pr-2 lg:pr-0">
                     {service.description}
                   </p>
 
@@ -2014,33 +2170,33 @@ export default function Home() {
         {/* Scattered Floating Media Grid */}
         <div className="absolute inset-0 w-full h-full z-10 pointer-events-none">
 
-          {/* Image 1: left edge, middle. Square */}
-          <div className="floating-img absolute left-4 top-4 sm:left-12 sm:top-[12%] lg:left-6 xl:left-12 lg:top-[42%] w-16 h-16 sm:w-20 sm:h-20 lg:w-16 lg:h-16 xl:w-20 xl:h-20 border border-neutral-200 bg-neutral-50 shadow-sm overflow-hidden rounded-xl lg:rounded-none opacity-90 lg:opacity-100">
+          {/* Image 1: Top Left */}
+          <div className="floating-img absolute left-3 top-4 sm:left-10 sm:top-[10%] lg:left-6 xl:left-10 lg:top-[38%] w-20 h-24 sm:w-28 sm:h-32 lg:w-28 lg:h-32 xl:w-36 xl:h-44 border-2 border-white bg-neutral-50 shadow-md overflow-hidden rounded-2xl opacity-95">
             <Image src="/meta_ad_2.png" alt="Testimonial background portrait 1" fill className="object-cover" />
           </div>
 
-          {/* Image 2: top left. Vertical square */}
-          <div className="floating-img absolute left-[22%] top-[8%] sm:top-[12%] w-24 h-24 sm:w-32 sm:h-32 border border-neutral-200 bg-neutral-50 shadow-sm overflow-hidden rounded-xl lg:rounded-none hidden lg:block opacity-90 lg:opacity-100">
+          {/* Image 2: Top Left Center (Desktop) */}
+          <div className="floating-img absolute left-[20%] top-[6%] sm:top-[10%] w-32 h-32 sm:w-40 sm:h-40 lg:w-40 lg:h-40 border-2 border-white bg-neutral-50 shadow-md overflow-hidden rounded-2xl hidden lg:block opacity-95">
             <Image src="/portrait_2.png" alt="Testimonial background portrait 2" fill className="object-cover" />
           </div>
 
-          {/* Image 3: bottom left. Vertical rect */}
-          <div className="floating-img absolute left-4 bottom-14 sm:left-12 sm:bottom-[10%] lg:left-[8%] xl:left-[12%] lg:bottom-[6%] w-16 h-20 sm:w-24 sm:h-32 lg:w-28 lg:h-36 xl:w-40 xl:h-52 border border-neutral-200 bg-neutral-50 shadow-sm overflow-hidden rounded-xl lg:rounded-none opacity-90 lg:opacity-100">
+          {/* Image 3: Bottom Left */}
+          <div className="floating-img absolute left-3 bottom-14 sm:left-10 sm:bottom-[8%] lg:left-[6%] xl:left-[10%] lg:bottom-[4%] w-24 h-30 sm:w-32 sm:h-40 lg:w-36 lg:h-48 xl:w-48 xl:h-56 border-2 border-white bg-neutral-50 shadow-md overflow-hidden rounded-2xl opacity-95">
             <Image src="/chatgpt_image_jul_20.png" alt="Testimonial background portrait 3" fill className="object-cover" />
           </div>
 
-          {/* Image 4: top right. Small square */}
-          <div className="floating-img absolute right-4 top-4 sm:right-12 sm:top-[12%] lg:right-[22%] lg:top-[12%] w-16 h-16 sm:w-20 sm:h-20 lg:w-16 lg:h-16 xl:w-20 xl:h-20 border border-neutral-200 bg-neutral-50 shadow-sm overflow-hidden rounded-xl lg:rounded-none opacity-90 lg:opacity-100">
+          {/* Image 4: Top Right */}
+          <div className="floating-img absolute right-3 top-4 sm:right-10 sm:top-[10%] lg:right-[20%] lg:top-[10%] w-20 h-24 sm:w-28 sm:h-32 lg:w-28 lg:h-32 xl:w-36 xl:h-44 border-2 border-white bg-neutral-50 shadow-md overflow-hidden rounded-2xl opacity-95">
             <Image src="/portrait_4.png" alt="Testimonial background portrait 4" fill className="object-cover" />
           </div>
 
-          {/* Image 5: right edge, middle. Square */}
-          <div className="floating-img absolute right-6 sm:right-12 top-[45%] w-24 h-24 sm:w-32 sm:h-32 border border-neutral-200 bg-neutral-50 shadow-sm overflow-hidden rounded-xl lg:rounded-none hidden lg:block opacity-90 lg:opacity-100">
+          {/* Image 5: Middle Right (Desktop) */}
+          <div className="floating-img absolute right-6 sm:right-10 top-[42%] w-32 h-32 sm:w-40 sm:h-40 lg:w-40 lg:h-40 border-2 border-white bg-neutral-50 shadow-md overflow-hidden rounded-2xl hidden lg:block opacity-95">
             <Image src="/unlock_potential_left.png" alt="Testimonial background portrait 5" fill className="object-cover" />
           </div>
 
-          {/* Image 6: bottom right. Vertical square */}
-          <div className="floating-img absolute right-4 bottom-14 sm:right-12 sm:bottom-[10%] lg:right-[15%] lg:bottom-[12%] w-16 h-20 sm:w-24 sm:h-28 lg:w-20 lg:h-24 xl:w-24 xl:h-28 border border-neutral-200 bg-neutral-50 shadow-sm overflow-hidden rounded-xl lg:rounded-none opacity-90 lg:opacity-100">
+          {/* Image 6: Bottom Right */}
+          <div className="floating-img absolute right-3 bottom-14 sm:right-10 sm:bottom-[8%] lg:right-[12%] lg:bottom-[8%] w-24 h-30 sm:w-32 sm:h-40 lg:w-32 lg:h-40 xl:w-40 xl:h-50 border-2 border-white bg-neutral-50 shadow-md overflow-hidden rounded-2xl opacity-95">
             <Image src="/unlock_potential_right.png" alt="Testimonial background portrait 6" fill className="object-cover" />
           </div>
 
@@ -2234,7 +2390,7 @@ export default function Home() {
       {/* Floating Scroll to Top Button (Bottom-Right) */}
       <button
         onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-12 h-12 rounded-full bg-[#121212] text-white hover:bg-black transition-colors shadow-lg cursor-pointer"
+        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#121212] text-white hover:bg-black transition-colors shadow-lg cursor-pointer"
         aria-label="Scroll to top"
       >
         <svg
