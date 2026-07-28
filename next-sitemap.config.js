@@ -13,16 +13,8 @@ module.exports = {
     '/api/*'
   ],
   robotsTxtOptions: {
-    policies: [
-      {
-        userAgent: '*',
-        allow: '/',
-        disallow: ['/wp-admin/', '/404', '/500', '/api/*'],
-      },
-      {
-        userAgent: '*',
-        allow: '/wp-admin/admin-ajax.php',
-      },
-    ],
+    transformRobotsTxt: async (config, robotsTxt) => {
+      return `# Robots.txt for Bouncy Digital\n\nUser-agent: *\nAllow: /\n\n# Block API routes from crawling\nDisallow: /api/*\n\n# Block custom error pages\nDisallow: /404\nDisallow: /500\n\n# Sitemap\nSitemap: https://bouncydigital.com/sitemap.xml\n`;
+    },
   },
 }
