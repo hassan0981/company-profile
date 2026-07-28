@@ -34,5 +34,44 @@ export const metadata: Metadata = {
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return children;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Will you manage my entire advertising campaign?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. We manage your entire Meta advertising campaign, including audience research, campaign setup, ad creatives, budget optimization, A/B testing, performance monitoring, and detailed reporting to help achieve your marketing goals."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How do you improve campaign performance?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "We continuously analyse campaign data, test different audiences, creatives, ad placements, and bidding strategies to reduce advertising costs, improve conversions, and maximise your return on ad spend (ROAS)."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What results can I expect from Meta Ads?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Our goal is to help your business generate qualified leads, increase website traffic, improve brand awareness, boost online sales, and achieve measurable business growth through data-driven Facebook and Instagram advertising campaigns."
+                }
+              }
+            ]
+          }),
+        }}
+      />
+      {children}
+    </>
+  );
 }

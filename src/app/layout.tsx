@@ -98,6 +98,63 @@ export default function RootLayout({
       <head>
         <link rel="preload" href="/BOUNCY.png" as="image" type="image/png" />
         <link rel="preload" href="/sh-bg.webp" as="image" type="image/webp" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "@id": "https://bouncydigital.com/#organization",
+              "name": "Bouncy Digital",
+              "alternateName": "Bouncy",
+              "url": "https://bouncydigital.com",
+              "logo": "https://bouncydigital.com/logo.png",
+              "image": "https://bouncydigital.com/logo.png",
+              "description": "Bouncy Digital is a full-service digital marketing agency providing SEO, web development, social media marketing, Meta Ads, Google Ads, branding, content marketing, and performance-driven digital solutions to help businesses grow online.",
+              "email": "info@bouncydigital.com",
+              "telephone": "+92 329 0968819 ",
+              "foundingDate": "2026",
+              "knowsAbout": [
+                "Search Engine Optimization",
+                "Technical SEO",
+                "Local SEO",
+                "E-commerce SEO",
+                "Web Development",
+                "Social Media Marketing",
+                "Facebook Ads",
+                "Instagram Ads",
+                "Meta Ads",
+                "Google Ads",
+                "Pay-Per-Click Advertising",
+                "Content Marketing",
+                "Digital Marketing",
+                "Brand Strategy",
+                "Lead Generation",
+                "Website Optimization"
+              ],
+              "sameAs": [
+                "https://www.facebook.com/yourpage",
+                "https://www.instagram.com/yourprofile",
+                "https://www.linkedin.com/company/yourcompany",
+                "https://x.com/yourprofile",
+                "https://www.youtube.com/@yourchannel"
+              ],
+              "contactPoint": {
+                "@type": "info@bouncydigital.com ",
+                "telephone": "+92 329 0968819 ",
+                "contactType": "customer support",
+                "availableLanguage": [
+                  "English",
+                  "Urdu"
+                ]
+              },
+              "address": {
+                "@type": "Model Town Lahore",
+                "addressCountry": "PK"
+              }
+            }),
+          }}
+        />
       </head>
       {/* Google Tag Manager Script */}
       <Script

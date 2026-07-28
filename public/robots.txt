@@ -1,7 +1,17 @@
+# *
 User-agent: *
 Allow: /
-Disallow: /api/
+Disallow: /wp-admin/
+Disallow: /404
+Disallow: /500
+Disallow: /api/*
 
+# *
+User-agent: *
+Allow: /wp-admin/admin-ajax.php
+
+# Host
+Host: https://bouncydigital.com
+
+# Sitemaps
 Sitemap: https://bouncydigital.com/sitemap.xml
-# LLM & AI Search File
-# https://bouncydigital.com/llms.txt

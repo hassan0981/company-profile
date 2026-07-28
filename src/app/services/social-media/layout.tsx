@@ -34,5 +34,60 @@ export const metadata: Metadata = {
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return children;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is included in your social media management service?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Our social media management service includes content planning, creative post design, copywriting, profile optimization, content scheduling, community engagement, performance monitoring, and monthly reporting to help grow your online presence."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Which social media platforms do you manage?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "We manage Facebook, Instagram, LinkedIn, X (formerly Twitter), TikTok, Pinterest, and other major social media platforms based on your business goals and target audience."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How often will you post on my social media accounts?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The posting frequency depends on your selected package and marketing strategy. We create a consistent content calendar to keep your audience engaged while maintaining quality and brand consistency."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can social media management help generate leads and sales?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. A well-planned social media strategy helps increase brand awareness, engage your target audience, drive website traffic, and generate qualified leads that can convert into customers."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Why should I choose Bouncy Digital for social media management?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Bouncy Digital develops customised social media strategies based on your business objectives. We create engaging content, monitor performance, optimise campaigns, and focus on building a strong online presence that delivers measurable results."
+                }
+              }
+            ]
+          }),
+        }}
+      />
+      {children}
+    </>
+  );
 }
