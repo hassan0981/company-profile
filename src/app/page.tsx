@@ -933,7 +933,7 @@ export default function Home() {
     };
   }, []);
 
-  const line1Words = "Creative Digital".split("");
+  const line1Words = "Hassan Digital".split("");
   const line2Words = "Marketing Agency".split("");
   const line3Words = "Bounce Beyond Ordinary".split("");
   const descParagraph = "We combine creative thinking with data-driven digital marketing strategies. From website development and SEO to social media management and high-performing ad campaigns, we help your business attract the right audience, build trust, and achieve sustainable growth. ".split(" ");
