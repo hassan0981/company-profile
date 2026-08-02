@@ -1,0 +1,1 @@
+self.__BUILD_MANIFEST = (function(a,b){return {__rewrites:{afterFiles:[{has:a,source:"\u002Fsitemap_index.xml",destination:b},{has:a,source:"\u002Fsitemap-0.xml",destination:b}],beforeFiles:[],fallback:[]},__routerFilterStatic:a,__routerFilterDynamic:a,sortedPages:["\u002F_app"]}}(void 0,"\u002Fsitemap.xml"));self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()

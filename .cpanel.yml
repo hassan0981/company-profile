@@ -2,8 +2,9 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home2/mhassanja/public_html/bouncydigital.com
-    - /bin/cp -R src $DEPLOYPATH
+    - /bin/cp -R .next $DEPLOYPATH
     - /bin/cp -R public $DEPLOYPATH
+    - /bin/cp -R src $DEPLOYPATH
     - /bin/cp package.json $DEPLOYPATH
     - /bin/cp package-lock.json $DEPLOYPATH
     - /bin/cp next.config.ts $DEPLOYPATH

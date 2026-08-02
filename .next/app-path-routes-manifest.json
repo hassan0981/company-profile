@@ -1,0 +1,15 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/about-us/page": "/about-us",
+  "/blog/[slug]/page": "/blog/[slug]",
+  "/blog/page": "/blog",
+  "/contact-us/page": "/contact-us",
+  "/favicon.ico/route": "/favicon.ico",
+  "/page": "/",
+  "/services/meta-ads/page": "/services/meta-ads",
+  "/services/page": "/services",
+  "/services/seo/page": "/services/seo",
+  "/services/social-media/page": "/services/social-media",
+  "/services/web-development/page": "/services/web-development"
+}

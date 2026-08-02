@@ -1,0 +1,161 @@
+{
+  "version": 3,
+  "pages404": true,
+  "appType": "app",
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "priority": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    },
+    {
+      "source": "/web-development",
+      "destination": "/services/web-development",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/web-development(?:/)?$"
+    },
+    {
+      "source": "/seo-services",
+      "destination": "/services/seo",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/seo-services(?:/)?$"
+    },
+    {
+      "source": "/social-media-management",
+      "destination": "/services/social-media",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/social-media-management(?:/)?$"
+    },
+    {
+      "source": "/meta-ads",
+      "destination": "/services/meta-ads",
+      "statusCode": 308,
+      "regex": "^(?!/_next)/meta-ads(?:/)?$"
+    }
+  ],
+  "headers": [],
+  "onMatchHeaders": [],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [
+      {
+        "source": "/sitemap_index.xml",
+        "destination": "/sitemap.xml",
+        "regex": "^/sitemap_index\\.xml(?:/)?$"
+      },
+      {
+        "source": "/sitemap-0.xml",
+        "destination": "/sitemap.xml",
+        "regex": "^/sitemap-0\\.xml(?:/)?$"
+      }
+    ],
+    "fallback": []
+  },
+  "dynamicRoutes": [
+    {
+      "page": "/blog/[slug]",
+      "regex": "^/blog/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPslug": "nxtPslug"
+      },
+      "namedRegex": "^/blog/(?<nxtPslug>[^/]+?)(?:/)?$"
+    }
+  ],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_global-error",
+      "regex": "^/_global\\-error(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_global\\-error(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/about-us",
+      "regex": "^/about\\-us(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/about\\-us(?:/)?$"
+    },
+    {
+      "page": "/blog",
+      "regex": "^/blog(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/blog(?:/)?$"
+    },
+    {
+      "page": "/contact-us",
+      "regex": "^/contact\\-us(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/contact\\-us(?:/)?$"
+    },
+    {
+      "page": "/favicon.ico",
+      "regex": "^/favicon\\.ico(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/favicon\\.ico(?:/)?$"
+    },
+    {
+      "page": "/services",
+      "regex": "^/services(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/services(?:/)?$"
+    },
+    {
+      "page": "/services/meta-ads",
+      "regex": "^/services/meta\\-ads(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/services/meta\\-ads(?:/)?$"
+    },
+    {
+      "page": "/services/seo",
+      "regex": "^/services/seo(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/services/seo(?:/)?$"
+    },
+    {
+      "page": "/services/social-media",
+      "regex": "^/services/social\\-media(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/services/social\\-media(?:/)?$"
+    },
+    {
+      "page": "/services/web-development",
+      "regex": "^/services/web\\-development(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/services/web\\-development(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments",
+    "clientParamParsing": false,
+    "dynamicRSCPrerender": false
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}

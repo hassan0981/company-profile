@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/services/layout,_N_T_/services/social-media/layout,_N_T_/services/social-media/page,_N_T_/services/social-media"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/services/social-media/__PAGE__",
+    "/services/social-media",
+    "/services",
+    "/_index",
+    "/_head"
+  ]
+}
