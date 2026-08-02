@@ -6,6 +6,7 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import MagneticButton from "@/components/MagneticButton";
+import certImg from "../../../public/certificate.webp";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -746,10 +747,11 @@ export default function AboutUsPage() {
 
                 {/* Certificate Image Container */}
                 <div className="relative aspect-[3/2] w-full rounded-2xl overflow-hidden bg-neutral-950 flex items-center justify-center">
-                  <img
-                    src="/certificate.png"
+                  <Image
+                    src={certImg}
                     alt="Institute of Digital Marketing Pakistan Certificate of Completion - Chaudhry Abdul Samad"
                     className="w-full h-full object-contain transform transition-transform duration-700 group-hover:scale-105"
+                    priority
                   />
                   
                   {/* Subtle Dark Overlay on hover with Expand Badge */}
@@ -870,10 +872,11 @@ export default function AboutUsPage() {
 
             {/* High-res Image Container */}
             <div className="relative w-full aspect-[3/2] rounded-2xl overflow-hidden bg-black flex items-center justify-center">
-              <img
-                src="/certificate.png"
+              <Image
+                src={certImg}
                 alt="Institute of Digital Marketing Pakistan Certificate of Completion"
                 className="w-full h-full object-contain"
+                priority
               />
             </div>
           </div>
