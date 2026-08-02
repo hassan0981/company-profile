@@ -745,14 +745,11 @@ export default function AboutUsPage() {
                 <div className="absolute inset-0 bg-gradient-to-r from-[#206cbb]/30 via-transparent to-[#3c9e90]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl pointer-events-none" />
 
                 {/* Certificate Image Container */}
-                <div className="relative aspect-[3/2] w-full rounded-2xl overflow-hidden bg-neutral-950">
-                  <Image
-                    src="/CERTIFICATE.png"
+                <div className="relative aspect-[3/2] w-full rounded-2xl overflow-hidden bg-neutral-950 flex items-center justify-center">
+                  <img
+                    src="/certificate.png"
                     alt="Institute of Digital Marketing Pakistan Certificate of Completion - Chaudhry Abdul Samad"
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 60vw"
-                    className="object-contain transform transition-transform duration-700 group-hover:scale-105"
-                    priority
+                    className="w-full h-full object-contain transform transition-transform duration-700 group-hover:scale-105"
                   />
                   
                   {/* Subtle Dark Overlay on hover with Expand Badge */}
@@ -872,14 +869,11 @@ export default function AboutUsPage() {
             </div>
 
             {/* High-res Image Container */}
-            <div className="relative w-full aspect-[3/2] rounded-2xl overflow-hidden bg-black">
-              <Image
-                src="/CERTIFICATE.png"
+            <div className="relative w-full aspect-[3/2] rounded-2xl overflow-hidden bg-black flex items-center justify-center">
+              <img
+                src="/certificate.png"
                 alt="Institute of Digital Marketing Pakistan Certificate of Completion"
-                fill
-                sizes="100vw"
-                className="object-contain"
-                priority
+                className="w-full h-full object-contain"
               />
             </div>
           </div>
