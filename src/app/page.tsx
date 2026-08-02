@@ -933,7 +933,7 @@ export default function Home() {
     };
   }, []);
 
-  const line1Words = "Hassan Digital".split("");
+  const line1Words = "Creative Digital".split("");
   const line2Words = "Marketing Agency".split("");
   const line3Words = "Bounce Beyond Ordinary".split("");
   const descParagraph = "We combine creative thinking with data-driven digital marketing strategies. From website development and SEO to social media management and high-performing ad campaigns, we help your business attract the right audience, build trust, and achieve sustainable growth. ".split(" ");
@@ -949,7 +949,7 @@ export default function Home() {
         style={{ clipPath: "circle(100% at 50% 50%)" }}
       >
         <div className="preloader-svg relative flex flex-col items-center justify-center">
-          
+
           {/* Glowing Animated Ring with Bouncy Theme Gradient */}
           <div className="relative w-28 h-28 sm:w-32 sm:h-32 flex items-center justify-center">
             <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
@@ -1179,7 +1179,7 @@ export default function Home() {
       {/* 2. Unlock Potential Section */}
       <section className="unlock-section relative bg-white pt-10 pb-20 lg:pt-12 lg:pb-28 px-4 sm:px-8 lg:px-12 xl:px-16 overflow-hidden z-20 border-t border-neutral-100">
         <div className="relative mx-auto max-w-[1510px] w-full flex flex-col gap-12 sm:gap-16 lg:gap-20">
-          
+
           {/* Top Center Heading */}
           <div className="text-center flex flex-col items-center w-full">
             <h2 className="what-we-do-heading opacity-0 bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent font-black text-4xl sm:text-5xl lg:text-6xl tracking-tight select-none w-fit pb-1">
@@ -1265,7 +1265,7 @@ export default function Home() {
 
           {/* Column 1: Left Stationary Nav Menu */}
           <div className="w-full lg:w-[25%] flex flex-col justify-start items-start gap-y-4 sm:gap-y-8 lg:gap-y-12 border-b lg:border-b-0 lg:border-r border-neutral-200 pl-4 sm:pl-8 lg:pl-12 xl:pl-16 pr-4 sm:pr-6 pt-8 sm:pt-12 lg:pt-20 pb-4 sm:pb-6 lg:pb-12">
-            
+
             {/* Top Heading & Mobile Intro Description */}
             <div className="text-left w-full">
               <h2 className="bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent font-black text-xl sm:text-3xl lg:text-4xl uppercase tracking-wider leading-tight select-none py-1 lg:py-2">
@@ -1284,11 +1284,10 @@ export default function Home() {
                   <button
                     key={idx}
                     onClick={() => handleNavClick(idx)}
-                    className={`service-nav-btn shrink-0 text-left text-xs sm:text-sm lg:text-2xl font-bold tracking-tight transition-all duration-300 cursor-pointer px-4 py-2.5 sm:px-5 sm:py-2.5 rounded-xl lg:p-0 lg:rounded-none border lg:border-none flex items-center gap-2 ${
-                      activeService === idx
+                    className={`service-nav-btn shrink-0 text-left text-xs sm:text-sm lg:text-2xl font-bold tracking-tight transition-all duration-300 cursor-pointer px-4 py-2.5 sm:px-5 sm:py-2.5 rounded-xl lg:p-0 lg:rounded-none border lg:border-none flex items-center gap-2 ${activeService === idx
                         ? "bg-gradient-to-r from-[#206cbb] to-[#3c9e90] text-white shadow-md shadow-[#206cbb]/25 lg:bg-clip-text lg:text-transparent lg:shadow-none border-transparent font-extrabold scale-102 lg:scale-105 origin-left"
                         : "text-neutral-700 border-neutral-200/80 bg-white/90 lg:bg-transparent lg:text-neutral-400 opacity-90 lg:opacity-50 hover:opacity-100 hover:border-neutral-300 active:scale-95"
-                    }`}
+                      }`}
                   >
                     {activeService === idx && (
                       <span className="h-1.5 w-1.5 rounded-full bg-white lg:hidden animate-pulse" />
@@ -1347,15 +1346,14 @@ export default function Home() {
             </p>
 
             {/* Middle Row: Dynamic Details Container */}
-            <div className="relative flex-grow flex flex-col justify-start items-start pt-1 lg:pt-2 pb-4 sm:pb-6">
+            <div className="relative min-h-[220px] sm:min-h-[240px] lg:min-h-[250px] flex flex-col justify-start items-start pt-1 lg:pt-2 pb-2">
               {servicesData.map((service, idx) => (
                 <div
                   key={idx}
-                  className={`service-details-wrapper transition-all duration-500 ease-in-out ${
-                    activeService === idx
+                  className={`service-details-wrapper transition-all duration-500 ease-in-out ${activeService === idx
                       ? "block opacity-100 relative lg:absolute lg:inset-x-0 lg:top-2 translate-y-0 pointer-events-auto"
                       : "hidden lg:block opacity-0 lg:absolute lg:inset-x-0 lg:top-2 -translate-y-6 pointer-events-none"
-                  }`}
+                    }`}
                 >
                   <h3 className="bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight mb-3 sm:mb-4 w-fit">
                     {service.title}
@@ -1378,10 +1376,10 @@ export default function Home() {
             </div>
 
             {/* Bottom Row: Pinned interactive "Explore More" badge */}
-            <div className="mt-8 shrink-0">
+            <div className="mt-2 sm:mt-3 shrink-0">
               <Link href={serviceUrls[activeService]} className="block w-fit">
                 <MagneticButton
-                  className="w-28 h-28 sm:w-32 sm:h-32 border-neutral-300 text-xs sm:text-sm bg-transparent"
+                  className="w-24 h-24 sm:w-28 sm:h-28 border-neutral-300 text-xs sm:text-sm bg-transparent"
                 >
                   Explore More <span className="text-xs sm:text-sm">↗</span>
                 </MagneticButton>
@@ -1613,9 +1611,8 @@ export default function Home() {
                   <h3 className="text-xl lg:text-[22px] font-extrabold bg-gradient-to-r from-neutral-800 to-neutral-900 bg-clip-text text-transparent group-hover:from-[#206cbb] group-hover:to-[#3c9e90] transition-colors duration-500 mt-2 text-center select-none w-fit mx-auto mb-1">
                     Free Discovery Consultation
                   </h3>
-                  <p className={`text-neutral-500 transition-all duration-500 text-sm sm:text-base leading-relaxed text-center mt-3 max-w-[310px] ${
-                    expandedCards[1] ? "" : "line-clamp-2"
-                  }`}>
+                  <p className={`text-neutral-500 transition-all duration-500 text-sm sm:text-base leading-relaxed text-center mt-3 max-w-[310px] ${expandedCards[1] ? "" : "line-clamp-2"
+                    }`}>
                     Before any project can succeed, there needs to be an understanding of your business. This consultation helps us know more about your business, your aims and target audience so that we can find ways of sustainable development.
                   </p>
                   <button
@@ -1687,9 +1684,8 @@ export default function Home() {
                   <h3 className="text-xl lg:text-[22px] font-extrabold bg-gradient-to-r from-neutral-800 to-neutral-900 bg-clip-text text-transparent group-hover:from-[#206cbb] group-hover:to-[#3c9e90] transition-colors duration-500 mt-2 text-center select-none w-fit mx-auto mb-1">
                     Personalized Growth Strategy
                   </h3>
-                  <p className={`text-neutral-500 transition-all duration-500 text-sm sm:text-base leading-relaxed text-center mt-3 max-w-[310px] ${
-                    expandedCards[2] ? "" : "line-clamp-2"
-                  }`}>
+                  <p className={`text-neutral-500 transition-all duration-500 text-sm sm:text-base leading-relaxed text-center mt-3 max-w-[310px] ${expandedCards[2] ? "" : "line-clamp-2"
+                    }`}>
                     We conduct thorough research and use all the data to create a personalized strategy for your online growth.
                   </p>
                   <button
@@ -1761,9 +1757,8 @@ export default function Home() {
                   <h3 className="text-xl lg:text-[22px] font-extrabold bg-gradient-to-r from-neutral-800 to-neutral-900 bg-clip-text text-transparent group-hover:from-[#206cbb] group-hover:to-[#3c9e90] transition-colors duration-500 mt-2 text-center select-none w-fit mx-auto mb-1">
                     Effective Implementation
                   </h3>
-                  <p className={`text-neutral-500 transition-all duration-500 text-sm sm:text-base leading-relaxed text-center mt-3 max-w-[310px] ${
-                    expandedCards[3] ? "" : "line-clamp-2"
-                  }`}>
+                  <p className={`text-neutral-500 transition-all duration-500 text-sm sm:text-base leading-relaxed text-center mt-3 max-w-[310px] ${expandedCards[3] ? "" : "line-clamp-2"
+                    }`}>
                     From developing websites and implementing SEO tactics to managing social media and advertising campaigns - Our team implements your vision with creativity and precision.
                   </p>
                   <button
@@ -1835,9 +1830,8 @@ export default function Home() {
                   <h3 className="text-xl lg:text-[22px] font-extrabold bg-gradient-to-r from-neutral-800 to-neutral-900 bg-clip-text text-transparent group-hover:from-[#206cbb] group-hover:to-[#3c9e90] transition-colors duration-500 mt-2 text-center select-none w-fit mx-auto mb-1">
                     Optimization & Scaling
                   </h3>
-                  <p className={`text-neutral-500 transition-all duration-500 text-sm sm:text-base leading-relaxed text-center mt-3 max-w-[310px] ${
-                    expandedCards[4] ? "" : "line-clamp-2"
-                  }`}>
+                  <p className={`text-neutral-500 transition-all duration-500 text-sm sm:text-base leading-relaxed text-center mt-3 max-w-[310px] ${expandedCards[4] ? "" : "line-clamp-2"
+                    }`}>
                     Online growth never ends after the implementation phase. It continues through constant optimization and scaling of your efforts.
                   </p>
                   <button
