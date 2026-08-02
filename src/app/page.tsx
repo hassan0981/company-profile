@@ -1346,7 +1346,7 @@ export default function Home() {
             </p>
 
             {/* Middle Row: Dynamic Details Container */}
-            <div className="relative min-h-[220px] sm:min-h-[240px] lg:min-h-[250px] flex flex-col justify-start items-start pt-1 lg:pt-2 pb-2">
+            <div className="relative min-h-[240px] sm:min-h-[260px] lg:min-h-[270px] flex flex-col justify-start items-start pt-1 lg:pt-2 pb-2">
               {servicesData.map((service, idx) => (
                 <div
                   key={idx}
@@ -1376,7 +1376,7 @@ export default function Home() {
             </div>
 
             {/* Bottom Row: Pinned interactive "Explore More" badge */}
-            <div className="mt-2 sm:mt-3 shrink-0">
+            <div className="mt-5 sm:mt-6 lg:mt-7 shrink-0">
               <Link href={serviceUrls[activeService]} className="block w-fit">
                 <MagneticButton
                   className="w-24 h-24 sm:w-28 sm:h-28 border-neutral-300 text-xs sm:text-sm bg-transparent"
