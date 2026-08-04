@@ -110,6 +110,7 @@ export default function Footer() {
                   alt="BouncyDigital Logo"
                   width={384}
                   height={192}
+                  loading="lazy"
                   className="h-48 w-96 object-contain -mt-10"
                 />
               </Link>

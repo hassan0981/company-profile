@@ -1602,6 +1602,9 @@ export default function Home() {
                   <img
                     src="/workflow_icon_1.webp"
                     alt="Free Discovery Consultation"
+                    width={80}
+                    height={80}
+                    loading="lazy"
                     className="w-20 h-20 object-contain z-10 drop-shadow-[0_10px_20px_rgba(32,108,187,0.25)] group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500"
                   />
                 </div>
@@ -1675,6 +1678,9 @@ export default function Home() {
                   <img
                     src="/workflow_icon_2.webp"
                     alt="Personalized Growth Strategy"
+                    width={80}
+                    height={80}
+                    loading="lazy"
                     className="w-20 h-20 object-contain z-10 drop-shadow-[0_10px_20px_rgba(32,108,187,0.25)] group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500"
                   />
                 </div>
@@ -1748,6 +1754,9 @@ export default function Home() {
                   <img
                     src="/workflow_icon_3.webp"
                     alt="Effective Implementation"
+                    width={80}
+                    height={80}
+                    loading="lazy"
                     className="w-20 h-20 object-contain z-10 drop-shadow-[0_10px_20px_rgba(32,108,187,0.25)] group-hover:scale-110 group-hover:rotate-12 transition-transform duration-500"
                   />
                 </div>
@@ -1821,6 +1830,9 @@ export default function Home() {
                   <img
                     src="/workflow_icon_4.webp"
                     alt="Optimization & Scaling"
+                    width={80}
+                    height={80}
+                    loading="lazy"
                     className="w-20 h-20 object-contain z-10 drop-shadow-[0_10px_20px_rgba(32,108,187,0.25)] group-hover:scale-110 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform duration-500"
                   />
                 </div>
