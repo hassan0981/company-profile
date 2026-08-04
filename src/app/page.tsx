@@ -192,22 +192,20 @@ export default function Home() {
       isMobileViewport ? 0 : "-=1.0" // Start immediately on mobile
     );
 
-    // E. Entrance: Typography Mask-Reveal (Lift Vertically & Scale Up)
+    // E. Entrance: Typography Mask-Reveal (Scale Up & Fade In - Layout Stable)
     // "Bounce" line
     masterTimeline.fromTo(
       ".char-line1",
       {
-        y: "120%",
-        scale: 0.6,
+        scale: 0.85,
         opacity: 0,
       },
       {
-        y: "0%",
         scale: 1,
         opacity: 1,
-        duration: 1.2,
-        stagger: 0.03,
-        ease: "power4.out", // Buttery, high-end cubic-bezier equivalent
+        duration: 0.8,
+        stagger: 0.02,
+        ease: "power2.out",
       },
       isMobileViewport ? 0.05 : "-=1.2"
     );
@@ -216,17 +214,15 @@ export default function Home() {
     masterTimeline.fromTo(
       ".char-line2",
       {
-        y: "120%",
-        scale: 0.6,
+        scale: 0.85,
         opacity: 0,
       },
       {
-        y: "0%",
         scale: 1,
         opacity: 1,
-        duration: 1.2,
-        stagger: 0.03,
-        ease: "power4.out",
+        duration: 0.8,
+        stagger: 0.02,
+        ease: "power2.out",
       },
       isMobileViewport ? 0.15 : "-=1.0"
     );
@@ -235,22 +231,20 @@ export default function Home() {
     masterTimeline.fromTo(
       ".char-line3",
       {
-        y: "120%",
-        scale: 0.6,
+        scale: 0.85,
         opacity: 0,
       },
       {
-        y: "0%",
         scale: 1,
         opacity: 1,
-        duration: 1.2,
-        stagger: 0.03,
-        ease: "power4.out",
+        duration: 0.8,
+        stagger: 0.02,
+        ease: "power2.out",
       },
       isMobileViewport ? 0.25 : "-=0.9"
     );
 
-    // F. Entrance: Staggered Collage Images (Top to Bottom: 1 -> 2 -> 3 -> 4)
+    // F. Entrance: Staggered Collage Images (Scale Up & Fade In - Layout Stable)
     const collageImages = [
       ".portrait-img-1",
       ".portrait-img-2",
@@ -262,52 +256,46 @@ export default function Home() {
       collageImages,
       {
         opacity: 0,
-        y: 80,
-        scale: 0.88,
+        scale: 0.93,
       },
       {
         opacity: 1,
-        y: 0,
         scale: 1,
-        duration: 1.4,
-        stagger: 0.15,
-        ease: "power3.out",
+        duration: 0.9,
+        stagger: 0.1,
+        ease: "power2.out",
       },
       isMobileViewport ? 0.35 : "-=1.1"
     );
 
-    // G. Entrance: Description Words Stagger Reveal
+    // G. Entrance: Description Words Stagger Reveal (Fade In - Layout Stable)
     masterTimeline.fromTo(
       ".desc-word",
       {
-        y: "100%",
         opacity: 0,
       },
       {
-        y: "0%",
         opacity: 1,
-        stagger: 0.012,
-        duration: 0.8,
-        ease: "power3.out",
+        stagger: 0.008,
+        duration: 0.6,
+        ease: "power2.out",
       },
       isMobileViewport ? 0.45 : "-=1.1"
     );
 
-    // H. Entrance: Decorative Squares
+    // H. Entrance: Decorative Squares (Scale Up & Fade In - Layout Stable)
     masterTimeline.fromTo(
       [".peach-box", ".dark-box"],
       {
         opacity: 0,
         scale: 0.5,
-        x: 30,
       },
       {
         opacity: 1,
         scale: 1,
-        x: 0,
-        duration: 1.0,
+        duration: 0.8,
         stagger: 0.1,
-        ease: "power3.out",
+        ease: "power2.out",
       },
       isMobileViewport ? 0.55 : "-=1.1"
     );
