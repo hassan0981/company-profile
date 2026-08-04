@@ -48,7 +48,7 @@ export default function Navbar() {
             alt="Bouncy Logo"
             width={325}
             height={162}
-            className="object-contain h-[85px] sm:h-[98px] w-auto -my-4"
+            className="object-contain h-[85px] sm:h-[98px] w-[170px] sm:w-[196px] -my-4"
             priority
           />
         </Link>

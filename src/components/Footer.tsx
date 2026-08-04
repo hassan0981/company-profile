@@ -108,7 +108,9 @@ export default function Footer() {
                 <img
                   src="/white_outline.webp"
                   alt="BouncyDigital Logo"
-                  className="h-48 w-auto object-contain -mt-10"
+                  width={384}
+                  height={192}
+                  className="h-48 w-96 object-contain -mt-10"
                 />
               </Link>
             </div>

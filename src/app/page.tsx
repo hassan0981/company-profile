@@ -145,7 +145,7 @@ export default function Home() {
     // A. Animate Preloader Progress Circle (0% to 100%)
     masterTimeline.to(".preloader-progress-circle", {
       strokeDashoffset: 0,
-      duration: 0.7,
+      duration: 0.3,
       ease: "power2.inOut",
     });
 
@@ -155,16 +155,16 @@ export default function Home() {
       {
         scale: 0.8,
         opacity: 0,
-        duration: 0.2,
+        duration: 0.15,
         ease: "power2.in",
       },
-      "-=0.1"
+      "-=0.05"
     );
 
     // C. Slide out preloader black screen layer via circular clip-path wipe
     masterTimeline.to(".preloader-layer", {
       clipPath: "circle(0% at 50% 50%)",
-      duration: 0.6,
+      duration: 0.35,
       ease: "power4.inOut",
     });
 

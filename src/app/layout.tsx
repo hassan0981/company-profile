@@ -98,6 +98,8 @@ export default function RootLayout({
       <head>
         <link rel="preload" href="/BOUNCY.webp" as="image" type="image/webp" />
         <link rel="preload" href="/sh-bg.webp" as="image" type="image/webp" />
+        <link rel="preload" href="/meta_ad_2_1.webp" as="image" type="image/webp" fetchPriority="high" />
+        <link rel="preload" href="/service_smm.webp" as="image" type="image/webp" fetchPriority="high" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
