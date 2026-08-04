@@ -933,7 +933,7 @@ export default function Home() {
     };
   }, []);
 
-  const line1Words = "Creative Digital".split("");
+  const line1Words = "Hassan Digital".split("");
   const line2Words = "Marketing Agency".split("");
   const line3Words = "Bounce Beyond Ordinary".split("");
   const descParagraph = "We combine creative thinking with data-driven digital marketing strategies. From website development and SEO to social media management and high-performing ad campaigns, we help your business attract the right audience, build trust, and achieve sustainable growth. ".split(" ");
@@ -1285,8 +1285,8 @@ export default function Home() {
                     key={idx}
                     onClick={() => handleNavClick(idx)}
                     className={`service-nav-btn shrink-0 text-left text-xs sm:text-sm lg:text-2xl font-bold tracking-tight transition-all duration-300 cursor-pointer px-4 py-2.5 sm:px-5 sm:py-2.5 rounded-xl lg:p-0 lg:rounded-none border lg:border-none flex items-center gap-2 ${activeService === idx
-                        ? "bg-gradient-to-r from-[#206cbb] to-[#3c9e90] text-white shadow-md shadow-[#206cbb]/25 lg:bg-clip-text lg:text-transparent lg:shadow-none border-transparent font-extrabold scale-102 lg:scale-105 origin-left"
-                        : "text-neutral-700 border-neutral-200/80 bg-white/90 lg:bg-transparent lg:text-neutral-400 opacity-90 lg:opacity-50 hover:opacity-100 hover:border-neutral-300 active:scale-95"
+                      ? "bg-gradient-to-r from-[#206cbb] to-[#3c9e90] text-white shadow-md shadow-[#206cbb]/25 lg:bg-clip-text lg:text-transparent lg:shadow-none border-transparent font-extrabold scale-102 lg:scale-105 origin-left"
+                      : "text-neutral-700 border-neutral-200/80 bg-white/90 lg:bg-transparent lg:text-neutral-400 opacity-90 lg:opacity-50 hover:opacity-100 hover:border-neutral-300 active:scale-95"
                       }`}
                   >
                     {activeService === idx && (
@@ -1351,8 +1351,8 @@ export default function Home() {
                 <div
                   key={idx}
                   className={`service-details-wrapper transition-all duration-500 ease-in-out ${activeService === idx
-                      ? "block opacity-100 relative lg:absolute lg:inset-x-0 lg:top-2 translate-y-0 pointer-events-auto"
-                      : "hidden lg:block opacity-0 lg:absolute lg:inset-x-0 lg:top-2 -translate-y-6 pointer-events-none"
+                    ? "block opacity-100 relative lg:absolute lg:inset-x-0 lg:top-2 translate-y-0 pointer-events-auto"
+                    : "hidden lg:block opacity-0 lg:absolute lg:inset-x-0 lg:top-2 -translate-y-6 pointer-events-none"
                     }`}
                 >
                   <h3 className="bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent text-xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight mb-3 sm:mb-4 w-fit">
