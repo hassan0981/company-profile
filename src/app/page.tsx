@@ -139,34 +139,41 @@ export default function Home() {
   useEffect(() => {
     const cardListeners: { card: HTMLElement; move: (e: MouseEvent) => void; leave: () => void }[] = [];
 
+    const isMobileViewport = window.innerWidth < 768;
+
     // 1. Master Animation Timeline (Preloader -> Reveal)
     const masterTimeline = gsap.timeline();
 
-    // A. Animate Preloader Progress Circle (0% to 100%)
-    masterTimeline.to(".preloader-progress-circle", {
-      strokeDashoffset: 0,
-      duration: 0.3,
-      ease: "power2.inOut",
-    });
+    if (!isMobileViewport) {
+      // A. Animate Preloader Progress Circle (0% to 100%)
+      masterTimeline.to(".preloader-progress-circle", {
+        strokeDashoffset: 0,
+        duration: 0.3,
+        ease: "power2.inOut",
+      });
 
-    // B. Fade out Preloader Progress Circle SVG
-    masterTimeline.to(
-      ".preloader-svg",
-      {
-        scale: 0.8,
-        opacity: 0,
-        duration: 0.15,
-        ease: "power2.in",
-      },
-      "-=0.05"
-    );
+      // B. Fade out Preloader Progress Circle SVG
+      masterTimeline.to(
+        ".preloader-svg",
+        {
+          scale: 0.8,
+          opacity: 0,
+          duration: 0.15,
+          ease: "power2.in",
+        },
+        "-=0.05"
+      );
 
-    // C. Slide out preloader black screen layer via circular clip-path wipe
-    masterTimeline.to(".preloader-layer", {
-      clipPath: "circle(0% at 50% 50%)",
-      duration: 0.35,
-      ease: "power4.inOut",
-    });
+      // C. Slide out preloader black screen layer via circular clip-path wipe
+      masterTimeline.to(".preloader-layer", {
+        clipPath: "circle(0% at 50% 50%)",
+        duration: 0.35,
+        ease: "power4.inOut",
+      });
+    } else {
+      // Instantly hide preloader overlay on mobile viewports
+      gsap.set(".preloader-layer", { display: "none" });
+    }
 
     // D. Entrance: Concentric Background Circles (Fade & Expand)
     masterTimeline.fromTo(
@@ -182,7 +189,7 @@ export default function Home() {
         stagger: 0.12,
         ease: "power3.out",
       },
-      "-=1.0" // Starts revealing as the clip-path wipe is halfway done
+      isMobileViewport ? 0 : "-=1.0" // Start immediately on mobile
     );
 
     // E. Entrance: Typography Mask-Reveal (Lift Vertically & Scale Up)
@@ -202,7 +209,7 @@ export default function Home() {
         stagger: 0.03,
         ease: "power4.out", // Buttery, high-end cubic-bezier equivalent
       },
-      "-=1.2" // Overlaps with circles entrance
+      isMobileViewport ? 0.05 : "-=1.2"
     );
 
     // "Beyond" line
@@ -221,7 +228,7 @@ export default function Home() {
         stagger: 0.03,
         ease: "power4.out",
       },
-      "-=1.0"
+      isMobileViewport ? 0.15 : "-=1.0"
     );
 
     // "Ordinary" line
@@ -240,7 +247,7 @@ export default function Home() {
         stagger: 0.03,
         ease: "power4.out",
       },
-      "-=0.9"
+      isMobileViewport ? 0.25 : "-=0.9"
     );
 
     // F. Entrance: Staggered Collage Images (Top to Bottom: 1 -> 2 -> 3 -> 4)
@@ -266,7 +273,7 @@ export default function Home() {
         stagger: 0.15,
         ease: "power3.out",
       },
-      "-=1.1"
+      isMobileViewport ? 0.35 : "-=1.1"
     );
 
     // G. Entrance: Description Words Stagger Reveal
@@ -283,7 +290,7 @@ export default function Home() {
         duration: 0.8,
         ease: "power3.out",
       },
-      "-=1.1"
+      isMobileViewport ? 0.45 : "-=1.1"
     );
 
     // H. Entrance: Decorative Squares
@@ -302,7 +309,7 @@ export default function Home() {
         stagger: 0.1,
         ease: "power3.out",
       },
-      "-=1.1"
+      isMobileViewport ? 0.55 : "-=1.1"
     );
 
     // 2. Continuous Floating Effect for Hero Images (Gently bobbing/swaying)
