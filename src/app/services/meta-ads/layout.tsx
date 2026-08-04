@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/BOUNCY.png",
+        url: "/BOUNCY.webp",
         width: 1200,
         height: 630,
         alt: "Meta Ads Services That Drive Leads & Sales | Bouncy",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: "Meta Ads Services That Drive Leads & Sales | Bouncy",
     description:
       "Develop your business with Bouncy's Meta Ads services. We design high-converting Facebook and Instagram ad campaigns that increase leads, sales, website traffic, and brand awareness.",
-    images: ["/BOUNCY.png"],
+    images: ["/BOUNCY.webp"],
   },
   alternates: {
     canonical: "https://bouncydigital.com/services/meta-ads",

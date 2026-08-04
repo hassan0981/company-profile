@@ -44,7 +44,7 @@ export default function Navbar() {
         {/* Logo Section (Right on Mobile, Left on Desktop) */}
         <Link href="/" onClick={handleLinkClick} className="flex items-center focus:outline-none -mr-4 sm:-mr-8 md:-ml-18 md:mr-0 order-last md:order-first">
           <Image
-            src="/BOUNCY.png"
+            src="/BOUNCY.webp"
             alt="Bouncy Logo"
             width={325}
             height={162}

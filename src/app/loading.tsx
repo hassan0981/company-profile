@@ -13,7 +13,7 @@ export default function Loading() {
           {/* Logo Center */}
           <div className="relative w-10 h-10 sm:w-12 sm:h-12 animate-pulse">
             <Image
-              src="/BOUNCY.png"
+              src="/BOUNCY.webp"
               alt="Bouncy Digital"
               fill
               className="object-contain"

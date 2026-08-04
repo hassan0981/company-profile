@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/BOUNCY.png",
+        url: "/BOUNCY.webp",
         width: 1200,
         height: 630,
         alt: "Website Design & Web Development Services | Bouncy",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: "Website Design & Web Development Services | Bouncy",
     description:
       "Bouncy provides professional web development services including business websites, WordPress development, eCommerce stores, portfolio websites, landing pages, and ongoing website maintenance.",
-    images: ["/BOUNCY.png"],
+    images: ["/BOUNCY.webp"],
   },
   alternates: {
     canonical: "https://bouncydigital.com/services/web-development",

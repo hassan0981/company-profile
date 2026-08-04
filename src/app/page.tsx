@@ -22,25 +22,25 @@ const serviceUrls = [
 const servicesData = [
   {
     title: "Web Development",
-    image: "/service_webdev.png",
+    image: "/service_webdev.webp",
     description: "We build fast, responsive, and user-friendly websites that combine modern design with seamless functionality. Every website is designed to create a strong first impression, enhance user experience, and turn visitors into customers.",
     bullets: ["WordPress", "Mern Stack", "App Development", "Ecommerce"]
   },
   {
     title: "SEO",
-    image: "/service_seo.png",
+    image: "/service_seo.webp",
     description: "Our SEO strategies are built to improve your online visibility and drive sustainable organic growth. Through in-depth keyword research, technical SEO, on-page optimization & off-page SEO, we help your business rank higher and attract qualified traffic.",
     bullets: ["Search Optimization", "Technical Audit", "Keyword Research", "Keyword Analysis"]
   },
   {
     title: "Social Media Management",
-    image: "/service_smm.png",
+    image: "/service_smm.webp",
     description: "We help businesses build a strong and consistent presence across social media. Through conversion focused targetting, creative content, and active community management, we increase brand awareness and build lasting customer relationships.",
     bullets: ["Content Strategy", "Brand Consistency", "Customer Engagement", "Brand Awareness"]
   },
   {
     title: "Meta Ads",
-    image: "/service_metaads.png",
+    image: "/service_metaads.webp",
     description: "We create Facebook and Instagram advertising campaigns that connect your business with the right audience. Through strategic targeting, compelling creatives, and continuous optimization, we turn clicks into qualified leads, customers, and measurable business growth.",
     bullets: ["Audience Research", "Campaign Strategy", "Creative Ad Design", "A/B Testing"]
   }
@@ -987,7 +987,7 @@ export default function Home() {
             {/* Bouncy Logo in Preloader Center */}
             <div className="absolute inset-0 flex items-center justify-center p-4">
               <Image
-                src="/BOUNCY.png"
+                src="/BOUNCY.webp"
                 alt="Bouncy Logo"
                 width={120}
                 height={60}
@@ -1030,7 +1030,7 @@ export default function Home() {
             <div className="portrait-img-1 shrink-0 relative w-[155px] h-[155px] xs:w-[175px] xs:h-[175px] sm:w-[220px] sm:h-[220px] lg:w-[240px] lg:h-[240px] border border-neutral-200/50 bg-neutral-50 shadow-md rounded-lg overflow-hidden">
               <div className="portrait-img-1-inner relative w-full h-full">
                 <Image
-                  src="/meta_ad_2_1.png"
+                  src="/meta_ad_2_1.webp"
                   alt="Digital design collage 1"
                   fill
                   sizes="(max-width: 768px) 180px, 240px"
@@ -1044,7 +1044,7 @@ export default function Home() {
             <div className="portrait-img-2 shrink-0 relative w-[155px] h-[155px] xs:w-[175px] xs:h-[175px] sm:w-[220px] sm:h-[220px] lg:w-[240px] lg:h-[240px] border border-neutral-200/50 bg-neutral-50 shadow-md self-center lg:self-end rounded-lg overflow-hidden">
               <div className="portrait-img-2-inner relative w-full h-full">
                 <Image
-                  src="/service_smm.png"
+                  src="/service_smm.webp"
                   alt="Digital design collage 2"
                   fill
                   sizes="(max-width: 768px) 180px, 240px"
@@ -1058,7 +1058,7 @@ export default function Home() {
             <div className="portrait-img-3 hidden lg:block shrink-0 relative w-[180px] h-[180px] sm:w-[220px] sm:h-[220px] lg:w-[240px] lg:h-[240px] border border-neutral-200/50 bg-neutral-50 shadow-md rounded-lg overflow-hidden">
               <div className="portrait-img-3-inner relative w-full h-full">
                 <Image
-                  src="/meta_ad_2.png"
+                  src="/meta_ad_2.webp"
                   alt="Digital design collage 3"
                   fill
                   sizes="(max-width: 768px) 180px, 240px"
@@ -1141,7 +1141,7 @@ export default function Home() {
                 <div className="portrait-img-4 relative w-full h-[160px] sm:h-[200px] lg:h-[240px] aspect-[240/150] lg:aspect-square border border-neutral-200/50 bg-neutral-50 shadow-md">
                   <div className="portrait-img-4-inner relative w-full h-full">
                     <Image
-                      src="/portrait_4.png"
+                      src="/portrait_4.webp"
                       alt="Digital design collage 4"
                       fill
                       sizes="(max-width: 768px) 100vw, 240px"
@@ -1193,7 +1193,7 @@ export default function Home() {
             <div className="unlock-left-wrapper w-full lg:w-[42%] flex justify-start pt-6 lg:pt-16">
               <div className="unlock-left-inner relative w-full max-w-[480px] aspect-[4/3] lg:aspect-[420/460] overflow-hidden border border-neutral-200/50 shadow-md">
                 <Image
-                  src="/unlock_potential_left.png"
+                  src="/unlock_potential_left.webp"
                   alt="Collaborating creative designers in yellow jacket"
                   fill
                   sizes="(max-width: 1024px) 100vw, 480px"
@@ -1242,7 +1242,7 @@ export default function Home() {
                 <div className="unlock-right-wrapper w-full lg:w-[45%] flex justify-center lg:justify-end lg:pl-6">
                   <div className="unlock-right-inner relative w-full max-w-full sm:max-w-[280px] h-[260px] sm:h-[340px] overflow-hidden border border-neutral-200/50 shadow-md">
                     <Image
-                      src="/unlock_potential_right.png"
+                      src="/unlock_potential_right.webp"
                       alt="Discussing work in modern office space"
                       fill
                       sizes="(max-width: 1024px) 280px, 280px"
@@ -1600,7 +1600,7 @@ export default function Home() {
 
                   {/* Inner 3D Icon */}
                   <img
-                    src="/workflow_icon_1.png"
+                    src="/workflow_icon_1.webp"
                     alt="Free Discovery Consultation"
                     className="w-20 h-20 object-contain z-10 drop-shadow-[0_10px_20px_rgba(32,108,187,0.25)] group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500"
                   />
@@ -1673,7 +1673,7 @@ export default function Home() {
 
                   {/* Inner 3D Icon */}
                   <img
-                    src="/workflow_icon_2.png"
+                    src="/workflow_icon_2.webp"
                     alt="Personalized Growth Strategy"
                     className="w-20 h-20 object-contain z-10 drop-shadow-[0_10px_20px_rgba(32,108,187,0.25)] group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500"
                   />
@@ -1746,7 +1746,7 @@ export default function Home() {
 
                   {/* Inner 3D Icon */}
                   <img
-                    src="/workflow_icon_3.png"
+                    src="/workflow_icon_3.webp"
                     alt="Effective Implementation"
                     className="w-20 h-20 object-contain z-10 drop-shadow-[0_10px_20px_rgba(32,108,187,0.25)] group-hover:scale-110 group-hover:rotate-12 transition-transform duration-500"
                   />
@@ -1819,7 +1819,7 @@ export default function Home() {
 
                   {/* Inner 3D Icon */}
                   <img
-                    src="/workflow_icon_4.png"
+                    src="/workflow_icon_4.webp"
                     alt="Optimization & Scaling"
                     className="w-20 h-20 object-contain z-10 drop-shadow-[0_10px_20px_rgba(32,108,187,0.25)] group-hover:scale-110 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform duration-500"
                   />
@@ -1916,7 +1916,7 @@ export default function Home() {
                   </div>
                   <div className="text-left">
                     <h3 className="text-black text-sm sm:text-lg lg:text-xl font-extrabold mb-1 flex items-center gap-2 select-none">
-                      <Image src="/workflow_icon_1.png" alt="Research" width={20} height={20} className="object-contain shrink-0" />
+                      <Image src="/workflow_icon_1.webp" alt="Research" width={20} height={20} className="object-contain shrink-0" />
                       <span>Research</span>
                     </h3>
                     <p className="text-neutral-500 text-xs sm:text-sm leading-normal sm:leading-relaxed text-left lg:text-justify">
@@ -1942,7 +1942,7 @@ export default function Home() {
                   </div>
                   <div className="text-left">
                     <h3 className="text-black text-sm sm:text-lg lg:text-xl font-extrabold mb-1 flex items-center gap-2 select-none">
-                      <Image src="/workflow_icon_2.png" alt="Strategy" width={20} height={20} className="object-contain shrink-0" />
+                      <Image src="/workflow_icon_2.webp" alt="Strategy" width={20} height={20} className="object-contain shrink-0" />
                       <span>Strategy</span>
                     </h3>
                     <p className="text-neutral-500 text-xs sm:text-sm leading-normal sm:leading-relaxed text-left lg:text-justify">
@@ -1968,7 +1968,7 @@ export default function Home() {
                   </div>
                   <div className="text-left">
                     <h3 className="text-black text-sm sm:text-lg lg:text-xl font-extrabold mb-1 flex items-center gap-2 select-none">
-                      <Image src="/workflow_icon_3.png" alt="Optimization & Analytics" width={20} height={20} className="object-contain shrink-0" />
+                      <Image src="/workflow_icon_3.webp" alt="Optimization & Analytics" width={20} height={20} className="object-contain shrink-0" />
                       <span>Optimization & Analytics</span>
                     </h3>
                     <p className="text-neutral-500 text-xs sm:text-sm leading-normal sm:leading-relaxed text-left lg:text-justify">
@@ -1994,7 +1994,7 @@ export default function Home() {
                   </div>
                   <div className="text-left">
                     <h3 className="text-black text-sm sm:text-lg lg:text-xl font-extrabold mb-1 flex items-center gap-2 select-none">
-                      <Image src="/workflow_icon_4.png" alt="Growth" width={20} height={20} className="object-contain shrink-0" />
+                      <Image src="/workflow_icon_4.webp" alt="Growth" width={20} height={20} className="object-contain shrink-0" />
                       <span>Growth</span>
                     </h3>
                     <p className="text-neutral-500 text-xs sm:text-sm leading-normal sm:leading-relaxed text-left lg:text-justify">
@@ -2073,7 +2073,7 @@ export default function Home() {
                     style={{ clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)" }}
                   >
                     <Image
-                      src="/portrait_1.png"
+                      src="/portrait_1.webp"
                       alt="Team portrait triangle 1"
                       fill
                       sizes="(max-width: 768px) 110px, 150px"
@@ -2087,7 +2087,7 @@ export default function Home() {
                     style={{ clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)" }}
                   >
                     <Image
-                      src="/portrait_2.png"
+                      src="/portrait_2.webp"
                       alt="Team portrait triangle 2"
                       fill
                       sizes="(max-width: 768px) 140px, 190px"
@@ -2101,7 +2101,7 @@ export default function Home() {
                     style={{ clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)" }}
                   >
                     <Image
-                      src="/portrait_3.png"
+                      src="/portrait_3.webp"
                       alt="Team portrait triangle 3"
                       fill
                       sizes="(max-width: 768px) 100px, 130px"
@@ -2166,32 +2166,32 @@ export default function Home() {
 
           {/* Image 1: Top Left */}
           <div className="floating-img absolute left-3 top-4 sm:left-10 sm:top-[10%] lg:left-6 xl:left-10 lg:top-[38%] w-20 h-24 sm:w-28 sm:h-32 lg:w-28 lg:h-32 xl:w-36 xl:h-44 border-2 border-white bg-neutral-50 shadow-md overflow-hidden rounded-2xl opacity-95">
-            <Image src="/meta_ad_2.png" alt="Testimonial background portrait 1" fill className="object-cover" />
+            <Image src="/meta_ad_2.webp" alt="Testimonial background portrait 1" fill className="object-cover" />
           </div>
 
           {/* Image 2: Top Left Center (Desktop) */}
           <div className="floating-img absolute left-[20%] top-[6%] sm:top-[10%] w-32 h-32 sm:w-40 sm:h-40 lg:w-40 lg:h-40 border-2 border-white bg-neutral-50 shadow-md overflow-hidden rounded-2xl hidden lg:block opacity-95">
-            <Image src="/portrait_2.png" alt="Testimonial background portrait 2" fill className="object-cover" />
+            <Image src="/portrait_2.webp" alt="Testimonial background portrait 2" fill className="object-cover" />
           </div>
 
           {/* Image 3: Bottom Left */}
           <div className="floating-img absolute left-3 bottom-14 sm:left-10 sm:bottom-[8%] lg:left-[6%] xl:left-[10%] lg:bottom-[4%] w-24 h-30 sm:w-32 sm:h-40 lg:w-36 lg:h-48 xl:w-48 xl:h-56 border-2 border-white bg-neutral-50 shadow-md overflow-hidden rounded-2xl opacity-95">
-            <Image src="/chatgpt_image_jul_20.png" alt="Testimonial background portrait 3" fill className="object-cover" />
+            <Image src="/chatgpt_image_jul_20.webp" alt="Testimonial background portrait 3" fill className="object-cover" />
           </div>
 
           {/* Image 4: Top Right */}
           <div className="floating-img absolute right-3 top-4 sm:right-10 sm:top-[10%] lg:right-[20%] lg:top-[10%] w-20 h-24 sm:w-28 sm:h-32 lg:w-28 lg:h-32 xl:w-36 xl:h-44 border-2 border-white bg-neutral-50 shadow-md overflow-hidden rounded-2xl opacity-95">
-            <Image src="/portrait_4.png" alt="Testimonial background portrait 4" fill className="object-cover" />
+            <Image src="/portrait_4.webp" alt="Testimonial background portrait 4" fill className="object-cover" />
           </div>
 
           {/* Image 5: Middle Right (Desktop) */}
           <div className="floating-img absolute right-6 sm:right-10 top-[42%] w-32 h-32 sm:w-40 sm:h-40 lg:w-40 lg:h-40 border-2 border-white bg-neutral-50 shadow-md overflow-hidden rounded-2xl hidden lg:block opacity-95">
-            <Image src="/unlock_potential_left.png" alt="Testimonial background portrait 5" fill className="object-cover" />
+            <Image src="/unlock_potential_left.webp" alt="Testimonial background portrait 5" fill className="object-cover" />
           </div>
 
           {/* Image 6: Bottom Right */}
           <div className="floating-img absolute right-3 bottom-14 sm:right-10 sm:bottom-[8%] lg:right-[12%] lg:bottom-[8%] w-24 h-30 sm:w-32 sm:h-40 lg:w-32 lg:h-40 xl:w-40 xl:h-50 border-2 border-white bg-neutral-50 shadow-md overflow-hidden rounded-2xl opacity-95">
-            <Image src="/unlock_potential_right.png" alt="Testimonial background portrait 6" fill className="object-cover" />
+            <Image src="/unlock_potential_right.webp" alt="Testimonial background portrait 6" fill className="object-cover" />
           </div>
 
         </div>

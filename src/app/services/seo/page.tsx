@@ -15,43 +15,43 @@ if (typeof window !== "undefined") {
 const servicesData = [
   {
     title: "Technical SEO",
-    image: "/technical_seo.png",
+    image: "/technical_seo.webp",
     description: "A well-optimized website starts with a strong technical foundation. We identify and fix issues that can limit your search visibility, including crawl errors, indexing problems, slow loading speeds, mobile usability, structured data, and overall site performance. By improving your website's technical health, we help search engines crawl your pages more efficiently while providing a faster, smoother experience that keeps visitors engaged.",
     bullets: ["Technical Audit", "Crawl Errors", "Site Speed", "Mobile Optimization", "Core Web Vitals"]
   },
   {
     title: "Keyword Research & SEO Strategy",
-    image: "/seo.png",
+    image: "/seo.webp",
     description: "Every successful SEO campaign starts with understanding what your potential customers are searching for. We conduct in-depth keyword research to identify high-value search terms based on search intent, competition, and business potential—not just search volume. This allows us to build a customized SEO plan that targets the right audience, uncovers new growth opportunities, and lays the foundation for long-term organic success.",
     bullets: ["Keyword Research", "Search Intent", "SEO Foundation", "User Intent"]
   },
   {
     title: "On-Page SEO",
-    image: "/on_page_seo.png",
+    image: "/on_page_seo.webp",
     description: "Your website should not only rank well but also provide an excellent experience for your visitors. We optimize every important on-page element, including titles, meta descriptions, headings, URLs, internal links, images, and content structure, while ensuring each page is aligned with the right keywords. The result is a website that is easier for search engines to understand and more effective at turning visitors into customers.",
     bullets: ["Title Tags", "Meta Description", "Content Optimization", "Search Optimization"]
   },
   {
     title: "Off-Page SEO & Authority Building",
-    image: "/unlock_potential_right.png",
+    image: "/unlock_potential_right.webp",
     description: "Google rewards websites that have earned trust and authority within their industry. Our Off-Page SEO strategy focuses on building your website's credibility through high-quality backlinks, digital outreach, brand mentions, and ethical link-building practices. Rather than chasing large quantities of links, we prioritize quality and relevance to strengthen your online reputation and improve your long-term search performance.",
     bullets: ["Quality Backlinks", "Link Building", "Citation Building", "Referral Traffic"]
   },
   {
     title: "Local SEO",
-    image: "/service_smm.png",
+    image: "/service_smm.webp",
     description: "When customers search for businesses near them, your business should be one of the first they find. Our Local SEO services improve your visibility on Google Search and Google Maps by optimizing your Google Business Profile, local citations, location-specific keywords, customer reviews, and local landing pages. Whether you serve a single city or multiple locations, we help you attract nearby customers who are actively searching for the services you offer.",
     bullets: ["Google Business", "Google Maps", "Business Profile", "Local Ranking"]
   },
   {
     title: "Competitor Analysis",
-    image: "/competitor_analysis_seo.png",
+    image: "/competitor_analysis_seo.webp",
     description: "Understanding your competition is an important part of every successful SEO campaign. We analyse competitor keywords, backlink profiles, website structure, and content to identify opportunities for growth. These insights help us create a strategy that gives your business a stronger position in search results.",
     bullets: ["Competitor Research", "Keyword Analysis", "Backlink Analysis", "Website Audit"]
   },
   {
     title: "Ecommerce SEO",
-    image: "/service_seo.png",
+    image: "/service_seo.webp",
     description: "Ecommerce SEO is designed for businesses that sell products online. We optimize product pages, category pages, product descriptions, images, and website structure to improve search visibility and increase organic sales. Our approach helps customers discover your products more easily while creating a seamless shopping experience.",
     bullets: ["Product Optimization", "Category Optimization", "Product Pages", "Image Optimization"]
   }
@@ -296,7 +296,7 @@ export default function SEOPage() {
                   style={{ borderRadius: "50% 50% 5% 50%" }}
                 >
                   <Image
-                    src="/chatgpt_image_jul_20.png"
+                    src="/chatgpt_image_jul_20.webp"
                     alt="Creative 3D abstract shapes"
                     fill
                     sizes="(max-width: 768px) 230px, 290px"
@@ -324,7 +324,7 @@ export default function SEOPage() {
                   style={{ borderRadius: "5% 50% 50% 50%" }}
                 >
                   <Image
-                    src="/meta_ad_2.png"
+                    src="/meta_ad_2.webp"
                     alt="Abstract 3D digital illustration"
                     fill
                     sizes="(max-width: 768px) 190px, 230px"
@@ -377,7 +377,7 @@ export default function SEOPage() {
                   style={{ borderRadius: "50% 5% 50% 50%" }}
                 >
                   <Image
-                    src="/portrait_4.png"
+                    src="/portrait_4.webp"
                     alt="Creative visionary portrait"
                     fill
                     sizes="(max-width: 768px) 250px, 330px"

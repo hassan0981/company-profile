@@ -38,7 +38,18 @@
       "regex": "^(?!/_next)/meta-ads(?:/)?$"
     }
   ],
-  "headers": [],
+  "headers": [
+    {
+      "source": "/:path*\\.(svg|jpg|jpeg|png|gif|ico|css|js|woff|woff2|webp)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, must-revalidate"
+        }
+      ],
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))?\\.(svg|jpg|jpeg|png|gif|ico|css|js|woff|woff2|webp)(?:/)?$"
+    }
+  ],
   "onMatchHeaders": [],
   "rewrites": {
     "beforeFiles": [],

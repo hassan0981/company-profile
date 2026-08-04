@@ -15,37 +15,37 @@ if (typeof window !== "undefined") {
 const servicesData = [
   {
     title: "Content Strategy & Planning",
-    image: "/content_strategy_social.png",
+    image: "/content_strategy_social.webp",
     description: "Every successful social media presence starts with a clear strategy. We take the time to understand your business, audience, and objectives before creating a tailored content plan that keeps your brand consistent, relevant, and aligned with your marketing goals across every platform.",
     bullets: ["Audience Research", "Content Planning", "Brand Consistency", "Business Analysis"]
   },
   {
     title: "Creation of Creative Content",
-    image: "/service_smm.png",
+    image: "/service_smm.webp",
     description: "Great content captures attention, but meaningful content drives action. Our team creates engaging graphics, compelling captions, short-form videos, and branded creatives designed to stop users from scrolling on Instagram and encourage them to connect with your business.",
     bullets: ["Scroll-Stopping Creatives", "Engaging Visuals", "Compelling Captions", "Action-Driven Content"]
   },
   {
     title: "Content Calendar and Planning",
-    image: "/content_planning_social.png",
+    image: "/content_planning_social.webp",
     description: "Consistency is what keeps your audience engaged. We develop a structured content calendar that ensures your Facebook page and other social channels stay active with timely, well-planned content that reinforces your brand and keeps your business top of mind.",
     bullets: ["Content Planning", "Consistent Posting", "Brand Visibility", "Multi Channel Sync"]
   },
   {
     title: "Community Management",
-    image: "/community_management_social.png",
+    image: "/community_management_social.webp",
     description: "A growing community is built through genuine conversations. We manage comments, messages, and customer interactions across your social media platforms, helping you build trust, strengthen relationships, and create a positive experience that encourages long-term customer loyalty.",
     bullets: ["Comment Management", "Message Responses", "Customer Engagement", "Community Growth"]
   },
   {
     title: "Brand Awareness & Growth",
-    image: "/brand_awareness_social.png",
+    image: "/brand_awareness_social.webp",
     description: "Brand growth doesn't happen by chance—it happens through the right strategy, consistent messaging, and content that resonates with your audience. At Bouncy, we help businesses build a strong social media presence that increases brand awareness, attracts potential customers, and supports long-term business growth.",
     bullets: ["Brand Awareness", "Audience Growth", "Consistent Branding", "Business Growth"]
   },
   {
     title: "Performance Analytics & Reporting",
-    image: "/performance_reporting_social.png",
+    image: "/performance_reporting_social.webp",
     description: "Every strategy is backed by data. We track key performance metrics such as reach, engagement, follower growth, and content performance, providing clear reports and actionable insights to continuously improve your social media results.",
     bullets: ["Performance Tracking", "Engagement Insights", "Follower Growth", "Data-Driven Reports"]
   }
@@ -306,7 +306,7 @@ export default function SocialMediaPage() {
                   style={{ borderRadius: "50% 50% 5% 50%" }}
                 >
                   <Image
-                    src="/social_hero_2_1.png"
+                    src="/social_hero_2_1.webp"
                     alt="Creative social media marketing"
                     fill
                     sizes="(max-width: 768px) 230px, 290px"
@@ -334,7 +334,7 @@ export default function SocialMediaPage() {
                   style={{ borderRadius: "5% 50% 50% 50%" }}
                 >
                   <Image
-                    src="/content_strategy_social1.png"
+                    src="/content_strategy_social1.webp"
                     alt="Social media strategic graphics"
                     fill
                     sizes="(max-width: 768px) 190px, 230px"
@@ -387,7 +387,7 @@ export default function SocialMediaPage() {
                   style={{ borderRadius: "50% 5% 50% 50%" }}
                 >
                   <Image
-                    src="/service_metaads.png"
+                    src="/service_metaads.webp"
                     alt="Digital advertising campaign illustration"
                     fill
                     sizes="(max-width: 768px) 250px, 330px"

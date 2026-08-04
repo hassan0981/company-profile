@@ -33,7 +33,7 @@ const getArticleSchema = (slug: string) => {
         "name": "Bouncy Digital",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://bouncydigital.com/logo.png"
+          "url": "https://bouncydigital.com/logo.webp"
         }
       },
       "mainEntityOfPage": {
@@ -88,7 +88,7 @@ const getArticleSchema = (slug: string) => {
         "url": "https://bouncydigital.com",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://bouncydigital.com/logo.png"
+          "url": "https://bouncydigital.com/logo.webp"
         }
       },
       "datePublished": "2026-07-18",
@@ -153,7 +153,7 @@ const getArticleSchema = (slug: string) => {
       "url": "https://bouncydigital.com",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://bouncydigital.com/logo.png"
+        "url": "https://bouncydigital.com/logo.webp"
       }
     },
     "mainEntityOfPage": {

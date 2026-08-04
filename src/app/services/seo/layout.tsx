@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/BOUNCY.png",
+        url: "/BOUNCY.webp",
         width: 1200,
         height: 630,
         alt: "SEO Services That Increase Traffic & Leads | Bouncy",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: "SEO Services That Increase Traffic & Leads | Bouncy",
     description:
       "Improve your online visibility with Bouncy’s search engine optimisation services. Our technical SEO, keyword research, on-page and off-page SEO, and local SEO services will increase your ranking, traffic, and leads.",
-    images: ["/BOUNCY.png"],
+    images: ["/BOUNCY.webp"],
   },
   alternates: {
     canonical: "https://bouncydigital.com/services/seo",

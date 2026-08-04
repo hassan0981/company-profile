@@ -283,50 +283,50 @@ export default function AboutUsPage() {
   };
 
   const clientsList = [
-    { name: "AGN Tax Consultant", logo: "/agntax_logo_1.png" },
-    { name: "My Fragrance", logo: "/logo.png" },
-    { name: "Forces School & College", logo: "/forces_school.png" },
-    { name: "The Punjab School", logo: "/the_punjab_school_logo.png" },
+    { name: "AGN Tax Consultant", logo: "/agntax_logo_1.webp" },
+    { name: "My Fragrance", logo: "/logo.webp" },
+    { name: "Forces School & College", logo: "/forces_school.webp" },
+    { name: "The Punjab School", logo: "/the_punjab_school_logo.webp" },
     { name: "Physician Revenue", logo: "/physician_revenue.webp" },
-    { name: "Gulab Devi Hospital", logo: "/gulab_devi.png" },
-    { name: "Headrogen", logo: "/headrogen_2.png" },
+    { name: "Gulab Devi Hospital", logo: "/gulab_devi.webp" },
+    { name: "Headrogen", logo: "/headrogen_2.webp" },
   ];
 
   const teamList = [
     {
       name: "Abdul Samad",
       role: "CEO and Head Marketing",
-      image: "/team/abdul_samad.jpg",
+      image: "/team/abdul_samad.webp",
       bio: "Leading strategic growth and driving high-impact marketing initiatives.",
     },
     {
       name: "Saba Samad",
       role: "Seo Expert",
-      image: "/team/saba_samad.jpg",
+      image: "/team/saba_samad.webp",
       bio: "Boosting organic visibility, keyword authority, and search rankings.",
     },
     {
       name: "Muhammad Hassan",
       role: "Full stack developer",
-      image: "/team/muhammad_hassan.jpg",
+      image: "/team/muhammad_hassan.webp",
       bio: "Architecting high-performance digital solutions and modern web apps.",
     },
     {
       name: "Kashmaila Javed",
       role: "Head Business development",
-      image: "/team/kashmaila_javed.jpg",
+      image: "/team/kashmaila_javed.webp",
       bio: "Expanding client partnerships and cultivating strategic opportunities.",
     },
     {
       name: "Wajeeha Javed",
       role: "Head Tech n Design",
-      image: "/team/wajeeha_javed.jpg",
+      image: "/team/wajeeha_javed.webp",
       bio: "Pioneering technology innovation and leading design excellence.",
     },
     {
       name: "Ali Arif",
       role: "Figma Expert",
-      image: "/team/ali_arif.jpg",
+      image: "/team/ali_arif.webp",
       bio: "Designing intuitive user experiences and sleek digital interfaces.",
     },
   ];
@@ -504,7 +504,7 @@ export default function AboutUsPage() {
                     <div className="w-full h-full flex items-center justify-center p-6 text-white bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.15),transparent)]">
                       <div className="relative w-24 h-24">
                         <Image
-                          src="/white_outline.png"
+                          src="/white_outline.webp"
                           alt="Bouncy Logo"
                           fill
                           className="object-contain"
@@ -524,7 +524,7 @@ export default function AboutUsPage() {
                     <div className="w-full h-full flex items-center justify-center p-6 text-white bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.15),transparent)]">
                       <div className="relative w-24 h-24">
                         <Image
-                          src="/white_outline.png"
+                          src="/white_outline.webp"
                           alt="Bouncy Logo"
                           fill
                           className="object-contain"

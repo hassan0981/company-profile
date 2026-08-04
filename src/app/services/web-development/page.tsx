@@ -15,37 +15,37 @@ if (typeof window !== "undefined") {
 const servicesData = [
   {
     title: "Business Website Design & Development",
-    image: "/web_2.png",
+    image: "/web_2.webp",
     description: "Your business deserves a website that creates a powerful first impression and inspires confidence from the very first click. We build professional business websites that reflect your brand, clearly communicate your value, and guide visitors toward taking action. Every website is designed with intuitive navigation, mobile responsiveness, and conversion-focused layouts to help turn visitors into loyal customers.",
     bullets: ["One Page Sites", "Design Focus", "SEO Optimization", "Multi Page Sites"]
   },
   {
     title: "WordPress Website Development",
-    image: "/web_3.png",
+    image: "/web_3.webp",
     description: "WordPress powers millions of successful websites for a reason—it's flexible, scalable, and easy to manage. We develop custom WordPress websites tailored to your business needs, giving you complete control over your content while ensuring fast performance, strong security, and room to grow. From service-based businesses to corporate websites and blogs, we build solutions that are ready for the future.",
     bullets: ["Custom Themes", "Easy Management", "High Security", "Fast Loading"]
   },
   {
     title: "Portfolio Website Design",
-    image: "/web_4.png",
+    image: "/web_4.webp",
     description: "Your portfolio should do more than display your work—it should tell your story and showcase your expertise. We create clean, modern portfolio websites that highlight your achievements, strengthen your credibility, and leave a lasting impression on potential clients. Every design is crafted to make your work stand out while encouraging visitors to connect with you.",
     bullets: ["Work Showcase", "Personal Branding", "Creative Layouts", "Contact Forms"]
   },
   {
     title: "Landing Page Design",
-    image: "/web_5.png",
+    image: "/web_5.webp",
     description: "A successful landing page has one goal: turning visitors into leads or customers. We design high-converting landing pages with clear messaging, persuasive layouts, and calls-to-action that eliminate distractions and drive results. Whether you're running Google Ads, Meta Ads, or launching a new product or service, our landing pages are built to maximize conversions.",
     bullets: ["Lead Generation", "Ad Campaign", "Clean Layout", "High Conversion"]
   },
   {
     title: "E-Commerce Website Development",
-    image: "/web6.png",
+    image: "/web6.webp",
     description: "A great online store should make buying effortless and enjoyable. We develop high-performance eCommerce websites that provide a smooth shopping experience from product discovery to secure checkout. Whether you choose WooCommerce or Shopify, we build fast, mobile-friendly, and conversion-focused online stores that help increase sales while making inventory and order management simple.",
     bullets: ["WooCommerce Shopify", "Secure Checkout", "Product Catalog", "Payment Gateway"]
   },
   {
     title: "Ongoing Website Support & Maintenance",
-    image: "/web_7.png",
+    image: "/web_7.webp",
     description: "Launching your website is only the beginning. To keep it performing at its best, we provide ongoing support, security updates, performance optimization, and technical maintenance. As your business grows, we ensure your website stays secure, up to date, and ready to support your next stage of growth—so you can focus on running your business with confidence.",
     bullets: ["System Updates", "Security Backups", "Speed Tuning", "Bug Fixing"]
   }
@@ -261,7 +261,7 @@ export default function WebDevelopmentPage() {
                   style={{ borderRadius: "50% 50% 5% 50%" }}
                 >
                   <Image
-                    src="/web_code_monitors.png"
+                    src="/web_code_monitors.webp"
                     alt="Web development code on modern monitors"
                     fill
                     sizes="(max-width: 768px) 230px, 290px"
@@ -289,7 +289,7 @@ export default function WebDevelopmentPage() {
                   style={{ borderRadius: "5% 50% 50% 50%" }}
                 >
                   <Image
-                    src="/web_wireframe_tablet.png"
+                    src="/web_wireframe_tablet.webp"
                     alt="Web design and layout wireframing on drawing tablet"
                     fill
                     sizes="(max-width: 768px) 190px, 230px"
@@ -342,7 +342,7 @@ export default function WebDevelopmentPage() {
                   style={{ borderRadius: "50% 5% 50% 50%" }}
                 >
                   <Image
-                    src="/web_development_1.png"
+                    src="/web_development_1.webp"
                     alt="Creative team workspace discussion"
                     fill
                     sizes="(max-width: 768px) 250px, 330px"

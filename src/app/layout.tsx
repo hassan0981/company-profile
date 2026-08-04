@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/BOUNCY.png",
+        url: "/BOUNCY.webp",
         width: 1200,
         height: 630,
         alt: "Bouncy Digital Marketing Agency",
@@ -73,15 +73,15 @@ export const metadata: Metadata = {
     title: "Digital Marketing Agency for Business Growth | Bouncy",
     description:
       "Bouncy is a creative digital marketing agency providing SEO, web design, social media management, Meta Ads and growth strategies to help businesses grow traffic, leads and sales.",
-    images: ["/BOUNCY.png"],
+    images: ["/BOUNCY.webp"],
   },
   alternates: {
     canonical: "https://bouncydigital.com",
   },
   icons: {
-    icon: "/white_outline.png",
-    shortcut: "/white_outline.png",
-    apple: "/white_outline.png",
+    icon: "/white_outline.webp",
+    shortcut: "/white_outline.webp",
+    apple: "/white_outline.webp",
   },
 };
 
@@ -96,7 +96,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${kanit.variable} h-full antialiased overflow-x-hidden`}
     >
       <head>
-        <link rel="preload" href="/BOUNCY.png" as="image" type="image/png" />
+        <link rel="preload" href="/BOUNCY.webp" as="image" type="image/webp" />
         <link rel="preload" href="/sh-bg.webp" as="image" type="image/webp" />
         <script
           type="application/ld+json"
@@ -108,8 +108,8 @@ export default function RootLayout({
               "name": "Bouncy Digital",
               "alternateName": "Bouncy",
               "url": "https://bouncydigital.com",
-              "logo": "https://bouncydigital.com/logo.png",
-              "image": "https://bouncydigital.com/logo.png",
+              "logo": "https://bouncydigital.com/logo.webp",
+              "image": "https://bouncydigital.com/logo.webp",
               "description": "Bouncy Digital is a full-service digital marketing agency providing SEO, web development, social media marketing, Meta Ads, Google Ads, branding, content marketing, and performance-driven digital solutions to help businesses grow online.",
               "email": "info@bouncydigital.com",
               "telephone": "+92 329 0968819 ",

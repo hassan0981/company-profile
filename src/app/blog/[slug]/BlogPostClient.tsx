@@ -236,7 +236,7 @@ export default function BlogPostClient({ params }: PageProps) {
           "name": "Bouncy Digital",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://bouncydigital.com/logo.png"
+            "url": "https://bouncydigital.com/logo.webp"
           }
         },
         "mainEntityOfPage": {
@@ -291,7 +291,7 @@ export default function BlogPostClient({ params }: PageProps) {
           "url": "https://bouncydigital.com",
           "logo": {
             "@type": "ImageObject",
-            "url": "https://bouncydigital.com/logo.png"
+            "url": "https://bouncydigital.com/logo.webp"
           }
         },
         "datePublished": "2026-07-18",
@@ -353,7 +353,7 @@ export default function BlogPostClient({ params }: PageProps) {
         "url": "https://bouncydigital.com",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://bouncydigital.com/logo.png"
+          "url": "https://bouncydigital.com/logo.webp"
         }
       },
       "mainEntityOfPage": {

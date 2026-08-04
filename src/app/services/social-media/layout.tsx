@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/BOUNCY.png",
+        url: "/BOUNCY.webp",
         width: 1200,
         height: 630,
         alt: "Effective Social Media Management Services | Bouncy",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: "Effective Social Media Management Services | Bouncy",
     description:
       "Develop your brand with Bouncy's social media management services. We create content strategies, engaging posts, content calendars, community management, and campaigns that increase brand awareness and customer engagement.",
-    images: ["/BOUNCY.png"],
+    images: ["/BOUNCY.webp"],
   },
   alternates: {
     canonical: "https://bouncydigital.com/services/social-media",

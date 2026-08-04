@@ -15,37 +15,37 @@ if (typeof window !== "undefined") {
 const servicesData = [
   {
     title: "Audience Research & Targeting",
-    image: "/meta_ad_3.png",
+    image: "/meta_ad_3.webp",
     description: "The success of every Meta Ads campaign begins with reaching the right audience. We research your ideal customers and build highly targeted audiences based on demographics, interests, behaviors, and location, ensuring your ads are shown to people who are most likely to convert.",
     bullets: ["Audience Research", "Demographic Targeting", "Location-Based Reach", "Higher Conversions"]
   },
   {
     title: "Creative Ad Design",
-    image: "/meta_creative.png",
+    image: "/meta_creative.webp",
     description: "Great advertising starts with great creativity. Our team designs scroll-stopping visuals and compelling ad copy that capture attention on Facebook and Instagram, encourage engagement, and motivate potential customers to take action.",
     bullets: ["Creative Ad Design", "Compelling Ad Copy", "Scroll-Stopping Visuals", "Higher Customer Engagement"]
   },
   {
     title: "Campaign Strategy & Management",
-    image: "/meta_ad_2_1.png",
+    image: "/meta_ad_2_1.webp",
     description: "Running ads without a strategy often leads to wasted budget. We create customized advertising campaigns aligned with your business objectives, manage every aspect of your campaigns, and continuously monitor performance to keep your advertising effective and efficient.",
     bullets: ["Custom Campaign Strategy", "Campaign Management", "Performance Monitoring", "Budget Optimization"]
   },
   {
     title: "Performance Optimization",
-    image: "/meta_ad_3.png",
+    image: "/meta_ad_3.webp",
     description: "Digital advertising requires constant improvement. We regularly test audiences, creatives, placements, and campaign setup to improve results, lower advertising costs, and maximize your return on ad spend (ROAS).",
     bullets: ["A/B Testing", "Audience Optimization", "Lower Ad Costs", "Higher ROAS"]
   },
   {
     title: "Lead Generation & Business Growth",
-    image: "/meta_4.png",
+    image: "/meta_4.webp",
     description: "Our goal is more than generating clicks—we focus on generating business. Whether you want more inquiries, website traffic, online sales, or brand awareness, our Facebook and Instagram advertising are designed to attract quality customers and support long-term business growth.",
     bullets: ["Qualified Lead Generation", "Website Traffic Growth", "Increased Online Sales", "Long-Term Business Growth"]
   },
   {
     title: "Reporting & Insights",
-    image: "/performance_reporting_social_1.png",
+    image: "/performance_reporting_social_1.webp",
     description: "Every successful campaign is backed by data. We provide clear performance reports and actionable insights, allowing you to understand what's working, track your growth, and make informed decisions for future marketing campaigns.",
     bullets: ["Performance Reporting", "Growth Tracking", "Actionable Insights", "Data-Driven Decisions"]
   }
@@ -290,7 +290,7 @@ export default function MetaAdsPage() {
                   style={{ borderRadius: "50% 50% 5% 50%" }}
                 >
                   <Image
-                    src="/office_team_discuss.png"
+                    src="/office_team_discuss.webp"
                     alt="Creative team discussing marketing strategy in a modern office"
                     fill
                     sizes="(max-width: 768px) 230px, 290px"
@@ -318,7 +318,7 @@ export default function MetaAdsPage() {
                   style={{ borderRadius: "5% 50% 50% 50%" }}
                 >
                   <Image
-                    src="/office_workspace_desk.png"
+                    src="/office_workspace_desk.webp"
                     alt="Sleek startup office desk with dashboard analytics on laptop"
                     fill
                     sizes="(max-width: 768px) 190px, 230px"
@@ -371,7 +371,7 @@ export default function MetaAdsPage() {
                   style={{ borderRadius: "50% 5% 50% 50%" }}
                 >
                   <Image
-                    src="/office_meeting_collab.png"
+                    src="/office_meeting_collab.webp"
                     alt="Team meeting in glass conference room of a modern high-rise office"
                     fill
                     sizes="(max-width: 768px) 250px, 330px"

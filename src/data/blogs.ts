@@ -23,11 +23,11 @@ export const blogPosts: BlogPost[] = [
     title: "Why Your Business Website Isn't Converting: 5 Common Traps and How to Fix Them",
     category: "Web Development",
     date: "July 20, 2026",
-    image: "/blog_laptop.png",
+    image: "/blog_laptop.webp",
     excerpt: "Discover why driving traffic to your website isn't enough, the hidden user-experience hurdles killing your conversions, and actionable steps to turn visitors into paying customers.",
     author: {
       name: "Wajeeha Javed",
-      avatar: "/team/wajeeha_javed.jpg",
+      avatar: "/team/wajeeha_javed.webp",
       role: "Head Tech n Design"
     },
     readTime: "6 min read",
@@ -79,11 +79,11 @@ export const blogPosts: BlogPost[] = [
     title: "The Power of Meta Ads & SEO: How to Create a Unified Growth Engine",
     category: "Digital Marketing",
     date: "July 18, 2026",
-    image: "/blog_team.png",
+    image: "/blog_team.webp",
     excerpt: "Stop treating paid ads and organic search as separate strategies. Learn how combining Meta Ads with SEO creates a powerful multi-channel funnel that drives immediate leads while building long-term authority.",
     author: {
       name: "Wajeeha Javed",
-      avatar: "/team/wajeeha_javed.jpg",
+      avatar: "/team/wajeeha_javed.webp",
       role: "Head Tech n Design"
     },
     readTime: "7 min read",

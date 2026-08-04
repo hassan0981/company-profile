@@ -106,7 +106,7 @@ export default function Footer() {
               {/* Logo */}
               <Link href="/" className="flex items-center justify-center focus:outline-none w-fit">
                 <img
-                  src="/white_outline.png"
+                  src="/white_outline.webp"
                   alt="BouncyDigital Logo"
                   className="h-48 w-auto object-contain -mt-10"
                 />
