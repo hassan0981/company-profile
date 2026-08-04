@@ -27,7 +27,7 @@ if (fs.existsSync(envPath)) {
 
 const dev = false;
 const hostname = 'localhost';
-const port = process.env.PORT || 3000;
+const port = parseInt(process.env.PORT || '3000', 10);
 const app = next({ dev, hostname, port });
 const handle = app.getRequestHandler();
 
@@ -38,7 +38,7 @@ if (process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.SUPABASE_SERVICE_ROLE_KE
 }
 
 app.prepare().then(() => {
-  createServer(async (req, res) => {
+  const server = createServer(async (req, res) => {
     try {
       const parsedUrl = parse(req.url, true);
 
@@ -254,7 +254,53 @@ app.prepare().then(() => {
       res.statusCode = 500;
       res.end('Internal server error');
     }
-  }).listen(port, (err) => {
+  });
+
+  // Track active socket connections for graceful shutdown
+  const sockets = new Set();
+  server.on('connection', (socket) => {
+    sockets.add(socket);
+    socket.on('close', () => {
+      sockets.delete(socket);
+    });
+  });
+
+  // Graceful shutdown handler
+  let isShuttingDown = false;
+  const shutdown = (signal) => {
+    if (isShuttingDown) return;
+    isShuttingDown = true;
+    console.log(`Received ${signal}. Initiating graceful shutdown...`);
+
+    // Stop accepting new connections
+    server.close((err) => {
+      if (err) {
+        console.error('Error while closing HTTP server:', err);
+        process.exit(1);
+      } else {
+        console.log('HTTP server closed gracefully.');
+        process.exit(0);
+      }
+    });
+
+    // Safety timeout: give active requests up to 5s to complete before destroying lingering sockets
+    const forceTimeout = setTimeout(() => {
+      console.warn('Safety timeout reached. Cleaning up remaining open sockets...');
+      for (const socket of sockets) {
+        socket.destroy();
+      }
+      process.exit(0);
+    }, 5000);
+
+    if (forceTimeout.unref) {
+      forceTimeout.unref();
+    }
+  };
+
+  process.on('SIGTERM', () => shutdown('SIGTERM'));
+  process.on('SIGINT', () => shutdown('SIGINT'));
+
+  server.listen(port, (err) => {
     if (err) throw err;
     console.log(`> Ready on http://${hostname}:${port}`);
   });

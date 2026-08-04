@@ -4,9 +4,10 @@ deployment:
     - export DEPLOYPATH=/home2/mhassanja/public_html/bouncydigital.com
     - /bin/cp -R .next/. $DEPLOYPATH/.next/
     - /bin/cp -R public/. $DEPLOYPATH/public/
-    - /bin/cp -R src/. $DEPLOYPATH/src/
+    - /bin/cp server.js $DEPLOYPATH/
     - /bin/cp package.json $DEPLOYPATH/
-    - /bin/cp package-lock.json $DEPLOYPATH/
     - /bin/cp next.config.ts $DEPLOYPATH/
     - /bin/cp next-sitemap.config.js $DEPLOYPATH/
-    - /bin/cp tsconfig.json $DEPLOYPATH/
+    - /bin/mkdir -p $DEPLOYPATH/tmp
+    - /bin/touch $DEPLOYPATH/tmp/restart.txt
+
