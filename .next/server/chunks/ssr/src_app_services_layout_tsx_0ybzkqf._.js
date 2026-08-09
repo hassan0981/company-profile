@@ -1,0 +1,3 @@
+module.exports=[44222,a=>{"use strict";var b=a.i(7997);a.s(["default",0,function({children:a}){return(0,b.jsx)(b.Fragment,{children:a})},"metadata",0,{title:"Our Digital Marketing Services | Bouncy Digital",description:"Explore Bouncy Digital's full suite of services: Web Development, SEO, Social Media Management, and Meta Ads.",alternates:{canonical:"https://bouncydigital.com/services"},openGraph:{title:"Our Digital Marketing Services | Bouncy Digital",description:"Explore Bouncy Digital's full suite of services: Web Development, SEO, Social Media Management, and Meta Ads.",url:"https://bouncydigital.com/services",siteName:"Bouncy Digital",locale:"en_US",type:"website"}}])},98526,a=>{a.n(a.i(44222))}];
+
+//# sourceMappingURL=src_app_services_layout_tsx_0ybzkqf._.js.map

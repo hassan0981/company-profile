@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { blogPosts } from "@/data/blogs";
 import BlogPostClient from "./BlogPostClient";
 
@@ -9,6 +10,40 @@ export async function generateStaticParams() {
 
 interface PageProps {
   params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const post = blogPosts.find((p) => p.slug === slug);
+  if (!post) return {};
+
+  const canonicalUrl = `https://bouncydigital.com/blog/${slug}`;
+
+  return {
+    title: `${post.title} | Bouncy Blog`,
+    description: post.excerpt,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      url: canonicalUrl,
+      type: "article",
+      images: [
+        {
+          url: `https://bouncydigital.com${post.image}`,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: [`https://bouncydigital.com${post.image}`],
+    },
+  };
 }
 
 const getArticleSchema = (slug: string) => {
@@ -132,6 +167,57 @@ const getArticleSchema = (slug: string) => {
     };
   }
 
+  if (slug === "how-seo-drives-organic-business-growth") {
+    return {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "@id": "https://bouncydigital.com/blog/how-seo-drives-organic-business-growth/#article",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://bouncydigital.com/blog/how-seo-drives-organic-business-growth"
+      },
+      "headline": "How SEO Drives Organic Business Growth: A Complete Guide for Businesses",
+      "alternativeHeadline": "A Complete Guide for Businesses on Driving Organic Growth with SEO",
+      "description": "Learn how SEO drives organic business growth by increasing visibility, attracting qualified leads, building trust, and delivering sustainable long-term results.",
+      "image": [
+        "https://bouncydigital.com/blog_seo_growth.webp"
+      ],
+      "author": {
+        "@type": "Person",
+        "name": "Saba Samad",
+        "jobTitle": "SEO Expert"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Bouncy Digital",
+        "url": "https://bouncydigital.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://bouncydigital.com/logo.webp"
+        }
+      },
+      "datePublished": "2026-08-08",
+      "dateModified": "2026-08-08",
+      "articleSection": "SEO",
+      "keywords": [
+        "SEO",
+        "Search Engine Optimization",
+        "Organic Business Growth",
+        "SEO Strategy",
+        "Technical SEO",
+        "Local SEO",
+        "Keyword Research",
+        "Lead Generation",
+        "Website Traffic",
+        "Digital Marketing"
+      ],
+      "wordCount": "650",
+      "inLanguage": "en",
+      "isAccessibleForFree": true,
+      "articleBody": "This guide explains how Search Engine Optimization (SEO) drives sustainable organic business growth. It covers search intent, organic traffic, building trust, attracting qualified leads, high-quality content, local SEO, technical optimization, user experience, and key performance metrics."
+    };
+  }
+
   const post = blogPosts.find((p) => p.slug === slug);
   if (!post) return null;
 
@@ -180,7 +266,7 @@ export default async function BlogPostPage({ params }: PageProps) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
       )}
-      <BlogPostClient params={params} />
+      <BlogPostClient slug={slug} />
     </>
   );
 }

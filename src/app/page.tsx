@@ -6,7 +6,7 @@ import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import MagneticButton from "@/components/MagneticButton";
-import { blogPosts } from "@/data/blogs";
+import { blogPosts, type BlogPost } from "@/data/blogs";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -2282,7 +2282,7 @@ export default function Home() {
 
           {/* Cards Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-            {blogPosts.map((post) => (
+            {blogPosts.slice(0, 2).map((post) => (
               <Link
                 key={post.id}
                 href={`/blog/${post.slug}`}

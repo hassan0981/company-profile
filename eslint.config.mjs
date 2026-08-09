@@ -12,8 +12,6 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
-    "scratch_*.js",
-    "scratch_test_smtp.js",
   ]),
 ]);
 

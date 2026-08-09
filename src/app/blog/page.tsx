@@ -30,7 +30,7 @@ export default function BlogPage() {
   }, []);
 
   return (
-    <main ref={containerRef} className="flex-grow bg-white py-24 sm:py-32 relative overflow-hidden">
+    <main ref={containerRef} className="flex-grow bg-white pt-16 pb-24 sm:pt-20 sm:pb-32 relative overflow-hidden">
       {/* Visual Background Accents */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-[#206cbb]/5 to-[#3c9e90]/5 blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-[#3c9e90]/5 to-[#206cbb]/5 blur-3xl pointer-events-none" />
@@ -38,11 +38,11 @@ export default function BlogPage() {
       <div className="mx-auto max-w-[1200px] px-6 relative z-10">
         
         {/* Header Section */}
-        <div className="max-w-2xl mb-20">
+        <div className="max-w-2xl mb-16">
           <span className="blog-header-element bg-gradient-to-br from-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent font-extrabold text-xs sm:text-sm tracking-widest uppercase mb-3 inline-block">
             BOUNCY INSIGHTS
           </span>
-          <h1 className="blog-header-element text-4xl sm:text-5xl lg:text-6xl font-extrabold text-black tracking-tight leading-none mb-6">
+          <h1 className="blog-header-element text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-none mb-6 bg-gradient-to-r from-[#174e89] via-[#206cbb] to-[#3c9e90] bg-clip-text text-transparent pb-1">
             Insights, Stories & Resources.
           </h1>
           <p className="blog-header-element text-lg text-neutral-500 max-w-xl font-light leading-relaxed">

@@ -122,6 +122,30 @@
         "x-next-revalidate-tag-token"
       ]
     },
+    "/blog/how-seo-drives-organic-business-growth": {
+      "experimentalBypassFor": [
+        {
+          "type": "header",
+          "key": "next-action"
+        },
+        {
+          "type": "header",
+          "key": "content-type",
+          "value": "multipart/form-data;.*"
+        }
+      ],
+      "initialRevalidateSeconds": false,
+      "srcRoute": "/blog/[slug]",
+      "dataRoute": "/blog/how-seo-drives-organic-business-growth.rsc",
+      "allowHeader": [
+        "host",
+        "x-matched-path",
+        "x-prerender-revalidate",
+        "x-prerender-revalidate-if-generated",
+        "x-next-revalidated-tags",
+        "x-next-revalidate-tag-token"
+      ]
+    },
     "/blog/meta-ads-seo-integration": {
       "experimentalBypassFor": [
         {
@@ -376,8 +400,8 @@
   },
   "notFoundRoutes": [],
   "preview": {
-    "previewModeId": "5fddee212cbd678966b8962ad7645aa5",
-    "previewModeSigningKey": "a9efd43fe7ec518e89bbb971a6920c8b5940b595d9d3927c9f68a272628eccfd",
-    "previewModeEncryptionKey": "56f49bd5559964b485762979a113f76d02db8d1fce1f60d7bf9223ee60f3632f"
+    "previewModeId": "491139183ff5a53077072a13d28e6941",
+    "previewModeSigningKey": "d64f03e34bad6a51a38eab3f06ade0e4239b46b07ee2dba4b6102c0267c8877d",
+    "previewModeEncryptionKey": "d2d8bf6189ec294df06a8efc2eae6922567025b7648e8ffd805bff92788685b6"
   }
 }
