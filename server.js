@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
 const { createServer } = require('http');
 const { parse } = require('url');
 const next = require('next');
@@ -122,118 +123,125 @@ app.prepare().then(() => {
               </html>
             `;
 
-            // 3. Attempt Email Delivery via Brevo API
+            // 3. Dispatch Email via Server Mail (Sendmail / Local MTA / Configured Server SMTP)
             let emailSent = false;
-            try {
-              const apiKey = process.env.BREVO_API_KEY || "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";
-              const apiResponse = await fetch("https://api.brevo.com/v3/smtp/email", {
-                method: "POST",
-                headers: {
-                  "Accept": "application/json",
-                  "Content-Type": "application/json",
-                  "api-key": apiKey,
-                },
-                body: JSON.stringify({
-                  sender: { name: "Bouncy Digital", email: "info@bouncydigital.com" },
-                  to: [{ email: "info@bouncydigital.com", name: "Bouncy Admin" }],
-                  replyTo: { email: email, name: name },
-                  subject: `[Website Contact] ${subject}`,
-                  htmlContent: htmlContent,
+            const mailTo = process.env.MAIL_TO || "info@bouncydigital.com";
+            const mailFrom = process.env.MAIL_FROM || `"Bouncy Contact" <info@bouncydigital.com>`;
+
+            const mailOptions = {
+              from: mailFrom,
+              to: mailTo,
+              replyTo: `"${name}" <${email}>`,
+              subject: `[Website Contact] ${subject}`,
+              html: htmlContent,
+            };
+
+            const transportsToTry = [];
+
+            // A. If custom SMTP_HOST is explicitly configured (non-Brevo)
+            if (process.env.SMTP_HOST && !process.env.SMTP_HOST.includes("brevo")) {
+              const host = process.env.SMTP_HOST;
+              const port = parseInt(process.env.SMTP_PORT || "587", 10);
+              const secure = process.env.SMTP_SECURE === "true" || port === 465;
+              const auth = (process.env.SMTP_USER && process.env.SMTP_PASS)
+                ? { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }
+                : undefined;
+
+              transportsToTry.push({
+                name: `Configured SMTP (${host}:${port})`,
+                transport: nodemailer.createTransport({
+                  host,
+                  port,
+                  secure,
+                  auth,
+                  tls: { rejectUnauthorized: false },
+                  connectionTimeout: 5000,
                 }),
               });
-              if (apiResponse.ok) {
-                emailSent = true;
-                console.log("Email successfully dispatched via Brevo REST API.");
-              }
-            } catch (apiErr) {
-              console.warn("Brevo API warning:", apiErr);
             }
 
-            // 4. Try SMTP failover
-            if (!emailSent) {
-              const mailOptions = {
-                from: `"Bouncy Contact" <info@bouncydigital.com>`,
-                to: "info@bouncydigital.com",
-                replyTo: email,
-                subject: `[Website Contact] ${subject}`,
-                html: htmlContent,
-              };
+            // B. cPanel / Linux Sendmail Binary (Native Exim MTA)
+            const sendmailCandidates = [
+              process.env.SENDMAIL_PATH,
+              '/usr/sbin/sendmail',
+              '/usr/bin/sendmail',
+              '/usr/lib/sendmail',
+            ].filter(Boolean);
 
-              const smtpTransports = [
-                // 1. Try Brevo SMTP (if credentials are valid)
-                {
-                  host: "smtp-relay.brevo.com",
-                  port: 587,
-                  secure: false,
-                  auth: {
-                    user: process.env.SMTP_USER || "b20534001@smtp-brevo.com",
-                    pass: process.env.SMTP_PASS || "xsmtpsib-2a13902958ffb0d71b8b6bef1e3e3a57b8d17564a9c4235df3d03a87732c42e3-MZ6mPECpeT7xPiwD"
-                  }
-                },
-                {
-                  host: "smtp-relay.brevo.com",
+            let sendmailBinaryFound = null;
+            for (const smPath of sendmailCandidates) {
+              if (fs.existsSync(smPath)) {
+                sendmailBinaryFound = smPath;
+                break;
+              }
+            }
+
+            if (sendmailBinaryFound || process.platform === 'linux') {
+              const binaryPath = sendmailBinaryFound || '/usr/sbin/sendmail';
+              transportsToTry.push({
+                name: `Server Sendmail Binary (${binaryPath})`,
+                transport: nodemailer.createTransport({
+                  sendmail: true,
+                  newline: 'unix',
+                  path: binaryPath,
+                }),
+              });
+            }
+
+            // C. Localhost SMTP (cPanel local delivery via port 25)
+            transportsToTry.push({
+              name: "Local SMTP (127.0.0.1:25)",
+              transport: nodemailer.createTransport({
+                host: "127.0.0.1",
+                port: 25,
+                secure: false,
+                tls: { rejectUnauthorized: false },
+                connectionTimeout: 4000,
+              }),
+            });
+
+            transportsToTry.push({
+              name: "Local SMTP (localhost:25)",
+              transport: nodemailer.createTransport({
+                host: "localhost",
+                port: 25,
+                secure: false,
+                tls: { rejectUnauthorized: false },
+                connectionTimeout: 4000,
+              }),
+            });
+
+            // D. Domain mail server fallback if SMTP credentials provided
+            if (process.env.SMTP_USER && process.env.SMTP_PASS && !process.env.SMTP_HOST) {
+              transportsToTry.push({
+                name: "cPanel Domain Mail (mail.bouncydigital.com:465)",
+                transport: nodemailer.createTransport({
+                  host: "mail.bouncydigital.com",
                   port: 465,
                   secure: true,
                   auth: {
-                    user: process.env.SMTP_USER || "b20534001@smtp-brevo.com",
-                    pass: process.env.SMTP_PASS || "xsmtpsib-2a13902958ffb0d71b8b6bef1e3e3a57b8d17564a9c4235df3d03a87732c42e3-MZ6mPECpeT7xPiwD"
-                  }
-                },
-                // 2. Try Localhost SMTP (NO AUTH - cPanel local delivery)
-                {
-                  host: "127.0.0.1",
-                  port: 25,
-                  secure: false,
-                  auth: undefined
-                },
-                {
-                  host: "localhost",
-                  port: 25,
-                  secure: false,
-                  auth: undefined
-                }
-              ];
+                    user: process.env.SMTP_USER,
+                    pass: process.env.SMTP_PASS,
+                  },
+                  tls: { rejectUnauthorized: false },
+                  connectionTimeout: 5000,
+                }),
+              });
+            }
 
-              for (const transportConfig of smtpTransports) {
-                try {
-                  const transporter = nodemailer.createTransport({
-                    host: transportConfig.host,
-                    port: transportConfig.port,
-                    secure: transportConfig.secure,
-                    auth: transportConfig.auth,
-                    tls: { rejectUnauthorized: false },
-                    connectionTimeout: 4000,
-                  });
-                  await transporter.sendMail(mailOptions);
-                  emailSent = true;
-                  console.log(`Email dispatched successfully via SMTP ${transportConfig.host}:${transportConfig.port}`);
-                  break;
-                } catch (err) {
-                  console.warn(`SMTP failover failed on ${transportConfig.host}:${transportConfig.port}:`, err.message);
-                }
+            for (const item of transportsToTry) {
+              try {
+                await item.transport.sendMail(mailOptions);
+                emailSent = true;
+                console.log(`Email dispatched successfully via ${item.name}`);
+                break;
+              } catch (transportErr) {
+                console.warn(`Server mail attempt failed via ${item.name}:`, transportErr.message);
               }
             }
 
-            // 5. Try cPanel Sendmail Binary if SMTP failed
             if (!emailSent) {
-              try {
-                const sendmailTransporter = nodemailer.createTransport({
-                  sendmail: true,
-                  newline: 'unix',
-                  path: '/usr/sbin/sendmail',
-                });
-                await sendmailTransporter.sendMail({
-                  from: `"Bouncy Contact" <info@bouncydigital.com>`,
-                  to: "info@bouncydigital.com",
-                  replyTo: email,
-                  subject: `[Website Contact] ${subject}`,
-                  html: htmlContent,
-                });
-                emailSent = true;
-                console.log("Email dispatched successfully via cPanel Sendmail binary");
-              } catch (smErr) {
-                console.warn("cPanel Sendmail failed:", smErr.message);
-              }
+              console.warn("Notice: All server mail delivery transports were attempted. Lead is saved in Supabase.");
             }
 
             res.writeHead(200, { 'Content-Type': 'application/json' });

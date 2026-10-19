@@ -317,7 +317,7 @@ export default function WebDevelopmentPage() {
 
               {/* Description Paragraph in Solid Black */}
               <p className="text-black text-sm sm:text-base md:text-lg leading-relaxed max-w-[420px] font-normal text-justify">
-                Your website shouldn't just exist—it should help your business grow. Whether someone discovers you through Google, social media, or an ad, your website should build trust, showcase your value, and turn visitors into paying customers. At Bouncy, we create fast, high-performing websites that are designed to generate leads, increase conversions, and support long-term business growth.
+                Your website shouldn&apos;t just exist—it should help your business grow. Whether someone discovers you through Google, social media, or an ad, your website should build trust, showcase your value, and turn visitors into paying customers. At Bouncy, we create fast, high-performing websites that are designed to generate leads, increase conversions, and support long-term business growth.
               </p>
             </div>
           </div>
